@@ -643,8 +643,7 @@ namespace mRemoteNG.UI.Controls
         {
             foreach (ToolStripItem item in items)
             {
-                var menuItem = item as ToolStripMenuItem;
-                if (menuItem == null)
+                if (item is not ToolStripMenuItem menuItem)
                 {
                     continue;
                 }
@@ -697,8 +696,7 @@ namespace mRemoteNG.UI.Controls
 
         private void OnConnectClicked(object sender, EventArgs e)
         {
-            var selectedNodeAsContainer = _connectionTree.SelectedNode as ContainerInfo;
-            if (selectedNodeAsContainer != null)
+            if (_connectionTree.SelectedNode is ContainerInfo selectedNodeAsContainer)
                 Runtime.ConnectionInitiator.OpenConnection(selectedNodeAsContainer, ConnectionInfo.Force.DoNotJump);
             else
                 Runtime.ConnectionInitiator.OpenConnection(_connectionTree.SelectedNode, ConnectionInfo.Force.DoNotJump);
@@ -706,8 +704,7 @@ namespace mRemoteNG.UI.Controls
 
         private void OnConnectToConsoleSessionClicked(object sender, EventArgs e)
         {
-            var selectedNodeAsContainer = _connectionTree.SelectedNode as ContainerInfo;
-            if (selectedNodeAsContainer != null)
+            if (_connectionTree.SelectedNode is ContainerInfo selectedNodeAsContainer)
                 Runtime.ConnectionInitiator.OpenConnection(selectedNodeAsContainer,
                                                            ConnectionInfo.Force.UseConsoleSession |
                                                            ConnectionInfo.Force.DoNotJump);
@@ -720,8 +717,7 @@ namespace mRemoteNG.UI.Controls
 
         private void OnDontConnectToConsoleSessionClicked(object sender, EventArgs e)
         {
-            var selectedNodeAsContainer = _connectionTree.SelectedNode as ContainerInfo;
-            if (selectedNodeAsContainer != null)
+            if (_connectionTree.SelectedNode is ContainerInfo selectedNodeAsContainer)
                 Runtime.ConnectionInitiator.OpenConnection(selectedNodeAsContainer,
                                                            ConnectionInfo.Force.DontUseConsoleSession |
                                                            ConnectionInfo.Force.DoNotJump);
@@ -733,8 +729,7 @@ namespace mRemoteNG.UI.Controls
 
         private void OnConnectInFullscreenClicked(object sender, EventArgs e)
         {
-            var selectedNodeAsContainer = _connectionTree.SelectedNode as ContainerInfo;
-            if (selectedNodeAsContainer != null)
+            if (_connectionTree.SelectedNode is ContainerInfo selectedNodeAsContainer)
                 Runtime.ConnectionInitiator.OpenConnection(selectedNodeAsContainer,
                                                            ConnectionInfo.Force.Fullscreen | ConnectionInfo.Force.DoNotJump);
             else
@@ -744,8 +739,7 @@ namespace mRemoteNG.UI.Controls
 
         private void OnConnectWithNoCredentialsClick(object sender, EventArgs e)
         {
-            var selectedNodeAsContainer = _connectionTree.SelectedNode as ContainerInfo;
-            if (selectedNodeAsContainer != null)
+            if (_connectionTree.SelectedNode is ContainerInfo selectedNodeAsContainer)
                 Runtime.ConnectionInitiator.OpenConnection(selectedNodeAsContainer, ConnectionInfo.Force.NoCredentials);
             else
                 Runtime.ConnectionInitiator.OpenConnection(_connectionTree.SelectedNode, ConnectionInfo.Force.NoCredentials);
@@ -753,8 +747,7 @@ namespace mRemoteNG.UI.Controls
 
         private void OnChoosePanelBeforeConnectingClicked(object sender, EventArgs e)
         {
-            var selectedNodeAsContainer = _connectionTree.SelectedNode as ContainerInfo;
-            if (selectedNodeAsContainer != null)
+            if (_connectionTree.SelectedNode is ContainerInfo selectedNodeAsContainer)
                 Runtime.ConnectionInitiator.OpenConnection(selectedNodeAsContainer,
                                                            ConnectionInfo.Force.OverridePanel |
                                                            ConnectionInfo.Force.DoNotJump);
@@ -781,8 +774,7 @@ namespace mRemoteNG.UI.Controls
             try
             {
                 if (connectionInfo == null) return;
-                var nodeAsContainer = connectionInfo as ContainerInfo;
-                if (nodeAsContainer != null)
+                if (connectionInfo is ContainerInfo nodeAsContainer)
                 {
                     foreach (var child in nodeAsContainer.Children)
                     {

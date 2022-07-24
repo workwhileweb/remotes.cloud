@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using mRemoteNG.UI.Window;
 
@@ -13,12 +13,12 @@ namespace mRemoteNG.UI
             get
             {
                 CleanUp();
-                if (Index is BaseWindow)
-                    return IndexByObject(Index);
-                if (Index is int)
-                    return IndexByNumber(Convert.ToInt32(Index));
-
-                return null;
+                return Index switch
+                {
+                    BaseWindow => IndexByObject(Index),
+                    int => IndexByNumber(Convert.ToInt32(Index)),
+                    _ => null
+                };
             }
         }
 
@@ -81,8 +81,7 @@ namespace mRemoteNG.UI
                     return;
                 }
 
-                var baseWindow = List[i] as BaseWindow;
-                if (baseWindow != null && !baseWindow.IsDisposed) continue;
+                if (List[i] is BaseWindow baseWindow && !baseWindow.IsDisposed) continue;
                 List.RemoveAt(i);
                 CleanUp();
                 return;

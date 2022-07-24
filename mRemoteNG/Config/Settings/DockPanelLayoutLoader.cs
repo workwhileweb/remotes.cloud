@@ -16,13 +16,8 @@ namespace mRemoteNG.Config.Settings
 
         public DockPanelLayoutLoader(FrmMain mainForm, MessageCollector messageCollector)
         {
-            if (mainForm == null)
-                throw new ArgumentNullException(nameof(mainForm));
-            if (messageCollector == null)
-                throw new ArgumentNullException(nameof(messageCollector));
-
-            _mainForm = mainForm;
-            _messageCollector = messageCollector;
+            _mainForm = mainForm ?? throw new ArgumentNullException(nameof(mainForm));
+            _messageCollector = messageCollector ?? throw new ArgumentNullException(nameof(messageCollector));
         }
 
         public void LoadPanelsFromXml()

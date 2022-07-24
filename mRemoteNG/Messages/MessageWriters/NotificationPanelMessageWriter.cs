@@ -11,10 +11,7 @@ namespace mRemoteNG.Messages.MessageWriters
 
         public NotificationPanelMessageWriter(ErrorAndInfoWindow messageWindow)
         {
-            if (messageWindow == null)
-                throw new ArgumentNullException(nameof(messageWindow));
-
-            _messageWindow = messageWindow;
+            _messageWindow = messageWindow ?? throw new ArgumentNullException(nameof(messageWindow));
         }
 
         public void Write(IMessage message)

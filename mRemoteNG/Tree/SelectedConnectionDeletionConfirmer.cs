@@ -18,15 +18,14 @@ namespace mRemoteNG.Tree
 
         public bool Confirm(ConnectionInfo deletionTarget)
         {
-            if (deletionTarget == null)
-                return false;
-
-            var deletionTargetAsContainer = deletionTarget as ContainerInfo;
-            if (deletionTargetAsContainer != null)
-                return deletionTargetAsContainer.HasChildren()
+            return deletionTarget switch
+            {
+                null => false,
+                ContainerInfo deletionTargetAsContainer => deletionTargetAsContainer.HasChildren()
                     ? UserConfirmsNonEmptyFolderDeletion(deletionTargetAsContainer)
-                    : UserConfirmsEmptyFolderDeletion(deletionTargetAsContainer);
-            return UserConfirmsConnectionDeletion(deletionTarget);
+                    : UserConfirmsEmptyFolderDeletion(deletionTargetAsContainer),
+                _ => UserConfirmsConnectionDeletion(deletionTarget)
+            };
         }
 
         private bool UserConfirmsEmptyFolderDeletion(AbstractConnectionRecord deletionTarget)

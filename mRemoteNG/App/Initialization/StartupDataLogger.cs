@@ -13,10 +13,7 @@ namespace mRemoteNG.App.Initialization
 
         public StartupDataLogger(MessageCollector messageCollector)
         {
-            if (messageCollector == null)
-                throw new ArgumentNullException(nameof(messageCollector));
-
-            _messageCollector = messageCollector;
+            _messageCollector = messageCollector ?? throw new ArgumentNullException(nameof(messageCollector));
         }
 
         public void LogStartupData()

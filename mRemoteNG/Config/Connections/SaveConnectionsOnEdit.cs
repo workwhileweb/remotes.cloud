@@ -13,10 +13,7 @@ namespace mRemoteNG.Config.Connections
 
         public SaveConnectionsOnEdit(ConnectionsService connectionsService)
         {
-            if (connectionsService == null)
-                throw new ArgumentNullException(nameof(connectionsService));
-
-            _connectionsService = connectionsService;
+            _connectionsService = connectionsService ?? throw new ArgumentNullException(nameof(connectionsService));
             connectionsService.ConnectionsLoaded += ConnectionsServiceOnConnectionsLoaded;
         }
 

@@ -27,11 +27,12 @@ namespace mRemoteNG.Credential
                                          object value,
                                          Type destinationType)
         {
-            if (value is ICredentialRecord && destinationType == typeof(Guid))
-                return ((ICredentialRecord)value).Id;
-            if (value is ICredentialRecord && destinationType == typeof(ICredentialRecord))
-                return value;
-            return base.ConvertTo(context, culture, value, destinationType);
+            return value switch
+            {
+                ICredentialRecord record when destinationType == typeof(Guid) => record.Id,
+                ICredentialRecord when destinationType == typeof(ICredentialRecord) => value,
+                _ => base.ConvertTo(context, culture, value, destinationType)
+            };
         }
 
         public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)

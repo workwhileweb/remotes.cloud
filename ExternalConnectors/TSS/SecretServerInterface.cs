@@ -34,8 +34,7 @@ namespace ExternalConnectors.TSS
                     f.tbUsername.Text = un ?? "";
                     f.tbPassword.Text = ssPassword;    // in OTP refresh cases, this value might already be filled
 
-                    var url = key.GetValue("URL") as string;
-                    if (url == null || !url.Contains("://"))
+                    if (key.GetValue("URL") is not string url || !url.Contains("://"))
                         url = "https://cred.domain.local/SecretServer";
                     f.tbSSURL.Text = url;
 

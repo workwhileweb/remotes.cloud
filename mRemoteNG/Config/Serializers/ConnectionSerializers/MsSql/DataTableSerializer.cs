@@ -259,8 +259,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
         {
             if (!(connectionInfo is RootNodeInfo))
                 SerializeConnectionInfo(connectionInfo);
-            var containerInfo = connectionInfo as ContainerInfo;
-            if (containerInfo == null) return;
+            if (connectionInfo is not ContainerInfo containerInfo) return;
             foreach (var child in containerInfo.Children)
                 SerializeNodesRecursive(child);
         }

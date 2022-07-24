@@ -11,16 +11,12 @@ namespace mRemoteNG.Tree.ClickHandlers
 
         public ExpandNodeClickHandler(IConnectionTree connectionTree)
         {
-            if (connectionTree == null)
-                throw new ArgumentNullException(nameof(connectionTree));
-
-            _connectionTree = connectionTree;
+            _connectionTree = connectionTree ?? throw new ArgumentNullException(nameof(connectionTree));
         }
 
         public void Execute(ConnectionInfo clickedNode)
         {
-            var clickedNodeAsContainer = clickedNode as ContainerInfo;
-            if (clickedNodeAsContainer == null) return;
+            if (clickedNode is not ContainerInfo clickedNodeAsContainer) return;
             _connectionTree.ToggleExpansion(clickedNodeAsContainer);
         }
     }

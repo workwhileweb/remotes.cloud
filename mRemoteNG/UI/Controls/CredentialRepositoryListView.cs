@@ -70,8 +70,7 @@ namespace mRemoteNG.UI.Controls
             if (mouseEventArgs.Clicks < 2) return;
             OLVColumn column;
             var listItem = objectListView1.GetItemAt(mouseEventArgs.X, mouseEventArgs.Y, out column);
-            var clickedNode = listItem.RowObject as ICredentialRepository;
-            if (clickedNode == null) return;
+            if (listItem.RowObject is not ICredentialRepository clickedNode) return;
             DoubleClickHandler?.Invoke(clickedNode);
         }
 

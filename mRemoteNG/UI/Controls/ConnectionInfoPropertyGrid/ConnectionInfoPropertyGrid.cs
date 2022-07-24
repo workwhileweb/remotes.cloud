@@ -120,21 +120,12 @@ namespace mRemoteNG.UI.Controls.ConnectionInfoPropertyGrid
 
                 if (RootNodeSelected && PropertyMode == PropertyMode.Connection)
                 {
-                    if (SelectedConnectionInfo is RootPuttySessionsNodeInfo)
+                    BrowsableProperties = SelectedConnectionInfo switch
                     {
-                        BrowsableProperties = new[]
-                        {
-                            nameof(RootPuttySessionsNodeInfo.Name)
-                        };
-                    }
-                    else if (SelectedConnectionInfo is RootNodeInfo)
-                    {
-                        BrowsableProperties = new[]
-                        {
-                            nameof(RootNodeInfo.Name),
-                            nameof(RootNodeInfo.Password)
-                        };
-                    }
+                        RootPuttySessionsNodeInfo => new[] {nameof(RootPuttySessionsNodeInfo.Name)},
+                        RootNodeInfo => new[] {nameof(RootNodeInfo.Name), nameof(RootNodeInfo.Password)},
+                        _ => BrowsableProperties
+                    };
 
                     Refresh();
                     return;

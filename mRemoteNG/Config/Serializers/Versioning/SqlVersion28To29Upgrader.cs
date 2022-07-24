@@ -27,7 +27,7 @@ namespace mRemoteNG.Config.Serializers.Versioning
         public Version Upgrade()
         {
             Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
-                                                string.Format("Upgrading database to version {0}.", version));
+                $"Upgrading database to version {version}.");
 
             const string mySqlAlter = @"
 ALTER TABLE tblCons ADD COLUMN StartProgram varchar(512) DEFAULT NULL;

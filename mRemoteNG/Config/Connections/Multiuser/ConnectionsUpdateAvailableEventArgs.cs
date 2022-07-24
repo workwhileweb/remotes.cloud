@@ -14,9 +14,7 @@ namespace mRemoteNG.Config.Connections.Multiuser
 
         public ConnectionsUpdateAvailableEventArgs(IDatabaseConnector databaseConnector, DateTime updateTime)
         {
-            if (databaseConnector == null)
-                throw new ArgumentNullException(nameof(databaseConnector));
-            DatabaseConnector = databaseConnector;
+            DatabaseConnector = databaseConnector ?? throw new ArgumentNullException(nameof(databaseConnector));
             UpdateTime = updateTime;
         }
     }

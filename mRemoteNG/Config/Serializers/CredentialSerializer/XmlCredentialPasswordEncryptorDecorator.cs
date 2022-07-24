@@ -16,13 +16,8 @@ namespace mRemoteNG.Config.Serializers.CredentialSerializer
                                                        ISerializer<IEnumerable<ICredentialRecord>, string>
                                                            baseSerializer)
         {
-            if (baseSerializer == null)
-                throw new ArgumentNullException(nameof(baseSerializer));
-            if (cryptographyProvider == null)
-                throw new ArgumentNullException(nameof(cryptographyProvider));
-
-            _baseSerializer = baseSerializer;
-            _cryptographyProvider = cryptographyProvider;
+            _baseSerializer = baseSerializer ?? throw new ArgumentNullException(nameof(baseSerializer));
+            _cryptographyProvider = cryptographyProvider ?? throw new ArgumentNullException(nameof(cryptographyProvider));
         }
 
 

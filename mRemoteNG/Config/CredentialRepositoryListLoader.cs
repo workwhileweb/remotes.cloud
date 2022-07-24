@@ -14,13 +14,8 @@ namespace mRemoteNG.Config
         public CredentialRepositoryListLoader(IDataProvider<string> dataProvider,
                                               CredentialRepositoryListDeserializer deserializer)
         {
-            if (dataProvider == null)
-                throw new ArgumentNullException(nameof(dataProvider));
-            if (deserializer == null)
-                throw new ArgumentNullException(nameof(deserializer));
-
-            _dataProvider = dataProvider;
-            _deserializer = deserializer;
+            _dataProvider = dataProvider ?? throw new ArgumentNullException(nameof(dataProvider));
+            _deserializer = deserializer ?? throw new ArgumentNullException(nameof(deserializer));
         }
 
         public IEnumerable<ICredentialRepository> Load()

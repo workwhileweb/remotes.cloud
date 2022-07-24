@@ -44,16 +44,12 @@ namespace mRemoteNG.Config.Connections
         {
             if (previousTreeModelModel == null)
                 throw new ArgumentNullException(nameof(previousTreeModelModel));
-            if (newTreeModelModel == null)
-                throw new ArgumentNullException(nameof(newTreeModelModel));
-            if (newSourcePath == null)
-                throw new ArgumentNullException(nameof(newSourcePath));
 
             PreviousConnectionTreeModel = previousTreeModelModel;
             PreviousSourceWasDatabase = previousSourceWasDatabase;
-            NewConnectionTreeModel = newTreeModelModel;
+            NewConnectionTreeModel = newTreeModelModel ?? throw new ArgumentNullException(nameof(newTreeModelModel));
             NewSourceIsDatabase = newSourceIsDatabase;
-            NewSourcePath = newSourcePath;
+            NewSourcePath = newSourcePath ?? throw new ArgumentNullException(nameof(newSourcePath));
         }
     }
 }

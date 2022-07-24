@@ -346,10 +346,12 @@ namespace mRemoteNG.Connection
             get => GetPropertyValue("RDPMinutesToIdleTimeout", _rdpMinutesToIdleTimeout);
             set
             {
-                if (value < 0)
-                    value = 0;
-                else if (value > 240)
-                    value = 240;
+                value = value switch
+                {
+                    < 0 => 0,
+                    > 240 => 240,
+                    _ => value
+                };
                 SetField(ref _rdpMinutesToIdleTimeout, value, "RDPMinutesToIdleTimeout");
             }
         }

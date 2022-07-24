@@ -90,8 +90,7 @@ namespace mRemoteNG.Security.SymmetricEncryption
 
         private void SetNonceForCcm()
         {
-            var ccm = _aeadBlockCipher as CcmBlockCipher;
-            if (ccm != null)
+            if (_aeadBlockCipher is CcmBlockCipher ccm)
                 NonceBitSize = 88;
         }
 

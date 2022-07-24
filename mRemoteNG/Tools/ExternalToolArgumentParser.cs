@@ -178,10 +178,12 @@ namespace mRemoteNG.Tools
                 case "username":
                     replacement = _connectionInfo.Username;
                     if (string.IsNullOrEmpty(replacement))
-                        if (OptionsCredentialsPage.Default.EmptyCredentials == "windows")
-                            replacement = Environment.UserName;
-                        else if (OptionsCredentialsPage.Default.EmptyCredentials == "custom")
-                            replacement = OptionsCredentialsPage.Default.DefaultUsername;
+                        replacement = OptionsCredentialsPage.Default.EmptyCredentials switch
+                        {
+                            "windows" => Environment.UserName,
+                            "custom" => OptionsCredentialsPage.Default.DefaultUsername,
+                            _ => replacement
+                        };
                     break;
                 case "password":
                     replacement = _connectionInfo.Password;
@@ -191,10 +193,12 @@ namespace mRemoteNG.Tools
                 case "domain":
                     replacement = _connectionInfo.Domain;
                     if (string.IsNullOrEmpty(replacement))
-                        if (OptionsCredentialsPage.Default.EmptyCredentials == "windows")
-                            replacement = Environment.UserDomainName;
-                        else if (OptionsCredentialsPage.Default.EmptyCredentials == "custom")
-                            replacement = OptionsCredentialsPage.Default.DefaultDomain;
+                        replacement = OptionsCredentialsPage.Default.EmptyCredentials switch
+                        {
+                            "windows" => Environment.UserDomainName,
+                            "custom" => OptionsCredentialsPage.Default.DefaultDomain,
+                            _ => replacement
+                        };
                     break;
                 case "description":
                     replacement = _connectionInfo.Description;

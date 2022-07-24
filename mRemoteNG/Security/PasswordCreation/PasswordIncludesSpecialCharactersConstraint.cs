@@ -26,10 +26,7 @@ namespace mRemoteNG.Security.PasswordCreation
         public PasswordIncludesSpecialCharactersConstraint(IEnumerable<char> specialCharacters, int minimumCount = 1)
             : this(minimumCount)
         {
-            if (specialCharacters == null)
-                throw new ArgumentNullException(nameof(specialCharacters));
-
-            SpecialCharacters = specialCharacters;
+            SpecialCharacters = specialCharacters ?? throw new ArgumentNullException(nameof(specialCharacters));
             ConstraintHint = string.Format(Language.PasswordConstainsSpecialCharactersConstraintHint, _minimumCount,
                                            string.Concat(SpecialCharacters));
         }

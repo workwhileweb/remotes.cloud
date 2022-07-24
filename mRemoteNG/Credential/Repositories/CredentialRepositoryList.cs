@@ -79,8 +79,7 @@ namespace mRemoteNG.Credential.Repositories
 
         private void OnRepoConfigChanged(object sender, EventArgs args)
         {
-            var repo = sender as ICredentialRepository;
-            if (repo == null) return;
+            if (sender is not ICredentialRepository repo) return;
             RaiseRepositoriesUpdatedEvent(ActionType.Updated, new[] {repo});
         }
     }

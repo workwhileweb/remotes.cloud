@@ -30,9 +30,7 @@ namespace mRemoteNG.Config.Connections
 
         public SqlConnectionsSaver(SaveFilter saveFilter, ISerializer<IEnumerable<LocalConnectionPropertiesModel>, string> localPropertieSerializer, IDataProvider<string> localPropertiesDataProvider)
         {
-            if (saveFilter == null)
-                throw new ArgumentNullException(nameof(saveFilter));
-            _saveFilter = saveFilter;
+            _saveFilter = saveFilter ?? throw new ArgumentNullException(nameof(saveFilter));
             _localPropertiesSerializer = localPropertieSerializer.ThrowIfNull(nameof(localPropertieSerializer));
             _dataProvider = localPropertiesDataProvider.ThrowIfNull(nameof(localPropertiesDataProvider));
         }

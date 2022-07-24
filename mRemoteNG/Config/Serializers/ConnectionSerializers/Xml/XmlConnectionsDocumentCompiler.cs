@@ -19,13 +19,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
         public XmlConnectionsDocumentCompiler(ICryptographyProvider cryptographyProvider,
                                               ISerializer<ConnectionInfo, XElement> connectionNodeSerializer)
         {
-            if (cryptographyProvider == null)
-                throw new ArgumentNullException(nameof(cryptographyProvider));
-            if (connectionNodeSerializer == null)
-                throw new ArgumentNullException(nameof(connectionNodeSerializer));
-
-            _cryptographyProvider = cryptographyProvider;
-            _connectionNodeSerializer = connectionNodeSerializer;
+            _cryptographyProvider = cryptographyProvider ?? throw new ArgumentNullException(nameof(cryptographyProvider));
+            _connectionNodeSerializer = connectionNodeSerializer ?? throw new ArgumentNullException(nameof(connectionNodeSerializer));
         }
 
         public XDocument CompileDocument(ConnectionTreeModel connectionTreeModel, bool fullFileEncryption)
@@ -59,8 +54,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
                 parentElement.Add(newElement);
             }
 
-            var serializationTargetAsContainer = serializationTarget as ContainerInfo;
-            if (serializationTargetAsContainer == null) return;
+            if (serializationTarget is not ContainerInfo serializationTargetAsContainer) return;
             foreach (var child in serializationTargetAsContainer.Children.ToArray())
                 CompileRecursive(child, newElement);
         }
@@ -74,8 +68,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
         {
             while (true)
             {
-                var connectionInfoAsRootNode = connectionInfo as RootNodeInfo;
-                if (connectionInfoAsRootNode != null) return connectionInfoAsRootNode;
+                if (connectionInfo is RootNodeInfo connectionInfoAsRootNode) return connectionInfoAsRootNode;
                 connectionInfo = connectionInfo?.Parent ?? new RootNodeInfo(RootNodeType.Connection);
             }
         }

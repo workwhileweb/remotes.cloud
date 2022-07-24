@@ -21,20 +21,13 @@ namespace mRemoteNG.Credential.Repositories
                                        CredentialRecordSaver credentialRecordSaver,
                                        CredentialRecordLoader credentialRecordLoader)
         {
-            if (config == null)
-                throw new ArgumentNullException(nameof(config));
-            if (credentialRecordSaver == null)
-                throw new ArgumentNullException(nameof(credentialRecordSaver));
-            if (credentialRecordLoader == null)
-                throw new ArgumentNullException(nameof(credentialRecordLoader));
-
-            Config = config;
+            Config = config ?? throw new ArgumentNullException(nameof(config));
             CredentialRecords = new FullyObservableCollection<ICredentialRecord>();
             ((FullyObservableCollection<ICredentialRecord>)CredentialRecords).CollectionUpdated +=
                 RaiseCredentialsUpdatedEvent;
             Config.PropertyChanged += (sender, args) => RaiseRepositoryConfigUpdatedEvent(args);
-            _credentialRecordSaver = credentialRecordSaver;
-            _credentialRecordLoader = credentialRecordLoader;
+            _credentialRecordSaver = credentialRecordSaver ?? throw new ArgumentNullException(nameof(credentialRecordSaver));
+            _credentialRecordLoader = credentialRecordLoader ?? throw new ArgumentNullException(nameof(credentialRecordLoader));
         }
 
         public void LoadCredentials(SecureString key)

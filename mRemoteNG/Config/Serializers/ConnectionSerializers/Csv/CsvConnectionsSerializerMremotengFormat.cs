@@ -79,8 +79,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
 
         private void SerializeNodesRecursive(ConnectionInfo node, StringBuilder sb)
         {
-            var nodeAsContainer = node as ContainerInfo;
-            if (nodeAsContainer != null)
+            if (node is ContainerInfo nodeAsContainer)
             {
                 foreach (var child in nodeAsContainer.Children)
                 {

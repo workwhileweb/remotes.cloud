@@ -17,13 +17,8 @@ namespace mRemoteNG.Config.Settings
         public DockPanelLayoutSaver(ISerializer<DockPanel, string> dockPanelSerializer,
                                     IDataProvider<string> dataProvider)
         {
-            if (dockPanelSerializer == null)
-                throw new ArgumentNullException(nameof(dockPanelSerializer));
-            if (dataProvider == null)
-                throw new ArgumentNullException(nameof(dataProvider));
-
-            _dockPanelSerializer = dockPanelSerializer;
-            _dataProvider = dataProvider;
+            _dockPanelSerializer = dockPanelSerializer ?? throw new ArgumentNullException(nameof(dockPanelSerializer));
+            _dataProvider = dataProvider ?? throw new ArgumentNullException(nameof(dataProvider));
         }
 
         public void Save()

@@ -15,25 +15,18 @@ namespace mRemoteNG.Credential
         public CredentialDeletionMsgBoxConfirmer(
             Func<string, string, MessageBoxButtons, MessageBoxIcon, DialogResult> confirmationFunc)
         {
-            if (confirmationFunc == null)
-                throw new ArgumentNullException(nameof(confirmationFunc));
-
-            _confirmationFunc = confirmationFunc;
+            _confirmationFunc = confirmationFunc ?? throw new ArgumentNullException(nameof(confirmationFunc));
         }
 
         public bool Confirm(IEnumerable<ICredentialRecord> confirmationTargets)
         {
             var targetsArray = confirmationTargets.ToArray();
-            if (targetsArray.Length == 0) return false;
-            if (targetsArray.Length > 1)
-                return PromptUser(
-                                  string.Format(
-                                                "Are you sure you want to delete these {0} selected credentials?",
-                                                targetsArray.Length));
-            return PromptUser(
-                              string.Format(
-                                            Language.ConfirmDeleteCredentialRecord,
-                                            targetsArray.First().Title));
+            return targetsArray.Length switch
+            {
+                0 => false,
+                > 1 => PromptUser($"Are you sure you want to delete these {targetsArray.Length} selected credentials?"),
+                _ => PromptUser(string.Format(Language.ConfirmDeleteCredentialRecord, targetsArray.First().Title))
+            };
         }
 
         private bool PromptUser(string promptMessage)

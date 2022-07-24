@@ -83,8 +83,7 @@ namespace mRemoteNG.UI.Controls
 
         private static void ComboBox_DrawItem(object sender, DrawItemEventArgs e)
         {
-            var comboBox = sender as ComboBox;
-            if (comboBox == null)
+            if (sender is not ComboBox comboBox)
             {
                 return;
             }

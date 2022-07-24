@@ -17,10 +17,7 @@ namespace mRemoteNG.Tools.Cmdline
 
         public StartupArgumentsInterpreter(MessageCollector messageCollector)
         {
-            if (messageCollector == null)
-                throw new ArgumentNullException(nameof(messageCollector));
-
-            _messageCollector = messageCollector;
+            _messageCollector = messageCollector ?? throw new ArgumentNullException(nameof(messageCollector));
         }
 
         public void ParseArguments(IEnumerable<string> cmdlineArgs)

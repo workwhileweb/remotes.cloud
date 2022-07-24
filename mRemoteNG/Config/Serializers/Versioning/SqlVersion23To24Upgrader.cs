@@ -11,10 +11,7 @@ namespace mRemoteNG.Config.Serializers.Versioning
 
         public SqlVersion23To24Upgrader(IDatabaseConnector databaseConnector)
         {
-            if (databaseConnector == null)
-                throw new ArgumentNullException(nameof(databaseConnector));
-
-            _databaseConnector = databaseConnector;
+            _databaseConnector = databaseConnector ?? throw new ArgumentNullException(nameof(databaseConnector));
         }
 
         public bool CanUpgrade(Version currentVersion)

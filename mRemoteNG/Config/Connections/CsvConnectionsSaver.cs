@@ -16,11 +16,9 @@ namespace mRemoteNG.Config.Connections
         {
             if (string.IsNullOrEmpty(connectionFileName))
                 throw new ArgumentException($"Argument '{nameof(connectionFileName)}' cannot be null or empty");
-            if (saveFilter == null)
-                throw new ArgumentNullException(nameof(saveFilter));
 
             _connectionFileName = connectionFileName;
-            _saveFilter = saveFilter;
+            _saveFilter = saveFilter ?? throw new ArgumentNullException(nameof(saveFilter));
         }
 
         public void Save(ConnectionTreeModel connectionTreeModel, string propertyNameTrigger = "")

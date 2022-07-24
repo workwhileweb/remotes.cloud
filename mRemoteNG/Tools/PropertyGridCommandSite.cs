@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Reflection;
@@ -58,8 +58,7 @@ namespace mRemoteNG.Tools
 
         private void VerbEventHandler(object sender, EventArgs e)
         {
-            var verb = sender as DesignerVerb;
-            if (verb == null)
+            if (sender is not DesignerVerb verb)
             {
                 return;
             }

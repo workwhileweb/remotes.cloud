@@ -43,12 +43,14 @@ namespace mRemoteNG.UI
 
         public string GetKey(ConnectionInfo connectionInfo)
         {
-            if (connectionInfo == null) return "";
-            if (connectionInfo is RootPuttySessionsNodeInfo) return "PuttySessions";
-            if (connectionInfo is RootNodeInfo) return "Root";
-            if (connectionInfo is ContainerInfo) return "Folder";
-
-            return GetConnectionIcon(connectionInfo);
+            return connectionInfo switch
+            {
+                null => "",
+                RootPuttySessionsNodeInfo => "PuttySessions",
+                RootNodeInfo => "Root",
+                ContainerInfo => "Folder",
+                _ => GetConnectionIcon(connectionInfo)
+            };
         }
 
         private static string BuildConnectionIconName(string icon, bool connected)

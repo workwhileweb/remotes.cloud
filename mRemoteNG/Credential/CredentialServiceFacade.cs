@@ -17,16 +17,9 @@ namespace mRemoteNG.Credential
                                        ILoader<IEnumerable<ICredentialRepository>> loader,
                                        ISaver<IEnumerable<ICredentialRepository>> saver)
         {
-            if (repositoryList == null)
-                throw new ArgumentNullException(nameof(repositoryList));
-            if (loader == null)
-                throw new ArgumentNullException(nameof(loader));
-            if (saver == null)
-                throw new ArgumentNullException(nameof(saver));
-
-            _repositoryList = repositoryList;
-            _loader = loader;
-            _saver = saver;
+            _repositoryList = repositoryList ?? throw new ArgumentNullException(nameof(repositoryList));
+            _loader = loader ?? throw new ArgumentNullException(nameof(loader));
+            _saver = saver ?? throw new ArgumentNullException(nameof(saver));
             SetupEventHandlers();
         }
 

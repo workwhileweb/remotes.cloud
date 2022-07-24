@@ -13,9 +13,7 @@ namespace mRemoteNG.Tree
 
         public PreviousSessionOpener(IConnectionInitiator connectionInitiator)
         {
-            if (connectionInitiator == null)
-                throw new ArgumentNullException(nameof(connectionInitiator));
-            _connectionInitiator = connectionInitiator;
+            _connectionInitiator = connectionInitiator ?? throw new ArgumentNullException(nameof(connectionInitiator));
         }
 
         public void Execute(IConnectionTree connectionTree)

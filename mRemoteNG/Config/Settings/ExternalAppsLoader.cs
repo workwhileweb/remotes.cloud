@@ -20,16 +20,9 @@ namespace mRemoteNG.Config.Settings
                                   MessageCollector messageCollector,
                                   ExternalToolsToolStrip externalToolsToolStrip)
         {
-            if (mainForm == null)
-                throw new ArgumentNullException(nameof(mainForm));
-            if (messageCollector == null)
-                throw new ArgumentNullException(nameof(messageCollector));
-            if (externalToolsToolStrip == null)
-                throw new ArgumentNullException(nameof(externalToolsToolStrip));
-
-            _mainForm = mainForm;
-            _messageCollector = messageCollector;
-            _externalToolsToolStrip = externalToolsToolStrip;
+            _mainForm = mainForm ?? throw new ArgumentNullException(nameof(mainForm));
+            _messageCollector = messageCollector ?? throw new ArgumentNullException(nameof(messageCollector));
+            _externalToolsToolStrip = externalToolsToolStrip ?? throw new ArgumentNullException(nameof(externalToolsToolStrip));
         }
 
 

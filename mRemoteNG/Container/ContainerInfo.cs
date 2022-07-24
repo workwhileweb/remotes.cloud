@@ -227,8 +227,7 @@ namespace mRemoteNG.Container
             foreach (var child in Children)
             {
                 childList.Add(child);
-                var childContainer = child as ContainerInfo;
-                if (childContainer != null)
+                if (child is ContainerInfo childContainer)
                     childList.AddRange(GetRecursiveChildList(childContainer));
             }
 
@@ -241,8 +240,7 @@ namespace mRemoteNG.Container
             foreach (var child in container.Children)
             {
                 childList.Add(child);
-                var childContainer = child as ContainerInfo;
-                if (childContainer != null)
+                if (child is ContainerInfo childContainer)
                     childList.AddRange(GetRecursiveChildList(childContainer));
             }
 
@@ -256,8 +254,7 @@ namespace mRemoteNG.Container
             {
                 if (child.Favorite && child.GetTreeNodeType() == TreeNodeType.Connection)
                     childList.Add(child);
-                var childContainer = child as ContainerInfo;
-                if (childContainer != null)
+                if (child is ContainerInfo childContainer)
                     childList.AddRange(GetRecursiveFavoritChildList(childContainer));
             }
             return childList;
@@ -298,8 +295,7 @@ namespace mRemoteNG.Container
             {
                 if (child.Favorite && child.GetTreeNodeType() == TreeNodeType.Connection)
                     childList.Add(child);
-                var childContainer = child as ContainerInfo;
-                if (childContainer != null)
+                if (child is ContainerInfo childContainer)
                     childList.AddRange(GetRecursiveFavoritChildList(childContainer));
             }
             return childList;
@@ -308,16 +304,14 @@ namespace mRemoteNG.Container
         protected virtual void SubscribeToChildEvents(ConnectionInfo child)
         {
             child.PropertyChanged += RaisePropertyChangedEvent;
-            var childAsContainer = child as ContainerInfo;
-            if (childAsContainer == null) return;
+            if (child is not ContainerInfo childAsContainer) return;
             childAsContainer.CollectionChanged += RaiseCollectionChangedEvent;
         }
 
         protected virtual void UnsubscribeToChildEvents(ConnectionInfo child)
         {
             child.PropertyChanged -= RaisePropertyChangedEvent;
-            var childAsContainer = child as ContainerInfo;
-            if (childAsContainer == null) return;
+            if (child is not ContainerInfo childAsContainer) return;
             childAsContainer.CollectionChanged -= RaiseCollectionChangedEvent;
         }
 

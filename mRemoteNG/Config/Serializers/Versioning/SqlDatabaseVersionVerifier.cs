@@ -15,10 +15,7 @@ namespace mRemoteNG.Config.Serializers.Versioning
 
         public SqlDatabaseVersionVerifier(IDatabaseConnector DatabaseConnector)
         {
-            if (DatabaseConnector == null)
-                throw new ArgumentNullException(nameof(DatabaseConnector));
-
-            _databaseConnector = DatabaseConnector;
+            _databaseConnector = DatabaseConnector ?? throw new ArgumentNullException(nameof(DatabaseConnector));
         }
 
         public bool VerifyDatabaseVersion(Version dbVersion)

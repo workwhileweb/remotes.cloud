@@ -53,8 +53,7 @@ namespace mRemoteNG.Tools
                 Tag = node
             };
 
-            var nodeAsContainer = node as ContainerInfo;
-            if (nodeAsContainer != null)
+            if (node is ContainerInfo nodeAsContainer)
             {
                 menuItem.Image = Properties.Resources.FolderClosed_16x;
                 menuItem.Tag = nodeAsContainer;

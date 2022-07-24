@@ -9,9 +9,7 @@ namespace mRemoteNG.Tree.ClickHandlers
 
         public SwitchToConnectionClickHandler(IConnectionInitiator connectionInitiator)
         {
-            if (connectionInitiator == null)
-                throw new ArgumentNullException(nameof(connectionInitiator));
-            _connectionInitiator = connectionInitiator;
+            _connectionInitiator = connectionInitiator ?? throw new ArgumentNullException(nameof(connectionInitiator));
         }
 
         public void Execute(ConnectionInfo clickedNode)

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Specialized;
 
@@ -12,12 +12,12 @@ namespace mRemoteNG.Connection.Protocol
         {
             get
             {
-                var @base = index as ProtocolBase;
-                if (@base != null)
-                    return @base;
-                if (index is int)
-                    return (ProtocolBase)List[Convert.ToInt32(index)];
-                return null;
+                return index switch
+                {
+                    ProtocolBase @base => @base,
+                    int => (ProtocolBase) List[Convert.ToInt32(index)],
+                    _ => null
+                };
             }
         }
 

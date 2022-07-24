@@ -9,7 +9,7 @@ namespace mRemoteNG.Connection
     public class DefaultConnectionInfo : ConnectionInfo
     {
         [Browsable(false)]
-        public static DefaultConnectionInfo Instance { get; } = new DefaultConnectionInfo();
+        public static DefaultConnectionInfo Instance { get; } = new();
 
         private DefaultConnectionInfo()
         {

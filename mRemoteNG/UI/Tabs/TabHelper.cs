@@ -6,7 +6,7 @@ namespace mRemoteNG.UI.Tabs
 {
     class TabHelper
     {
-        private static readonly Lazy<TabHelper> lazyHelper = new Lazy<TabHelper>(() => new TabHelper());
+        private static readonly Lazy<TabHelper> lazyHelper = new(() => new TabHelper());
 
         public static TabHelper Instance => lazyHelper.Value;
 

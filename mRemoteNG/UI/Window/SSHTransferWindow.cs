@@ -39,7 +39,7 @@ namespace mRemoteNG.UI.Window
 
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources =
+            var resources =
                 new System.ComponentModel.ComponentResourceManager(typeof(SSHTransferWindow));
             grpFiles = new MrngGroupBox();
             lblLocalFile = new MrngLabel();

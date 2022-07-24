@@ -14,7 +14,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
         private readonly SecureString _encryptionKey;
         private readonly SaveFilter _saveFilter;
 
-        public Version Version { get; } = new Version(2, 6);
+        public Version Version { get; } = new(2, 6);
 
         public XmlConnectionNodeSerializer26(ICryptographyProvider cryptographyProvider, SecureString encryptionKey, SaveFilter saveFilter)
         {

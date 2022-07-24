@@ -11,7 +11,7 @@ namespace mRemoteNG.UI.Forms
     public partial class FrmPassword : IKeyProvider
     {
         private readonly string _passwordName;
-        private SecureString _password = new SecureString();
+        private SecureString _password = new();
 
         /// <summary>
         /// Puts the dialog into the New Password mode. An extra

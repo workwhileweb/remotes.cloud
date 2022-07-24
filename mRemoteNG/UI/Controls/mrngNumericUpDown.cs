@@ -116,14 +116,14 @@ namespace mRemoteNG.UI.Controls
         private void InitializeComponent()
         {
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
-            this.SuspendLayout();
+            SuspendLayout();
             // 
             // NGNumericUpDown
             // 
-            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular,
-                                                System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            Font = new Font("Segoe UI", 8.25F, FontStyle.Regular,
+                                                GraphicsUnit.Point, ((byte)(0)));
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
-            this.ResumeLayout(false);
+            ResumeLayout(false);
         }
     }
 }

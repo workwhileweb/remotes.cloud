@@ -12,7 +12,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
         ISerializer<IEnumerable<LocalConnectionPropertiesModel>, string>,
         IDeserializer<string, IEnumerable<LocalConnectionPropertiesModel>>
     {
-        public Version Version { get; } = new Version(1, 0);
+        public Version Version { get; } = new(1, 0);
 
         public string Serialize(IEnumerable<LocalConnectionPropertiesModel> models)
         {

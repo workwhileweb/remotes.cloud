@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using mRemoteNG.App;
@@ -28,12 +28,12 @@ namespace mRemoteNG.Tools
         {
             get
             {
-                NativeMethods.WINDOWPLACEMENT windowPlacement = GetWindowPlacement();
+                var windowPlacement = GetWindowPlacement();
                 return Convert.ToBoolean(windowPlacement.flags & NativeMethods.WPF_RESTORETOMAXIMIZED);
             }
             set
             {
-                NativeMethods.WINDOWPLACEMENT windowPlacement = GetWindowPlacement();
+                var windowPlacement = GetWindowPlacement();
                 if (value)
                 {
                     windowPlacement.flags = windowPlacement.flags | NativeMethods.WPF_RESTORETOMAXIMIZED;
@@ -58,7 +58,7 @@ namespace mRemoteNG.Tools
                 throw (new NullReferenceException("WindowPlacement.Form is not set."));
             }
 
-            NativeMethods.WINDOWPLACEMENT windowPlacement = new NativeMethods.WINDOWPLACEMENT();
+            var windowPlacement = new NativeMethods.WINDOWPLACEMENT();
             windowPlacement.length = (uint)Marshal.SizeOf(windowPlacement);
             try
             {

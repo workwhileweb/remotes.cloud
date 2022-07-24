@@ -66,7 +66,7 @@ namespace mRemoteNG.Tools
 
         public static string DBDate(DateTime Dt)
 		{
-			switch (Properties.OptionsDBsPage.Default.SQLServerType)
+			switch (OptionsDBsPage.Default.SQLServerType)
 			{
 				case "mysql":
 					return Dt.ToString("yyyy/MM/dd HH:mm:ss");
@@ -78,7 +78,7 @@ namespace mRemoteNG.Tools
 
 		public static Type DBTimeStampType()
 		{
-			switch (Properties.OptionsDBsPage.Default.SQLServerType)
+			switch (OptionsDBsPage.Default.SQLServerType)
 			{
 				case "mysql":
 					return typeof(MySqlDateTime);
@@ -90,7 +90,7 @@ namespace mRemoteNG.Tools
 
 		public static object DBTimeStampNow()
 		{
-			switch (Properties.OptionsDBsPage.Default.SQLServerType)
+			switch (OptionsDBsPage.Default.SQLServerType)
 			{
 				case "mysql":
 					return new MySqlDateTime(DateTime.Now);
@@ -127,7 +127,7 @@ namespace mRemoteNG.Tools
                 if (sender != null)
                 {
                     var bmp = new Bitmap(sender.Width, sender.Height, PixelFormat.Format32bppRgb);
-                    Graphics g = Graphics.FromImage(bmp);
+                    var g = Graphics.FromImage(bmp);
                     g.CopyFromScreen(sender.PointToScreen(System.Drawing.Point.Empty), System.Drawing.Point.Empty, bmp.Size, CopyPixelOperation.SourceCopy);
                     return bmp;
                 }

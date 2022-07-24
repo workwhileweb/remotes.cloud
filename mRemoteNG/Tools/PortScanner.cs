@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net;
@@ -13,10 +13,10 @@ namespace mRemoteNG.Tools
 {
     public class PortScanner
     {
-        private readonly List<IPAddress> _ipAddresses = new List<IPAddress>();
-        private readonly List<int> _ports = new List<int>();
+        private readonly List<IPAddress> _ipAddresses = new();
+        private readonly List<int> _ports = new();
         private Thread _scanThread;
-        private readonly List<ScanHost> _scannedHosts = new List<ScanHost>();
+        private readonly List<ScanHost> _scannedHosts = new();
         private readonly int _timeoutInMilliseconds;
 
         #region Public Methods
@@ -101,7 +101,7 @@ namespace mRemoteNG.Tools
         #region Private Methods
 
         private int _hostCount;
-        private readonly List<Ping> _pings = new List<Ping>();
+        private readonly List<Ping> _pings = new();
 
         private void ScanAsync()
         {

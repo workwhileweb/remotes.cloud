@@ -58,13 +58,13 @@ namespace mRemoteNG.App.Update
 
         private void SetDefaultProxySettings()
         {
-            var shouldWeUseProxy = Properties.OptionsUpdatesPage.Default.UpdateUseProxy;
-            var proxyAddress = Properties.OptionsUpdatesPage.Default.UpdateProxyAddress;
-            var port = Properties.OptionsUpdatesPage.Default.UpdateProxyPort;
-            var useAuthentication = Properties.OptionsUpdatesPage.Default.UpdateProxyUseAuthentication;
-            var username = Properties.OptionsUpdatesPage.Default.UpdateProxyAuthUser;
+            var shouldWeUseProxy = OptionsUpdatesPage.Default.UpdateUseProxy;
+            var proxyAddress = OptionsUpdatesPage.Default.UpdateProxyAddress;
+            var port = OptionsUpdatesPage.Default.UpdateProxyPort;
+            var useAuthentication = OptionsUpdatesPage.Default.UpdateProxyUseAuthentication;
+            var username = OptionsUpdatesPage.Default.UpdateProxyAuthUser;
             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-            var password = cryptographyProvider.Decrypt(Properties.OptionsUpdatesPage.Default.UpdateProxyAuthPass, Runtime.EncryptionKey);
+            var password = cryptographyProvider.Decrypt(OptionsUpdatesPage.Default.UpdateProxyAuthPass, Runtime.EncryptionKey);
 
             SetProxySettings(shouldWeUseProxy, proxyAddress, port, useAuthentication, username, password);
         }
@@ -224,11 +224,11 @@ namespace mRemoteNG.App.Update
                 _getUpdateInfoCancelToken = new CancellationTokenSource();
                 var updateInfo = await _httpClient.GetStringAsync(UpdateChannelInfo.GetUpdateChannelInfo(), _getUpdateInfoCancelToken.Token);
                 CurrentUpdateInfo = UpdateInfo.FromString(updateInfo);
-                Properties.OptionsUpdatesPage.Default.CheckForUpdatesLastCheck = DateTime.UtcNow;
+                OptionsUpdatesPage.Default.CheckForUpdatesLastCheck = DateTime.UtcNow;
 
-                if (!Properties.OptionsUpdatesPage.Default.UpdatePending)
+                if (!OptionsUpdatesPage.Default.UpdatePending)
                 {
-                    Properties.OptionsUpdatesPage.Default.UpdatePending = IsUpdateAvailable();
+                    OptionsUpdatesPage.Default.UpdatePending = IsUpdateAvailable();
                 }
             }
             finally

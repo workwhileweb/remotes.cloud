@@ -44,34 +44,34 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         public override void LoadSettings()
         {
-            chkUseSQLServer.Checked = Properties.OptionsDBsPage.Default.UseSQLServer;
-            txtSQLType.Text = Properties.OptionsDBsPage.Default.SQLServerType;
-            txtSQLServer.Text = Properties.OptionsDBsPage.Default.SQLHost;
-            txtSQLDatabaseName.Text = Properties.OptionsDBsPage.Default.SQLDatabaseName;
-            txtSQLUsername.Text = Properties.OptionsDBsPage.Default.SQLUser;
+            chkUseSQLServer.Checked = OptionsDBsPage.Default.UseSQLServer;
+            txtSQLType.Text = OptionsDBsPage.Default.SQLServerType;
+            txtSQLServer.Text = OptionsDBsPage.Default.SQLHost;
+            txtSQLDatabaseName.Text = OptionsDBsPage.Default.SQLDatabaseName;
+            txtSQLUsername.Text = OptionsDBsPage.Default.SQLUser;
             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-            txtSQLPassword.Text = cryptographyProvider.Decrypt(Properties.OptionsDBsPage.Default.SQLPass, Runtime.EncryptionKey);
-            chkSQLReadOnly.Checked = Properties.OptionsDBsPage.Default.SQLReadOnly;
+            txtSQLPassword.Text = cryptographyProvider.Decrypt(OptionsDBsPage.Default.SQLPass, Runtime.EncryptionKey);
+            chkSQLReadOnly.Checked = OptionsDBsPage.Default.SQLReadOnly;
             lblTestConnectionResults.Text = "";
         }
 
         public override void SaveSettings()
         {
             base.SaveSettings();
-            var sqlServerWasPreviouslyEnabled = Properties.OptionsDBsPage.Default.UseSQLServer;
+            var sqlServerWasPreviouslyEnabled = OptionsDBsPage.Default.UseSQLServer;
 
-            Properties.OptionsDBsPage.Default.UseSQLServer = chkUseSQLServer.Checked;
-            Properties.OptionsDBsPage.Default.SQLServerType = txtSQLType.Text;
-            Properties.OptionsDBsPage.Default.SQLHost = txtSQLServer.Text;
-            Properties.OptionsDBsPage.Default.SQLDatabaseName = txtSQLDatabaseName.Text;
-            Properties.OptionsDBsPage.Default.SQLUser = txtSQLUsername.Text;
+            OptionsDBsPage.Default.UseSQLServer = chkUseSQLServer.Checked;
+            OptionsDBsPage.Default.SQLServerType = txtSQLType.Text;
+            OptionsDBsPage.Default.SQLHost = txtSQLServer.Text;
+            OptionsDBsPage.Default.SQLDatabaseName = txtSQLDatabaseName.Text;
+            OptionsDBsPage.Default.SQLUser = txtSQLUsername.Text;
             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-            Properties.OptionsDBsPage.Default.SQLPass = cryptographyProvider.Encrypt(txtSQLPassword.Text, Runtime.EncryptionKey);
-            Properties.OptionsDBsPage.Default.SQLReadOnly = chkSQLReadOnly.Checked;
+            OptionsDBsPage.Default.SQLPass = cryptographyProvider.Encrypt(txtSQLPassword.Text, Runtime.EncryptionKey);
+            OptionsDBsPage.Default.SQLReadOnly = chkSQLReadOnly.Checked;
 
-            if (Properties.OptionsDBsPage.Default.UseSQLServer)
+            if (OptionsDBsPage.Default.UseSQLServer)
                 ReinitializeSqlUpdater();
-            else if (!Properties.OptionsDBsPage.Default.UseSQLServer && sqlServerWasPreviouslyEnabled)
+            else if (!OptionsDBsPage.Default.UseSQLServer && sqlServerWasPreviouslyEnabled)
                 DisableSql();
         }
 

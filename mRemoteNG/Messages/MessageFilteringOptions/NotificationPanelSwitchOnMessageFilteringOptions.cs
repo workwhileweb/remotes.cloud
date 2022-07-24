@@ -12,20 +12,20 @@ namespace mRemoteNG.Messages.MessageFilteringOptions
 
         public bool AllowInfoMessages
         {
-            get => Properties.OptionsNotificationsPage.Default.SwitchToMCOnInformation;
-            set => Properties.OptionsNotificationsPage.Default.SwitchToMCOnInformation = value;
+            get => OptionsNotificationsPage.Default.SwitchToMCOnInformation;
+            set => OptionsNotificationsPage.Default.SwitchToMCOnInformation = value;
         }
 
         public bool AllowWarningMessages
         {
-            get => Properties.OptionsNotificationsPage.Default.SwitchToMCOnWarning;
-            set => Properties.OptionsNotificationsPage.Default.SwitchToMCOnWarning = value;
+            get => OptionsNotificationsPage.Default.SwitchToMCOnWarning;
+            set => OptionsNotificationsPage.Default.SwitchToMCOnWarning = value;
         }
 
         public bool AllowErrorMessages
         {
-            get => Properties.OptionsNotificationsPage.Default.SwitchToMCOnError;
-            set => Properties.OptionsNotificationsPage.Default.SwitchToMCOnError = value;
+            get => OptionsNotificationsPage.Default.SwitchToMCOnError;
+            set => OptionsNotificationsPage.Default.SwitchToMCOnError = value;
         }
     }
 }

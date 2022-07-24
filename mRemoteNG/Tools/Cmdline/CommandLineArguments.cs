@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -7,7 +7,7 @@ namespace mRemoteNG.Tools.Cmdline
     // Adapted from http://qntm.org/cmd
     public class CommandLineArguments
     {
-        protected List<Argument> Arguments = new List<Argument>();
+        protected List<Argument> Arguments = new();
 
         public bool EscapeForShell { get; set; }
 

@@ -5,8 +5,7 @@ namespace mRemoteNG.Tools
 {
     public class ExternalToolsService
     {
-        public FullyObservableCollection<ExternalTool> ExternalTools { get; set; } =
-            new FullyObservableCollection<ExternalTool>();
+        public FullyObservableCollection<ExternalTool> ExternalTools { get; set; } = new();
 
         public ExternalTool GetExtAppByName(string name)
         {

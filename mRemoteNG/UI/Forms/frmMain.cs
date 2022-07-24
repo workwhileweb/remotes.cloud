@@ -40,7 +40,7 @@ namespace mRemoteNG.UI.Forms
 {
     public partial class FrmMain
     {
-        public static FrmMain Default { get; } = new FrmMain();
+        public static FrmMain Default { get; } = new();
 
         private static ClipboardchangeEventHandler _clipboardChangedEvent;
         private bool _inSizeMove;
@@ -53,7 +53,7 @@ namespace mRemoteNG.UI.Forms
         private ConnectionInfo _selectedConnection;
         private readonly IList<IMessageWriter> _messageWriters = new List<IMessageWriter>();
         private readonly ThemeManager _themeManager;
-        private readonly FileBackupPruner _backupPruner = new FileBackupPruner();
+        private readonly FileBackupPruner _backupPruner = new();
 
         internal FullscreenHandler Fullscreen { get; set; }
 
@@ -64,13 +64,13 @@ namespace mRemoteNG.UI.Forms
         {
             _showFullPathInTitle = Properties.OptionsAppearancePage.Default.ShowCompleteConsPathInTitle;
             InitializeComponent();
-            Screen targetScreen = (Screen.AllScreens.Length > 1) ? Screen.AllScreens[1] : Screen.AllScreens[0];
+            var targetScreen = (Screen.AllScreens.Length > 1) ? Screen.AllScreens[1] : Screen.AllScreens[0];
 
-            Rectangle viewport = targetScreen.WorkingArea;
+            var viewport = targetScreen.WorkingArea;
             
             // normaly it should be screens[1] however due DPI apply 1 size "same" as default with 100%
-            this.Left = viewport.Left + (targetScreen.Bounds.Size.Width / 2) - (this.Width / 2);
-            this.Top = viewport.Top + (targetScreen.Bounds.Size.Height / 2) - (this.Height / 2);
+            Left = viewport.Left + (targetScreen.Bounds.Size.Width / 2) - (Width / 2);
+            Top = viewport.Top + (targetScreen.Bounds.Size.Height / 2) - (Height / 2);
 
             Fullscreen = new FullscreenHandler(this);
 

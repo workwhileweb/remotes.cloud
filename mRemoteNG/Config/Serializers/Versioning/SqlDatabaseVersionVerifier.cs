@@ -9,7 +9,7 @@ namespace mRemoteNG.Config.Serializers.Versioning
 {
     public class SqlDatabaseVersionVerifier
     {
-        protected readonly Version currentSupportedVersion = new Version(2, 9);
+        protected readonly Version currentSupportedVersion = new(2, 9);
 
         private readonly IDatabaseConnector _databaseConnector;
 

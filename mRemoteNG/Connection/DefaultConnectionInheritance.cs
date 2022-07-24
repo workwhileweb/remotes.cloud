@@ -8,7 +8,7 @@ namespace mRemoteNG.Connection
     public class DefaultConnectionInheritance : ConnectionInfoInheritance
     {
         [Browsable(false)]
-        public static DefaultConnectionInheritance Instance { get; } = new DefaultConnectionInheritance();
+        public static DefaultConnectionInheritance Instance { get; } = new();
 
         private DefaultConnectionInheritance() : base(null, true)
         {

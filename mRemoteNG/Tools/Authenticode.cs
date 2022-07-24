@@ -1,4 +1,4 @@
-#if !PORTABLE
+﻿#if !PORTABLE
 using System;
 using System.Windows.Forms;
 using System.IO;
@@ -273,7 +273,7 @@ namespace mRemoteNG.Tools
 			public const int TRUST_E_NOSIGNATURE = unchecked ((int) 0x800B0100);
 				
 			public static readonly Guid WINTRUST_ACTION_GENERIC_VERIFY_V2 =
- new Guid("{00AAC56B-CD44-11d0-8CC2-00C04FC295EE}");
+                new("{00AAC56B-CD44-11d0-8CC2-00C04FC295EE}");
 				
 			public const uint WTD_CHOICE_FILE = 1;
 			public const uint WTD_DISABLE_MD2_MD4 = 0x2000;

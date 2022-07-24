@@ -20,7 +20,7 @@ namespace mRemoteNG.Connection.Protocol
     {
         private const int IDM_RECONF = 0x50; // PuTTY Settings Menu ID
         private bool _isPuttyNg;
-        private readonly DisplayProperties _display = new DisplayProperties();
+        private readonly DisplayProperties _display = new();
 
         #region Public Properties
 
@@ -101,19 +101,19 @@ namespace mRemoteNG.Connection.Protocol
 
                         if (string.IsNullOrEmpty(username))
                         {
-                            switch (Properties.OptionsCredentialsPage.Default.EmptyCredentials)
+                            switch (OptionsCredentialsPage.Default.EmptyCredentials)
                             {
                                 case "windows":
                                     username = Environment.UserName;
                                     break;
-                                case "custom" when !string.IsNullOrEmpty(Properties.OptionsCredentialsPage.Default.DefaultUsername):
-                                    username = Properties.OptionsCredentialsPage.Default.DefaultUsername;
+                                case "custom" when !string.IsNullOrEmpty(OptionsCredentialsPage.Default.DefaultUsername):
+                                    username = OptionsCredentialsPage.Default.DefaultUsername;
                                     break;
                                 case "custom":
                                     try
                                     {
                                         ExternalConnectors.TSS.SecretServerInterface.FetchSecretFromServer(
-                                            "SSAPI:" + Properties.OptionsCredentialsPage.Default.UserViaAPDefault, out username, out password,
+                                            "SSAPI:" + OptionsCredentialsPage.Default.UserViaAPDefault, out username, out password,
                                             out domain);
                                     }
                                     catch (Exception ex)
@@ -127,10 +127,10 @@ namespace mRemoteNG.Connection.Protocol
 
                         if (string.IsNullOrEmpty(password))
                         {
-                            if (Properties.OptionsCredentialsPage.Default.EmptyCredentials == "custom")
+                            if (OptionsCredentialsPage.Default.EmptyCredentials == "custom")
                             {
                                 var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-                                password = cryptographyProvider.Decrypt(Properties.OptionsCredentialsPage.Default.DefaultPassword, Runtime.EncryptionKey);
+                                password = cryptographyProvider.Decrypt(OptionsCredentialsPage.Default.DefaultPassword, Runtime.EncryptionKey);
                             }
                         }
 
@@ -170,11 +170,11 @@ namespace mRemoteNG.Connection.Protocol
                 PuttyProcess.Exited += ProcessExited;
 
                 PuttyProcess.Start();
-                PuttyProcess.WaitForInputIdle(Properties.OptionsAdvancedPage.Default.MaxPuttyWaitTime * 1000);
+                PuttyProcess.WaitForInputIdle(OptionsAdvancedPage.Default.MaxPuttyWaitTime * 1000);
 
                 var startTicks = Environment.TickCount;
                 while (PuttyHandle.ToInt32() == 0 &
-                       Environment.TickCount < startTicks + Properties.OptionsAdvancedPage.Default.MaxPuttyWaitTime * 1000)
+                       Environment.TickCount < startTicks + OptionsAdvancedPage.Default.MaxPuttyWaitTime * 1000)
                 {
                     if (_isPuttyNg)
                     {

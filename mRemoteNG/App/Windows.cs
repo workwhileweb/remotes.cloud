@@ -19,10 +19,10 @@ namespace mRemoteNG.App
             set => _treeForm = value;
         }
 
-        internal static ConfigWindow ConfigForm { get; set; } = new ConfigWindow();
-        internal static ErrorAndInfoWindow ErrorsForm { get; set; } = new ErrorAndInfoWindow();
-        private static UpdateWindow UpdateForm { get; set; } = new UpdateWindow();
-        internal static SSHTransferWindow SshtransferForm { get; private set; } = new SSHTransferWindow();
+        internal static ConfigWindow ConfigForm { get; set; } = new();
+        internal static ErrorAndInfoWindow ErrorsForm { get; set; } = new();
+        private static UpdateWindow UpdateForm { get; set; } = new();
+        internal static SSHTransferWindow SshtransferForm { get; private set; } = new();
 
 
         public static void Show(WindowType windowType)

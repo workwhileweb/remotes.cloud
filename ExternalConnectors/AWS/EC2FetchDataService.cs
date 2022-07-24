@@ -16,7 +16,7 @@ namespace ExternalConnectors.AWS
             // get secret id
             if (!input.StartsWith("AWSAPI:"))
                 throw new Exception("calling this function requires AWSAPI: input");
-            string InstanceID = input[7..];
+            var InstanceID = input[7..];
 
             // init connection credentials, display popup if necessary
             AWSConnectionData.Init();
@@ -28,29 +28,29 @@ namespace ExternalConnectors.AWS
         private static async Task<List<InstanceInfo>> GetEC2IPDataAsync(string region)
         {
             // caching
-            TimeSpan timeSpan = DateTime.Now - lastFetch;
+            var timeSpan = DateTime.Now - lastFetch;
             if (timeSpan.TotalMinutes < 1 && lastData != null)
                 return lastData;
 
             //AWSConfigs.AWSRegion = AWSConnectionData.region;
             AWSConfigs.AWSRegion = region;
-            string awsAccessKeyId = AWSConnectionData.awsKeyID;
-            string awsSecretAccessKey = AWSConnectionData.awsKey;
+            var awsAccessKeyId = AWSConnectionData.awsKeyID;
+            var awsSecretAccessKey = AWSConnectionData.awsKey;
 
             var _client = new AmazonEC2Client(awsAccessKeyId, awsSecretAccessKey, RegionEndpoint.EUCentral1);
-            bool done = false;
+            var done = false;
 
             List<InstanceInfo> instanceList = new();
             var request = new DescribeInstancesRequest();
             while (!done)
             {
-                DescribeInstancesResponse response = await _client.DescribeInstancesAsync(request);
+                var response = await _client.DescribeInstancesAsync(request);
 
                 foreach (var reservation in response.Reservations)
                 {
                     foreach (var instance in reservation.Instances)
                     {
-                        string vmname = "";
+                        var vmname = "";
                         foreach (var tag in instance.Tags)
                         {
                             if (tag.Key == "Name")

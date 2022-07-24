@@ -6,26 +6,26 @@ namespace mRemoteNG.Messages.MessageFilteringOptions
     {
         public bool AllowDebugMessages
         {
-            get => Properties.OptionsNotificationsPage.Default.PopupMessageWriterWriteDebugMsgs;
-            set => Properties.OptionsNotificationsPage.Default.PopupMessageWriterWriteDebugMsgs = value;
+            get => OptionsNotificationsPage.Default.PopupMessageWriterWriteDebugMsgs;
+            set => OptionsNotificationsPage.Default.PopupMessageWriterWriteDebugMsgs = value;
         }
 
         public bool AllowInfoMessages
         {
-            get => Properties.OptionsNotificationsPage.Default.PopupMessageWriterWriteInfoMsgs;
-            set => Properties.OptionsNotificationsPage.Default.PopupMessageWriterWriteInfoMsgs = value;
+            get => OptionsNotificationsPage.Default.PopupMessageWriterWriteInfoMsgs;
+            set => OptionsNotificationsPage.Default.PopupMessageWriterWriteInfoMsgs = value;
         }
 
         public bool AllowWarningMessages
         {
-            get => Properties.OptionsNotificationsPage.Default.PopupMessageWriterWriteWarningMsgs;
-            set => Properties.OptionsNotificationsPage.Default.PopupMessageWriterWriteWarningMsgs = value;
+            get => OptionsNotificationsPage.Default.PopupMessageWriterWriteWarningMsgs;
+            set => OptionsNotificationsPage.Default.PopupMessageWriterWriteWarningMsgs = value;
         }
 
         public bool AllowErrorMessages
         {
-            get => Properties.OptionsNotificationsPage.Default.PopupMessageWriterWriteErrorMsgs;
-            set => Properties.OptionsNotificationsPage.Default.PopupMessageWriterWriteErrorMsgs = value;
+            get => OptionsNotificationsPage.Default.PopupMessageWriterWriteErrorMsgs;
+            set => OptionsNotificationsPage.Default.PopupMessageWriterWriteErrorMsgs = value;
         }
     }
 }

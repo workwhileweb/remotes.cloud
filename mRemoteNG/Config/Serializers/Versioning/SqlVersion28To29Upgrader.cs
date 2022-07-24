@@ -8,7 +8,7 @@ namespace mRemoteNG.Config.Serializers.Versioning
 {
     public class SqlVersion28To29Upgrader : IVersionUpgrader
     {
-        private readonly Version version = new Version(2, 9);
+        private readonly Version version = new(2, 9);
         private readonly IDatabaseConnector _databaseConnector;
 
         public SqlVersion28To29Upgrader(IDatabaseConnector databaseConnector)

@@ -53,7 +53,7 @@ namespace mRemoteNG.Tools
         /// <summary>
         /// Returns an empty <see cref="Optional{T}"/>
         /// </summary>
-        public static Optional<T> Empty => new Optional<T>();
+        public static Optional<T> Empty => new();
 
         #region IEnumerable
 

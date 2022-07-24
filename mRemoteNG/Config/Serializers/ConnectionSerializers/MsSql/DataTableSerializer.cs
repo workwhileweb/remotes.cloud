@@ -19,12 +19,12 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
         private readonly SecureString _encryptionKey;
         private DataTable _dataTable;
         private DataTable _sourceDataTable;
-        private Dictionary<string, int> sourcePrimaryKeyDict = new Dictionary<string, int>();
+        private Dictionary<string, int> sourcePrimaryKeyDict = new();
         private const string TableName = "tblCons";
         private readonly SaveFilter _saveFilter;
         private int _currentNodeIndex;
 
-        public Version Version { get; } = new Version(2, 8);
+        public Version Version { get; } = new(2, 8);
 
         public DataTableSerializer(SaveFilter saveFilter,
                                    ICryptographyProvider cryptographyProvider,
@@ -506,7 +506,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
         {
             _currentNodeIndex++;
             var isNewRow = false;
-            DataRow dataRow = _dataTable.Rows.Find(connectionInfo.ConstantID);
+            var dataRow = _dataTable.Rows.Find(connectionInfo.ConstantID);
             if (dataRow == null)
             {
                 dataRow = _dataTable.NewRow();

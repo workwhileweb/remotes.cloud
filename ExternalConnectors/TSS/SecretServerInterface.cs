@@ -25,16 +25,16 @@ namespace ExternalConnectors.TSS
                 if (initdone == true)
                     return;
 
-                RegistryKey key = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\mRemoteSSInterface");
+                var key = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\mRemoteSSInterface");
                 try
                 {
                     // display gui and ask for data
-                    SSConnectionForm f = new SSConnectionForm();
-                    string? un = key.GetValue("Username") as string;
+                    var f = new SSConnectionForm();
+                    var un = key.GetValue("Username") as string;
                     f.tbUsername.Text = un ?? "";
-                    f.tbPassword.Text = SSConnectionData.ssPassword;    // in OTP refresh cases, this value might already be filled
+                    f.tbPassword.Text = ssPassword;    // in OTP refresh cases, this value might already be filled
 
-                    string? url = key.GetValue("URL") as string;
+                    var url = key.GetValue("URL") as string;
                     if (url == null || !url.Contains("://"))
                         url = "https://cred.domain.local/SecretServer";
                     f.tbSSURL.Text = url;
@@ -116,7 +116,7 @@ namespace ExternalConnectors.TSS
 
         private static void FetchSecret(int secretID, out string secretUsername, out string secretPassword, out string secretDomain)
         {
-            string baseURL = SSConnectionData.ssUrl;
+            var baseURL = SSConnectionData.ssUrl;
 
             SecretModel secret;
             if (SSConnectionData.ssSSO)
@@ -242,7 +242,7 @@ namespace ExternalConnectors.TSS
             // get secret id
             if (!input.StartsWith("SSAPI:"))
                 throw new Exception("calling this function requires SSAPI: input");
-            int secretID = Int32.Parse(input.Substring(6));
+            var secretID = Int32.Parse(input.Substring(6));
 
             // init connection credentials, display popup if necessary
             SSConnectionData.Init();

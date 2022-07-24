@@ -39,9 +39,9 @@ namespace mRemoteNGTests.UI.Forms
         [Test]
         public void ClickingCancelClosesPasswordForm()
         {
-            bool eventFired = false;
+            var eventFired = false;
             _passwordForm.FormClosed += (o, e) => eventFired = true;
-            Button cancelButton = _passwordForm.FindControl<Button>("btnCancel");
+            var cancelButton = _passwordForm.FindControl<Button>("btnCancel");
             cancelButton.PerformClick();
             Assert.That(eventFired, Is.True);
         }

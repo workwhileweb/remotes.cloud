@@ -23,13 +23,12 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
 {
     public partial class ConnectionTree : TreeListView, IConnectionTree
     {
-        private readonly ConnectionTreeDragAndDropHandler _dragAndDropHandler = new ConnectionTreeDragAndDropHandler();
+        private readonly ConnectionTreeDragAndDropHandler _dragAndDropHandler = new();
         private readonly PuttySessionsManager _puttySessionsManager = PuttySessionsManager.Instance;
-        private readonly StatusImageList _statusImageList = new StatusImageList();
+        private readonly StatusImageList _statusImageList = new();
         private ThemeManager _themeManager;
 
-        private readonly ConnectionTreeSearchTextFilter _connectionTreeSearchTextFilter =
-            new ConnectionTreeSearchTextFilter();
+        private readonly ConnectionTreeSearchTextFilter _connectionTreeSearchTextFilter = new();
 
         private bool _nodeInEditMode;
         private bool _allowEdit;
@@ -319,7 +318,7 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
             _connectionTreeSearchTextFilter.SpecialInclusionList.Add(newNode);
 
             // use root node if no node is selected
-            ConnectionInfo parentNode = SelectedNode ?? GetRootConnectionNode();
+            var parentNode = SelectedNode ?? GetRootConnectionNode();
             DefaultConnectionInfo.Instance.SaveTo(newNode);
             DefaultConnectionInheritance.Instance.SaveTo(newNode.Inheritance);
             var selectedContainer = parentNode as ContainerInfo;
@@ -487,7 +486,7 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
         {
             try
             {
-                if (!Properties.OptionsAppearancePage.Default.ShowDescriptionTooltipsInTree)
+                if (!OptionsAppearancePage.Default.ShowDescriptionTooltipsInTree)
                 {
                     // setting text to null prevents the tooltip from being shown
                     e.Text = null;

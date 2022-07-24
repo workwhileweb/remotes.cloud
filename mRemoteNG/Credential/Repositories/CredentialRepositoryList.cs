@@ -8,7 +8,7 @@ namespace mRemoteNG.Credential.Repositories
 {
     public class CredentialRepositoryList : ICredentialRepositoryList
     {
-        private readonly List<ICredentialRepository> _credentialProviders = new List<ICredentialRepository>();
+        private readonly List<ICredentialRepository> _credentialProviders = new();
 
         public IEnumerable<ICredentialRepository> CredentialProviders => _credentialProviders;
 

@@ -9,7 +9,7 @@ namespace mRemoteNG.Config.Settings
 {
     public class DockPanelLayoutSerializer : ISerializer<DockPanel, string>
     {
-        public Version Version { get; } = new Version(1, 0);
+        public Version Version { get; } = new(1, 0);
 
         public string Serialize(DockPanel dockPanel)
         {

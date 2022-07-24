@@ -14,7 +14,7 @@ namespace mRemoteNG.Container
     {
         private bool _isExpanded;
 
-        [Browsable(false)] public List<ConnectionInfo> Children { get; } = new List<ConnectionInfo>();
+        [Browsable(false)] public List<ConnectionInfo> Children { get; } = new();
 
         [Category(""), Browsable(false), ReadOnly(false), Bindable(false), DefaultValue(""), DesignOnly(false)]
         public bool IsExpanded

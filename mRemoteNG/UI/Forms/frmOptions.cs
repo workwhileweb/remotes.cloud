@@ -15,7 +15,7 @@ namespace mRemoteNG.UI.Forms
     {
         private Dictionary<string, OptionsPage> _pages;
         private readonly string _pageName;
-        private readonly DisplayProperties _display = new DisplayProperties();
+        private readonly DisplayProperties _display = new();
 
         public FrmOptions() : this(Language.StartupExit)
         {
@@ -71,29 +71,29 @@ namespace mRemoteNG.UI.Forms
         {
             _pages = new Dictionary<string, OptionsPage>{};
 
-            if (Properties.OptionsStartupExitPage.Default.cbStartupExitPageInOptionMenu == true || Properties.rbac.Default.ActiveRole == "AdminRole")
+            if (OptionsStartupExitPage.Default.cbStartupExitPageInOptionMenu == true || rbac.Default.ActiveRole == "AdminRole")
                 _pages.Add(typeof(StartupExitPage).Name, new StartupExitPage { Dock = DockStyle.Fill });
-            if (Properties.OptionsAppearancePage.Default.cbAppearancePageInOptionMenu == true || Properties.rbac.Default.ActiveRole == "AdminRole")
+            if (OptionsAppearancePage.Default.cbAppearancePageInOptionMenu == true || rbac.Default.ActiveRole == "AdminRole")
                 _pages.Add(typeof(AppearancePage).Name, new AppearancePage { Dock = DockStyle.Fill });
-            if (Properties.OptionsConnectionsPage.Default.cbConnectionsPageInOptionMenu == true || Properties.rbac.Default.ActiveRole == "AdminRole")
+            if (OptionsConnectionsPage.Default.cbConnectionsPageInOptionMenu == true || rbac.Default.ActiveRole == "AdminRole")
                 _pages.Add(typeof(ConnectionsPage).Name, new ConnectionsPage { Dock = DockStyle.Fill });
-            if (Properties.OptionsTabsPanelsPage.Default.cbTabsPanelsPageInOptionMenu == true || Properties.rbac.Default.ActiveRole == "AdminRole")
+            if (OptionsTabsPanelsPage.Default.cbTabsPanelsPageInOptionMenu == true || rbac.Default.ActiveRole == "AdminRole")
                 _pages.Add(typeof(TabsPanelsPage).Name, new TabsPanelsPage { Dock = DockStyle.Fill });
-            if (Properties.OptionsNotificationsPage.Default.cbNotificationsPageInOptionMenu == true || Properties.rbac.Default.ActiveRole == "AdminRole")
+            if (OptionsNotificationsPage.Default.cbNotificationsPageInOptionMenu == true || rbac.Default.ActiveRole == "AdminRole")
                 _pages.Add(typeof(NotificationsPage).Name, new NotificationsPage { Dock = DockStyle.Fill });
-            if (Properties.OptionsCredentialsPage.Default.cbCredentialsPageInOptionMenu == true || Properties.rbac.Default.ActiveRole == "AdminRole")
+            if (OptionsCredentialsPage.Default.cbCredentialsPageInOptionMenu == true || rbac.Default.ActiveRole == "AdminRole")
                 _pages.Add(typeof(CredentialsPage).Name, new CredentialsPage { Dock = DockStyle.Fill });
-            if (Properties.OptionsDBsPage.Default.cbDBsPageInOptionMenu == true || Properties.rbac.Default.ActiveRole == "AdminRole")
+            if (OptionsDBsPage.Default.cbDBsPageInOptionMenu == true || rbac.Default.ActiveRole == "AdminRole")
                 _pages.Add(typeof(SqlServerPage).Name, new SqlServerPage { Dock = DockStyle.Fill });
-            if (Properties.OptionsUpdatesPage.Default.cbUpdatesPageInOptionMenu == true || Properties.rbac.Default.ActiveRole == "AdminRole")
+            if (OptionsUpdatesPage.Default.cbUpdatesPageInOptionMenu == true || rbac.Default.ActiveRole == "AdminRole")
                 _pages.Add(typeof(UpdatesPage).Name, new UpdatesPage { Dock = DockStyle.Fill });
-            if (Properties.OptionsThemePage.Default.cbThemePageInOptionMenu == true || Properties.rbac.Default.ActiveRole == "AdminRole")
+            if (OptionsThemePage.Default.cbThemePageInOptionMenu == true || rbac.Default.ActiveRole == "AdminRole")
                 _pages.Add(typeof(ThemePage).Name, new ThemePage { Dock = DockStyle.Fill });
-            if (Properties.OptionsSecurityPage.Default.cbSecurityPageInOptionMenu == true || Properties.rbac.Default.ActiveRole == "AdminRole")
+            if (OptionsSecurityPage.Default.cbSecurityPageInOptionMenu == true || rbac.Default.ActiveRole == "AdminRole")
                 _pages.Add(typeof(SecurityPage).Name, new SecurityPage { Dock = DockStyle.Fill });
-            if (Properties.OptionsAdvancedPage.Default.cbAdvancedPageInOptionMenu == true || Properties.rbac.Default.ActiveRole == "AdminRole")
+            if (OptionsAdvancedPage.Default.cbAdvancedPageInOptionMenu == true || rbac.Default.ActiveRole == "AdminRole")
                 _pages.Add(typeof(AdvancedPage).Name, new AdvancedPage { Dock = DockStyle.Fill });
-            if (Properties.OptionsBackupPage.Default.cbBacupPageInOptionMenu == true || Properties.rbac.Default.ActiveRole == "AdminRole")
+            if (OptionsBackupPage.Default.cbBacupPageInOptionMenu == true || rbac.Default.ActiveRole == "AdminRole")
                 _pages.Add(typeof(BackupPage).Name, new BackupPage { Dock = DockStyle.Fill });
         }
 

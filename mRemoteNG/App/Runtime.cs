@@ -40,19 +40,18 @@ namespace mRemoteNG.App
         public static bool UseCredentialManager => false;
 
         public static WindowList WindowList { get; set; }
-        public static MessageCollector MessageCollector { get; } = new MessageCollector();
+        public static MessageCollector MessageCollector { get; } = new();
         public static NotificationAreaIcon NotificationAreaIcon { get; set; }
-        public static ExternalToolsService ExternalToolsService { get; } = new ExternalToolsService();
+        public static ExternalToolsService ExternalToolsService { get; } = new();
 
         public static SecureString EncryptionKey { get; set; } =
             new RootNodeInfo(RootNodeType.Connection).PasswordString.ConvertToSecureString();
 
         public static ICredentialRepositoryList CredentialProviderCatalog { get; } = new CredentialRepositoryList();
 
-        public static ConnectionInitiator ConnectionInitiator { get; set; } = new ConnectionInitiator();
+        public static ConnectionInitiator ConnectionInitiator { get; set; } = new();
 
-        public static ConnectionsService ConnectionsService { get; } =
-            new ConnectionsService(PuttySessionsManager.Instance);
+        public static ConnectionsService ConnectionsService { get; } = new(PuttySessionsManager.Instance);
 
         #region Connections Loading/Saving
 
@@ -91,23 +90,23 @@ namespace mRemoteNG.App
                         return;
 
                     connectionFileName = loadDialog.FileName;
-                    Properties.OptionsDBsPage.Default.UseSQLServer = false;
-                    Properties.OptionsDBsPage.Default.Save();
+                    OptionsDBsPage.Default.UseSQLServer = false;
+                    OptionsDBsPage.Default.Save();
                 }
-                else if (!Properties.OptionsDBsPage.Default.UseSQLServer)
+                else if (!OptionsDBsPage.Default.UseSQLServer)
                 {
                     connectionFileName = ConnectionsService.GetStartupConnectionFileName();
                 }
 
-                ConnectionsService.LoadConnections(Properties.OptionsDBsPage.Default.UseSQLServer, false, connectionFileName);
+                ConnectionsService.LoadConnections(OptionsDBsPage.Default.UseSQLServer, false, connectionFileName);
 
-                if (Properties.OptionsDBsPage.Default.UseSQLServer)
+                if (OptionsDBsPage.Default.UseSQLServer)
                 {
                     ConnectionsService.LastSqlUpdate = DateTime.Now;
                 } 
 				else
                 {
-                    ConnectionsService.LastFileUpdate =  System.IO.File.GetLastWriteTime(connectionFileName);
+                    ConnectionsService.LastFileUpdate =  File.GetLastWriteTime(connectionFileName);
                 }
 
                 // re-enable sql update checking after updates are loaded
@@ -117,7 +116,7 @@ namespace mRemoteNG.App
             {
                 FrmSplashScreenNew.GetInstance().Close();
 
-                if (Properties.OptionsDBsPage.Default.UseSQLServer)
+                if (OptionsDBsPage.Default.UseSQLServer)
                 {
                     MessageCollector.AddExceptionMessage(Language.LoadFromSqlFailed, ex);
                     var commandButtons = string.Join("|", Language._TryAgain, Language.CommandOpenConnectionFile, string.Format(Language.CommandExitProgram, Application.ProductName));
@@ -128,7 +127,7 @@ namespace mRemoteNG.App
                             LoadConnections(withDialog);
                             return;
                         case 1:
-                            Properties.OptionsDBsPage.Default.UseSQLServer = false;
+                            OptionsDBsPage.Default.UseSQLServer = false;
                             LoadConnections(true);
                             return;
                         default:

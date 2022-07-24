@@ -80,11 +80,11 @@ namespace mRemoteNG.Connection.Protocol
                 _process.Exited += ProcessExited;
 
                 _process.Start();
-                _process.WaitForInputIdle(Properties.OptionsAdvancedPage.Default.MaxPuttyWaitTime * 1000);
+                _process.WaitForInputIdle(OptionsAdvancedPage.Default.MaxPuttyWaitTime * 1000);
 
                 var startTicks = Environment.TickCount;
                 while (_handle.ToInt32() == 0 &
-                       Environment.TickCount < startTicks + Properties.OptionsAdvancedPage.Default.MaxPuttyWaitTime * 1000)
+                       Environment.TickCount < startTicks + OptionsAdvancedPage.Default.MaxPuttyWaitTime * 1000)
                 {
                     _process.Refresh();
                     if (_process.MainWindowTitle != "Default IME")

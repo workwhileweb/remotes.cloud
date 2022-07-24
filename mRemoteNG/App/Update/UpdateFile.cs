@@ -10,8 +10,7 @@ namespace mRemoteNG.App.Update
 
         // ReSharper disable MemberCanBePrivate.Local
         // ReSharper disable once MemberCanBePrivate.Global
-        public Dictionary<string, string> Items { get; } =
-            new Dictionary<string, string>(StringComparer.InvariantCultureIgnoreCase);
+        public Dictionary<string, string> Items { get; } = new(StringComparer.InvariantCultureIgnoreCase);
 
         #endregion
 

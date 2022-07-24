@@ -16,7 +16,7 @@ namespace mRemoteNG.UI.Controls.FilteredPropertyGrid
         /// Contain a reference to the collection of properties to show in the parent PropertyGrid.
         /// </summary>
         /// <remarks>By default, m_PropertyDescriptors contain all the properties of the object. </remarks>
-        readonly List<PropertyDescriptor> _propertyDescriptors = new List<PropertyDescriptor>();
+        readonly List<PropertyDescriptor> _propertyDescriptors = new();
 
         /// <summary>
         /// Contain a reference to the array of properties to display in the PropertyGrid.
@@ -333,7 +333,7 @@ namespace mRemoteNG.UI.Controls.FilteredPropertyGrid
                                                   .OfType<PropertyDescriptor>()
                                                   .Where(PropertyDoesntHaveBrowsableFalseAttribute);
 
-                foreach (PropertyDescriptor propertyDescriptor in originalPropertyDescriptors)
+                foreach (var propertyDescriptor in originalPropertyDescriptors)
                     _propertyDescriptors.Add(propertyDescriptor);
             }
 

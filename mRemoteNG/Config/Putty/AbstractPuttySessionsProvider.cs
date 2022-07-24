@@ -11,7 +11,7 @@ namespace mRemoteNG.Config.Putty
 {
     public abstract class AbstractPuttySessionsProvider
     {
-        public virtual RootPuttySessionsNodeInfo RootInfo { get; } = new RootPuttySessionsNodeInfo();
+        public virtual RootPuttySessionsNodeInfo RootInfo { get; } = new();
 
         protected virtual List<PuttySessionInfo> Sessions => RootInfo.Children.OfType<PuttySessionInfo>().ToList();
 

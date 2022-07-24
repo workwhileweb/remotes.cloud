@@ -31,7 +31,7 @@ namespace mRemoteNG.Config.DatabaseConnectors
 
         public MySqlDatabaseConnector(string host, string database, string username, string password)
         {
-            string[] hostParts = host.Split(new char[]{':'}, 2);
+            var hostParts = host.Split(new char[]{':'}, 2);
             _dbHost = hostParts[0];
             _dbPort = (hostParts.Length == 2)?hostParts[1]:"3306";
             _dbName = database;

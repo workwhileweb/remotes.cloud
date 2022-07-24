@@ -14,7 +14,7 @@ namespace mRemoteNG.Connection.Protocol
 {
     public class ProtocolFactory
     {
-        private readonly RdpProtocolFactory _rdpProtocolFactory = new RdpProtocolFactory();
+        private readonly RdpProtocolFactory _rdpProtocolFactory = new();
 
         public ProtocolBase CreateProtocol(ConnectionInfo connectionInfo)
         {
@@ -23,7 +23,7 @@ namespace mRemoteNG.Connection.Protocol
             {
                 case ProtocolType.RDP:
                     var rdp = _rdpProtocolFactory.Build(connectionInfo.RdpVersion);
-                    rdp.LoadBalanceInfoUseUtf8 = Properties.OptionsAdvancedPage.Default.RdpLoadBalanceInfoUseUtf8;
+                    rdp.LoadBalanceInfoUseUtf8 = OptionsAdvancedPage.Default.RdpLoadBalanceInfoUseUtf8;
                     return rdp;
                 case ProtocolType.VNC:
                     return new ProtocolVNC();

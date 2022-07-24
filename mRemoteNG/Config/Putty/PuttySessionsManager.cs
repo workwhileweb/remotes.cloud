@@ -10,13 +10,13 @@ namespace mRemoteNG.Config.Putty
 {
     public class PuttySessionsManager
     {
-        public static PuttySessionsManager Instance { get; } = new PuttySessionsManager();
+        public static PuttySessionsManager Instance { get; } = new();
 
-        private readonly List<AbstractPuttySessionsProvider> _providers = new List<AbstractPuttySessionsProvider>();
+        private readonly List<AbstractPuttySessionsProvider> _providers = new();
 
         public IEnumerable<AbstractPuttySessionsProvider> Providers => _providers;
 
-        public List<RootPuttySessionsNodeInfo> RootPuttySessionsNodes { get; } = new List<RootPuttySessionsNodeInfo>();
+        public List<RootPuttySessionsNodeInfo> RootPuttySessionsNodes { get; } = new();
 
         private PuttySessionsManager()
         {

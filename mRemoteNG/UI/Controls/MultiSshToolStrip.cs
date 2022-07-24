@@ -17,9 +17,9 @@ namespace mRemoteNG.UI.Controls
         private ToolStripLabel lblMultiSsh;
         private ToolStripTextBox txtMultiSsh;
         private int previousCommandIndex = 0;
-        private readonly ArrayList processHandlers = new ArrayList();
-        private readonly ArrayList quickConnectConnections = new ArrayList();
-        private readonly ArrayList previousCommands = new ArrayList();
+        private readonly ArrayList processHandlers = new();
+        private readonly ArrayList quickConnectConnections = new();
+        private readonly ArrayList previousCommands = new();
         private readonly ThemeManager _themeManager;
 
         private int CommandHistoryLength { get; set; } = 100;

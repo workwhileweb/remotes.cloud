@@ -130,9 +130,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             _permissionsListing = new List<DropdownList>
             {
-                {new DropdownList((int) ACLPermissions.Hidden, Language.ACLPermissionsHidden)},
-                {new DropdownList((int) ACLPermissions.ReadOnly, Language.ACLPermissionsReadOnly)},
-                {new DropdownList((int) ACLPermissions.WriteAllow, Language.ACLPermissionsWriteAllow)},
+                {new((int) ACLPermissions.Hidden, Language.ACLPermissionsHidden)},
+                {new((int) ACLPermissions.ReadOnly, Language.ACLPermissionsReadOnly)},
+                {new((int) ACLPermissions.WriteAllow, Language.ACLPermissionsWriteAllow)},
             };
 
             btnBrowsePath.Text = Language.strBrowse;

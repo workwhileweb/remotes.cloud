@@ -21,8 +21,8 @@ namespace mRemoteNG.Tools
 
             protected override string GetLocalizedString(string value)
             {
-                string OrderPrefix = "";
-                for (int x = 0; x <= MaxOrder - Order; x++)
+                var OrderPrefix = "";
+                for (var x = 0; x <= MaxOrder - Order; x++)
                 {
                     OrderPrefix += Convert.ToString("\t");
                 }

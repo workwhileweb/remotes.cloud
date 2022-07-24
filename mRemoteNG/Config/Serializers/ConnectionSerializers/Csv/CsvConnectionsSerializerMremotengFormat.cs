@@ -16,7 +16,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
         private readonly SaveFilter _saveFilter;
         private readonly ICredentialRepositoryList _credentialRepositoryList;
 
-        public Version Version { get; } = new Version(2, 7);
+        public Version Version { get; } = new(2, 7);
 
         public CsvConnectionsSerializerMremotengFormat(SaveFilter saveFilter,
                                                        ICredentialRepositoryList credentialRepositoryList)

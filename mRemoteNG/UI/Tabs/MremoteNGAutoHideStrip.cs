@@ -113,7 +113,7 @@ namespace mRemoteNG.UI.Tabs
 
         #endregion
 
-        private static Matrix MatrixIdentity { get; } = new Matrix();
+        private static Matrix MatrixIdentity { get; } = new();
 
         private static DockState[] _dockStates;
 
@@ -308,9 +308,9 @@ namespace mRemoteNG.UI.Tabs
                     var rectTransform = RtlTransform(rectImage, dockState);
                     Point[] rotationPoints =
                     {
-                        new Point(rectTransform.X + rectTransform.Width, rectTransform.Y),
-                        new Point(rectTransform.X + rectTransform.Width, rectTransform.Y + rectTransform.Height),
-                        new Point(rectTransform.X, rectTransform.Y)
+                        new(rectTransform.X + rectTransform.Width, rectTransform.Y),
+                        new(rectTransform.X + rectTransform.Width, rectTransform.Y + rectTransform.Height),
+                        new(rectTransform.X, rectTransform.Y)
                     };
 
                     using (var rotatedIcon = new Icon(((Form)content).Icon, 16, 16))

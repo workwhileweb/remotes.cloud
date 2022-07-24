@@ -11,8 +11,8 @@ namespace mRemoteNGTests.Connection.Protocol
 {
 	public class IntegratedProgramTests
 	{
-		private readonly ExternalTool _extTool = new ExternalTool
-		{
+		private readonly ExternalTool _extTool = new()
+        {
 			DisplayName = "notepad",
 			FileName = @"%windir%\system32\notepad.exe",
 			Arguments = "",

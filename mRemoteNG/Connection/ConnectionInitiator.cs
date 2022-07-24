@@ -18,8 +18,8 @@ namespace mRemoteNG.Connection
 {
     public class ConnectionInitiator : IConnectionInitiator
     {
-        private readonly PanelAdder _panelAdder = new PanelAdder();
-        private readonly List<string> _activeConnections = new List<string>();
+        private readonly PanelAdder _panelAdder = new();
+        private readonly List<string> _activeConnections = new();
 
         public IEnumerable<string> ActiveConnections => _activeConnections;
 
@@ -66,12 +66,13 @@ namespace mRemoteNG.Connection
                 {
                     try
                     {
-                        string host = await ExternalConnectors.AWS.EC2FetchDataService.GetEC2InstanceDataAsync("AWSAPI:" + connectionInfo.EC2InstanceId, connectionInfo.EC2Region);
+                        var host = await ExternalConnectors.AWS.EC2FetchDataService.GetEC2InstanceDataAsync("AWSAPI:" + connectionInfo.EC2InstanceId, connectionInfo.EC2Region);
                         if (!string.IsNullOrEmpty(host))
                             connectionInfo.Hostname = host;
                     }
                     catch
                     {
+                        //
                     }
                 }
 
@@ -104,7 +105,7 @@ namespace mRemoteNG.Connection
                 if (!string.IsNullOrEmpty(connectionInfoOriginal.SSHTunnelConnectionName))
                 {
                     // Find the connection info specified as SSH tunnel in the connections tree
-                    connectionInfoSshTunnel = getSSHConnectionInfoByName(Runtime.ConnectionsService.ConnectionTreeModel.RootNodes, connectionInfoOriginal.SSHTunnelConnectionName);
+                    connectionInfoSshTunnel = GetSshConnectionInfoByName(Runtime.ConnectionsService.ConnectionTreeModel.RootNodes, connectionInfoOriginal.SSHTunnelConnectionName);
                     if (connectionInfoSshTunnel == null)
                     {
                         Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
@@ -185,7 +186,7 @@ namespace mRemoteNG.Connection
 
                         try
                         {
-                            testsock.Connect(System.Net.IPAddress.Loopback, localSshTunnelPort);
+                            await testsock.ConnectAsync(System.Net.IPAddress.Loopback, localSshTunnelPort);
                             testsock.Close();
                             break;
                         }
@@ -215,7 +216,7 @@ namespace mRemoteNG.Connection
                 SetConnectionFormEventHandlers(newProtocol, connectionForm);
                 SetConnectionEventHandlers(newProtocol);
                 // in case of connection through SSH tunnel the container is already defined and must be use, else it needs to be created here
-                if (connectionContainer == null) connectionContainer = SetConnectionContainer(connectionInfo, connectionForm);
+                connectionContainer ??= SetConnectionContainer(connectionInfo, connectionForm);
                 BuildConnectionInterfaceController(connectionInfo, newProtocol, connectionContainer);
                 // in case of connection through SSH tunnel the connectionInfo was modified but connectionInfoOriginal in all cases retains the original info
                 // and is stored in interface control for further use
@@ -248,18 +249,18 @@ namespace mRemoteNG.Connection
         }
 
         // recursively traverse the tree to find ConnectionInfo of a specific name
-        private ConnectionInfo getSSHConnectionInfoByName(IEnumerable<ConnectionInfo> rootnodes, string SSHTunnelConnectionName)
+        private static ConnectionInfo GetSshConnectionInfoByName(IEnumerable<ConnectionInfo> rootnodes, string sshTunnelConnectionName)
         {
             ConnectionInfo result = null;
             foreach (var node in rootnodes)
             {
                 if (node is ContainerInfo container)
                 {
-                    result = getSSHConnectionInfoByName(container.Children, SSHTunnelConnectionName);
+                    result = GetSshConnectionInfoByName(container.Children, sshTunnelConnectionName);
                 }
                 else
                 {
-                    if (node.Name == SSHTunnelConnectionName && (node.Protocol == ProtocolType.SSH1 || node.Protocol == ProtocolType.SSH2)) result = node;
+                    if (node.Name == sshTunnelConnectionName && (node.Protocol == ProtocolType.SSH1 || node.Protocol == ProtocolType.SSH2)) result = node;
                 }
                 if (result != null) break;
             }
@@ -297,9 +298,11 @@ namespace mRemoteNG.Connection
             return null;
         }
 
-        private static string SetConnectionPanel(ConnectionInfo connectionInfo, ConnectionInfo.Force force)
+        private static string SetConnectionPanel(AbstractConnectionRecord connectionInfo, ConnectionInfo.Force force)
         {
-            if (connectionInfo.Panel != "" && !force.HasFlag(ConnectionInfo.Force.OverridePanel) && !Properties.OptionsTabsPanelsPage.Default.AlwaysShowPanelSelectionDlg)
+            if (connectionInfo.Panel != "" &&
+                !force.HasFlag(ConnectionInfo.Force.OverridePanel) &&
+                !OptionsTabsPanelsPage.Default.AlwaysShowPanelSelectionDlg)
                 return connectionInfo.Panel;
 
             var frmPnl = new FrmChoosePanel();

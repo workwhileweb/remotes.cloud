@@ -111,7 +111,7 @@ namespace mRemoteNGTests
         private void FireEvent(string eventName)
         {
             var ctrl = Properties;
-            MethodInfo method = typeof(ListView).GetMethod("On" + eventName, BindingFlags.Instance | BindingFlags.NonPublic);
+            var method = typeof(ListView).GetMethod("On" + eventName, BindingFlags.Instance | BindingFlags.NonPublic);
             method.Invoke(ctrl, new object[] { EventArgs.Empty });
         }
 
@@ -121,7 +121,7 @@ namespace mRemoteNGTests
         /// <param name="text">The item to select.</param>
         public void Select(string text)
         {
-            int index = FindItemByString(text);
+            var index = FindItemByString(text);
 
             if (ItemFound(index))
             {
@@ -135,7 +135,7 @@ namespace mRemoteNGTests
         /// <param name="items"></param>
         public void SelectItems(string[] items)
         {
-            foreach (string item in items)
+            foreach (var item in items)
             {
                 Select(item);
             }
@@ -147,7 +147,7 @@ namespace mRemoteNGTests
         /// <param name="matchList"></param>
         public bool SelectedItemsMatch(string[] matches)
         {
-            ArrayList matchList = new ArrayList(matches);
+            var matchList = new ArrayList(matches);
 
             if (matchList.Count != Properties.SelectedItems.Count)
             {
@@ -174,7 +174,7 @@ namespace mRemoteNGTests
 
         private int FindItemByString(string text)
         {
-            for (int i = 0; i < Properties.Items.Count; i++)
+            for (var i = 0; i < Properties.Items.Count; i++)
             {
                 if (Properties.Items[i].Text == text)
                 {

@@ -31,10 +31,10 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 			
 			_connectionWarning = new List<DropdownList>
             {
-                { new DropdownList((int)ConfirmCloseEnum.Never, Language.RadioCloseWarnMultiple)},
-                { new DropdownList((int)ConfirmCloseEnum.Exit, Language.RadioCloseWarnExit)},
-                { new DropdownList((int)ConfirmCloseEnum.Multiple, Language.RadioCloseWarnMultiple)},
-                { new DropdownList((int)ConfirmCloseEnum.All, Language._CloseWarnAll)}
+                { new((int)ConfirmCloseEnum.Never, Language.RadioCloseWarnMultiple)},
+                { new((int)ConfirmCloseEnum.Exit, Language.RadioCloseWarnExit)},
+                { new((int)ConfirmCloseEnum.Multiple, Language.RadioCloseWarnMultiple)},
+                { new((int)ConfirmCloseEnum.All, Language._CloseWarnAll)}
             };
 
             //comboBoxConnectionWarning.DataSource = _connectionWarning;
@@ -69,44 +69,44 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             numRdpReconnectionCount.Value = Convert.ToDecimal(Settings.Default.RdpReconnectionCount);
             numRDPConTimeout.Value = Convert.ToDecimal(Settings.Default.ConRDPOverallConnectionTimeout);
-            numAutoSave.Value = Convert.ToDecimal(Properties.OptionsBackupPage.Default.AutoSaveEveryMinutes);
+            numAutoSave.Value = Convert.ToDecimal(OptionsBackupPage.Default.AutoSaveEveryMinutes);
 
             //comboBoxConnectionWarning.SelectedValue = Settings.Default.ConfirmCloseConnection;
 
-            if (Properties.OptionsBackupPage.Default.SaveConnectionsFrequency == (int)ConnectionsBackupFrequencyEnum.Unassigned)
+            if (OptionsBackupPage.Default.SaveConnectionsFrequency == (int)ConnectionsBackupFrequencyEnum.Unassigned)
             {
-				if (Properties.OptionsBackupPage.Default.SaveConnectionsAfterEveryEdit)
+				if (OptionsBackupPage.Default.SaveConnectionsAfterEveryEdit)
                 {
-                    Properties.OptionsBackupPage.Default.SaveConnectionsFrequency = (int)ConnectionsBackupFrequencyEnum.OnEdit;
+                    OptionsBackupPage.Default.SaveConnectionsFrequency = (int)ConnectionsBackupFrequencyEnum.OnEdit;
                 }
-                else if (Properties.OptionsBackupPage.Default.SaveConsOnExit)
+                else if (OptionsBackupPage.Default.SaveConsOnExit)
                 {
-                    Properties.OptionsBackupPage.Default.SaveConnectionsFrequency = (int)ConnectionsBackupFrequencyEnum.OnExit;
+                    OptionsBackupPage.Default.SaveConnectionsFrequency = (int)ConnectionsBackupFrequencyEnum.OnExit;
                 }
                 else
                 {
-                    Properties.OptionsBackupPage.Default.SaveConnectionsFrequency = (int)ConnectionsBackupFrequencyEnum.Never;
+                    OptionsBackupPage.Default.SaveConnectionsFrequency = (int)ConnectionsBackupFrequencyEnum.Never;
                 }
             }
         }
 
         public override void SaveSettings()
         {
-            Properties.Settings.Default.SingleClickOnConnectionOpensIt = chkSingleClickOnConnectionOpensIt.Checked;
-            Properties.Settings.Default.SingleClickSwitchesToOpenConnection = chkSingleClickOnOpenedConnectionSwitchesToIt.Checked;
-            Properties.Settings.Default.TrackActiveConnectionInConnectionTree = chkConnectionTreeTrackActiveConnection.Checked;
-            Properties.Settings.Default.SetHostnameLikeDisplayName = chkHostnameLikeDisplayName.Checked;
+            Settings.Default.SingleClickOnConnectionOpensIt = chkSingleClickOnConnectionOpensIt.Checked;
+            Settings.Default.SingleClickSwitchesToOpenConnection = chkSingleClickOnOpenedConnectionSwitchesToIt.Checked;
+            Settings.Default.TrackActiveConnectionInConnectionTree = chkConnectionTreeTrackActiveConnection.Checked;
+            Settings.Default.SetHostnameLikeDisplayName = chkHostnameLikeDisplayName.Checked;
 
-            Properties.Settings.Default.UseFilterSearch = chkUseFilterSearch.Checked;
-            Properties.Settings.Default.PlaceSearchBarAboveConnectionTree = chkPlaceSearchBarAboveConnectionTree.Checked;
-            Properties.Settings.Default.DoNotTrimUsername = chkDoNotTrimUsername.Checked;
+            Settings.Default.UseFilterSearch = chkUseFilterSearch.Checked;
+            Settings.Default.PlaceSearchBarAboveConnectionTree = chkPlaceSearchBarAboveConnectionTree.Checked;
+            Settings.Default.DoNotTrimUsername = chkDoNotTrimUsername.Checked;
 
-            Properties.Settings.Default.RdpReconnectionCount = (int)numRdpReconnectionCount.Value;
-            Properties.Settings.Default.ConRDPOverallConnectionTimeout = (int)numRDPConTimeout.Value;
-            Properties.OptionsBackupPage.Default.AutoSaveEveryMinutes = (int)numAutoSave.Value;
-            if (Properties.OptionsBackupPage.Default.AutoSaveEveryMinutes > 0)
+            Settings.Default.RdpReconnectionCount = (int)numRdpReconnectionCount.Value;
+            Settings.Default.ConRDPOverallConnectionTimeout = (int)numRDPConTimeout.Value;
+            OptionsBackupPage.Default.AutoSaveEveryMinutes = (int)numAutoSave.Value;
+            if (OptionsBackupPage.Default.AutoSaveEveryMinutes > 0)
             {
-                _frmMain.tmrAutoSave.Interval = Properties.OptionsBackupPage.Default.AutoSaveEveryMinutes * 60000;
+                _frmMain.tmrAutoSave.Interval = OptionsBackupPage.Default.AutoSaveEveryMinutes * 60000;
                 _frmMain.tmrAutoSave.Enabled = true;
             }
             else

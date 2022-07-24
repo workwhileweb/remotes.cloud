@@ -18,11 +18,10 @@ namespace mRemoteNG.UI.TaskDialog
 
         private string _mainInstruction = "Main Instruction Text";
 
-        private readonly Font _mainInstructionFont =
-            new Font("Segoe UI", 11.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+        private readonly Font _mainInstructionFont = new("Segoe UI", 11.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
 
-        private readonly List<MrngRadioButton> _radioButtonCtrls = new List<MrngRadioButton>();
-        private readonly DisplayProperties _display = new DisplayProperties();
+        private readonly List<MrngRadioButton> _radioButtonCtrls = new();
+        private readonly DisplayProperties _display = new();
         private Control _focusControl;
 
         private bool _isVista = false;

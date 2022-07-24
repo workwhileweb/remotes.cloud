@@ -491,18 +491,18 @@ namespace mRemoteNG.Connection.Protocol.RDP
 
                 if (string.IsNullOrEmpty(userName))
                 {
-                    switch (Properties.OptionsCredentialsPage.Default.EmptyCredentials)
+                    switch (OptionsCredentialsPage.Default.EmptyCredentials)
                     {
                         case "windows":
                             _rdpClient.UserName = Environment.UserName;
                             break;
-                        case "custom" when !string.IsNullOrEmpty(Properties.OptionsCredentialsPage.Default.DefaultUsername):
-                            _rdpClient.UserName = Properties.OptionsCredentialsPage.Default.DefaultUsername;
+                        case "custom" when !string.IsNullOrEmpty(OptionsCredentialsPage.Default.DefaultUsername):
+                            _rdpClient.UserName = OptionsCredentialsPage.Default.DefaultUsername;
                             break;
                         case "custom":
                             try
                             {
-                                ExternalConnectors.TSS.SecretServerInterface.FetchSecretFromServer("SSAPI:" + Properties.OptionsCredentialsPage.Default.UserViaAPDefault, out userName, out password, out domain);
+                                ExternalConnectors.TSS.SecretServerInterface.FetchSecretFromServer("SSAPI:" + OptionsCredentialsPage.Default.UserViaAPDefault, out userName, out password, out domain);
                                 _rdpClient.UserName = userName;
                             }
                             catch (Exception ex)
@@ -520,12 +520,12 @@ namespace mRemoteNG.Connection.Protocol.RDP
 
                 if (string.IsNullOrEmpty(password))
                 {
-                    if (Properties.OptionsCredentialsPage.Default.EmptyCredentials == "custom")
+                    if (OptionsCredentialsPage.Default.EmptyCredentials == "custom")
                     {
-                        if (Properties.OptionsCredentialsPage.Default.DefaultPassword != "")
+                        if (OptionsCredentialsPage.Default.DefaultPassword != "")
                         {
                             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-                            _rdpClient.AdvancedSettings2.ClearTextPassword = cryptographyProvider.Decrypt(Properties.OptionsCredentialsPage.Default.DefaultPassword, Runtime.EncryptionKey);
+                            _rdpClient.AdvancedSettings2.ClearTextPassword = cryptographyProvider.Decrypt(OptionsCredentialsPage.Default.DefaultPassword, Runtime.EncryptionKey);
                         }
                     }
                 }
@@ -536,10 +536,10 @@ namespace mRemoteNG.Connection.Protocol.RDP
 
                 if (string.IsNullOrEmpty(domain))
                 {
-                    _rdpClient.Domain = Properties.OptionsCredentialsPage.Default.EmptyCredentials switch
+                    _rdpClient.Domain = OptionsCredentialsPage.Default.EmptyCredentials switch
                     {
                         "windows" => Environment.UserDomainName,
-                        "custom" => Properties.OptionsCredentialsPage.Default.DefaultDomain,
+                        "custom" => OptionsCredentialsPage.Default.DefaultDomain,
                         _ => _rdpClient.Domain
                     };
                 }
@@ -749,7 +749,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 Event_Disconnected(this, reason, discReason);
             }
 
-            if (Properties.OptionsAdvancedPage.Default.ReconnectOnDisconnect)
+            if (OptionsAdvancedPage.Default.ReconnectOnDisconnect)
             {
                 ReconnectGroup = new ReconnectGroup();
                 ReconnectGroup.CloseClicked += Event_ReconnectGroupCloseClicked;
@@ -821,12 +821,12 @@ namespace mRemoteNG.Connection.Protocol.RDP
 
         public static class Versions
         {
-            public static readonly Version RDC60 = new Version(6, 0, 6000);
-            public static readonly Version RDC61 = new Version(6, 0, 6001);
-            public static readonly Version RDC70 = new Version(6, 1, 7600);
-            public static readonly Version RDC80 = new Version(6, 2, 9200);
-            public static readonly Version RDC81 = new Version(6, 3, 9600);
-            public static readonly Version RDC100 = new Version(10, 0, 0);
+            public static readonly Version RDC60 = new(6, 0, 6000);
+            public static readonly Version RDC61 = new(6, 0, 6001);
+            public static readonly Version RDC70 = new(6, 1, 7600);
+            public static readonly Version RDC80 = new(6, 2, 9200);
+            public static readonly Version RDC81 = new(6, 3, 9600);
+            public static readonly Version RDC100 = new(10, 0, 0);
         }
 
         #region Reconnect Stuff

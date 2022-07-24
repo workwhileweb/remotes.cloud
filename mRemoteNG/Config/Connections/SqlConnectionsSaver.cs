@@ -173,7 +173,7 @@ namespace mRemoteNG.Config.Connections
 
         private bool SqlUserIsReadOnly()
         {
-            return Properties.OptionsDBsPage.Default.SQLReadOnly;
+            return OptionsDBsPage.Default.SQLReadOnly;
         }
     }
 }

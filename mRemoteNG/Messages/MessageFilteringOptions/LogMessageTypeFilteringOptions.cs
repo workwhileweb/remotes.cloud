@@ -6,26 +6,26 @@ namespace mRemoteNG.Messages.MessageFilteringOptions
     {
         public bool AllowDebugMessages
         {
-            get => Properties.OptionsNotificationsPage.Default.TextLogMessageWriterWriteDebugMsgs;
-            set => Properties.OptionsNotificationsPage.Default.TextLogMessageWriterWriteDebugMsgs = value;
+            get => OptionsNotificationsPage.Default.TextLogMessageWriterWriteDebugMsgs;
+            set => OptionsNotificationsPage.Default.TextLogMessageWriterWriteDebugMsgs = value;
         }
 
         public bool AllowInfoMessages
         {
-            get => Properties.OptionsNotificationsPage.Default.TextLogMessageWriterWriteInfoMsgs;
-            set => Properties.OptionsNotificationsPage.Default.TextLogMessageWriterWriteInfoMsgs = value;
+            get => OptionsNotificationsPage.Default.TextLogMessageWriterWriteInfoMsgs;
+            set => OptionsNotificationsPage.Default.TextLogMessageWriterWriteInfoMsgs = value;
         }
 
         public bool AllowWarningMessages
         {
-            get => Properties.OptionsNotificationsPage.Default.TextLogMessageWriterWriteWarningMsgs;
-            set => Properties.OptionsNotificationsPage.Default.TextLogMessageWriterWriteWarningMsgs = value;
+            get => OptionsNotificationsPage.Default.TextLogMessageWriterWriteWarningMsgs;
+            set => OptionsNotificationsPage.Default.TextLogMessageWriterWriteWarningMsgs = value;
         }
 
         public bool AllowErrorMessages
         {
-            get => Properties.OptionsNotificationsPage.Default.TextLogMessageWriterWriteErrorMsgs;
-            set => Properties.OptionsNotificationsPage.Default.TextLogMessageWriterWriteErrorMsgs = value;
+            get => OptionsNotificationsPage.Default.TextLogMessageWriterWriteErrorMsgs;
+            set => OptionsNotificationsPage.Default.TextLogMessageWriterWriteErrorMsgs = value;
         }
     }
 }

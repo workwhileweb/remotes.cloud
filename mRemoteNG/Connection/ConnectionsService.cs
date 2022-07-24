@@ -24,7 +24,7 @@ namespace mRemoteNG.Connection
 {
 	public class ConnectionsService
     {
-        private static readonly object SaveLock = new object();
+        private static readonly object SaveLock = new();
         private readonly PuttySessionsManager _puttySessionsManager;
         private readonly IDataProvider<string> _localConnectionPropertiesDataProvider;
         private readonly LocalConnectionPropertiesXmlSerializer _localConnectionPropertiesSerializer;
@@ -94,7 +94,7 @@ namespace mRemoteNG.Connection
                 var newConnectionInfo = new ConnectionInfo();
                 newConnectionInfo.CopyFrom(DefaultConnectionInfo.Instance);
 
-                newConnectionInfo.Name = Properties.OptionsTabsPanelsPage.Default.IdentifyQuickConnectTabs
+                newConnectionInfo.Name = OptionsTabsPanelsPage.Default.IdentifyQuickConnectTabs
                     ? string.Format(Language.Quick, uriBuilder.Host)
                     : uriBuilder.Host;
 
@@ -311,9 +311,9 @@ namespace mRemoteNG.Connection
                 return GetDefaultStartupConnectionFileName();
             }
             */
-            if (Properties.OptionsConnectionsPage.Default.ConnectrionFilePath != "")
+            if (OptionsConnectionsPage.Default.ConnectrionFilePath != "")
             {
-                return Properties.OptionsConnectionsPage.Default.ConnectrionFilePath;
+                return OptionsConnectionsPage.Default.ConnectrionFilePath;
             }
             else
             {
@@ -330,12 +330,12 @@ namespace mRemoteNG.Connection
         {
             if (filename == GetDefaultStartupConnectionFileName())
             {
-                Properties.OptionsBackupPage.Default.LoadConsFromCustomLocation = false;
+                OptionsBackupPage.Default.LoadConsFromCustomLocation = false;
             }
             else
             {
-                Properties.OptionsBackupPage.Default.LoadConsFromCustomLocation = true;
-                Properties.OptionsBackupPage.Default.BackupLocation = filename;
+                OptionsBackupPage.Default.LoadConsFromCustomLocation = true;
+                OptionsBackupPage.Default.BackupLocation = filename;
             }
         }
 

@@ -11,7 +11,7 @@ namespace mRemoteNG.Tree
 {
     public sealed class ConnectionTreeModel : INotifyCollectionChanged, INotifyPropertyChanged
     {
-        public List<ContainerInfo> RootNodes { get; } = new List<ContainerInfo>();
+        public List<ContainerInfo> RootNodes { get; } = new();
 
         public void AddRootNode(ContainerInfo rootNode)
         {

@@ -247,9 +247,9 @@ namespace mRemoteNG.UI.Controls
                                                                                  .ConnectionTreeModel).ToArray();
             _btnConnections.DropDownItems.AddRange(rootMenuItems);
 
-            ToolStripMenuItem favorites = new ToolStripMenuItem(Language.Favorites, Properties.Resources.Favorite_16x);
+            var favorites = new ToolStripMenuItem(Language.Favorites, Properties.Resources.Favorite_16x);
             var rootNodes = Runtime.ConnectionsService.ConnectionTreeModel.RootNodes;
-            List<ToolStripMenuItem> favoritesList = new List<ToolStripMenuItem>();
+            var favoritesList = new List<ToolStripMenuItem>();
 
             foreach (var node in rootNodes)
             {

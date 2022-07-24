@@ -184,12 +184,12 @@ namespace mRemoteNG.UI.Menu
 
                 if (newFileName == Runtime.ConnectionsService.GetDefaultStartupConnectionFileName())
                 {
-                    Properties.OptionsBackupPage.Default.LoadConsFromCustomLocation = false;
+                    OptionsBackupPage.Default.LoadConsFromCustomLocation = false;
                 }
                 else
                 {
-                    Properties.OptionsBackupPage.Default.LoadConsFromCustomLocation = true;
-                    Properties.OptionsBackupPage.Default.BackupLocation = newFileName;
+                    OptionsBackupPage.Default.LoadConsFromCustomLocation = true;
+                    OptionsBackupPage.Default.BackupLocation = newFileName;
                 }
             }
         }

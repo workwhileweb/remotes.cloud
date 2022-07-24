@@ -1,10 +1,10 @@
-namespace mRemoteNG.Connection.Protocol.Rlogin
+﻿namespace mRemoteNG.Connection.Protocol.Rlogin
 {
     public class ProtocolRlogin : PuttyBase
     {
         public ProtocolRlogin()
         {
-            this.PuttyProtocol = Putty_Protocol.rlogin;
+            PuttyProtocol = Putty_Protocol.rlogin;
         }
 
         public enum Defaults

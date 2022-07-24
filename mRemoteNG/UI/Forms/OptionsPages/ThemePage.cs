@@ -16,7 +16,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         private readonly ThemeManager _themeManager;
         private readonly bool _oriActiveTheming;
-        private readonly List<ThemeInfo> modifiedThemes = new List<ThemeInfo>();
+        private readonly List<ThemeInfo> modifiedThemes = new();
 
         #endregion
 
@@ -81,16 +81,16 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             base.SaveSettings();
 
-            Properties.OptionsThemePage.Default.ThemingActive = true;
+            OptionsThemePage.Default.ThemingActive = true;
 
             // Save the theme settings form close so we don't run into unexpected results while modifying...
             // Prompt the user that a restart is required to apply the new theme...
             if (cboTheme.SelectedItem != null
             ) // LoadSettings calls SaveSettings, so these might be null the first time around
             {
-                if (!Properties.OptionsThemePage.Default.ThemeName.Equals(((ThemeInfo)cboTheme.SelectedItem).Name))
+                if (!OptionsThemePage.Default.ThemeName.Equals(((ThemeInfo)cboTheme.SelectedItem).Name))
                 {
-                    Properties.OptionsThemePage.Default.ThemeName = ((ThemeInfo)cboTheme.SelectedItem).Name;
+                    OptionsThemePage.Default.ThemeName = ((ThemeInfo)cboTheme.SelectedItem).Name;
                     CTaskDialog.MessageBox("Theme Changed", "Restart Required.", "Please restart mRemoteNG to apply the selected theme.", ETaskDialogButtons.Ok, ESysIcons.Information);
                 }
             }

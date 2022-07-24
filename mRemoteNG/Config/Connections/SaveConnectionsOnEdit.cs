@@ -46,7 +46,7 @@ namespace mRemoteNG.Config.Connections
         private void SaveConnectionOnEdit(string propertyName = "")
         {
             //OBSOLETE: mRemoteNG.Settings.Default.SaveConnectionsAfterEveryEdit is obsolete and should be removed in a future release
-            if (Properties.OptionsBackupPage.Default.SaveConnectionsAfterEveryEdit || (Properties.OptionsBackupPage.Default.SaveConnectionsFrequency == (int)ConnectionsBackupFrequencyEnum.OnEdit))
+            if (OptionsBackupPage.Default.SaveConnectionsAfterEveryEdit || (OptionsBackupPage.Default.SaveConnectionsFrequency == (int)ConnectionsBackupFrequencyEnum.OnEdit))
             {
                 if (FrmMain.Default.IsClosing)
                     return;

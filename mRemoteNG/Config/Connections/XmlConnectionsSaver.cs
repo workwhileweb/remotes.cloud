@@ -38,7 +38,7 @@ namespace mRemoteNG.Config.Connections
                     cryptographyProvider,
                     connectionTreeModel,
                     _saveFilter,
-                    Properties.OptionsSecurityPage.Default.EncryptCompleteConnectionsFile);
+                    OptionsSecurityPage.Default.EncryptCompleteConnectionsFile);
 
                 var rootNode = connectionTreeModel.RootNodes.OfType<RootNodeInfo>().First();
                 var xml = xmlConnectionsSerializer.Serialize(rootNode);

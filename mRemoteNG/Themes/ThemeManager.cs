@@ -39,18 +39,18 @@ namespace mRemoteNG.Themes
 
         private void SetActive()
         {
-            if (themes[Properties.OptionsThemePage.Default.ThemeName] != null)
-                ActiveTheme = (ThemeInfo)themes[Properties.OptionsThemePage.Default.ThemeName];
+            if (themes[OptionsThemePage.Default.ThemeName] != null)
+                ActiveTheme = (ThemeInfo)themes[OptionsThemePage.Default.ThemeName];
             else
             {
                 ActiveTheme = DefaultTheme;
-                if (string.IsNullOrEmpty(Properties.OptionsThemePage.Default.ThemeName)) return;
+                if (string.IsNullOrEmpty(OptionsThemePage.Default.ThemeName)) return;
 
                 //too early for logging to be enabled...
                 Debug.WriteLine("Detected invalid Theme in settings file. Resetting to default.");
                 // if we got here, then there's an invalid theme name in use, so just empty it out...
-                Properties.OptionsThemePage.Default.ThemeName = "";
-                Properties.OptionsThemePage.Default.Save();
+                OptionsThemePage.Default.ThemeName = "";
+                OptionsThemePage.Default.Save();
             }
         }
 
@@ -285,7 +285,7 @@ namespace mRemoteNG.Themes
             {
                 if (themes.Count == 0) return;
                 _themeActive = value;
-                Properties.OptionsThemePage.Default.ThemingActive = value;
+                OptionsThemePage.Default.ThemingActive = value;
                 NotifyThemeChanged(this, new PropertyChangedEventArgs(""));
             }
         }
@@ -306,20 +306,20 @@ namespace mRemoteNG.Themes
                 // Default accordingly...
                 if (value == null)
                 {
-                    var changed = !Properties.OptionsThemePage.Default.ThemeName.Equals(DefaultTheme.Name);
+                    var changed = !OptionsThemePage.Default.ThemeName.Equals(DefaultTheme.Name);
 
-                    Properties.OptionsThemePage.Default.ThemeName = DefaultTheme.Name;
+                    OptionsThemePage.Default.ThemeName = DefaultTheme.Name;
                     _activeTheme = DefaultTheme;
 
                     if (changed)
                         NotifyThemeChanged(this, new PropertyChangedEventArgs("theme"));
 
-                    Properties.OptionsThemePage.Default.Save();
+                    OptionsThemePage.Default.Save();
                     return;
                 }
 
                 _activeTheme = value;
-                Properties.OptionsThemePage.Default.ThemeName = value.Name;
+                OptionsThemePage.Default.ThemeName = value.Name;
                 NotifyThemeChanged(this, new PropertyChangedEventArgs("theme"));
             }
         }

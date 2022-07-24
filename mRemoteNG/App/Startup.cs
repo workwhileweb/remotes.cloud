@@ -24,7 +24,7 @@ namespace mRemoteNG.App
         private readonly ConnectionIconLoader _connectionIconLoader;
         private readonly FrmMain _frmMain = FrmMain.Default;
 
-        public static Startup Instance { get; } = new Startup();
+        public static Startup Instance { get; } = new();
 
         private Startup()
         {
@@ -58,7 +58,7 @@ namespace mRemoteNG.App
         public void CreateConnectionsProvider(MessageCollector messageCollector)
         {
             messageCollector.AddMessage(MessageClass.DebugMsg, "Determining if we need a database syncronizer");
-            if (!Properties.OptionsDBsPage.Default.UseSQLServer) return;
+            if (!OptionsDBsPage.Default.UseSQLServer) return;
             messageCollector.AddMessage(MessageClass.DebugMsg, "Creating database syncronizer");
             Runtime.ConnectionsService.RemoteConnectionsSyncronizer = new RemoteConnectionsSyncronizer(new SqlConnectionsUpdateChecker());
             Runtime.ConnectionsService.RemoteConnectionsSyncronizer.Enable();
@@ -76,8 +76,8 @@ namespace mRemoteNG.App
             }
 
             var nextUpdateCheck =
-                Convert.ToDateTime(Properties.OptionsUpdatesPage.Default.CheckForUpdatesLastCheck.Add(TimeSpan.FromDays(Convert.ToDouble(Properties.OptionsUpdatesPage.Default.CheckForUpdatesFrequencyDays))));
-            if (!Properties.OptionsUpdatesPage.Default.UpdatePending && DateTime.UtcNow < nextUpdateCheck)
+                Convert.ToDateTime(OptionsUpdatesPage.Default.CheckForUpdatesLastCheck.Add(TimeSpan.FromDays(Convert.ToDouble(OptionsUpdatesPage.Default.CheckForUpdatesFrequencyDays))));
+            if (!OptionsUpdatesPage.Default.UpdatePending && DateTime.UtcNow < nextUpdateCheck)
             {
                 return;
             }

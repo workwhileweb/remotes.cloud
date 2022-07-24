@@ -20,7 +20,7 @@ namespace mRemoteNG.Connection.Protocol.VNC
         private ConnectionInfo _info;
         private static bool _isConnectionSuccessful;
         private static Exception _socketexception;
-        private static readonly ManualResetEvent TimeoutObject = new ManualResetEvent(false);
+        private static readonly ManualResetEvent TimeoutObject = new(false);
 
         #endregion
 

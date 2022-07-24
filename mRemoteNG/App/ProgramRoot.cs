@@ -19,7 +19,7 @@ namespace mRemoteNG.App
         [STAThread]
         public static void Main(string[] args)
         {
-            if (Properties.OptionsStartupExitPage.Default.SingleInstance)
+            if (OptionsStartupExitPage.Default.SingleInstance)
                 StartApplicationAsSingleInstance();
             else
                 StartApplication();
@@ -33,9 +33,9 @@ namespace mRemoteNG.App
 
             var frmSplashScreen = FrmSplashScreenNew.GetInstance();
 
-            Screen targetScreen = (Screen.AllScreens.Length > 1) ? Screen.AllScreens[1] : Screen.AllScreens[0];
+            var targetScreen = (Screen.AllScreens.Length > 1) ? Screen.AllScreens[1] : Screen.AllScreens[0];
 
-            Rectangle viewport = targetScreen.WorkingArea;
+            var viewport = targetScreen.WorkingArea;
             frmSplashScreen.Top = viewport.Top;
             frmSplashScreen.Left = viewport.Left;
             // normaly it should be screens[1] however due DPI apply 1 size "same" as default with 100%

@@ -17,7 +17,7 @@ namespace mRemoteNG.Credential
 
         [ReadOnly(true)] public string Username { get; set; } = Language.CredentialUnavailable;
 
-        [ReadOnly(true)] public SecureString Password { get; set; } = new SecureString();
+        [ReadOnly(true)] public SecureString Password { get; set; } = new();
 
         [ReadOnly(true)] public string Domain { get; set; } = Language.CredentialUnavailable;
 

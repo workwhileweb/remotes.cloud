@@ -28,7 +28,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
         private XmlConnectionsDecryptor _decryptor;
         private string ConnectionFileName = "";
         private const double MaxSupportedConfVersion = 2.8;
-        private readonly RootNodeInfo _rootNodeInfo = new RootNodeInfo(RootNodeType.Connection);
+        private readonly RootNodeInfo _rootNodeInfo = new(RootNodeType.Connection);
 
         public Func<Optional<SecureString>> AuthenticationRequestor { get; set; }
 

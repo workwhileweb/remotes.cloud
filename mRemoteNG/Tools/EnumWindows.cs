@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System;
 using System.Runtime.InteropServices;
 
@@ -30,7 +30,7 @@ namespace mRemoteNG.Tools
             return handleList;
         }
 
-        private readonly List<List<IntPtr>> HandleLists = new List<List<IntPtr>>();
+        private readonly List<List<IntPtr>> HandleLists = new();
 
         private bool EnumCallback(int hwnd, int lParam)
         {

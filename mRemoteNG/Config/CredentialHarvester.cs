@@ -14,8 +14,7 @@ namespace mRemoteNG.Config
         private readonly IEqualityComparer<ICredentialRecord> _credentialComparer = new CredentialDomainUserComparer();
 
         // maps a connectioninfo (by its id) to the credential object that was harvested
-        public Dictionary<Guid, ICredentialRecord> ConnectionToCredentialMap { get; } =
-            new Dictionary<Guid, ICredentialRecord>();
+        public Dictionary<Guid, ICredentialRecord> ConnectionToCredentialMap { get; } = new();
 
         public IEnumerable<ICredentialRecord> Harvest(XDocument xDocument, SecureString decryptionKey)
         {

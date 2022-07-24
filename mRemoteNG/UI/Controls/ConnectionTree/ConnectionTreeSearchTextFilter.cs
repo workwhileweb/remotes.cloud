@@ -13,7 +13,7 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
         /// always be included in the output, regardless of matching
         /// the desired <see cref="FilterText"/>.
         /// </summary>
-        public List<ConnectionInfo> SpecialInclusionList { get; } = new List<ConnectionInfo>();
+        public List<ConnectionInfo> SpecialInclusionList { get; } = new();
 
         public bool Filter(object modelObject)
         {

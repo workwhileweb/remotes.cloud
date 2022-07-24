@@ -27,7 +27,7 @@
         }
         private void SetVisibility()
         {
-            bool ch = cbUseSSO.Checked;
+            var ch = cbUseSSO.Checked;
             tbPassword.Enabled = !ch;
             tbUsername.Enabled = !ch;
         }

@@ -32,18 +32,18 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             base.SaveSettings();
 
-            Properties.OptionsStartupExitPage.Default.OpenConsFromLastSession = chkReconnectOnStart.Checked;
-            Properties.OptionsStartupExitPage.Default.SingleInstance = chkSingleInstance.Checked;
-            Properties.OptionsStartupExitPage.Default.StartMinimized = chkStartMinimized.Checked;
-            Properties.OptionsStartupExitPage.Default.StartFullScreen = chkStartFullScreen.Checked;
+            OptionsStartupExitPage.Default.OpenConsFromLastSession = chkReconnectOnStart.Checked;
+            OptionsStartupExitPage.Default.SingleInstance = chkSingleInstance.Checked;
+            OptionsStartupExitPage.Default.StartMinimized = chkStartMinimized.Checked;
+            OptionsStartupExitPage.Default.StartFullScreen = chkStartFullScreen.Checked;
         }
 
         private void StartupExitPage_Load(object sender, EventArgs e)
         {
-            chkReconnectOnStart.Checked = Properties.OptionsStartupExitPage.Default.OpenConsFromLastSession;
-            chkSingleInstance.Checked = Properties.OptionsStartupExitPage.Default.SingleInstance;
-            chkStartMinimized.Checked = Properties.OptionsStartupExitPage.Default.StartMinimized;
-            chkStartFullScreen.Checked = Properties.OptionsStartupExitPage.Default.StartFullScreen;
+            chkReconnectOnStart.Checked = OptionsStartupExitPage.Default.OpenConsFromLastSession;
+            chkSingleInstance.Checked = OptionsStartupExitPage.Default.SingleInstance;
+            chkStartMinimized.Checked = OptionsStartupExitPage.Default.StartMinimized;
+            chkStartFullScreen.Checked = OptionsStartupExitPage.Default.StartFullScreen;
             ;
         }
 

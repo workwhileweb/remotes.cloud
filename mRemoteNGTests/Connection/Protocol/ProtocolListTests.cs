@@ -180,7 +180,7 @@ namespace mRemoteNGTests.Connection.Protocol
         [Test]
         public void AddCollectionChangedEventHasCorrectAction()
         {
-            NotifyCollectionChangedAction collectionChangedAction = NotifyCollectionChangedAction.Move;
+            var collectionChangedAction = NotifyCollectionChangedAction.Move;
             _protocolList.CollectionChanged += (sender, args) => collectionChangedAction = args.Action;
             _protocolList.Add(_protocol1);
             Assert.That(collectionChangedAction, Is.EqualTo(NotifyCollectionChangedAction.Add));
@@ -189,7 +189,7 @@ namespace mRemoteNGTests.Connection.Protocol
         [Test]
         public void AddRangeCollectionChangedEventHasCorrectAction()
         {
-            NotifyCollectionChangedAction collectionChangedAction = NotifyCollectionChangedAction.Move;
+            var collectionChangedAction = NotifyCollectionChangedAction.Move;
             _protocolList.CollectionChanged += (sender, args) => collectionChangedAction = args.Action;
             _protocolList.AddRange(new []{_protocol1});
             Assert.That(collectionChangedAction, Is.EqualTo(NotifyCollectionChangedAction.Add));
@@ -198,7 +198,7 @@ namespace mRemoteNGTests.Connection.Protocol
         [Test]
         public void RemoveCollectionChangedEventHasCorrectAction()
         {
-            NotifyCollectionChangedAction collectionChangedAction = NotifyCollectionChangedAction.Move;
+            var collectionChangedAction = NotifyCollectionChangedAction.Move;
             _protocolList.Add(_protocol1);
             _protocolList.CollectionChanged += (sender, args) => collectionChangedAction = args.Action;
             _protocolList.Remove(_protocol1);
@@ -208,7 +208,7 @@ namespace mRemoteNGTests.Connection.Protocol
         [Test]
         public void ClearCollectionChangedEventHasCorrectAction()
         {
-            NotifyCollectionChangedAction collectionChangedAction = NotifyCollectionChangedAction.Move;
+            var collectionChangedAction = NotifyCollectionChangedAction.Move;
             _protocolList.Add(_protocol1);
             _protocolList.CollectionChanged += (sender, args) => collectionChangedAction = args.Action;
             _protocolList.Clear();

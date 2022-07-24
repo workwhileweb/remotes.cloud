@@ -64,7 +64,7 @@ namespace mRemoteNG.Config.Connections.Multiuser
 
         private bool CheckIfIAmTheLastOneUpdated(DateTime lastUpdateInDb)
         {
-            DateTime lastSqlUpdateWithoutMilliseconds =
+            var lastSqlUpdateWithoutMilliseconds =
                 new DateTime(LastUpdateTime.Ticks - (LastUpdateTime.Ticks % TimeSpan.TicksPerSecond),
                              LastUpdateTime.Kind);
             return lastUpdateInDb == lastSqlUpdateWithoutMilliseconds;

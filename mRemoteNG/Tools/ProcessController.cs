@@ -96,9 +96,9 @@ namespace mRemoteNG.Tools
 
         #region Protected Fields
 
-        private readonly Process Process = new Process();
+        private readonly Process Process = new();
         private IntPtr Handle = IntPtr.Zero;
-        private List<IntPtr> Controls = new List<IntPtr>();
+        private List<IntPtr> Controls = new();
 
         #endregion
 
@@ -110,12 +110,12 @@ namespace mRemoteNG.Tools
             if (Process == null || Process.HasExited)
                 return IntPtr.Zero;
 
-            Process.WaitForInputIdle(Properties.OptionsAdvancedPage.Default.MaxPuttyWaitTime * 1000);
+            Process.WaitForInputIdle(OptionsAdvancedPage.Default.MaxPuttyWaitTime * 1000);
 
             Handle = IntPtr.Zero;
             var startTicks = Environment.TickCount;
             while (Handle == IntPtr.Zero &&
-                   Environment.TickCount < startTicks + (Properties.OptionsAdvancedPage.Default.MaxPuttyWaitTime * 1000))
+                   Environment.TickCount < startTicks + (OptionsAdvancedPage.Default.MaxPuttyWaitTime * 1000))
             {
                 Process.Refresh();
                 Handle = Process.MainWindowHandle;

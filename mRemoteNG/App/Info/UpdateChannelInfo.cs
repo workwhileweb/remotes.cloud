@@ -22,7 +22,7 @@ namespace mRemoteNG.App.Info
 
         public static Uri GetUpdateChannelInfo()
         {
-            var channel = IsValidChannel(Properties.OptionsUpdatesPage.Default.UpdateChannel) ? Properties.OptionsUpdatesPage.Default.UpdateChannel : STABLE;
+            var channel = IsValidChannel(OptionsUpdatesPage.Default.UpdateChannel) ? OptionsUpdatesPage.Default.UpdateChannel : STABLE;
             return GetUpdateTxtUri(channel);
         }
 
@@ -65,7 +65,7 @@ namespace mRemoteNG.App.Info
 
         private static Uri GetUpdateTxtUri(string channel)
         {
-            return new Uri(new Uri(Properties.OptionsUpdatesPage.Default.UpdateAddress),
+            return new Uri(new Uri(OptionsUpdatesPage.Default.UpdateAddress),
                            new Uri(GetChannelFileName(channel), UriKind.Relative));
         }
 

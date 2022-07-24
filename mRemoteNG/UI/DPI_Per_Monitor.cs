@@ -89,12 +89,12 @@ static class DPI_Per_Monitor
     [DllImport("Shcore.dll")]
     private static extern IntPtr GetDpiForMonitor([In]IntPtr hmonitor, [In]DpiType dpiType, [Out]out uint dpiX, [Out]out uint dpiY);
     [DllImport("User32.dll")]
-    private static extern IntPtr MonitorFromPoint([In]System.Drawing.Point pt, [In]uint dwFlags);
+    private static extern IntPtr MonitorFromPoint([In]Point pt, [In]uint dwFlags);
 
-    static List<Tuple<Control, Form, float>> ManResCtrl = new List<Tuple<Control, Form, float>>();
+    static List<Tuple<Control, Form, float>> ManResCtrl = new();
     internal static void TryEnableDPIAware(Form form, VoidOfFloatFloatDelegate CallBackWithScale)
     {
-        int handledLev = 0;
+        var handledLev = 0;
         if (0==handledLev)
             try { //"Creators update", new method, Only onw supported by newer VS: DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2
                 if (SetProcessDpiAwarenessContext(DPI_AWARENESS_CONTEXT - 4)) handledLev = 3;
@@ -110,7 +110,7 @@ static class DPI_Per_Monitor
                 handledLev = 1;
             } catch { }
         try {
-            var mon = MonitorFromPoint(new System.Drawing.Point(1, 1), 2/*MONITOR_DEFAULTTONEAREST*/); //(0,0) always top left of primary
+            var mon = MonitorFromPoint(new Point(1, 1), 2/*MONITOR_DEFAULTTONEAREST*/); //(0,0) always top left of primary
             uint dpiX;
             uint dpiY;
             GetDpiForMonitor(mon, DpiType.Effective, out dpiX, out dpiY);
@@ -123,7 +123,7 @@ static class DPI_Per_Monitor
     [DllImport("user32.dll", SetLastError = true)]
     public static extern bool EnableNonClientDpiScaling(IntPtr hWnd);
 
-    private static SemaphoreSlim semaphoreScale = new SemaphoreSlim(1, 1);
+    private static SemaphoreSlim semaphoreScale = new(1, 1);
     internal delegate void VoidOfFloatFloatDelegate(float x, float y);
     static Int32 Oldscales = -1;
     static bool isCurrentlyScaling=false;
@@ -132,16 +132,16 @@ static class DPI_Per_Monitor
             case 0x02E0:  //WM_DPICHANGED
                 try {
                     semaphoreScale.Wait(2000); //timeout??
-                    bool Local_isCurrentlyScaling = isCurrentlyScaling;
+                    var Local_isCurrentlyScaling = isCurrentlyScaling;
                     isCurrentlyScaling = true;
                     semaphoreScale.Release();
                     if (Local_isCurrentlyScaling) break; //We will get it again if we are moving....
 
-                    Int32 CurrentScales = m.WParam.ToInt32();
+                    var CurrentScales = m.WParam.ToInt32();
                     //if (ScaleFactorsLastAndPendingQueue[0]!=ScaleFactorsLastAndPendingQueue[1]) //We MIGHT get the message more than once!!!
                     if (Oldscales!= CurrentScales) { //We MIGHT get the message more than once!!!
-                        float scaleFactorX = (CurrentScales & 0xFFFF) / 96f; //###SEE NOTES!!###
-                        float scaleFactorY = (CurrentScales >> 16) / 96f; //###SEE NOTES!!###
+                        var scaleFactorX = (CurrentScales & 0xFFFF) / 96f; //###SEE NOTES!!###
+                        var scaleFactorY = (CurrentScales >> 16) / 96f; //###SEE NOTES!!###
                         CallBackWithScale(scaleFactorX, scaleFactorY);
                     }
                     semaphoreScale.Wait(2000); //timeout??

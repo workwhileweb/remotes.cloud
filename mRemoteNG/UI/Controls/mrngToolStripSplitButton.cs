@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace mRemoteNG.UI.Controls
 {
-    public class MrngToolStripSplitButton : System.Windows.Forms.ToolStripSplitButton
+    public class MrngToolStripSplitButton : ToolStripSplitButton
     {
         public new ToolStripDropDown DropDown
         {
@@ -25,9 +25,9 @@ namespace mRemoteNG.UI.Controls
                 return;
             }
 
-            Rectangle dropDownButtonBoundsClient = DropDownButtonBounds; // Relative to the ToolStripSplitButton
+            var dropDownButtonBoundsClient = DropDownButtonBounds; // Relative to the ToolStripSplitButton
             dropDownButtonBoundsClient.Offset(Bounds.Location); // Relative to the parent of the ToolStripSplitButton
-            Rectangle dropDownButtonBoundsScreen =
+            var dropDownButtonBoundsScreen =
                 GetCurrentParent().RectangleToScreen(dropDownButtonBoundsClient); // Relative to the screen
 
             if (dropDownButtonBoundsScreen.Contains(Control.MousePosition))

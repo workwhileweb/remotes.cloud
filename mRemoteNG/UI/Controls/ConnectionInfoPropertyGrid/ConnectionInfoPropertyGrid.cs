@@ -22,7 +22,7 @@ namespace mRemoteNG.UI.Controls.ConnectionInfoPropertyGrid
 {
     public partial class ConnectionInfoPropertyGrid : FilteredPropertyGrid.FilteredPropertyGrid
     {
-        private readonly Dictionary<Type, IEnumerable<PropertyInfo>> _propertyCache = new Dictionary<Type, IEnumerable<PropertyInfo>>();
+        private readonly Dictionary<Type, IEnumerable<PropertyInfo>> _propertyCache = new();
         private ConnectionInfo _selectedConnectionInfo;
         private PropertyMode _propertyMode;
 
@@ -311,7 +311,7 @@ namespace mRemoteNG.UI.Controls.ConnectionInfoPropertyGrid
 
             if (rootInfo.Password)
             {
-                var passwordName = Properties.OptionsDBsPage.Default.UseSQLServer ? Language.SQLServer.TrimEnd(':') : Path.GetFileName(Runtime.ConnectionsService.GetStartupConnectionFileName());
+                var passwordName = OptionsDBsPage.Default.UseSQLServer ? Language.SQLServer.TrimEnd(':') : Path.GetFileName(Runtime.ConnectionsService.GetStartupConnectionFileName());
                 var password = MiscTools.PasswordDialog(passwordName);
 
                 // operation cancelled, dont set a password

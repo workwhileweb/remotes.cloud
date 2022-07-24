@@ -12,9 +12,9 @@ namespace mRemoteNGTests.UI.Forms
         [Test]
         public void ClickingCloseButtonClosesTheForm()
         {
-            bool eventFired = false;
+            var eventFired = false;
             _optionsForm.FormClosed += (o, e) => eventFired = true;
-            Button cancelButton = _optionsForm.FindControl<Button>("btnCancel");
+            var cancelButton = _optionsForm.FindControl<Button>("btnCancel");
             cancelButton.PerformClick();
             Assert.That(eventFired, Is.True);
         }
@@ -22,7 +22,7 @@ namespace mRemoteNGTests.UI.Forms
         [Test]
         public void ClickingOKButtonSetsDialogResult()
         {
-            Button cancelButton = _optionsForm.FindControl<Button>("btnOK");
+            var cancelButton = _optionsForm.FindControl<Button>("btnOK");
             cancelButton.PerformClick();
             Assert.That(_optionsForm.DialogResult, Is.EqualTo(DialogResult.OK));
         }
@@ -30,7 +30,7 @@ namespace mRemoteNGTests.UI.Forms
         [Test]
         public void ListViewContainsOptionsPages()
         {
-            ListViewTester listViewTester = new ListViewTester("lstOptionPages", _optionsForm);
+            var listViewTester = new ListViewTester("lstOptionPages", _optionsForm);
             Assert.That(listViewTester.Items.Count, Is.EqualTo(12));
         }
     }

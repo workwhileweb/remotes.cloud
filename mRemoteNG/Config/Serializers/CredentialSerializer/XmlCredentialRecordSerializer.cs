@@ -9,7 +9,7 @@ namespace mRemoteNG.Config.Serializers.CredentialSerializer
 {
     public class XmlCredentialRecordSerializer : ISerializer<IEnumerable<ICredentialRecord>, string>
     {
-        public Version Version { get; } = new Version(1, 0);
+        public Version Version { get; } = new(1, 0);
 
         public string Serialize(IEnumerable<ICredentialRecord> credentialRecords)
         {

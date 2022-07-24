@@ -26,7 +26,7 @@ namespace mRemoteNG.Security.SymmetricEncryption
     {
         private readonly IAeadBlockCipher _aeadBlockCipher;
         private readonly Encoding _encoding;
-        private readonly SecureRandom _random = new SecureRandom();
+        private readonly SecureRandom _random = new();
 
         //Preconfigured Encryption Parameters
         protected virtual int NonceBitSize { get; set; } = 128;

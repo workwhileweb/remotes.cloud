@@ -111,7 +111,7 @@ namespace mRemoteNG.Tools
             FrmMain.Show();
             FrmMain.WindowState = FrmMain.PreviousWindowState;
 
-            if (Properties.OptionsAppearancePage.Default.ShowSystemTrayIcon) return;
+            if (OptionsAppearancePage.Default.ShowSystemTrayIcon) return;
             Runtime.NotificationAreaIcon.Dispose();
             Runtime.NotificationAreaIcon = null;
         }

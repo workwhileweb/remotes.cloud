@@ -59,7 +59,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 			// 
 			// chkAutomaticReconnect
 			// 
-			this.chkAutomaticReconnect._mice = MrngCheckBox.MouseState.OUT;
+			this.chkAutomaticReconnect.Mice = MrngCheckBox.MouseState.Out;
 			this.chkAutomaticReconnect.AutoSize = true;
 			this.chkAutomaticReconnect.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.chkAutomaticReconnect.Location = new System.Drawing.Point(3, 3);
@@ -89,7 +89,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 			// 
 			// chkUseCustomPuttyPath
 			// 
-			this.chkUseCustomPuttyPath._mice = MrngCheckBox.MouseState.OUT;
+			this.chkUseCustomPuttyPath.Mice = MrngCheckBox.MouseState.Out;
 			this.chkUseCustomPuttyPath.AutoSize = true;
 			this.chkUseCustomPuttyPath.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.chkUseCustomPuttyPath.Location = new System.Drawing.Point(3, 49);
@@ -141,7 +141,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 			// 
 			// btnLaunchPutty
 			// 
-			this.btnLaunchPutty._mice = MrngButton.MouseState.OUT;
+			this.btnLaunchPutty.Mice = MrngButton.MouseState.Out;
 			this.btnLaunchPutty.Image = global::mRemoteNG.Properties.Resources.PuttyConfig;
 			this.btnLaunchPutty.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.btnLaunchPutty.Location = new System.Drawing.Point(373, 109);
@@ -174,7 +174,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 			// 
 			// btnBrowseCustomPuttyPath
 			// 
-			this.btnBrowseCustomPuttyPath._mice = MrngButton.MouseState.OUT;
+			this.btnBrowseCustomPuttyPath.Mice = MrngButton.MouseState.Out;
 			this.btnBrowseCustomPuttyPath.Enabled = false;
 			this.btnBrowseCustomPuttyPath.Location = new System.Drawing.Point(373, 71);
 			this.btnBrowseCustomPuttyPath.Name = "btnBrowseCustomPuttyPath";
@@ -186,7 +186,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 			// 
 			// chkLoadBalanceInfoUseUtf8
 			// 
-			this.chkLoadBalanceInfoUseUtf8._mice = MrngCheckBox.MouseState.OUT;
+			this.chkLoadBalanceInfoUseUtf8.Mice = MrngCheckBox.MouseState.Out;
 			this.chkLoadBalanceInfoUseUtf8.AutoSize = true;
 			this.chkLoadBalanceInfoUseUtf8.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.chkLoadBalanceInfoUseUtf8.Location = new System.Drawing.Point(3, 26);

@@ -8,7 +8,7 @@ using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.UI.TaskDialog
 {
-    public partial class frmTaskDialog : Form
+    public partial class FrmTaskDialog : Form
     {
         //--------------------------------------------------------------------------------
 
@@ -114,7 +114,7 @@ namespace mRemoteNG.UI.TaskDialog
         #region CONSTRUCTOR
 
         //--------------------------------------------------------------------------------
-        public frmTaskDialog()
+        public FrmTaskDialog()
         {
             InitializeComponent();
 
@@ -358,42 +358,42 @@ namespace mRemoteNG.UI.TaskDialog
             ClientSize = new Size(ClientSize.Width, formHeight);
 
             _formBuilt = true;
-            ThemeManager.getInstance().ThemeChanged += ApplyTheme;
+            ThemeManager.GetInstance().ThemeChanged += ApplyTheme;
             ApplyTheme();
         }
 
         private void ApplyTheme()
         {
-            if (!ThemeManager.getInstance().ActiveAndExtended) return;
+            if (!ThemeManager.GetInstance().ActiveAndExtended) return;
 
-            pnlButtons.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-            pnlButtons.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
-            panel2.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-            panel2.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
-            pnlFooter.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-            pnlFooter.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
-            panel5.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-            panel5.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
-            panel3.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-            panel3.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            pnlButtons.BackColor = ThemeManager.GetInstance().ActiveTheme.ExtendedPalette.GetColor("Dialog_Background");
+            pnlButtons.ForeColor = ThemeManager.GetInstance().ActiveTheme.ExtendedPalette.GetColor("Dialog_Foreground");
+            panel2.BackColor = ThemeManager.GetInstance().ActiveTheme.ExtendedPalette.GetColor("Dialog_Background");
+            panel2.ForeColor = ThemeManager.GetInstance().ActiveTheme.ExtendedPalette.GetColor("Dialog_Foreground");
+            pnlFooter.BackColor = ThemeManager.GetInstance().ActiveTheme.ExtendedPalette.GetColor("Dialog_Background");
+            pnlFooter.ForeColor = ThemeManager.GetInstance().ActiveTheme.ExtendedPalette.GetColor("Dialog_Foreground");
+            panel5.BackColor = ThemeManager.GetInstance().ActiveTheme.ExtendedPalette.GetColor("Dialog_Background");
+            panel5.ForeColor = ThemeManager.GetInstance().ActiveTheme.ExtendedPalette.GetColor("Dialog_Foreground");
+            panel3.BackColor = ThemeManager.GetInstance().ActiveTheme.ExtendedPalette.GetColor("Dialog_Background");
+            panel3.ForeColor = ThemeManager.GetInstance().ActiveTheme.ExtendedPalette.GetColor("Dialog_Foreground");
             pnlCommandButtons.BackColor =
-                ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+                ThemeManager.GetInstance().ActiveTheme.ExtendedPalette.GetColor("Dialog_Background");
             pnlCommandButtons.ForeColor =
-                ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+                ThemeManager.GetInstance().ActiveTheme.ExtendedPalette.GetColor("Dialog_Foreground");
             pnlMainInstruction.BackColor =
-                ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+                ThemeManager.GetInstance().ActiveTheme.ExtendedPalette.GetColor("Dialog_Background");
             pnlMainInstruction.ForeColor =
-                ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
-            pnlContent.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-            pnlContent.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+                ThemeManager.GetInstance().ActiveTheme.ExtendedPalette.GetColor("Dialog_Foreground");
+            pnlContent.BackColor = ThemeManager.GetInstance().ActiveTheme.ExtendedPalette.GetColor("Dialog_Background");
+            pnlContent.ForeColor = ThemeManager.GetInstance().ActiveTheme.ExtendedPalette.GetColor("Dialog_Foreground");
             pnlExpandedInfo.BackColor =
-                ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+                ThemeManager.GetInstance().ActiveTheme.ExtendedPalette.GetColor("Dialog_Background");
             pnlExpandedInfo.ForeColor =
-                ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+                ThemeManager.GetInstance().ActiveTheme.ExtendedPalette.GetColor("Dialog_Foreground");
             pnlRadioButtons.BackColor =
-                ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+                ThemeManager.GetInstance().ActiveTheme.ExtendedPalette.GetColor("Dialog_Background");
             pnlRadioButtons.ForeColor =
-                ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+                ThemeManager.GetInstance().ActiveTheme.ExtendedPalette.GetColor("Dialog_Foreground");
         }
 
         //--------------------------------------------------------------------------------

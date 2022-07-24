@@ -16,30 +16,30 @@ namespace mRemoteNG.UI.Controls
      */
     public class MrngIpTextBox : UserControl
     {
-        private Panel panel1;
+        private Panel _panel1;
         public MrngTextBox Octet1;
         public MrngTextBox Octet2;
         public MrngTextBox Octet3;
         public MrngTextBox Octet4;
-        private MrngLabel label1;
-        private MrngLabel label2;
-        private MrngLabel label3;
-        private ToolTip toolTip1;
+        private MrngLabel _label1;
+        private MrngLabel _label2;
+        private MrngLabel _label3;
+        private ToolTip _toolTip1;
         private System.ComponentModel.IContainer components;
 
         /* Sets and Gets the tooltiptext on toolTip1 */
         public string ToolTipText
         {
-            get => toolTip1.GetToolTip(Octet1);
+            get => _toolTip1.GetToolTip(Octet1);
             set
             {
-                toolTip1.SetToolTip(Octet1, value);
-                toolTip1.SetToolTip(Octet2, value);
-                toolTip1.SetToolTip(Octet3, value);
-                toolTip1.SetToolTip(Octet4, value);
-                toolTip1.SetToolTip(label1, value);
-                toolTip1.SetToolTip(label2, value);
-                toolTip1.SetToolTip(label3, value);
+                _toolTip1.SetToolTip(Octet1, value);
+                _toolTip1.SetToolTip(Octet2, value);
+                _toolTip1.SetToolTip(Octet3, value);
+                _toolTip1.SetToolTip(Octet4, value);
+                _toolTip1.SetToolTip(_label1, value);
+                _toolTip1.SetToolTip(_label2, value);
+                _toolTip1.SetToolTip(_label3, value);
             }
         }
 
@@ -90,13 +90,13 @@ namespace mRemoteNG.UI.Controls
         {
             base.OnLoad(e);
             ApplyTheme();
-            ThemeManager.getInstance().ThemeChanged += ApplyTheme;
+            ThemeManager.GetInstance().ThemeChanged += ApplyTheme;
         }
 
         private void ApplyTheme()
         {
-            if (!ThemeManager.getInstance().ActiveAndExtended) return;
-            panel1.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
+            if (!ThemeManager.GetInstance().ActiveAndExtended) return;
+            _panel1.BackColor = ThemeManager.GetInstance().ActiveTheme.ExtendedPalette.GetColor("TextBox_Background");
         }
 
         protected override void Dispose(bool disposing)
@@ -118,33 +118,33 @@ namespace mRemoteNG.UI.Controls
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this._panel1 = new System.Windows.Forms.Panel();
             this.Octet4 = new mRemoteNG.UI.Controls.MrngTextBox();
             this.Octet3 = new mRemoteNG.UI.Controls.MrngTextBox();
             this.Octet2 = new mRemoteNG.UI.Controls.MrngTextBox();
             this.Octet1 = new mRemoteNG.UI.Controls.MrngTextBox();
-            this.label2 = new mRemoteNG.UI.Controls.MrngLabel();
-            this.label1 = new mRemoteNG.UI.Controls.MrngLabel();
-            this.label3 = new mRemoteNG.UI.Controls.MrngLabel();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.panel1.SuspendLayout();
+            this._label2 = new mRemoteNG.UI.Controls.MrngLabel();
+            this._label1 = new mRemoteNG.UI.Controls.MrngLabel();
+            this._label3 = new mRemoteNG.UI.Controls.MrngLabel();
+            this._toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this._panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.Window;
-            this.panel1.Controls.Add(this.Octet4);
-            this.panel1.Controls.Add(this.Octet3);
-            this.panel1.Controls.Add(this.Octet2);
-            this.panel1.Controls.Add(this.Octet1);
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.label3);
-            this.panel1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(124, 18);
-            this.panel1.TabIndex = 0;
+            this._panel1.BackColor = System.Drawing.SystemColors.Window;
+            this._panel1.Controls.Add(this.Octet4);
+            this._panel1.Controls.Add(this.Octet3);
+            this._panel1.Controls.Add(this.Octet2);
+            this._panel1.Controls.Add(this.Octet1);
+            this._panel1.Controls.Add(this._label2);
+            this._panel1.Controls.Add(this._label1);
+            this._panel1.Controls.Add(this._label3);
+            this._panel1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this._panel1.Location = new System.Drawing.Point(0, 0);
+            this._panel1.Name = "_panel1";
+            this._panel1.Size = new System.Drawing.Size(124, 18);
+            this._panel1.TabIndex = 0;
             // 
             // Octet4
             // 
@@ -208,37 +208,37 @@ namespace mRemoteNG.UI.Controls
             // 
             // label2
             // 
-            this.label2.Location = new System.Drawing.Point(86, 2);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(8, 13);
-            this.label2.TabIndex = 5;
-            this.label2.Text = ".";
+            this._label2.Location = new System.Drawing.Point(86, 2);
+            this._label2.Name = "_label2";
+            this._label2.Size = new System.Drawing.Size(8, 13);
+            this._label2.TabIndex = 5;
+            this._label2.Text = ".";
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(55, 2);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(8, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = ".";
+            this._label1.Location = new System.Drawing.Point(55, 2);
+            this._label1.Name = "_label1";
+            this._label1.Size = new System.Drawing.Size(8, 13);
+            this._label1.TabIndex = 1;
+            this._label1.Text = ".";
             // 
             // label3
             // 
-            this.label3.Location = new System.Drawing.Point(23, 1);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(8, 13);
-            this.label3.TabIndex = 6;
-            this.label3.Text = ".";
+            this._label3.Location = new System.Drawing.Point(23, 1);
+            this._label3.Name = "_label3";
+            this._label3.Size = new System.Drawing.Size(8, 13);
+            this._label3.TabIndex = 6;
+            this._label3.Text = ".";
             // 
             // IPTextBox
             // 
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this._panel1);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular,
                                                 System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "IPTextBox";
             this.Size = new System.Drawing.Size(124, 18);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this._panel1.ResumeLayout(false);
+            this._panel1.PerformLayout();
             this.ResumeLayout(false);
         }
 

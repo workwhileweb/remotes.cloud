@@ -8,7 +8,7 @@ namespace mRemoteNG.Config.Serializers.Versioning
 {
     public class SqlVersion28To29Upgrader : IVersionUpgrader
     {
-        private readonly Version version = new(2, 9);
+        private readonly Version _version = new(2, 9);
         private readonly IDatabaseConnector _databaseConnector;
 
         public SqlVersion28To29Upgrader(IDatabaseConnector databaseConnector)
@@ -21,13 +21,13 @@ namespace mRemoteNG.Config.Serializers.Versioning
             return currentVersion == new Version(2, 8) ||
                 // Support upgrading during dev revisions, 2.9.1, 2.9.2, etc...
                 (currentVersion <= new Version(2, 9) &&
-                currentVersion < version);
+                currentVersion < _version);
         }
 
         public Version Upgrade()
         {
             Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
-                $"Upgrading database to version {version}.");
+                $"Upgrading database to version {_version}.");
 
             const string mySqlAlter = @"
 ALTER TABLE tblCons ADD COLUMN StartProgram varchar(512) DEFAULT NULL;
@@ -44,7 +44,7 @@ ALTER TABLE tblRoot MODIFY COLUMN ConfVersion varchar(15);GO;";
             using (var sqlTran = _databaseConnector.DbConnection().BeginTransaction(System.Data.IsolationLevel.Serializable))
             {
                 DbCommand dbCommand;
-                if (_databaseConnector.GetType() == typeof(MSSqlDatabaseConnector))
+                if (_databaseConnector.GetType() == typeof(MsSqlDatabaseConnector))
                 {
                     dbCommand = _databaseConnector.DbCommand(msSqlAlter);
                     dbCommand.Transaction = sqlTran;
@@ -66,7 +66,7 @@ ALTER TABLE tblRoot MODIFY COLUMN ConfVersion varchar(15);GO;";
                 }
                 var pConfVersion = dbCommand.CreateParameter();
                 pConfVersion.ParameterName = "confVersion";
-                pConfVersion.Value = version.ToString();
+                pConfVersion.Value = _version.ToString();
                 pConfVersion.DbType = System.Data.DbType.String;
                 pConfVersion.Direction = System.Data.ParameterDirection.Input;
                 dbCommand.Parameters.Add(pConfVersion);
@@ -74,7 +74,7 @@ ALTER TABLE tblRoot MODIFY COLUMN ConfVersion varchar(15);GO;";
                 dbCommand.ExecuteNonQuery();
                 sqlTran.Commit();
             }
-            return version;
+            return _version;
         }
     }
 }

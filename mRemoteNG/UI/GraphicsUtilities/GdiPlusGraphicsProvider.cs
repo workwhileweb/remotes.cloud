@@ -9,7 +9,7 @@ namespace mRemoteNG.UI.GraphicsUtilities
     public class GdiPlusGraphicsProvider : IGraphicsProvider
     {
         // Dpi of a 'normal' definition screen
-        private const int BaselineDpi = 96;
+        private const int BASELINE_DPI = 96;
 
 
         public SizeF GetResolutionScalingFactor()
@@ -19,7 +19,7 @@ namespace mRemoteNG.UI.GraphicsUtilities
             using (var f = new Form())
             {
                 var g = f.CreateGraphics();
-                return new SizeF(g.DpiX / BaselineDpi, g.DpiY / BaselineDpi);
+                return new SizeF(g.DpiX / BASELINE_DPI, g.DpiY / BASELINE_DPI);
             }
         }
     }

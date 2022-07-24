@@ -18,12 +18,12 @@ namespace mRemoteNG.UI.Tabs
         /// <summary>
         ///Silent close ignores the popup asking for confirmation
         /// </summary>
-        public bool silentClose { get; set; }
+        public bool SilentClose { get; set; }
 
         /// <summary>
         /// Protocol close ignores the interface controller cleanup and the user confirmation dialog
         /// </summary>
-        public bool protocolClose { get; set; }
+        public bool ProtocolClose { get; set; }
 
         public ConnectionTab()
         {
@@ -38,9 +38,9 @@ namespace mRemoteNG.UI.Tabs
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            if (!protocolClose)
+            if (!ProtocolClose)
             {
-                if (!silentClose)
+                if (!SilentClose)
                 {
                     if (Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.All)
                     {
@@ -88,8 +88,8 @@ namespace mRemoteNG.UI.Tabs
             try
             {
                 var interfaceControl = Tag as InterfaceControl;
-                if (interfaceControl?.Info.Protocol == ProtocolType.VNC)
-                    ((ProtocolVNC)interfaceControl.Protocol).RefreshScreen();
+                if (interfaceControl?.Info.Protocol == ProtocolType.Vnc)
+                    ((ProtocolVnc)interfaceControl.Protocol).RefreshScreen();
             }
             catch (Exception ex)
             {

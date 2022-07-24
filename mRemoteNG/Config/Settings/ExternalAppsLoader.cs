@@ -26,7 +26,7 @@ namespace mRemoteNG.Config.Settings
         }
 
 
-        public void LoadExternalAppsFromXML()
+        public void LoadExternalAppsFromXml()
         {
 #if !PORTABLE
             var oldPath =

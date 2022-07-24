@@ -33,7 +33,7 @@ namespace mRemoteNG.Tools
                 else
                 {
                     if (node is PuttySessionInfo) continue;
-                    if (node.Protocol == ProtocolType.SSH1 || node.Protocol == ProtocolType.SSH2)
+                    if (node.Protocol == ProtocolType.Ssh1 || node.Protocol == ProtocolType.Ssh2)
                         result.Add(node.Name);
                 }
 

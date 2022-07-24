@@ -9,7 +9,7 @@ namespace mRemoteNG.UI.Controls
     //This is subclassed to avoid repeating the code in multiple places
     internal class MrngListView : ObjectListView
     {
-        private CellBorderDecoration deco;
+        private CellBorderDecoration _deco;
 
         //Control if the gridlines are styled, must be set before the OnCreateControl is fired
         public bool DecorateLines { get; set; } = true;
@@ -17,20 +17,20 @@ namespace mRemoteNG.UI.Controls
         public MrngListView()
         {
             InitializeComponent();
-            ThemeManager.getInstance().ThemeChanged += OnCreateControl;
+            ThemeManager.GetInstance().ThemeChanged += OnCreateControl;
         }
 
         protected override void OnCreateControl()
         {
             base.OnCreateControl();
-            var _themeManager = ThemeManager.getInstance();
-            if (!_themeManager.ActiveAndExtended) return;
+            var themeManager = ThemeManager.GetInstance();
+            if (!themeManager.ActiveAndExtended) return;
             //List back color
-            BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Background");
-            ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Foreground");
+            BackColor = themeManager.ActiveTheme.ExtendedPalette.GetColor("List_Background");
+            ForeColor = themeManager.ActiveTheme.ExtendedPalette.GetColor("List_Item_Foreground");
             //Selected item
-            SelectedBackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Selected_Background");
-            SelectedForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Selected_Foreground");
+            SelectedBackColor = themeManager.ActiveTheme.ExtendedPalette.GetColor("List_Item_Selected_Background");
+            SelectedForeColor = themeManager.ActiveTheme.ExtendedPalette.GetColor("List_Item_Selected_Foreground");
 
             //Header style
             HeaderUsesThemes = false;
@@ -38,8 +38,8 @@ namespace mRemoteNG.UI.Controls
             {
                 Normal =
                 {
-                    BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Header_Background"),
-                    ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Header_Foreground")
+                    BackColor = themeManager.ActiveTheme.ExtendedPalette.GetColor("List_Header_Background"),
+                    ForeColor = themeManager.ActiveTheme.ExtendedPalette.GetColor("List_Header_Foreground")
                 }
             };
             HeaderFormatStyle = headerStylo;
@@ -48,9 +48,9 @@ namespace mRemoteNG.UI.Controls
             {
                 UseCellFormatEvents = true;
                 GridLines = false;
-                deco = new CellBorderDecoration
+                _deco = new CellBorderDecoration
                 {
-                    BorderPen = new Pen(_themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Border")),
+                    BorderPen = new Pen(themeManager.ActiveTheme.ExtendedPalette.GetColor("List_Item_Border")),
                     FillBrush = null,
                     BoundsPadding = Size.Empty,
                     CornerRounding = 0
@@ -67,7 +67,7 @@ namespace mRemoteNG.UI.Controls
         {
             if (e.Column.IsVisible)
             {
-                e.SubItem.Decoration = deco;
+                e.SubItem.Decoration = _deco;
             }
         }
 

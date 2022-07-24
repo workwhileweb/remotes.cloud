@@ -86,12 +86,12 @@ namespace mRemoteNG.UI.Menu
 
         private void mMenToolsSSHTransfer_Click(object sender, EventArgs e)
         {
-            Windows.Show(WindowType.SSHTransfer);
+            Windows.Show(WindowType.SshTransfer);
         }
 
         private void mMenToolsUVNCSC_Click(object sender, EventArgs e)
         {
-            Windows.Show(WindowType.UltraVNCSC);
+            Windows.Show(WindowType.UltraVncsc);
         }
 
         private void mMenToolsExternalApps_Click(object sender, EventArgs e)

@@ -12,33 +12,33 @@ namespace mRemoteNG.Tools
         [Flags]
         public enum Flags
         {
-            MF_STRING = NativeMethods.MF_STRING,
-            MF_SEPARATOR = NativeMethods.MF_SEPARATOR,
-            MF_BYCOMMAND = NativeMethods.MF_BYCOMMAND,
-            MF_BYPOSITION = NativeMethods.MF_BYPOSITION,
-            MF_POPUP = NativeMethods.MF_POPUP,
-            WM_SYSCOMMAND = NativeMethods.WM_SYSCOMMAND
+            MfString = NativeMethods.MF_STRING,
+            MfSeparator = NativeMethods.MF_SEPARATOR,
+            MfBycommand = NativeMethods.MF_BYCOMMAND,
+            MfByposition = NativeMethods.MF_BYPOSITION,
+            MfPopup = NativeMethods.MF_POPUP,
+            WmSyscommand = NativeMethods.WM_SYSCOMMAND
         }
 
         private bool _disposed;
         internal IntPtr SystemMenuHandle;
-        private readonly IntPtr FormHandle;
+        private readonly IntPtr _formHandle;
 
-        public WindowMenu(IntPtr Handle) : base(true)
+        public WindowMenu(IntPtr handle) : base(true)
         {
-            FormHandle = Handle;
-            SystemMenuHandle = NativeMethods.GetSystemMenu(FormHandle, false);
+            _formHandle = handle;
+            SystemMenuHandle = NativeMethods.GetSystemMenu(_formHandle, false);
             SetHandle(SystemMenuHandle);
         }
 
         public void Reset()
         {
-            SystemMenuHandle = NativeMethods.GetSystemMenu(FormHandle, true);
+            SystemMenuHandle = NativeMethods.GetSystemMenu(_formHandle, true);
         }
 
-        public void AppendMenuItem(IntPtr ParentMenu, Flags Flags, IntPtr ID, string Text)
+        public void AppendMenuItem(IntPtr parentMenu, Flags flags, IntPtr id, string text)
         {
-            NativeMethods.AppendMenu(ParentMenu, (int)Flags, ID, Text);
+            NativeMethods.AppendMenu(parentMenu, (int)flags, id, text);
         }
 
         public IntPtr CreatePopupMenuItem()
@@ -46,16 +46,16 @@ namespace mRemoteNG.Tools
             return NativeMethods.CreatePopupMenu();
         }
 
-        public bool InsertMenuItem(IntPtr SysMenu, int Position, Flags Flags, IntPtr SubMenu, string Text)
+        public bool InsertMenuItem(IntPtr sysMenu, int position, Flags flags, IntPtr subMenu, string text)
         {
-            return NativeMethods.InsertMenu(SysMenu, Position, (int)Flags, SubMenu, Text);
+            return NativeMethods.InsertMenu(sysMenu, position, (int)flags, subMenu, text);
         }
 
-        public IntPtr SetBitmap(IntPtr Menu, int Position, Flags Flags, Bitmap Bitmap)
+        public IntPtr SetBitmap(IntPtr menu, int position, Flags flags, Bitmap bitmap)
         {
-            return new IntPtr(Convert.ToInt32(NativeMethods.SetMenuItemBitmaps(Menu, Position, (int)Flags,
-                                                                               Bitmap.GetHbitmap(),
-                                                                               Bitmap.GetHbitmap())));
+            return new IntPtr(Convert.ToInt32(NativeMethods.SetMenuItemBitmaps(menu, position, (int)flags,
+                                                                               bitmap.GetHbitmap(),
+                                                                               bitmap.GetHbitmap())));
         }
 
         protected override bool ReleaseHandle()

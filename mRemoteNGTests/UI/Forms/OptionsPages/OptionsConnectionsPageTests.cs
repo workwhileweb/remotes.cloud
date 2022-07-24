@@ -12,23 +12,23 @@ namespace mRemoteNGTests.UI.Forms.OptionsPages
         [Test]
         public void ConnectionsPageLinkExistsInListView()
         {
-            var listViewTester = new ListViewTester("lstOptionPages", _optionsForm);
+            var listViewTester = new ListViewTester("lstOptionPages", OptionsForm);
             Assert.That(listViewTester.Items[4].Text, Does.Match("Connections"));
         }
 
         [Test]
         public void ConnectionsIconShownInListView()
         {
-            var listViewTester = new ListViewTester("lstOptionPages", _optionsForm);
+            var listViewTester = new ListViewTester("lstOptionPages", OptionsForm);
             Assert.That(listViewTester.Items[4].ImageList, Is.Not.Null);
         }
 
         [Test]
         public void SelectingConnectionsPageLoadsSettings()
         {
-            var listViewTester = new ListViewTester("lstOptionPages", _optionsForm);
+            var listViewTester = new ListViewTester("lstOptionPages", OptionsForm);
             listViewTester.Select("Connections");
-            var checkboxTester = _optionsForm.FindControl<CheckBox>("chkSingleClickOnConnectionOpensIt");
+            var checkboxTester = OptionsForm.FindControl<CheckBox>("chkSingleClickOnConnectionOpensIt");
             Assert.That(checkboxTester.Text, Does.Match("Single click on connection"));
         }
     }

@@ -5,46 +5,46 @@ using Microsoft.Win32;
 
 namespace ExternalConnectors.AWS
 {
-    public class EC2FetchDataService
+    public class Ec2FetchDataService
     {
-        private static DateTime lastFetch;
-        private static List<InstanceInfo>? lastData;
+        private static DateTime _lastFetch;
+        private static List<InstanceInfo>? _lastData;
 
         // input must be in format "AWSAPI:instanceid" where instanceid is the ec2 instance id, e.g. i-066f750a76c97583d
-        public static async Task<string> GetEC2InstanceDataAsync(string input, string region)
+        public static async Task<string> GetEc2InstanceDataAsync(string input, string region)
         {
             // get secret id
             if (!input.StartsWith("AWSAPI:"))
                 throw new Exception("calling this function requires AWSAPI: input");
-            var InstanceID = input[7..];
+            var instanceId = input[7..];
 
             // init connection credentials, display popup if necessary
-            AWSConnectionData.Init();
-            var alldata = await GetEC2IPDataAsync(region);
-            var found = alldata.Where(x => x.InstanceId == InstanceID).SingleOrDefault();
-            return (found == null) ? "" : found.PublicIP;
+            AwsConnectionData.Init();
+            var alldata = await GetEc2IpDataAsync(region);
+            var found = alldata.Where(x => x.InstanceId == instanceId).SingleOrDefault();
+            return (found == null) ? "" : found.PublicIp;
         }
 
-        private static async Task<List<InstanceInfo>> GetEC2IPDataAsync(string region)
+        private static async Task<List<InstanceInfo>> GetEc2IpDataAsync(string region)
         {
             // caching
-            var timeSpan = DateTime.Now - lastFetch;
-            if (timeSpan.TotalMinutes < 1 && lastData != null)
-                return lastData;
+            var timeSpan = DateTime.Now - _lastFetch;
+            if (timeSpan.TotalMinutes < 1 && _lastData != null)
+                return _lastData;
 
             //AWSConfigs.AWSRegion = AWSConnectionData.region;
             AWSConfigs.AWSRegion = region;
-            var awsAccessKeyId = AWSConnectionData.awsKeyID;
-            var awsSecretAccessKey = AWSConnectionData.awsKey;
+            var awsAccessKeyId = AwsConnectionData.AwsKeyId;
+            var awsSecretAccessKey = AwsConnectionData.AwsKey;
 
-            var _client = new AmazonEC2Client(awsAccessKeyId, awsSecretAccessKey, RegionEndpoint.EUCentral1);
+            var client = new AmazonEC2Client(awsAccessKeyId, awsSecretAccessKey, RegionEndpoint.EUCentral1);
             var done = false;
 
             List<InstanceInfo> instanceList = new();
             var request = new DescribeInstancesRequest();
             while (!done)
             {
-                var response = await _client.DescribeInstancesAsync(request);
+                var response = await client.DescribeInstancesAsync(request);
 
                 foreach (var reservation in response.Reservations)
                 {
@@ -71,28 +71,28 @@ namespace ExternalConnectors.AWS
                 }
             }
 
-            lastData = instanceList.OrderBy(x => x.Name).ToList();
-            lastFetch = DateTime.Now;
-            return lastData;
+            _lastData = instanceList.OrderBy(x => x.Name).ToList();
+            _lastFetch = DateTime.Now;
+            return _lastData;
         }
 
 
-        public static class AWSConnectionData
+        public static class AwsConnectionData
         {
-            private static readonly RegistryKey key = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\mRemoteAWSInterface");
+            private static readonly RegistryKey Key = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\mRemoteAWSInterface");
 
-            public static string awsKeyID = "";
-            public static string awsKey = "";
+            public static string AwsKeyId = "";
+            public static string AwsKey = "";
             //public static string _region = "eu-central-1";
 
             public static void Init()
             {
-                if (awsKey != "")
+                if (AwsKey != "")
                     return;
                 // display gui and ask for data
-                AWSConnectionForm f = new();
-                f.tbAccesKeyID.Text = "" + key.GetValue("KeyID");
-                f.tbAccesKey.Text = "" + key.GetValue("Key");
+                AwsConnectionForm f = new();
+                f.tbAccesKeyID.Text = "" + Key.GetValue("KeyID");
+                f.tbAccesKey.Text = "" + Key.GetValue("Key");
                 //f.tbRegion.Text = "" + key.GetValue("Region");
                 //if (f.tbRegion.Text == null || f.tbRegion.Text.Length < 2)
                 //    f.tbRegion.Text = region;
@@ -102,16 +102,16 @@ namespace ExternalConnectors.AWS
                     return;
 
                 // store values to memory
-                awsKeyID = f.tbAccesKeyID.Text;
-                awsKey = f.tbAccesKey.Text;
+                AwsKeyId = f.tbAccesKeyID.Text;
+                AwsKey = f.tbAccesKey.Text;
                 //region = f.tbRegion.Text;
 
 
                 // write values to registry
-                key.SetValue("KeyID", awsKeyID);
-                key.SetValue("Key", awsKey);
+                Key.SetValue("KeyID", AwsKeyId);
+                Key.SetValue("Key", AwsKey);
                 //key.SetValue("Region", region);
-                key.Close();
+                Key.Close();
             }
         }
 

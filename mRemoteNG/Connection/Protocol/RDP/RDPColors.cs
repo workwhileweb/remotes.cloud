@@ -3,7 +3,7 @@ using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.Connection.Protocol.RDP
 {
-    public enum RDPColors
+    public enum RdpColors
     {
         [LocalizedAttributes.LocalizedDescription(nameof(Language.Rdp256Colors))]
         Colors256 = 8,

@@ -12,14 +12,14 @@ namespace mRemoteNG.UI.Controls
 
         public MrngGroupBox()
         {
-            ThemeManager.getInstance().ThemeChanged += OnCreateControl;
+            ThemeManager.GetInstance().ThemeChanged += OnCreateControl;
         }
 
 
         protected override void OnCreateControl()
         {
             base.OnCreateControl();
-            _themeManager = ThemeManager.getInstance();
+            _themeManager = ThemeManager.GetInstance();
             if (_themeManager.ThemingActive)
             {
                 Invalidate();
@@ -35,15 +35,15 @@ namespace mRemoteNG.UI.Controls
             }
 
             //Reusing the textbox colors
-            var titleColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("GroupBox_Foreground");
+            var titleColor = _themeManager.ActiveTheme.ExtendedPalette.GetColor("GroupBox_Foreground");
             //var backColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("GroupBox_Backgorund");
-            var lineColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("GroupBox_Line");
+            var lineColor = _themeManager.ActiveTheme.ExtendedPalette.GetColor("GroupBox_Line");
 
             if (!Enabled)
             {
-                titleColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("GroupBox_Disabled_Foreground");
+                titleColor = _themeManager.ActiveTheme.ExtendedPalette.GetColor("GroupBox_Disabled_Foreground");
                 //backColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("GroupBox_Disabled_Background");
-                lineColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("GroupBox_Disabled_Line");
+                lineColor = _themeManager.ActiveTheme.ExtendedPalette.GetColor("GroupBox_Disabled_Line");
             }
 
 

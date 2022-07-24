@@ -94,7 +94,7 @@ namespace mRemoteNGTests.Config
         public void CredentialMapCorrectForSingleCredential()
         {
             var connection = new ConnectionInfo { Username = "myuser", Domain = "somedomain", Password = "mypass" };
-            var connectionGuid = Guid.Parse(connection.ConstantID);
+            var connectionGuid = Guid.Parse(connection.ConstantId);
             var xdoc = CreateTestData(connection);
             _credentialHarvester.Harvest(xdoc, _key);
             var map = _credentialHarvester.ConnectionToCredentialMap;
@@ -109,8 +109,8 @@ namespace mRemoteNGTests.Config
             var con2 = new ConnectionInfo { Username = "something" };
             container.AddChildRange(new[] { con1, con2 });
             var xdoc = CreateTestData(container);
-            var con1Id = Guid.Parse(con1.ConstantID);
-            var con2Id = Guid.Parse(con2.ConstantID);
+            var con1Id = Guid.Parse(con1.ConstantId);
+            var con2Id = Guid.Parse(con2.ConstantId);
             _credentialHarvester.Harvest(xdoc, _key);
             var map = _credentialHarvester.ConnectionToCredentialMap;
             Assert.That(map[con1Id], Is.EqualTo(map[con2Id]));

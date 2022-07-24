@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace mRemoteNG.Config.DatabaseConnectors
 {
-    public class MSSqlDatabaseConnector : IDatabaseConnector
+    public class MsSqlDatabaseConnector : IDatabaseConnector
     {
         private DbConnection _dbConnection { get; set; } = default(SqlConnection);
         private string _dbConnectionString = "";
@@ -28,7 +28,7 @@ namespace mRemoteNG.Config.DatabaseConnectors
 
         public bool IsConnected => (_dbConnection.State == ConnectionState.Open);
 
-        public MSSqlDatabaseConnector(string sqlServer, string catalog, string username, string password)
+        public MsSqlDatabaseConnector(string sqlServer, string catalog, string username, string password)
         {
             _dbHost = sqlServer;
             _dbCatalog = catalog;
@@ -54,11 +54,11 @@ namespace mRemoteNG.Config.DatabaseConnectors
         private void BuildDbConnectionStringWithCustomCredentials()
         {
             var hostParts = _dbHost.Split(new char[] { ':' }, 2);
-            var _dbPort = (hostParts.Length == 2) ? hostParts[1] : "1433";
+            var dbPort = (hostParts.Length == 2) ? hostParts[1] : "1433";
 
             _dbConnectionString = new SqlConnectionStringBuilder
             {
-                DataSource = $"{hostParts[0]},{_dbPort}",
+                DataSource = $"{hostParts[0]},{dbPort}",
                 InitialCatalog = _dbCatalog,
                 UserID = _dbUsername,
                 Password = _dbPassword,

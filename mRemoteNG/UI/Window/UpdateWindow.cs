@@ -40,20 +40,20 @@ namespace mRemoteNG.UI.Window
         private async void Update_Load(object sender, EventArgs e)
         {
             ApplyTheme();
-            ThemeManager.getInstance().ThemeChanged += ApplyTheme;
+            ThemeManager.GetInstance().ThemeChanged += ApplyTheme;
             ApplyLanguage();
             await CheckForUpdateAsync();
         }
 
         private new void ApplyTheme()
         {
-            if (!ThemeManager.getInstance().ActiveAndExtended) return;
+            if (!ThemeManager.GetInstance().ActiveAndExtended) return;
 
             base.ApplyTheme();
             txtChangeLog.BackColor =
-                ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+                ThemeManager.GetInstance().ActiveTheme.ExtendedPalette.GetColor("Dialog_Background");
             txtChangeLog.ForeColor =
-                ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+                ThemeManager.GetInstance().ActiveTheme.ExtendedPalette.GetColor("Dialog_Foreground");
         }
 
         private void ApplyLanguage()

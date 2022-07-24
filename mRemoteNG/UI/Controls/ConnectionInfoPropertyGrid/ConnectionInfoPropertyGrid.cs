@@ -149,10 +149,10 @@ namespace mRemoteNG.UI.Controls.ConnectionInfoPropertyGrid
                     // ReSharper disable once SwitchStatementMissingSomeCases
                     switch (SelectedConnectionInfo.Protocol)
                     {
-                        case ProtocolType.RDP:
+                        case ProtocolType.Rdp:
                             strHide.AddRange(SpecialRdpExclusions());
                             break;
-                        case ProtocolType.VNC:
+                        case ProtocolType.Vnc:
                             strHide.AddRange(SpecialVncExclusions());
                             break;
                     }
@@ -209,34 +209,34 @@ namespace mRemoteNG.UI.Controls.ConnectionInfoPropertyGrid
         {
             var strHide = new List<string>();
 
-            if (SelectedConnectionInfo.RDPMinutesToIdleTimeout <= 0)
+            if (SelectedConnectionInfo.RdpMinutesToIdleTimeout <= 0)
             {
-                strHide.Add(nameof(AbstractConnectionRecord.RDPAlertIdleTimeout));
+                strHide.Add(nameof(AbstractConnectionRecord.RdpAlertIdleTimeout));
             }
 
-            if (SelectedConnectionInfo.RDGatewayUsageMethod == RDGatewayUsageMethod.Never)
+            if (SelectedConnectionInfo.RdGatewayUsageMethod == RdGatewayUsageMethod.Never)
             {
-                strHide.Add(nameof(AbstractConnectionRecord.RDGatewayDomain));
-                strHide.Add(nameof(AbstractConnectionRecord.RDGatewayHostname));
-                strHide.Add(nameof(AbstractConnectionRecord.RDGatewayPassword));
-                strHide.Add(nameof(AbstractConnectionRecord.RDGatewayUseConnectionCredentials));
-                strHide.Add(nameof(AbstractConnectionRecord.RDGatewayUsername));
+                strHide.Add(nameof(AbstractConnectionRecord.RdGatewayDomain));
+                strHide.Add(nameof(AbstractConnectionRecord.RdGatewayHostname));
+                strHide.Add(nameof(AbstractConnectionRecord.RdGatewayPassword));
+                strHide.Add(nameof(AbstractConnectionRecord.RdGatewayUseConnectionCredentials));
+                strHide.Add(nameof(AbstractConnectionRecord.RdGatewayUsername));
             }
-            else if (SelectedConnectionInfo.RDGatewayUseConnectionCredentials ==
-                     RDGatewayUseConnectionCredentials.Yes)
+            else if (SelectedConnectionInfo.RdGatewayUseConnectionCredentials ==
+                     RdGatewayUseConnectionCredentials.Yes)
             {
-                strHide.Add(nameof(AbstractConnectionRecord.RDGatewayDomain));
-                strHide.Add(nameof(AbstractConnectionRecord.RDGatewayPassword));
-                strHide.Add(nameof(AbstractConnectionRecord.RDGatewayUsername));
+                strHide.Add(nameof(AbstractConnectionRecord.RdGatewayDomain));
+                strHide.Add(nameof(AbstractConnectionRecord.RdGatewayPassword));
+                strHide.Add(nameof(AbstractConnectionRecord.RdGatewayUsername));
             }
 
-            if (!(SelectedConnectionInfo.Resolution == RDPResolutions.FitToWindow ||
-                  SelectedConnectionInfo.Resolution == RDPResolutions.Fullscreen))
+            if (!(SelectedConnectionInfo.Resolution == RdpResolutions.FitToWindow ||
+                  SelectedConnectionInfo.Resolution == RdpResolutions.Fullscreen))
             {
                 strHide.Add(nameof(AbstractConnectionRecord.AutomaticResize));
             }
 
-            if (SelectedConnectionInfo.RedirectSound != RDPSounds.BringToThisComputer)
+            if (SelectedConnectionInfo.RedirectSound != RdpSounds.BringToThisComputer)
             {
                 strHide.Add(nameof(AbstractConnectionRecord.SoundQuality));
             }
@@ -253,18 +253,18 @@ namespace mRemoteNG.UI.Controls.ConnectionInfoPropertyGrid
         private List<string> SpecialVncExclusions()
         {
             var strHide = new List<string>();
-            if (SelectedConnectionInfo.VNCAuthMode == ProtocolVNC.AuthMode.AuthVNC)
+            if (SelectedConnectionInfo.VncAuthMode == ProtocolVnc.AuthMode.AuthVnc)
             {
                 strHide.Add(nameof(AbstractConnectionRecord.Username));
                 strHide.Add(nameof(AbstractConnectionRecord.Domain));
             }
 
-            if (SelectedConnectionInfo.VNCProxyType == ProtocolVNC.ProxyType.ProxyNone)
+            if (SelectedConnectionInfo.VncProxyType == ProtocolVnc.ProxyType.ProxyNone)
             {
-                strHide.Add(nameof(AbstractConnectionRecord.VNCProxyIP));
-                strHide.Add(nameof(AbstractConnectionRecord.VNCProxyPassword));
-                strHide.Add(nameof(AbstractConnectionRecord.VNCProxyPort));
-                strHide.Add(nameof(AbstractConnectionRecord.VNCProxyUsername));
+                strHide.Add(nameof(AbstractConnectionRecord.VncProxyIp));
+                strHide.Add(nameof(AbstractConnectionRecord.VncProxyPassword));
+                strHide.Add(nameof(AbstractConnectionRecord.VncProxyPort));
+                strHide.Add(nameof(AbstractConnectionRecord.VncProxyUsername));
             }
 
             return strHide;

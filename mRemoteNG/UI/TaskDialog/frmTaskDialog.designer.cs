@@ -2,7 +2,7 @@
 
 namespace mRemoteNG.UI.TaskDialog
 {
-  partial class frmTaskDialog
+  partial class FrmTaskDialog
   {
     /// <summary>
     /// Required designer variable.
@@ -34,7 +34,7 @@ namespace mRemoteNG.UI.TaskDialog
     private void InitializeComponent()
     {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmTaskDialog));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmTaskDialog));
             this.imgMain = new System.Windows.Forms.PictureBox();
             this.pnlButtons = new System.Windows.Forms.Panel();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
@@ -198,7 +198,7 @@ namespace mRemoteNG.UI.TaskDialog
             // 
             // bt1
             // 
-            this.bt1._mice = MrngButton.MouseState.HOVER;
+            this.bt1.Mice = MrngButton.MouseState.Hover;
             this.bt1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.bt1.Location = new System.Drawing.Point(218, 8);
             this.bt1.Name = "bt1";
@@ -208,7 +208,7 @@ namespace mRemoteNG.UI.TaskDialog
             // 
             // bt2
             // 
-            this.bt2._mice = MrngButton.MouseState.HOVER;
+            this.bt2.Mice = MrngButton.MouseState.Hover;
             this.bt2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.bt2.Location = new System.Drawing.Point(299, 8);
             this.bt2.Name = "bt2";
@@ -218,7 +218,7 @@ namespace mRemoteNG.UI.TaskDialog
             // 
             // bt3
             // 
-            this.bt3._mice = MrngButton.MouseState.HOVER;
+            this.bt3.Mice = MrngButton.MouseState.Hover;
             this.bt3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.bt3.Location = new System.Drawing.Point(380, 8);
             this.bt3.Name = "bt3";
@@ -228,7 +228,7 @@ namespace mRemoteNG.UI.TaskDialog
             // 
             // cbVerify
             // 
-            this.cbVerify._mice = MrngCheckBox.MouseState.HOVER;
+            this.cbVerify.Mice = MrngCheckBox.MouseState.Hover;
             this.cbVerify.AutoSize = true;
             this.cbVerify.Location = new System.Drawing.Point(13, 34);
             this.cbVerify.Name = "cbVerify";
@@ -300,7 +300,7 @@ namespace mRemoteNG.UI.TaskDialog
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "frmTaskDialog";
+            this.Name = "FrmTaskDialog";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmTaskDialog";

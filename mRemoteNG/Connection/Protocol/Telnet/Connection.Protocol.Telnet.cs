@@ -4,7 +4,7 @@
     {
         public ProtocolTelnet()
         {
-            PuttyProtocol = Putty_Protocol.telnet;
+            PuttyProtocol = PuttyBase.PuttyProtocols.Telnet;
         }
 
         public enum Defaults

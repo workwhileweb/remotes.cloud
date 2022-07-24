@@ -81,7 +81,7 @@ namespace mRemoteNG.Config.Connections
             rootNode
                 .GetRecursiveChildList()
                 .Join(localConnectionProperties,
-                      con => con.ConstantID,
+                      con => con.ConstantId,
                       locals => locals.ConnectionId,
                       (con, locals) => new {Connection = con, LocalProperties = locals})
                 .ForEach(x =>

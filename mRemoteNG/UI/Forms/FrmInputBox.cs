@@ -6,7 +6,7 @@ namespace mRemoteNG.UI.Forms
 {
     public sealed partial class FrmInputBox : Form
     {
-        internal string returnValue;
+        internal string ReturnValue;
 
         public FrmInputBox(string title, string promptText, string value)
         {
@@ -27,16 +27,16 @@ namespace mRemoteNG.UI.Forms
 
         private void ApplyTheme()
         {
-            var _themeManager = ThemeManager.getInstance();
-            if (!_themeManager.ActiveAndExtended) return;
-            BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-            ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            var themeManager = ThemeManager.GetInstance();
+            if (!themeManager.ActiveAndExtended) return;
+            BackColor = themeManager.ActiveTheme.ExtendedPalette.GetColor("Dialog_Background");
+            ForeColor = themeManager.ActiveTheme.ExtendedPalette.GetColor("Dialog_Foreground");
         }
 
         private void _Ok_Click(object sender, System.EventArgs e)
         {
             DialogResult = DialogResult.OK;
-            returnValue = textBox.Text;
+            ReturnValue = textBox.Text;
             Close();
         }
 

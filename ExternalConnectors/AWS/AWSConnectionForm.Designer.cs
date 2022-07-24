@@ -1,6 +1,6 @@
 ﻿namespace ExternalConnectors.AWS
 {
-    partial class AWSConnectionForm
+    partial class AwsConnectionForm
     {
         /// <summary>
         /// Required designer variable.
@@ -156,7 +156,7 @@
             this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.Name = "AWSConnectionForm";
+            this.Name = "AwsConnectionForm";
             this.Text = "AWS EC2 API Login Data";
             this.Activated += new System.EventHandler(this.AWSConnectionForm_Activated);
             this.tableLayoutPanel1.ResumeLayout(false);

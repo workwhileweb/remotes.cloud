@@ -16,7 +16,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         private readonly ThemeManager _themeManager;
         private readonly bool _oriActiveTheming;
-        private readonly List<ThemeInfo> modifiedThemes = new();
+        private readonly List<ThemeInfo> _modifiedThemes = new();
 
         #endregion
 
@@ -24,9 +24,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             InitializeComponent();
             PageIcon = Resources.ImageConverter.GetImageAsIcon(Properties.Resources.AppearanceEditor_16x);
-            _themeManager = ThemeManager.getInstance();
+            _themeManager = ThemeManager.GetInstance();
             if (!_themeManager.ThemingActive) return;
-            _themeManager = ThemeManager.getInstance();
+            _themeManager = ThemeManager.GetInstance();
             _themeManager.ThemeChanged += ApplyTheme;
             _oriActiveTheming = _themeManager.ThemingActive;
         }
@@ -95,9 +95,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                 }
             }
 
-            foreach (var updatedTheme in modifiedThemes)
+            foreach (var updatedTheme in _modifiedThemes)
             {
-                _themeManager.updateTheme(updatedTheme);
+                _themeManager.UpdateTheme(updatedTheme);
             }
         }
 
@@ -162,11 +162,11 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             };
 
             if (colorDlg.ShowDialog() != DialogResult.OK) return;
-            modifiedThemes.Add(_themeManager.ActiveTheme);
-            _themeManager.ActiveTheme.ExtendedPalette.replaceColor(colorElem.Key, colorDlg.Color);
+            _modifiedThemes.Add(_themeManager.ActiveTheme);
+            _themeManager.ActiveTheme.ExtendedPalette.ReplaceColor(colorElem.Key, colorDlg.Color);
             colorElem.Value = colorDlg.Color;
             listPalette.RefreshObject(e.Model);
-            _themeManager.refreshUI();
+            _themeManager.RefreshUi();
         }
 
         private void ColorMeList(ThemeInfo ti)
@@ -183,9 +183,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             {
                 var dr = frmInputBox.ShowDialog();
                 if (dr != DialogResult.OK) return;
-                if (_themeManager.isThemeNameOk(frmInputBox.returnValue))
+                if (_themeManager.IsThemeNameOk(frmInputBox.ReturnValue))
                 {
-                    var addedTheme = _themeManager.addTheme(_themeManager.ActiveTheme, frmInputBox.returnValue);
+                    var addedTheme = _themeManager.AddTheme(_themeManager.ActiveTheme, frmInputBox.ReturnValue);
                     _themeManager.ActiveTheme = addedTheme;
                     LoadSettings();
                 }
@@ -206,9 +206,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                                                     ESysIcons.Question, ESysIcons.Information, 0);
 
             if (res != DialogResult.Yes) return;
-            if (modifiedThemes.Contains(_themeManager.ActiveTheme))
-                modifiedThemes.Remove(_themeManager.ActiveTheme);
-            _themeManager.deleteTheme(_themeManager.ActiveTheme);
+            if (_modifiedThemes.Contains(_themeManager.ActiveTheme))
+                _modifiedThemes.Remove(_themeManager.ActiveTheme);
+            _themeManager.DeleteTheme(_themeManager.ActiveTheme);
             LoadSettings();
         }
 

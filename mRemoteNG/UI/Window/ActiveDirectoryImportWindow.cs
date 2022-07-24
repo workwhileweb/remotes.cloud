@@ -33,11 +33,11 @@ namespace mRemoteNG.UI.Window
 
         private new void ApplyTheme()
         {
-            if (!ThemeManager.getInstance().ThemingActive) return;
+            if (!ThemeManager.GetInstance().ThemingActive) return;
             base.ApplyTheme();
-            if (!ThemeManager.getInstance().ActiveAndExtended) return;
-            activeDirectoryTree.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("List_Background");
-            activeDirectoryTree.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("List_Item_Foreground");
+            if (!ThemeManager.GetInstance().ActiveAndExtended) return;
+            activeDirectoryTree.BackColor = ThemeManager.GetInstance().ActiveTheme.ExtendedPalette.GetColor("List_Background");
+            activeDirectoryTree.ForeColor = ThemeManager.GetInstance().ActiveTheme.ExtendedPalette.GetColor("List_Item_Foreground");
         }
 
         private void BtnImport_Click(object sender, EventArgs e)

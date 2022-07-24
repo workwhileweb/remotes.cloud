@@ -43,7 +43,7 @@ namespace mRemoteNG.Config.DataProviders
 
             if (!DatabaseConnector.IsConnected)
                 OpenConnection();
-            if (DatabaseConnector.GetType() == typeof(MSSqlDatabaseConnector))
+            if (DatabaseConnector.GetType() == typeof(MsSqlDatabaseConnector))
             {
                 var sqlConnection = (SqlConnection)DatabaseConnector.DbConnection();
                 using (var transaction = sqlConnection.BeginTransaction(IsolationLevel.Serializable))

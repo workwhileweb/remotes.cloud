@@ -15,17 +15,17 @@ namespace mRemoteNG.UI.Controls
 
         public MrngLabel()
         {
-            ThemeManager.getInstance().ThemeChanged += OnCreateControl;
+            ThemeManager.GetInstance().ThemeChanged += OnCreateControl;
         }
 
         protected override void OnCreateControl()
         {
             base.OnCreateControl();
-            _themeManager = ThemeManager.getInstance();
+            _themeManager = ThemeManager.GetInstance();
             if (!_themeManager.ActiveAndExtended) return;
             // Use the Dialog_* colors since Labels generally have the same colors as panels/dialogs/windows/etc...
-            BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-            ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            BackColor = _themeManager.ActiveTheme.ExtendedPalette.GetColor("Dialog_Background");
+            ForeColor = _themeManager.ActiveTheme.ExtendedPalette.GetColor("Dialog_Foreground");
             FontOverrider.FontOverride(this);
             BuildTextFormatFlags();
             Invalidate();
@@ -91,7 +91,7 @@ namespace mRemoteNG.UI.Controls
             else
             {
                 var disabledtextLabel =
-                    _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Disabled_Foreground");
+                    _themeManager.ActiveTheme.ExtendedPalette.GetColor("TextBox_Disabled_Foreground");
                 TextRenderer.DrawText(e.Graphics, Text, Font, ClientRectangle, disabledtextLabel, _textFormatFlags);
             }
         }

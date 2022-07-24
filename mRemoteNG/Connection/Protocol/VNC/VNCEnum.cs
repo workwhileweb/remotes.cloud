@@ -34,19 +34,19 @@ namespace mRemoteNG.Connection.Protocol.VNC
     public enum Encoding
     {
         [Description("Raw")] EncRaw,
-        [Description("RRE")] EncRRE,
+        [Description("RRE")] EncRre,
         [Description("CoRRE")] EncCorre,
         [Description("Hextile")] EncHextile,
         [Description("Zlib")] EncZlib,
         [Description("Tight")] EncTight,
         [Description("ZlibHex")] EncZLibHex,
-        [Description("ZRLE")] EncZRLE
+        [Description("ZRLE")] EncZrle
     }
 
     public enum AuthMode
     {
         [LocalizedAttributes.LocalizedDescription(nameof(Language.Vnc))]
-        AuthVNC,
+        AuthVnc,
 
         [LocalizedAttributes.LocalizedDescription(nameof(Language.Windows))]
         AuthWin
@@ -58,7 +58,7 @@ namespace mRemoteNG.Connection.Protocol.VNC
         ProxyNone,
 
         [LocalizedAttributes.LocalizedDescription(nameof(Language.Http))]
-        ProxyHTTP,
+        ProxyHttp,
 
         [LocalizedAttributes.LocalizedDescription(nameof(Language.Socks5))]
         ProxySocks5,

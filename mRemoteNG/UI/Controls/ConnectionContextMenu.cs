@@ -578,7 +578,7 @@ namespace mRemoteNG.UI.Controls
             if (connectionInfo.OpenConnections.Count == 0)
                 _cMenTreeDisconnect.Enabled = false;
 
-            if (!(connectionInfo.Protocol == ProtocolType.SSH1 | connectionInfo.Protocol == ProtocolType.SSH2))
+            if (!(connectionInfo.Protocol == ProtocolType.Ssh1 | connectionInfo.Protocol == ProtocolType.Ssh2))
                 _cMenTreeToolsTransferFile.Enabled = false;
 
             _cMenTreeConnectWithOptionsConnectInFullscreen.Enabled = false;
@@ -601,10 +601,10 @@ namespace mRemoteNG.UI.Controls
             if (connectionInfo.OpenConnections.Count == 0)
                 _cMenTreeDisconnect.Enabled = false;
 
-            if (!(connectionInfo.Protocol == ProtocolType.SSH1 | connectionInfo.Protocol == ProtocolType.SSH2))
+            if (!(connectionInfo.Protocol == ProtocolType.Ssh1 | connectionInfo.Protocol == ProtocolType.Ssh2))
                 _cMenTreeToolsTransferFile.Enabled = false;
 
-            if (!(connectionInfo.Protocol == ProtocolType.RDP))
+            if (!(connectionInfo.Protocol == ProtocolType.Rdp))
             {
                 _cMenTreeConnectWithOptionsConnectInFullscreen.Enabled = false;
                 _cMenTreeConnectWithOptionsConnectToConsoleSession.Enabled = false;
@@ -613,7 +613,7 @@ namespace mRemoteNG.UI.Controls
             if (connectionInfo.Protocol == ProtocolType.IntApp)
                 _cMenTreeConnectWithOptionsNoCredentials.Enabled = false;
 
-            if (connectionInfo.Protocol != ProtocolType.RDP && connectionInfo.Protocol != ProtocolType.VNC)
+            if (connectionInfo.Protocol != ProtocolType.Rdp && connectionInfo.Protocol != ProtocolType.Vnc)
                 _cMenTreeConnectWithOptionsViewOnly.Enabled = false;
 
             _cMenTreeApplyInheritanceToChildren.Enabled = false;
@@ -809,7 +809,7 @@ namespace mRemoteNG.UI.Controls
         {
             try
             {
-                Windows.Show(WindowType.SSHTransfer);
+                Windows.Show(WindowType.SshTransfer);
                 Windows.SshtransferForm.Hostname = _connectionTree.SelectedNode.Hostname;
                 Windows.SshtransferForm.Username = _connectionTree.SelectedNode.Username;
                 Windows.SshtransferForm.Password = _connectionTree.SelectedNode.Password;

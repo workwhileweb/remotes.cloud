@@ -70,7 +70,7 @@ namespace mRemoteNG.UI.Window
         private void Tree_Load(object sender, EventArgs e)
         {
             //work on the theme change
-            _themeManager = ThemeManager.getInstance();
+            _themeManager = ThemeManager.GetInstance();
             _themeManager.ThemeChanged += ApplyTheme;
             ApplyTheme();
 
@@ -109,12 +109,12 @@ namespace mRemoteNG.UI.Window
                 return;
 
             // connection search area
-            searchBoxLayoutPanel.BackColor = activeTheme.ExtendedPalette.getColor("Dialog_Background");
-            searchBoxLayoutPanel.ForeColor = activeTheme.ExtendedPalette.getColor("Dialog_Foreground");
-            txtSearch.BackColor = activeTheme.ExtendedPalette.getColor("TextBox_Background");
-            txtSearch.ForeColor = activeTheme.ExtendedPalette.getColor("TextBox_Foreground");
+            searchBoxLayoutPanel.BackColor = activeTheme.ExtendedPalette.GetColor("Dialog_Background");
+            searchBoxLayoutPanel.ForeColor = activeTheme.ExtendedPalette.GetColor("Dialog_Foreground");
+            txtSearch.BackColor = activeTheme.ExtendedPalette.GetColor("TextBox_Background");
+            txtSearch.ForeColor = activeTheme.ExtendedPalette.GetColor("TextBox_Foreground");
             //Picturebox needs to be manually themed
-            pbSearch.BackColor = activeTheme.ExtendedPalette.getColor("TreeView_Background");
+            pbSearch.BackColor = activeTheme.ExtendedPalette.GetColor("TreeView_Background");
         }
 
         #endregion

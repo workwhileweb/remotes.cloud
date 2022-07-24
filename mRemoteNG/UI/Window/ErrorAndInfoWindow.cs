@@ -34,7 +34,7 @@ namespace mRemoteNG.UI.Window
             InitializeComponent();
             Icon = Resources.ImageConverter.GetImageAsIcon(Properties.Resources.StatusInformation_16x);
             lblMsgDate.Width = _display.ScaleWidth(lblMsgDate.Width);
-            _themeManager = ThemeManager.getInstance();
+            _themeManager = ThemeManager.GetInstance();
             ApplyTheme();
             _themeManager.ThemeChanged += ApplyTheme;
             LayoutVertical();
@@ -64,15 +64,15 @@ namespace mRemoteNG.UI.Window
         private new void ApplyTheme()
         {
             if (!_themeManager.ActiveAndExtended) return;
-            lvErrorCollector.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
-            lvErrorCollector.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
+            lvErrorCollector.BackColor = _themeManager.ActiveTheme.ExtendedPalette.GetColor("TextBox_Background");
+            lvErrorCollector.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.GetColor("TextBox_Foreground");
 
-            pnlErrorMsg.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-            pnlErrorMsg.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
-            txtMsgText.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
-            txtMsgText.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
-            lblMsgDate.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-            lblMsgDate.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            pnlErrorMsg.BackColor = _themeManager.ActiveTheme.ExtendedPalette.GetColor("Dialog_Background");
+            pnlErrorMsg.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.GetColor("Dialog_Foreground");
+            txtMsgText.BackColor = _themeManager.ActiveTheme.ExtendedPalette.GetColor("TextBox_Background");
+            txtMsgText.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.GetColor("TextBox_Foreground");
+            lblMsgDate.BackColor = _themeManager.ActiveTheme.ExtendedPalette.GetColor("Dialog_Background");
+            lblMsgDate.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.GetColor("Dialog_Foreground");
         }
 
         private void FillImageList()
@@ -164,11 +164,11 @@ namespace mRemoteNG.UI.Window
         {
             try
             {
-                pnlErrorMsg.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+                pnlErrorMsg.BackColor = _themeManager.ActiveTheme.ExtendedPalette.GetColor("Dialog_Background");
                 pbError.Image = null;
-                txtMsgText.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
+                txtMsgText.BackColor = _themeManager.ActiveTheme.ExtendedPalette.GetColor("TextBox_Background");
                 txtMsgText.Text = "";
-                lblMsgDate.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+                lblMsgDate.BackColor = _themeManager.ActiveTheme.ExtendedPalette.GetColor("Dialog_Background");
                 lblMsgDate.Text = "";
             }
             catch (Exception ex)
@@ -245,17 +245,17 @@ namespace mRemoteNG.UI.Window
                         {
                             //Inverse colors for dramatic effect
                             pnlErrorMsg.BackColor =
-                                _themeManager.ActiveTheme.ExtendedPalette.getColor("WarningText_Foreground");
+                                _themeManager.ActiveTheme.ExtendedPalette.GetColor("WarningText_Foreground");
                             pnlErrorMsg.ForeColor =
-                                _themeManager.ActiveTheme.ExtendedPalette.getColor("WarningText_Background");
+                                _themeManager.ActiveTheme.ExtendedPalette.GetColor("WarningText_Background");
                             txtMsgText.BackColor =
-                                _themeManager.ActiveTheme.ExtendedPalette.getColor("WarningText_Foreground");
+                                _themeManager.ActiveTheme.ExtendedPalette.GetColor("WarningText_Foreground");
                             txtMsgText.ForeColor =
-                                _themeManager.ActiveTheme.ExtendedPalette.getColor("WarningText_Background");
+                                _themeManager.ActiveTheme.ExtendedPalette.GetColor("WarningText_Background");
                             lblMsgDate.BackColor =
-                                _themeManager.ActiveTheme.ExtendedPalette.getColor("WarningText_Foreground");
+                                _themeManager.ActiveTheme.ExtendedPalette.GetColor("WarningText_Foreground");
                             lblMsgDate.ForeColor =
-                                _themeManager.ActiveTheme.ExtendedPalette.getColor("WarningText_Background");
+                                _themeManager.ActiveTheme.ExtendedPalette.GetColor("WarningText_Background");
                         }
 
                         break;
@@ -264,17 +264,17 @@ namespace mRemoteNG.UI.Window
                         if (_themeManager.ActiveAndExtended)
                         {
                             pnlErrorMsg.BackColor =
-                                _themeManager.ActiveTheme.ExtendedPalette.getColor("ErrorText_Foreground");
+                                _themeManager.ActiveTheme.ExtendedPalette.GetColor("ErrorText_Foreground");
                             pnlErrorMsg.ForeColor =
-                                _themeManager.ActiveTheme.ExtendedPalette.getColor("ErrorText_Background");
+                                _themeManager.ActiveTheme.ExtendedPalette.GetColor("ErrorText_Background");
                             txtMsgText.BackColor =
-                                _themeManager.ActiveTheme.ExtendedPalette.getColor("ErrorText_Foreground");
+                                _themeManager.ActiveTheme.ExtendedPalette.GetColor("ErrorText_Foreground");
                             txtMsgText.ForeColor =
-                                _themeManager.ActiveTheme.ExtendedPalette.getColor("ErrorText_Background");
+                                _themeManager.ActiveTheme.ExtendedPalette.GetColor("ErrorText_Background");
                             lblMsgDate.BackColor =
-                                _themeManager.ActiveTheme.ExtendedPalette.getColor("ErrorText_Foreground");
+                                _themeManager.ActiveTheme.ExtendedPalette.GetColor("ErrorText_Foreground");
                             lblMsgDate.ForeColor =
-                                _themeManager.ActiveTheme.ExtendedPalette.getColor("ErrorText_Background");
+                                _themeManager.ActiveTheme.ExtendedPalette.GetColor("ErrorText_Background");
                         }
 
                         break;

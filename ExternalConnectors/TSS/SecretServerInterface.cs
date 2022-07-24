@@ -6,33 +6,33 @@ namespace ExternalConnectors.TSS
 {
     public class SecretServerInterface
     {
-        private static class SSConnectionData
+        private static class SsConnectionData
         {
-            public static string ssUsername = "";
-            public static string ssPassword = "";
-            public static string ssUrl = "";
-            public static string ssOTP = "";
-            public static bool ssSSO = false;
-            public static bool initdone = false;
+            public static string SsUsername = "";
+            public static string SsPassword = "";
+            public static string SsUrl = "";
+            public static string SsOtp = "";
+            public static bool SsSso = false;
+            public static bool Initdone = false;
 
             //token 
-            public static string ssTokenBearer = "";
-            public static DateTime ssTokenExpiresOn = DateTime.UtcNow;
-            public static string ssTokenRefresh = "";
+            public static string SsTokenBearer = "";
+            public static DateTime SsTokenExpiresOn = DateTime.UtcNow;
+            public static string SsTokenRefresh = "";
 
             public static void Init()
             {
-                if (initdone == true)
+                if (Initdone == true)
                     return;
 
                 var key = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\mRemoteSSInterface");
                 try
                 {
                     // display gui and ask for data
-                    var f = new SSConnectionForm();
+                    var f = new SsConnectionForm();
                     var un = key.GetValue("Username") as string;
                     f.tbUsername.Text = un ?? "";
-                    f.tbPassword.Text = ssPassword;    // in OTP refresh cases, this value might already be filled
+                    f.tbPassword.Text = SsPassword;    // in OTP refresh cases, this value might already be filled
 
                     if (key.GetValue("URL") is not string url || !url.Contains("://"))
                         url = "https://cred.domain.local/SecretServer";
@@ -40,10 +40,10 @@ namespace ExternalConnectors.TSS
 
                     var b = key.GetValue("SSO");
                     if (b == null || (string)b != "True")
-                        ssSSO = false;
+                        SsSso = false;
                     else
-                        ssSSO = true;
-                    f.cbUseSSO.Checked = ssSSO;
+                        SsSso = true;
+                    f.cbUseSSO.Checked = SsSso;
                     
                     // show dialog
                     while (true)
@@ -54,17 +54,17 @@ namespace ExternalConnectors.TSS
                             return;
 
                         // store values to memory
-                        ssUsername = f.tbUsername.Text;
-                        ssPassword = f.tbPassword.Text;
-                        ssUrl = f.tbSSURL.Text;
-                        ssSSO = f.cbUseSSO.Checked;
-                        ssOTP = f.tbOTP.Text;
+                        SsUsername = f.tbUsername.Text;
+                        SsPassword = f.tbPassword.Text;
+                        SsUrl = f.tbSSURL.Text;
+                        SsSso = f.cbUseSSO.Checked;
+                        SsOtp = f.tbOTP.Text;
                         // check connection first
                         try
                         {
                             if (TestCredentials() == true)
                             {
-                                initdone = true;
+                                Initdone = true;
                                 break;
                             }
                         }
@@ -76,9 +76,9 @@ namespace ExternalConnectors.TSS
 
 
                     // write values to registry
-                    key.SetValue("Username", ssUsername);
-                    key.SetValue("URL", ssUrl);
-                    key.SetValue("SSO", ssSSO);
+                    key.SetValue("Username", SsUsername);
+                    key.SetValue("URL", SsUrl);
+                    key.SetValue("SSO", SsSso);
                 }
                 catch (Exception)
                 {
@@ -94,7 +94,7 @@ namespace ExternalConnectors.TSS
 
         private static bool TestCredentials()
         {
-            if (SSConnectionData.ssSSO)
+            if (SsConnectionData.SsSso)
             {
                 // checking creds doesn't really make sense here, as we can't modify them anyway if something is wrong
                 return true;
@@ -113,20 +113,20 @@ namespace ExternalConnectors.TSS
             }
         }
 
-        private static void FetchSecret(int secretID, out string secretUsername, out string secretPassword, out string secretDomain)
+        private static void FetchSecret(int secretId, out string secretUsername, out string secretPassword, out string secretDomain)
         {
-            var baseURL = SSConnectionData.ssUrl;
+            var baseUrl = SsConnectionData.SsUrl;
 
             SecretModel secret;
-            if (SSConnectionData.ssSSO)
+            if (SsConnectionData.SsSso)
             {
                 // REQUIRES IIS CONFIG! https://docs.thycotic.com/ss/11.0.0/api-scripting/webservice-iwa-powershell
                 var handler = new HttpClientHandler() { UseDefaultCredentials = true };
                 using (var httpClient = new HttpClient(handler))
                 {
                     // Call REST API:
-                    var client = new SecretsServiceClient($"{baseURL}/winauthwebservices/api", httpClient);
-                    secret = client.GetSecretAsync(false, true, secretID, null).Result;
+                    var client = new SecretsServiceClient($"{baseUrl}/winauthwebservices/api", httpClient);
+                    secret = client.GetSecretAsync(false, true, secretId, null).Result;
                 }
             }
             else
@@ -139,8 +139,8 @@ namespace ExternalConnectors.TSS
                     httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
                     // Call REST API:
-                    var client = new SecretsServiceClient($"{baseURL}/api", httpClient);
-                    secret = client.GetSecretAsync(false, true, secretID, null).Result;
+                    var client = new SecretsServiceClient($"{baseUrl}/api", httpClient);
+                    secret = client.GetSecretAsync(false, true, secretId, null).Result;
                 }
             }
 
@@ -165,46 +165,46 @@ namespace ExternalConnectors.TSS
         private static string GetToken()
         {
             // if there is no token, fetch a fresh one
-            if (String.IsNullOrEmpty(SSConnectionData.ssTokenBearer))
+            if (String.IsNullOrEmpty(SsConnectionData.SsTokenBearer))
             {
                 return GetTokenFresh();
             }
             // if there is a token, check if it is valid
-            if (SSConnectionData.ssTokenExpiresOn >= DateTime.UtcNow)
+            if (SsConnectionData.SsTokenExpiresOn >= DateTime.UtcNow)
             {
-                return SSConnectionData.ssTokenBearer;
+                return SsConnectionData.SsTokenBearer;
             }
             else
             {
                 // try using refresh token
                 using (var httpClient = new HttpClient())
                 {
-                    var tokenClient = new OAuth2ServiceClient(SSConnectionData.ssUrl, httpClient);
+                    var tokenClient = new OAuth2ServiceClient(SsConnectionData.SsUrl, httpClient);
                     TokenResponse token = new();
                     try
                     {
-                        token = tokenClient.AuthorizeAsync(Grant_type.Refresh_token, null, null, SSConnectionData.ssTokenRefresh, null).Result;
+                        token = tokenClient.AuthorizeAsync(Grant_type.Refresh_token, null, null, SsConnectionData.SsTokenRefresh, null).Result;
                         var tokenResult = token.Access_token;
 
-                        SSConnectionData.ssTokenBearer = tokenResult;
-                        SSConnectionData.ssTokenRefresh = token.Refresh_token;
-                        SSConnectionData.ssTokenExpiresOn = token.Expires_on;
+                        SsConnectionData.SsTokenBearer = tokenResult;
+                        SsConnectionData.SsTokenRefresh = token.Refresh_token;
+                        SsConnectionData.SsTokenExpiresOn = token.Expires_on;
                         return tokenResult;
                     }
                     catch (Exception)
                     {
                         // refresh token failed. clean memory and start fresh
-                        SSConnectionData.ssTokenBearer = "";
-                        SSConnectionData.ssTokenRefresh = "";
-                        SSConnectionData.ssTokenExpiresOn = DateTime.Now;
+                        SsConnectionData.SsTokenBearer = "";
+                        SsConnectionData.SsTokenRefresh = "";
+                        SsConnectionData.SsTokenExpiresOn = DateTime.Now;
                         // if OTP is required we need to ask user for a new OTP
-                        if (!String.IsNullOrEmpty(SSConnectionData.ssOTP))
+                        if (!String.IsNullOrEmpty(SsConnectionData.SsOtp))
                         {
-                            SSConnectionData.initdone = false;
+                            SsConnectionData.Initdone = false;
                             // the call below executes a connection test, which fetches a valid token
-                            SSConnectionData.Init();
+                            SsConnectionData.Init();
                             // we now have a fresh token in memory. return it to caller
-                            return SSConnectionData.ssTokenBearer;
+                            return SsConnectionData.SsTokenBearer;
                         }
                         else
                         {
@@ -220,15 +220,15 @@ namespace ExternalConnectors.TSS
             using (var httpClient = new HttpClient())
             {
                 // Authenticate:
-                var tokenClient = new OAuth2ServiceClient(SSConnectionData.ssUrl, httpClient);
+                var tokenClient = new OAuth2ServiceClient(SsConnectionData.SsUrl, httpClient);
                 // call below will throw an exception if the creds are invalid
-                var token = tokenClient.AuthorizeAsync(Grant_type.Password, SSConnectionData.ssUsername, SSConnectionData.ssPassword, null, SSConnectionData.ssOTP).Result;
+                var token = tokenClient.AuthorizeAsync(Grant_type.Password, SsConnectionData.SsUsername, SsConnectionData.SsPassword, null, SsConnectionData.SsOtp).Result;
                 // here we can be sure the creds are ok - return success state                   
                 var tokenResult = token.Access_token;
 
-                SSConnectionData.ssTokenBearer = tokenResult;
-                SSConnectionData.ssTokenRefresh = token.Refresh_token;
-                SSConnectionData.ssTokenExpiresOn = token.Expires_on;
+                SsConnectionData.SsTokenBearer = tokenResult;
+                SsConnectionData.SsTokenRefresh = token.Refresh_token;
+                SsConnectionData.SsTokenExpiresOn = token.Expires_on;
                 return tokenResult;
             }
         }
@@ -241,13 +241,13 @@ namespace ExternalConnectors.TSS
             // get secret id
             if (!input.StartsWith("SSAPI:"))
                 throw new Exception("calling this function requires SSAPI: input");
-            var secretID = Int32.Parse(input.Substring(6));
+            var secretId = Int32.Parse(input.Substring(6));
 
             // init connection credentials, display popup if necessary
-            SSConnectionData.Init();
+            SsConnectionData.Init();
 
             // get the secret
-            FetchSecret(secretID, out username, out password, out domain);
+            FetchSecret(secretId, out username, out password, out domain);
         }
     }
 }

@@ -16,29 +16,29 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
     {
         private string _connectionFileContents;
         private RemoteDesktopConnectionManagerDeserializer _deserializer;
-        private const string ExpectedName = "server1_displayname";
-        private const string ExpectedHostname = "server1";
-        private const string ExpectedDescription = "Comment text here";
-        private const string ExpectedUsername = "myusername1";
-        private const string ExpectedDomain = "mydomain";
-        private const string ExpectedPassword = "passwordHere!";
-        private const bool ExpectedUseConsoleSession = true;
-        private const int ExpectedPort = 9933;
-        private const RDGatewayUsageMethod ExpectedGatewayUsageMethod = RDGatewayUsageMethod.Always;
-        private const string ExpectedGatewayHostname = "gatewayserverhost.innerdomain.net";
-        private const string ExpectedGatewayUsername = "gatewayusername";
-        private const string ExpectedGatewayDomain = "innerdomain";
-        private const string ExpectedGatewayPassword = "gatewayPassword123";
-        private const RDPResolutions ExpectedRdpResolution = RDPResolutions.FitToWindow;
-        private const RDPColors ExpectedRdpColorDepth = RDPColors.Colors24Bit;
-        private const RDPSounds ExpectedAudioRedirection = RDPSounds.DoNotPlay;
-        private const bool ExpectedKeyRedirection = true;
-        private const bool ExpectedSmartcardRedirection = true;
-        private const bool ExpectedDriveRedirection = true;
-        private const bool ExpectedPortRedirection = true;
-        private const bool ExpectedPrinterRedirection = true;
-        private const AuthenticationLevel ExpectedAuthLevel = AuthenticationLevel.WarnOnFailedAuth;
-        private const string ExpectedStartProgram = "alternate shell";
+        private const string EXPECTED_NAME = "server1_displayname";
+        private const string EXPECTED_HOSTNAME = "server1";
+        private const string EXPECTED_DESCRIPTION = "Comment text here";
+        private const string EXPECTED_USERNAME = "myusername1";
+        private const string EXPECTED_DOMAIN = "mydomain";
+        private const string EXPECTED_PASSWORD = "passwordHere!";
+        private const bool EXPECTED_USE_CONSOLE_SESSION = true;
+        private const int EXPECTED_PORT = 9933;
+        private const RdGatewayUsageMethod EXPECTED_GATEWAY_USAGE_METHOD = RdGatewayUsageMethod.Always;
+        private const string EXPECTED_GATEWAY_HOSTNAME = "gatewayserverhost.innerdomain.net";
+        private const string EXPECTED_GATEWAY_USERNAME = "gatewayusername";
+        private const string EXPECTED_GATEWAY_DOMAIN = "innerdomain";
+        private const string EXPECTED_GATEWAY_PASSWORD = "gatewayPassword123";
+        private const RdpResolutions EXPECTED_RDP_RESOLUTION = RdpResolutions.FitToWindow;
+        private const RdpColors EXPECTED_RDP_COLOR_DEPTH = RdpColors.Colors24Bit;
+        private const RdpSounds EXPECTED_AUDIO_REDIRECTION = RdpSounds.DoNotPlay;
+        private const bool EXPECTED_KEY_REDIRECTION = true;
+        private const bool EXPECTED_SMARTCARD_REDIRECTION = true;
+        private const bool EXPECTED_DRIVE_REDIRECTION = true;
+        private const bool EXPECTED_PORT_REDIRECTION = true;
+        private const bool EXPECTED_PRINTER_REDIRECTION = true;
+        private const AuthenticationLevel EXPECTED_AUTH_LEVEL = AuthenticationLevel.WarnOnFailedAuth;
+        private const string EXPECTED_START_PROGRAM = "alternate shell";
 
         [OneTimeSetUp]
         public void OnetimeSetup()
@@ -143,28 +143,28 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
         {
 	        return new[]
 	        {
-		        new TestCaseData((Func<ConnectionInfo,object>)(con => con.Name), ExpectedName).SetName(nameof(ConnectionInfo.Name)),
-				new TestCaseData((Func<ConnectionInfo,object>)(con => con.Hostname), ExpectedHostname).SetName(nameof(ConnectionInfo.Hostname)),
-				new TestCaseData((Func<ConnectionInfo,object>)(con => con.Description), ExpectedDescription).SetName(nameof(ConnectionInfo.Description)),
-				new TestCaseData((Func<ConnectionInfo,object>)(con => con.Username), ExpectedUsername).SetName(nameof(ConnectionInfo.Username)),
-				new TestCaseData((Func<ConnectionInfo,object>)(con => con.Domain), ExpectedDomain).SetName(nameof(ConnectionInfo.Domain)),
-				new TestCaseData((Func<ConnectionInfo,object>)(con => con.Protocol), ProtocolType.RDP).SetName(nameof(ConnectionInfo.Protocol)),
-				new TestCaseData((Func<ConnectionInfo,object>)(con => con.UseConsoleSession), ExpectedUseConsoleSession).SetName(nameof(ConnectionInfo.UseConsoleSession)),
-				new TestCaseData((Func<ConnectionInfo,object>)(con => con.Port), ExpectedPort).SetName(nameof(ConnectionInfo.Port)),
-				new TestCaseData((Func<ConnectionInfo,object>)(con => con.RDGatewayUsageMethod), ExpectedGatewayUsageMethod).SetName(nameof(ConnectionInfo.RDGatewayUsageMethod)),
-				new TestCaseData((Func<ConnectionInfo,object>)(con => con.RDGatewayHostname), ExpectedGatewayHostname).SetName(nameof(ConnectionInfo.RDGatewayHostname)),
-				new TestCaseData((Func<ConnectionInfo,object>)(con => con.RDGatewayUsername), ExpectedGatewayUsername).SetName(nameof(ConnectionInfo.RDGatewayUsername)),
-				new TestCaseData((Func<ConnectionInfo,object>)(con => con.RDGatewayDomain), ExpectedGatewayDomain).SetName(nameof(ConnectionInfo.RDGatewayDomain)),
-				new TestCaseData((Func<ConnectionInfo,object>)(con => con.Resolution), ExpectedRdpResolution).SetName(nameof(ConnectionInfo.Resolution)),
-				new TestCaseData((Func<ConnectionInfo,object>)(con => con.Colors), ExpectedRdpColorDepth).SetName(nameof(ConnectionInfo.Colors)),
-				new TestCaseData((Func<ConnectionInfo,object>)(con => con.RedirectSound), ExpectedAudioRedirection).SetName(nameof(ConnectionInfo.RedirectSound)),
-				new TestCaseData((Func<ConnectionInfo,object>)(con => con.RedirectKeys), ExpectedKeyRedirection).SetName(nameof(ConnectionInfo.RedirectKeys)),
-		        new TestCaseData((Func<ConnectionInfo,object>)(con => con.RDPAuthenticationLevel), ExpectedAuthLevel).SetName(nameof(ConnectionInfo.RDPAuthenticationLevel)),
-		        new TestCaseData((Func<ConnectionInfo,object>)(con => con.RedirectSmartCards), ExpectedSmartcardRedirection).SetName(nameof(ConnectionInfo.RedirectSmartCards)),
-		        new TestCaseData((Func<ConnectionInfo,object>)(con => con.RedirectPrinters), ExpectedPrinterRedirection).SetName(nameof(ConnectionInfo.RedirectPrinters)),
-		        new TestCaseData((Func<ConnectionInfo,object>)(con => con.RedirectPorts), ExpectedPortRedirection).SetName(nameof(ConnectionInfo.RedirectPorts)),
-		        new TestCaseData((Func<ConnectionInfo,object>)(con => con.RedirectDiskDrives), ExpectedDriveRedirection).SetName(nameof(ConnectionInfo.RedirectDiskDrives)),
-		        new TestCaseData((Func<ConnectionInfo,object>)(con => con.RDPStartProgram), ExpectedStartProgram).SetName(nameof(ConnectionInfo.RDPStartProgram)),
+		        new TestCaseData((Func<ConnectionInfo,object>)(con => con.Name), EXPECTED_NAME).SetName(nameof(ConnectionInfo.Name)),
+				new TestCaseData((Func<ConnectionInfo,object>)(con => con.Hostname), EXPECTED_HOSTNAME).SetName(nameof(ConnectionInfo.Hostname)),
+				new TestCaseData((Func<ConnectionInfo,object>)(con => con.Description), EXPECTED_DESCRIPTION).SetName(nameof(ConnectionInfo.Description)),
+				new TestCaseData((Func<ConnectionInfo,object>)(con => con.Username), EXPECTED_USERNAME).SetName(nameof(ConnectionInfo.Username)),
+				new TestCaseData((Func<ConnectionInfo,object>)(con => con.Domain), EXPECTED_DOMAIN).SetName(nameof(ConnectionInfo.Domain)),
+				new TestCaseData((Func<ConnectionInfo,object>)(con => con.Protocol), ProtocolType.Rdp).SetName(nameof(ConnectionInfo.Protocol)),
+				new TestCaseData((Func<ConnectionInfo,object>)(con => con.UseConsoleSession), EXPECTED_USE_CONSOLE_SESSION).SetName(nameof(ConnectionInfo.UseConsoleSession)),
+				new TestCaseData((Func<ConnectionInfo,object>)(con => con.Port), EXPECTED_PORT).SetName(nameof(ConnectionInfo.Port)),
+				new TestCaseData((Func<ConnectionInfo,object>)(con => con.RdGatewayUsageMethod), EXPECTED_GATEWAY_USAGE_METHOD).SetName(nameof(ConnectionInfo.RdGatewayUsageMethod)),
+				new TestCaseData((Func<ConnectionInfo,object>)(con => con.RdGatewayHostname), EXPECTED_GATEWAY_HOSTNAME).SetName(nameof(ConnectionInfo.RdGatewayHostname)),
+				new TestCaseData((Func<ConnectionInfo,object>)(con => con.RdGatewayUsername), EXPECTED_GATEWAY_USERNAME).SetName(nameof(ConnectionInfo.RdGatewayUsername)),
+				new TestCaseData((Func<ConnectionInfo,object>)(con => con.RdGatewayDomain), EXPECTED_GATEWAY_DOMAIN).SetName(nameof(ConnectionInfo.RdGatewayDomain)),
+				new TestCaseData((Func<ConnectionInfo,object>)(con => con.Resolution), EXPECTED_RDP_RESOLUTION).SetName(nameof(ConnectionInfo.Resolution)),
+				new TestCaseData((Func<ConnectionInfo,object>)(con => con.Colors), EXPECTED_RDP_COLOR_DEPTH).SetName(nameof(ConnectionInfo.Colors)),
+				new TestCaseData((Func<ConnectionInfo,object>)(con => con.RedirectSound), EXPECTED_AUDIO_REDIRECTION).SetName(nameof(ConnectionInfo.RedirectSound)),
+				new TestCaseData((Func<ConnectionInfo,object>)(con => con.RedirectKeys), EXPECTED_KEY_REDIRECTION).SetName(nameof(ConnectionInfo.RedirectKeys)),
+		        new TestCaseData((Func<ConnectionInfo,object>)(con => con.RdpAuthenticationLevel), EXPECTED_AUTH_LEVEL).SetName(nameof(ConnectionInfo.RdpAuthenticationLevel)),
+		        new TestCaseData((Func<ConnectionInfo,object>)(con => con.RedirectSmartCards), EXPECTED_SMARTCARD_REDIRECTION).SetName(nameof(ConnectionInfo.RedirectSmartCards)),
+		        new TestCaseData((Func<ConnectionInfo,object>)(con => con.RedirectPrinters), EXPECTED_PRINTER_REDIRECTION).SetName(nameof(ConnectionInfo.RedirectPrinters)),
+		        new TestCaseData((Func<ConnectionInfo,object>)(con => con.RedirectPorts), EXPECTED_PORT_REDIRECTION).SetName(nameof(ConnectionInfo.RedirectPorts)),
+		        new TestCaseData((Func<ConnectionInfo,object>)(con => con.RedirectDiskDrives), EXPECTED_DRIVE_REDIRECTION).SetName(nameof(ConnectionInfo.RedirectDiskDrives)),
+		        new TestCaseData((Func<ConnectionInfo,object>)(con => con.RdpStartProgram), EXPECTED_START_PROGRAM).SetName(nameof(ConnectionInfo.RdpStartProgram)),
 			};
         }
 
@@ -180,15 +180,15 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
 				new TestCaseData((Func<ConnectionInfo,object>)(con => con.Protocol)).SetName(nameof(ConnectionInfo.Protocol)),
 				new TestCaseData((Func<ConnectionInfo,object>)(con => con.UseConsoleSession)).SetName(nameof(ConnectionInfo.UseConsoleSession)),
 				new TestCaseData((Func<ConnectionInfo,object>)(con => con.Port)).SetName(nameof(ConnectionInfo.Port)),
-				new TestCaseData((Func<ConnectionInfo,object>)(con => con.RDGatewayUsageMethod)).SetName(nameof(ConnectionInfo.RDGatewayUsageMethod)),
-				new TestCaseData((Func<ConnectionInfo,object>)(con => con.RDGatewayHostname)).SetName(nameof(ConnectionInfo.RDGatewayHostname)),
-				new TestCaseData((Func<ConnectionInfo,object>)(con => con.RDGatewayUsername)).SetName(nameof(ConnectionInfo.RDGatewayUsername)),
-				new TestCaseData((Func<ConnectionInfo,object>)(con => con.RDGatewayDomain)).SetName(nameof(ConnectionInfo.RDGatewayDomain)),
+				new TestCaseData((Func<ConnectionInfo,object>)(con => con.RdGatewayUsageMethod)).SetName(nameof(ConnectionInfo.RdGatewayUsageMethod)),
+				new TestCaseData((Func<ConnectionInfo,object>)(con => con.RdGatewayHostname)).SetName(nameof(ConnectionInfo.RdGatewayHostname)),
+				new TestCaseData((Func<ConnectionInfo,object>)(con => con.RdGatewayUsername)).SetName(nameof(ConnectionInfo.RdGatewayUsername)),
+				new TestCaseData((Func<ConnectionInfo,object>)(con => con.RdGatewayDomain)).SetName(nameof(ConnectionInfo.RdGatewayDomain)),
 				new TestCaseData((Func<ConnectionInfo,object>)(con => con.Resolution)).SetName(nameof(ConnectionInfo.Resolution)),
 				new TestCaseData((Func<ConnectionInfo,object>)(con => con.Colors)).SetName(nameof(ConnectionInfo.Colors)),
 				new TestCaseData((Func<ConnectionInfo,object>)(con => con.RedirectSound)).SetName(nameof(ConnectionInfo.RedirectSound)),
 				new TestCaseData((Func<ConnectionInfo,object>)(con => con.RedirectKeys)).SetName(nameof(ConnectionInfo.RedirectKeys)),
-				new TestCaseData((Func<ConnectionInfo,object>)(con => con.RDPAuthenticationLevel)).SetName(nameof(ConnectionInfo.RDPAuthenticationLevel)),
+				new TestCaseData((Func<ConnectionInfo,object>)(con => con.RdpAuthenticationLevel)).SetName(nameof(ConnectionInfo.RdpAuthenticationLevel)),
 				new TestCaseData((Func<ConnectionInfo,object>)(con => con.RedirectSmartCards)).SetName(nameof(ConnectionInfo.RedirectSmartCards)),
 				new TestCaseData((Func<ConnectionInfo,object>)(con => con.RedirectPrinters)).SetName(nameof(ConnectionInfo.RedirectPrinters)),
 				new TestCaseData((Func<ConnectionInfo,object>)(con => con.RedirectPorts)).SetName(nameof(ConnectionInfo.RedirectPorts)),

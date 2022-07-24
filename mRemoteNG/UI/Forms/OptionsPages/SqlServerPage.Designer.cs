@@ -81,7 +81,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkUseSQLServer
             // 
-            this.chkUseSQLServer._mice = MrngCheckBox.MouseState.OUT;
+            this.chkUseSQLServer.Mice = MrngCheckBox.MouseState.Out;
             this.chkUseSQLServer.AutoSize = true;
             this.chkUseSQLServer.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkUseSQLServer.Location = new System.Drawing.Point(3, 76);
@@ -175,7 +175,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // btnTestConnection
             // 
-            this.btnTestConnection._mice = MrngButton.MouseState.OUT;
+            this.btnTestConnection.Mice = MrngButton.MouseState.Out;
             this.btnTestConnection.Enabled = false;
             this.btnTestConnection.Location = new System.Drawing.Point(3, 267);
             this.btnTestConnection.Name = "btnTestConnection";
@@ -206,7 +206,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkSQLReadOnly
             // 
-            this.chkSQLReadOnly._mice = MrngCheckBox.MouseState.OUT;
+            this.chkSQLReadOnly.Mice = MrngCheckBox.MouseState.Out;
             this.chkSQLReadOnly.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.chkSQLReadOnly.AutoSize = true;
@@ -241,7 +241,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // txtSQLType
             // 
-            this.txtSQLType._mice = MrngComboBox.MouseState.HOVER;
+            this.txtSQLType.Mice = MrngComboBox.MouseState.Hover;
             this.txtSQLType.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtSQLType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.txtSQLType.FormattingEnabled = true;

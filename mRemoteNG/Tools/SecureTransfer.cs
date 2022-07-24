@@ -10,29 +10,29 @@ namespace mRemoteNG.Tools
 {
     internal class SecureTransfer : IDisposable
     {
-        private readonly string Host;
-        private readonly string User;
-        private readonly string Password;
-        private readonly int Port;
-        public readonly SSHTransferProtocol Protocol;
+        private readonly string _host;
+        private readonly string _user;
+        private readonly string _password;
+        private readonly int _port;
+        public readonly SshTransferProtocol Protocol;
         public string SrcFile;
         public string DstFile;
         public ScpClient ScpClt;
         public SftpClient SftpClt;
-        public SftpUploadAsyncResult asyncResult;
-        public AsyncCallback asyncCallback;
+        public SftpUploadAsyncResult AsyncResult;
+        public AsyncCallback AsyncCallback;
 
 
         public SecureTransfer()
         {
         }
 
-        public SecureTransfer(string host, string user, string pass, int port, SSHTransferProtocol protocol)
+        public SecureTransfer(string host, string user, string pass, int port, SshTransferProtocol protocol)
         {
-            Host = host;
-            User = user;
-            Password = pass;
-            Port = port;
+            _host = host;
+            _user = user;
+            _password = pass;
+            _port = port;
             Protocol = protocol;
         }
 
@@ -40,14 +40,14 @@ namespace mRemoteNG.Tools
             string user,
             string pass,
             int port,
-            SSHTransferProtocol protocol,
+            SshTransferProtocol protocol,
             string source,
             string dest)
         {
-            Host = host;
-            User = user;
-            Password = pass;
-            Port = port;
+            _host = host;
+            _user = user;
+            _password = pass;
+            _port = port;
             Protocol = protocol;
             SrcFile = source;
             DstFile = dest;
@@ -55,27 +55,27 @@ namespace mRemoteNG.Tools
 
         public void Connect()
         {
-            if (Protocol == SSHTransferProtocol.SCP)
+            if (Protocol == SshTransferProtocol.Scp)
             {
-                ScpClt = new ScpClient(Host, Port, User, Password);
+                ScpClt = new ScpClient(_host, _port, _user, _password);
                 ScpClt.Connect();
             }
 
-            if (Protocol == SSHTransferProtocol.SFTP)
+            if (Protocol == SshTransferProtocol.Sftp)
             {
-                SftpClt = new SftpClient(Host, Port, User, Password);
+                SftpClt = new SftpClient(_host, _port, _user, _password);
                 SftpClt.Connect();
             }
         }
 
         public void Disconnect()
         {
-            if (Protocol == SSHTransferProtocol.SCP)
+            if (Protocol == SshTransferProtocol.Scp)
             {
                 ScpClt.Disconnect();
             }
 
-            if (Protocol == SSHTransferProtocol.SFTP)
+            if (Protocol == SshTransferProtocol.Sftp)
             {
                 SftpClt.Disconnect();
             }
@@ -84,7 +84,7 @@ namespace mRemoteNG.Tools
 
         public void Upload()
         {
-            if (Protocol == SSHTransferProtocol.SCP)
+            if (Protocol == SshTransferProtocol.Scp)
             {
                 if (!ScpClt.IsConnected)
                 {
@@ -97,7 +97,7 @@ namespace mRemoteNG.Tools
                 ScpClt.Upload(new FileInfo(SrcFile), $"{DstFile}");
             }
 
-            if (Protocol == SSHTransferProtocol.SFTP)
+            if (Protocol == SshTransferProtocol.Sftp)
             {
                 if (!SftpClt.IsConnected)
                 {
@@ -107,28 +107,28 @@ namespace mRemoteNG.Tools
                     return;
                 }
 
-                asyncResult =
+                AsyncResult =
                     (SftpUploadAsyncResult)SftpClt.BeginUploadFile(new FileStream(SrcFile, Open), $"{DstFile}",
-                        asyncCallback);
+                        AsyncCallback);
             }
         }
 
-        public enum SSHTransferProtocol
+        public enum SshTransferProtocol
         {
-            SCP = 0,
-            SFTP = 1
+            Scp = 0,
+            Sftp = 1
         }
 
         private void Dispose(bool disposing)
         {
             if (!disposing) return;
 
-            if (Protocol == SSHTransferProtocol.SCP)
+            if (Protocol == SshTransferProtocol.Scp)
             {
                 ScpClt.Dispose();
             }
 
-            if (Protocol == SSHTransferProtocol.SFTP)
+            if (Protocol == SshTransferProtocol.Sftp)
             {
                 SftpClt.Dispose();
             }

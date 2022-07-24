@@ -8,10 +8,10 @@ namespace mRemoteNG.Themes
     /// </summary>
     public class PseudoKeyColor
     {
-        public PseudoKeyColor(string _key, Color _value)
+        public PseudoKeyColor(string key, Color value)
         {
-            Key = _key;
-            Value = _value;
+            Key = key;
+            Value = value;
         }
 
         public string Key { get; set; }
@@ -45,7 +45,7 @@ namespace mRemoteNG.Themes
         #region Public Methods
 
         // Set the default theme, that theme should contain all color values used by the application
-        public void setDefault(ExtendedColorPalette inPalettte)
+        public void SetDefault(ExtendedColorPalette inPalettte)
         {
             DefaultColorPalette = inPalettte.ExtColorPalette;
         }
@@ -57,7 +57,7 @@ namespace mRemoteNG.Themes
         /// </summary>
         /// <param name="colorKey"></param>
         /// <returns></returns>
-        public Color getColor(string colorKey)
+        public Color GetColor(string colorKey)
         {
             var retColor = ExtColorPalette.ContainsKey(colorKey) ? ExtColorPalette[colorKey] : Color.Empty;
             //Invisible colors are not good, might  indicate missing color from the palette as is represented by 00000000
@@ -82,7 +82,7 @@ namespace mRemoteNG.Themes
         /// </summary>
         /// <param name="colorKey"></param>
         /// <param name="inColor"></param>
-        public void addColor(string colorKey, Color inColor)
+        public void AddColor(string colorKey, Color inColor)
         {
             ExtColorPalette.Add(colorKey, inColor);
         }
@@ -93,7 +93,7 @@ namespace mRemoteNG.Themes
         /// </summary>
         /// <param name="colorKey"></param>
         /// <param name="inColor"></param>
-        public void replaceColor(string colorKey, Color inColor)
+        public void ReplaceColor(string colorKey, Color inColor)
         {
             ExtColorPalette[colorKey] = inColor;
         }

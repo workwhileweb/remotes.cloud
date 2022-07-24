@@ -3,7 +3,7 @@ using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.Connection.Protocol.RDP
 {
-    public enum RDPSounds
+    public enum RdpSounds
     {
         [LocalizedAttributes.LocalizedDescription(nameof(Language.RdpSoundBringToThisComputer))]
         BringToThisComputer = 0,

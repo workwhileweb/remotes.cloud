@@ -8,8 +8,8 @@ namespace ExternalConnectors.AWS
         public string InstanceId { get; }
         public string Name { get; }
         public string Status { get; }
-        public string PublicIP { get; }
-        public string PrivateIP { get; }
+        public string PublicIp { get; }
+        public string PrivateIp { get; }
         public InstanceInfo(Instance instance, string name)
         {
             InstanceId = instance.InstanceId;
@@ -26,8 +26,8 @@ namespace ExternalConnectors.AWS
                 default: Status = "Unknown"; break;
             };
 
-            PublicIP = instance.PublicIpAddress ?? "";
-            PrivateIP = instance.PrivateIpAddress ?? "";
+            PublicIp = instance.PublicIpAddress ?? "";
+            PrivateIp = instance.PrivateIpAddress ?? "";
 
         }
     }

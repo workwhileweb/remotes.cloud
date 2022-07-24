@@ -12,23 +12,23 @@ namespace mRemoteNGTests.UI.Forms.OptionsPages
         [Test]
         public void AppearancePageLinkExistsInListView()
         {
-            var listViewTester = new ListViewTester("lstOptionPages", _optionsForm);
+            var listViewTester = new ListViewTester("lstOptionPages", OptionsForm);
             Assert.That(listViewTester.Items[1].Text, Does.Match("Appearance"));
         }
 
         [Test]
         public void IconShownInListView()
         {
-            var listViewTester = new ListViewTester("lstOptionPages", _optionsForm);
+            var listViewTester = new ListViewTester("lstOptionPages", OptionsForm);
             Assert.That(listViewTester.Items[1].ImageList, Is.Not.Null);
         }
 
         [Test]
         public void SelectingAppearancePageLoadsSettings()
         {
-            var listViewTester = new ListViewTester("lstOptionPages", _optionsForm);
+            var listViewTester = new ListViewTester("lstOptionPages", OptionsForm);
             listViewTester.Select("Appearance");
-            var checkboxTester = _optionsForm.FindControl<CheckBox>("chkShowSystemTrayIcon");
+            var checkboxTester = OptionsForm.FindControl<CheckBox>("chkShowSystemTrayIcon");
             Assert.That(checkboxTester.Text, Does.Match("show notification area icon"));
         }
     }

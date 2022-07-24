@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace mRemoteNG.UI.Menu.msMultiSSH
 {
-    public partial class multiSsh : ToolStripMenuItem
+    public partial class MultiSsh : ToolStripMenuItem
     {
-        public multiSsh()
+        public MultiSsh()
         {
             Initialize();
         }

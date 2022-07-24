@@ -15,12 +15,12 @@ namespace mRemoteNG.Connection.Protocol
 
         private ConnectionTab _connectionTab;
         private InterfaceControl _interfaceControl;
-        private ConnectingEventHandler ConnectingEvent;
-        private ConnectedEventHandler ConnectedEvent;
-        private DisconnectedEventHandler DisconnectedEvent;
-        private ErrorOccuredEventHandler ErrorOccuredEvent;
-        private ClosingEventHandler ClosingEvent;
-        private ClosedEventHandler ClosedEvent;
+        private ConnectingEventHandler _connectingEvent;
+        private ConnectedEventHandler _connectedEvent;
+        private DisconnectedEventHandler _disconnectedEvent;
+        private ErrorOccuredEventHandler _errorOccuredEvent;
+        private ClosingEventHandler _closingEvent;
+        private ClosedEventHandler _closedEvent;
 
         #endregion
 
@@ -60,7 +60,7 @@ namespace mRemoteNG.Connection.Protocol
 
         public ConnectionInfo.Force Force { get; set; }
 
-        public readonly System.Timers.Timer tmrReconnect = new(2000);
+        public readonly System.Timers.Timer TmrReconnect = new(2000);
         protected ReconnectGroup ReconnectGroup;
 
         protected ProtocolBase(string name)
@@ -131,9 +131,9 @@ namespace mRemoteNG.Connection.Protocol
 
         public virtual bool Connect()
         {
-            if (InterfaceControl.Info.Protocol == ProtocolType.RDP) return false;
-            if (ConnectedEvent == null) return false;
-            ConnectedEvent(this);
+            if (InterfaceControl.Info.Protocol == ProtocolType.Rdp) return false;
+            if (_connectedEvent == null) return false;
+            _connectedEvent(this);
             return true;
         }
 
@@ -144,18 +144,18 @@ namespace mRemoteNG.Connection.Protocol
 
         public virtual void Close()
         {
-            var t = new Thread(CloseBG);
+            var t = new Thread(CloseBg);
             t.SetApartmentState(ApartmentState.STA);
             t.IsBackground = true;
             t.Start();
         }
 
-        private void CloseBG()
+        private void CloseBg()
         {
-            ClosedEvent?.Invoke(this);
+            _closedEvent?.Invoke(this);
             try
             {
-                tmrReconnect.Enabled = false;
+                TmrReconnect.Enabled = false;
 
                 if (Control != null)
                 {
@@ -197,13 +197,13 @@ namespace mRemoteNG.Connection.Protocol
             }
         }
 
-        private delegate void DisposeInterfaceCB();
+        private delegate void DisposeInterfaceCb();
 
         private void DisposeInterface()
         {
             if (_interfaceControl.InvokeRequired)
             {
-                var s = new DisposeInterfaceCB(DisposeInterface);
+                var s = new DisposeInterfaceCb(DisposeInterface);
                 _interfaceControl.Invoke(s);
             }
             else
@@ -212,13 +212,13 @@ namespace mRemoteNG.Connection.Protocol
             }
         }
 
-        private delegate void SetTagToNothingCB();
+        private delegate void SetTagToNothingCb();
 
         private void SetTagToNothing()
         {
             if (_interfaceControl.Parent.InvokeRequired)
             {
-                var s = new SetTagToNothingCB(SetTagToNothing);
+                var s = new SetTagToNothingCb(SetTagToNothing);
                 _interfaceControl.Parent.Invoke(s);
             }
             else
@@ -227,13 +227,13 @@ namespace mRemoteNG.Connection.Protocol
             }
         }
 
-        private delegate void DisposeControlCB();
+        private delegate void DisposeControlCb();
 
         private void DisposeControl()
         {
             if (Control.InvokeRequired)
             {
-                var s = new DisposeControlCB(DisposeControl);
+                var s = new DisposeControlCb(DisposeControl);
                 Control.Invoke(s);
             }
             else
@@ -250,79 +250,79 @@ namespace mRemoteNG.Connection.Protocol
 
         public event ConnectingEventHandler Connecting
         {
-            add => ConnectingEvent = (ConnectingEventHandler)Delegate.Combine(ConnectingEvent, value);
-            remove => ConnectingEvent = (ConnectingEventHandler)Delegate.Remove(ConnectingEvent, value);
+            add => _connectingEvent = (ConnectingEventHandler)Delegate.Combine(_connectingEvent, value);
+            remove => _connectingEvent = (ConnectingEventHandler)Delegate.Remove(_connectingEvent, value);
         }
 
         public delegate void ConnectedEventHandler(object sender);
 
         public event ConnectedEventHandler Connected
         {
-            add => ConnectedEvent = (ConnectedEventHandler)Delegate.Combine(ConnectedEvent, value);
-            remove => ConnectedEvent = (ConnectedEventHandler)Delegate.Remove(ConnectedEvent, value);
+            add => _connectedEvent = (ConnectedEventHandler)Delegate.Combine(_connectedEvent, value);
+            remove => _connectedEvent = (ConnectedEventHandler)Delegate.Remove(_connectedEvent, value);
         }
 
         public delegate void DisconnectedEventHandler(object sender, string disconnectedMessage, int? reasonCode);
 
         public event DisconnectedEventHandler Disconnected
         {
-            add => DisconnectedEvent = (DisconnectedEventHandler)Delegate.Combine(DisconnectedEvent, value);
-            remove => DisconnectedEvent = (DisconnectedEventHandler)Delegate.Remove(DisconnectedEvent, value);
+            add => _disconnectedEvent = (DisconnectedEventHandler)Delegate.Combine(_disconnectedEvent, value);
+            remove => _disconnectedEvent = (DisconnectedEventHandler)Delegate.Remove(_disconnectedEvent, value);
         }
 
         public delegate void ErrorOccuredEventHandler(object sender, string errorMessage, int? errorCode);
 
         public event ErrorOccuredEventHandler ErrorOccured
         {
-            add => ErrorOccuredEvent = (ErrorOccuredEventHandler)Delegate.Combine(ErrorOccuredEvent, value);
-            remove => ErrorOccuredEvent = (ErrorOccuredEventHandler)Delegate.Remove(ErrorOccuredEvent, value);
+            add => _errorOccuredEvent = (ErrorOccuredEventHandler)Delegate.Combine(_errorOccuredEvent, value);
+            remove => _errorOccuredEvent = (ErrorOccuredEventHandler)Delegate.Remove(_errorOccuredEvent, value);
         }
 
         public delegate void ClosingEventHandler(object sender);
 
         public event ClosingEventHandler Closing
         {
-            add => ClosingEvent = (ClosingEventHandler)Delegate.Combine(ClosingEvent, value);
-            remove => ClosingEvent = (ClosingEventHandler)Delegate.Remove(ClosingEvent, value);
+            add => _closingEvent = (ClosingEventHandler)Delegate.Combine(_closingEvent, value);
+            remove => _closingEvent = (ClosingEventHandler)Delegate.Remove(_closingEvent, value);
         }
 
         public delegate void ClosedEventHandler(object sender);
 
         public event ClosedEventHandler Closed
         {
-            add => ClosedEvent = (ClosedEventHandler)Delegate.Combine(ClosedEvent, value);
-            remove => ClosedEvent = (ClosedEventHandler)Delegate.Remove(ClosedEvent, value);
+            add => _closedEvent = (ClosedEventHandler)Delegate.Combine(_closedEvent, value);
+            remove => _closedEvent = (ClosedEventHandler)Delegate.Remove(_closedEvent, value);
         }
 
 
         public void Event_Closing(object sender)
         {
-            ClosingEvent?.Invoke(sender);
+            _closingEvent?.Invoke(sender);
         }
 
         protected void Event_Closed(object sender)
         {
-            ClosedEvent?.Invoke(sender);
+            _closedEvent?.Invoke(sender);
         }
 
         protected void Event_Connecting(object sender)
         {
-            ConnectingEvent?.Invoke(sender);
+            _connectingEvent?.Invoke(sender);
         }
 
         protected void Event_Connected(object sender)
         {
-            ConnectedEvent?.Invoke(sender);
+            _connectedEvent?.Invoke(sender);
         }
 
         protected void Event_Disconnected(object sender, string disconnectedMessage, int? reasonCode)
         {
-            DisconnectedEvent?.Invoke(sender, disconnectedMessage, reasonCode);
+            _disconnectedEvent?.Invoke(sender, disconnectedMessage, reasonCode);
         }
 
         protected void Event_ErrorOccured(object sender, string errorMsg, int? errorCode)
         {
-            ErrorOccuredEvent?.Invoke(sender, errorMsg, errorCode);
+            _errorOccuredEvent?.Invoke(sender, errorMsg, errorCode);
         }
 
         protected void Event_ReconnectGroupCloseClicked()
@@ -335,7 +335,7 @@ namespace mRemoteNG.Connection.Protocol
         private void Dispose(bool disposing)
         {
             if (disposing) return;
-            tmrReconnect?.Dispose();
+            TmrReconnect?.Dispose();
         }
 
         public void Dispose()

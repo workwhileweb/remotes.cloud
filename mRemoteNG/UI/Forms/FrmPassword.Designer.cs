@@ -70,7 +70,7 @@ namespace mRemoteNG.UI.Forms
             // 
             // btnOK
             // 
-            this.btnOK._mice = MrngButton.MouseState.HOVER;
+            this.btnOK.Mice = MrngButton.MouseState.Hover;
             this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnOK.Location = new System.Drawing.Point(215, 124);
             this.btnOK.Name = "btnOK";
@@ -82,7 +82,7 @@ namespace mRemoteNG.UI.Forms
             // 
             // btnCancel
             // 
-            this.btnCancel._mice = MrngButton.MouseState.HOVER;
+            this.btnCancel.Mice = MrngButton.MouseState.Hover;
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Location = new System.Drawing.Point(296, 124);

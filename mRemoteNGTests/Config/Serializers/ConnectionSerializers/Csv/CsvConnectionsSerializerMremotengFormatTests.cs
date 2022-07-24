@@ -15,18 +15,18 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
 	public class CsvConnectionsSerializerMremotengFormatTests
     {
         private ICredentialRepositoryList _credentialRepositoryList;
-        private const string ConnectionName = "myconnection";
-        private const string Username = "myuser";
-        private const string Domain = "mydomain";
-        private const string Password = "mypass123";
+        private const string CONNECTION_NAME = "myconnection";
+        private const string USERNAME = "myuser";
+        private const string DOMAIN = "mydomain";
+        private const string PASSWORD = "mypass123";
 
         [OneTimeSetUp]
         public void OneTimeSetup()
         {
             var credRecord = Substitute.For<ICredentialRecord>();
-            credRecord.Username.Returns(Username);
-            credRecord.Domain.Returns(Domain);
-            credRecord.Password.Returns(Password.ConvertToSecureString());
+            credRecord.Username.Returns(USERNAME);
+            credRecord.Domain.Returns(DOMAIN);
+            credRecord.Password.Returns(PASSWORD.ConvertToSecureString());
             _credentialRepositoryList = Substitute.For<ICredentialRepositoryList>();
             _credentialRepositoryList.GetCredentialRecord(new Guid()).ReturnsForAnyArgs(credRecord);
         }
@@ -37,7 +37,7 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
             var serializer = new CsvConnectionsSerializerMremotengFormat(new SaveFilter(), _credentialRepositoryList);
             var connectionInfo = BuildConnectionInfo();
             var csv = serializer.Serialize(connectionInfo);
-            Assert.That(csv, Does.Match(connectionInfo.ConstantID));
+            Assert.That(csv, Does.Match(connectionInfo.ConstantId));
         }
 
         [Test]
@@ -46,12 +46,12 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
             var serializer = new CsvConnectionsSerializerMremotengFormat(new SaveFilter(), _credentialRepositoryList);
             var treeModel = new ConnectionTreeModelBuilder().Build();
             var csv = serializer.Serialize(treeModel);
-            Assert.That(csv, Does.Not.Match($"{treeModel.RootNodes[0].ConstantID};.*;{TreeNodeType.Root}"));
+            Assert.That(csv, Does.Not.Match($"{treeModel.RootNodes[0].ConstantId};.*;{TreeNodeType.Root}"));
         }
 
-        [TestCase(Username)]
-        [TestCase(Domain)]
-        [TestCase(Password)]
+        [TestCase(USERNAME)]
+        [TestCase(DOMAIN)]
+        [TestCase(PASSWORD)]
         [TestCase("InheritColors")]
         public void CreatesCsv(string valueThatShouldExist)
         {
@@ -61,9 +61,9 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
             Assert.That(csv, Does.Match(valueThatShouldExist));
         }
 
-        [TestCase(Username)]
-        [TestCase(Domain)]
-        [TestCase(Password)]
+        [TestCase(USERNAME)]
+        [TestCase(DOMAIN)]
+        [TestCase(PASSWORD)]
         [TestCase("InheritColors")]
         public void SerializerRespectsSaveFilterSettings(string valueThatShouldntExist)
         {
@@ -133,10 +133,10 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
         {
             return new ConnectionInfo
             {
-                Name = ConnectionName,
-				Username = Username,
-				Domain = Domain,
-				Password = Password,
+                Name = CONNECTION_NAME,
+				Username = USERNAME,
+				Domain = DOMAIN,
+				Password = PASSWORD,
                 Inheritance = {Colors = true}
             };
         }

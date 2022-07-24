@@ -1,6 +1,6 @@
 ﻿namespace ExternalConnectors.TSS
 {
-    partial class SSConnectionForm
+    partial class SsConnectionForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SSConnectionForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SsConnectionForm));
             this.tbSSURL = new System.Windows.Forms.TextBox();
             this.tbUsername = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -248,7 +248,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "SSConnectionForm";
+            this.Name = "SsConnectionForm";
             this.Text = "Secret Server API Login Data";
             this.Activated += new System.EventHandler(this.SSConnectionForm_Activated);
             this.tableLayoutPanel1.ResumeLayout(false);

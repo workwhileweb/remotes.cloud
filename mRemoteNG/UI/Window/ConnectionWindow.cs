@@ -24,7 +24,7 @@ namespace mRemoteNG.UI.Window
 {
     public partial class ConnectionWindow : BaseWindow
     {
-        private VisualStudioToolStripExtender vsToolStripExtender;
+        private VisualStudioToolStripExtender _vsToolStripExtender;
         private readonly ToolStripRenderer _toolStripProfessionalRenderer = new ToolStripProfessionalRenderer();
 
         #region Public Methods
@@ -80,8 +80,8 @@ namespace mRemoteNG.UI.Window
             cmenTabTransferFile.Click += (sender, args) => TransferFile();
             cmenTabRefreshScreen.Click += (sender, args) => RefreshScreen();
             cmenTabSendSpecialKeysCtrlAltDel.Click +=
-                (sender, args) => SendSpecialKeys(ProtocolVNC.SpecialKeys.CtrlAltDel);
-            cmenTabSendSpecialKeysCtrlEsc.Click += (sender, args) => SendSpecialKeys(ProtocolVNC.SpecialKeys.CtrlEsc);
+                (sender, args) => SendSpecialKeys(ProtocolVnc.SpecialKeys.CtrlAltDel);
+            cmenTabSendSpecialKeysCtrlEsc.Click += (sender, args) => SendSpecialKeys(ProtocolVnc.SpecialKeys.CtrlEsc);
             cmenTabRenameTab.Click += (sender, args) => RenameTab();
             cmenTabDuplicateTab.Click += (sender, args) => DuplicateTab();
             cmenTabReconnect.Click += (sender, args) => Reconnect();
@@ -158,7 +158,7 @@ namespace mRemoteNG.UI.Window
 
         #endregion
 
-        public void reconnectAll(IConnectionInitiator initiator)
+        public void ReconnectAll(IConnectionInitiator initiator)
         {
             var controlList = new List<InterfaceControl>();
             try
@@ -189,38 +189,38 @@ namespace mRemoteNG.UI.Window
         private void Connection_Load(object sender, EventArgs e)
         {
             ApplyTheme();
-            ThemeManager.getInstance().ThemeChanged += ApplyTheme;
+            ThemeManager.GetInstance().ThemeChanged += ApplyTheme;
             ApplyLanguage();
         }
 
         private new void ApplyTheme()
         {
-            if (!ThemeManager.getInstance().ThemingActive)
+            if (!ThemeManager.GetInstance().ThemingActive)
             {
-                connDock.Theme = ThemeManager.getInstance().DefaultTheme.Theme;
+                connDock.Theme = ThemeManager.GetInstance().DefaultTheme.Theme;
                 return;
             }
 
             base.ApplyTheme();
             try
             {
-                connDock.Theme = ThemeManager.getInstance().ActiveTheme.Theme;
+                connDock.Theme = ThemeManager.GetInstance().ActiveTheme.Theme;
             }
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddExceptionMessage("UI.Window.ConnectionWindow.ApplyTheme() failed", ex);
             }
 
-            vsToolStripExtender = new VisualStudioToolStripExtender(components)
+            _vsToolStripExtender = new VisualStudioToolStripExtender(components)
             {
                 DefaultRenderer = _toolStripProfessionalRenderer
             };
-            vsToolStripExtender.SetStyle(cmenTab, ThemeManager.getInstance().ActiveTheme.Version,
-                                         ThemeManager.getInstance().ActiveTheme.Theme);
+            _vsToolStripExtender.SetStyle(cmenTab, ThemeManager.GetInstance().ActiveTheme.Version,
+                                         ThemeManager.GetInstance().ActiveTheme.Theme);
 
-            if (!ThemeManager.getInstance().ActiveAndExtended) return;
+            if (!ThemeManager.GetInstance().ActiveAndExtended) return;
             connDock.DockBackColor =
-                ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Tab_Item_Background");
+                ThemeManager.GetInstance().ActiveTheme.ExtendedPalette.GetColor("Tab_Item_Background");
         }
 
         private bool _documentHandlersAdded;
@@ -314,7 +314,7 @@ namespace mRemoteNG.UI.Window
                 {
                     var tabP = (ConnectionTab)dockContent;
                     if (tabP.Tag == null) continue;
-                    tabP.silentClose = true;
+                    tabP.SilentClose = true;
                     tabP.Close();
                 }
             }
@@ -371,7 +371,7 @@ namespace mRemoteNG.UI.Window
                     cmenTabViewOnly.Visible = false;
                 }
 
-                if (interfaceControl.Info.Protocol == ProtocolType.RDP)
+                if (interfaceControl.Info.Protocol == ProtocolType.Rdp)
                 {
                     var rdp = (RdpProtocol6)interfaceControl.Protocol;
                     cmenTabFullscreen.Visible = true;
@@ -385,9 +385,9 @@ namespace mRemoteNG.UI.Window
                     cmenTabSmartSize.Visible = false;
                 }
 
-                if (interfaceControl.Info.Protocol == ProtocolType.VNC)
+                if (interfaceControl.Info.Protocol == ProtocolType.Vnc)
                 {
-                    var vnc = (ProtocolVNC)interfaceControl.Protocol;
+                    var vnc = (ProtocolVnc)interfaceControl.Protocol;
                     cmenTabSendSpecialKeys.Visible = true;
                     cmenTabSmartSize.Visible = true;
                     cmenTabStartChat.Visible = true;
@@ -402,8 +402,8 @@ namespace mRemoteNG.UI.Window
                     cmenTabTransferFile.Visible = false;
                 }
 
-                if (interfaceControl.Info.Protocol == ProtocolType.SSH1 |
-                    interfaceControl.Info.Protocol == ProtocolType.SSH2)
+                if (interfaceControl.Info.Protocol == ProtocolType.Ssh1 |
+                    interfaceControl.Info.Protocol == ProtocolType.Ssh2)
                 {
                     cmenTabTransferFile.Visible = true;
                 }
@@ -449,10 +449,10 @@ namespace mRemoteNG.UI.Window
                 var interfaceControl = GetInterfaceControl();
                 if (interfaceControl == null) return;
 
-                if (interfaceControl.Info.Protocol == ProtocolType.SSH1 |
-                    interfaceControl.Info.Protocol == ProtocolType.SSH2)
+                if (interfaceControl.Info.Protocol == ProtocolType.Ssh1 |
+                    interfaceControl.Info.Protocol == ProtocolType.Ssh2)
                     SshTransferFile();
-                else if (interfaceControl.Info.Protocol == ProtocolType.VNC)
+                else if (interfaceControl.Info.Protocol == ProtocolType.Vnc)
                     VncTransferFile();
             }
             catch (Exception ex)
@@ -468,7 +468,7 @@ namespace mRemoteNG.UI.Window
                 var interfaceControl = GetInterfaceControl();
                 if (interfaceControl == null) return;
 
-                Windows.Show(WindowType.SSHTransfer);
+                Windows.Show(WindowType.SshTransfer);
                 var connectionInfo = interfaceControl.Info;
 
                 Windows.SshtransferForm.Hostname = connectionInfo.Hostname;
@@ -487,7 +487,7 @@ namespace mRemoteNG.UI.Window
             try
             {
                 var interfaceControl = GetInterfaceControl();
-                var vnc = interfaceControl?.Protocol as ProtocolVNC;
+                var vnc = interfaceControl?.Protocol as ProtocolVnc;
                 vnc?.StartFileTransfer();
             }
             catch (Exception ex)
@@ -518,7 +518,7 @@ namespace mRemoteNG.UI.Window
             try
             {
                 var interfaceControl = GetInterfaceControl();
-                var vnc = interfaceControl?.Protocol as ProtocolVNC;
+                var vnc = interfaceControl?.Protocol as ProtocolVnc;
                 vnc?.StartChat();
             }
             catch (Exception ex)
@@ -532,7 +532,7 @@ namespace mRemoteNG.UI.Window
             try
             {
                 var interfaceControl = GetInterfaceControl();
-                var vnc = interfaceControl?.Protocol as ProtocolVNC;
+                var vnc = interfaceControl?.Protocol as ProtocolVnc;
                 vnc?.RefreshScreen();
             }
             catch (Exception ex)
@@ -541,12 +541,12 @@ namespace mRemoteNG.UI.Window
             }
         }
 
-        private void SendSpecialKeys(ProtocolVNC.SpecialKeys keys)
+        private void SendSpecialKeys(ProtocolVnc.SpecialKeys keys)
         {
             try
             {
                 var interfaceControl = GetInterfaceControl();
-                var vnc = interfaceControl?.Protocol as ProtocolVNC;
+                var vnc = interfaceControl?.Protocol as ProtocolVnc;
                 vnc?.SendSpecialKeys(keys);
             }
             catch (Exception ex)
@@ -764,8 +764,8 @@ namespace mRemoteNG.UI.Window
                 {
                     var dr = frmInputBox.ShowDialog();
                     if (dr != DialogResult.OK) return;
-                    if (!string.IsNullOrEmpty(frmInputBox.returnValue))
-                        ((ConnectionTab)interfaceControl.Parent).TabText = frmInputBox.returnValue.Replace("&", "&&");
+                    if (!string.IsNullOrEmpty(frmInputBox.ReturnValue))
+                        ((ConnectionTab)interfaceControl.Parent).TabText = frmInputBox.ReturnValue.Replace("&", "&&");
                 }
             }
             catch (Exception ex)
@@ -783,7 +783,7 @@ namespace mRemoteNG.UI.Window
             var protocolBase = sender as ProtocolBase;
             if (!(protocolBase?.InterfaceControl.Parent is ConnectionTab tabPage)) return;
             if (tabPage.Disposing || tabPage.IsDisposed) return;
-            tabPage.protocolClose = true;
+            tabPage.ProtocolClose = true;
             Invoke(new Action(() => tabPage.Close()));
         }
 

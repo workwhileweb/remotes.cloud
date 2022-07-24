@@ -12,8 +12,8 @@ namespace mRemoteNG.Tree
 {
     public class ConnectionTreeDragAndDropHandler
     {
-        private readonly Color DropAllowedFeedbackColor = Color.Green;
-        private readonly Color DropDeniedFeedbackColor = Color.Red;
+        private readonly Color _dropAllowedFeedbackColor = Color.Green;
+        private readonly Color _dropDeniedFeedbackColor = Color.Red;
         private string _infoMessage;
         private Color _currentFeedbackColor;
         private bool _enableFeedback;
@@ -73,7 +73,7 @@ namespace mRemoteNG.Tree
         public void HandleEvent_ModelCanDrop(object sender, ModelDropEventArgs e)
         {
             _enableFeedback = true;
-            _currentFeedbackColor = DropDeniedFeedbackColor;
+            _currentFeedbackColor = _dropDeniedFeedbackColor;
             _infoMessage = null;
             foreach (var dropSource in e.SourceModels.Cast<ConnectionInfo>())
             {
@@ -119,7 +119,7 @@ namespace mRemoteNG.Tree
             {
                 if (!IsValidDrag(dropSource, dropTarget)) return dragDropEffect;
                 dragDropEffect = DragDropEffects.Move;
-                _currentFeedbackColor = DropAllowedFeedbackColor;
+                _currentFeedbackColor = _dropAllowedFeedbackColor;
             }
             else
             {
@@ -139,7 +139,7 @@ namespace mRemoteNG.Tree
             else
             {
                 dragDropEffect = DragDropEffects.Move;
-                _currentFeedbackColor = DropAllowedFeedbackColor;
+                _currentFeedbackColor = _dropAllowedFeedbackColor;
             }
 
             return dragDropEffect;

@@ -24,9 +24,9 @@ namespace mRemoteNG.Connection.Protocol
 
         #region Public Properties
 
-        protected Putty_Protocol PuttyProtocol { private get; set; }
+        protected PuttyProtocols PuttyProtocol { private get; set; }
 
-        protected Putty_SSHVersion PuttySSHVersion { private get; set; }
+        protected PuttySshVersions PuttySshVersion { private get; set; }
 
         public IntPtr PuttyHandle { get; set; }
 
@@ -49,7 +49,7 @@ namespace mRemoteNG.Connection.Protocol
 
         #region Public Methods
 
-        public bool isRunning()
+        public bool IsRunning()
         {
             return !PuttyProcess.HasExited;
         }
@@ -77,21 +77,21 @@ namespace mRemoteNG.Connection.Protocol
                 {
                     arguments.Add("-" + PuttyProtocol);
 
-                    if (PuttyProtocol == Putty_Protocol.ssh)
+                    if (PuttyProtocol == PuttyProtocols.Ssh)
                     {
 
                         var username = InterfaceControl.Info?.Username ?? "";
                         var password = InterfaceControl.Info?.Password ?? "";
                         var domain = InterfaceControl.Info?.Domain ?? "";
-                        var UserViaAPI = InterfaceControl.Info?.UserViaAPI ?? "";
+                        var userViaApi = InterfaceControl.Info?.UserViaApi ?? "";
 
 
                         // access secret server api if necessary
-                        if (!string.IsNullOrEmpty(UserViaAPI)) {
+                        if (!string.IsNullOrEmpty(userViaApi)) {
 
                             try
                             {
-                                ExternalConnectors.TSS.SecretServerInterface.FetchSecretFromServer("SSAPI:" + InterfaceControl.Info?.UserViaAPI, out username, out password, out domain);
+                                ExternalConnectors.TSS.SecretServerInterface.FetchSecretFromServer("SSAPI:" + InterfaceControl.Info?.UserViaApi, out username, out password, out domain);
                             }
                             catch (Exception ex)
                             {
@@ -134,7 +134,7 @@ namespace mRemoteNG.Connection.Protocol
                             }
                         }
 
-                        arguments.Add("-" + (int)PuttySSHVersion);
+                        arguments.Add("-" + (int)PuttySshVersion);
 
                         if (!Force.HasFlag(ConnectionInfo.Force.NoCredentials))
                         {
@@ -161,9 +161,9 @@ namespace mRemoteNG.Connection.Protocol
 
                 PuttyProcess.StartInfo.Arguments = arguments.ToString();
                 // add additional SSH options, f.e. tunnel or noshell parameters that may be specified for the the connnection
-                if (!string.IsNullOrEmpty(InterfaceControl.Info.SSHOptions))
+                if (!string.IsNullOrEmpty(InterfaceControl.Info.SshOptions))
                 {
-                    PuttyProcess.StartInfo.Arguments += " " + InterfaceControl.Info.SSHOptions;
+                    PuttyProcess.StartInfo.Arguments += " " + InterfaceControl.Info.SshOptions;
                 }
 
                 PuttyProcess.EnableRaisingEvents = true;
@@ -314,19 +314,19 @@ namespace mRemoteNG.Connection.Protocol
 
         #region Enums
 
-        protected enum Putty_Protocol
+        protected enum PuttyProtocols
         {
-            ssh = 0,
-            telnet = 1,
-            rlogin = 2,
-            raw = 3,
-            serial = 4
+            Ssh = 0,
+            Telnet = 1,
+            Rlogin = 2,
+            Raw = 3,
+            Serial = 4
         }
 
-        protected enum Putty_SSHVersion
+        protected enum PuttySshVersions
         {
-            ssh1 = 1,
-            ssh2 = 2
+            Ssh1 = 1,
+            Ssh2 = 2
         }
 
         #endregion

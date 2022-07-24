@@ -10,10 +10,10 @@ namespace mRemoteNG.Tools
         {
             var handleList = new List<IntPtr>();
 
-            HandleLists.Add(handleList);
-            var handleIndex = (IntPtr)HandleLists.IndexOf(handleList);
+            _handleLists.Add(handleList);
+            var handleIndex = (IntPtr)_handleLists.IndexOf(handleList);
             NativeMethods.EnumWindows(EnumCallback, handleIndex);
-            HandleLists.Remove(handleList);
+            _handleLists.Remove(handleList);
 
             return handleList;
         }
@@ -22,19 +22,19 @@ namespace mRemoteNG.Tools
         {
             var handleList = new List<IntPtr>();
 
-            HandleLists.Add(handleList);
-            var handleIndex = (IntPtr)HandleLists.IndexOf(handleList);
+            _handleLists.Add(handleList);
+            var handleIndex = (IntPtr)_handleLists.IndexOf(handleList);
             NativeMethods.EnumChildWindows(hWndParent, EnumCallback, handleIndex);
-            HandleLists.Remove(handleList);
+            _handleLists.Remove(handleList);
 
             return handleList;
         }
 
-        private readonly List<List<IntPtr>> HandleLists = new();
+        private readonly List<List<IntPtr>> _handleLists = new();
 
         private bool EnumCallback(int hwnd, int lParam)
         {
-            HandleLists[lParam].Add((IntPtr)hwnd);
+            _handleLists[lParam].Add((IntPtr)hwnd);
             return true;
         }
 

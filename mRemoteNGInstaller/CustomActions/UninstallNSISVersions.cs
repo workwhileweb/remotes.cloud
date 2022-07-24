@@ -7,8 +7,8 @@ namespace CustomActions
 {
     public class UninstallNsisVersions
     {
-        private const string RegistryPath = "Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\mRemoteNG";
-        private const string RegistryPathWow6432 = "Software\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\mRemoteNG";
+        private const string REGISTRY_PATH = "Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\mRemoteNG";
+        private const string REGISTRY_PATH_WOW6432 = "Software\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\mRemoteNG";
         private RegistryKey _activeRegistryPath;
 
 
@@ -60,7 +60,7 @@ namespace CustomActions
         {
             try
             {
-                _activeRegistryPath = Registry.LocalMachine.OpenSubKey(RegistryPath);
+                _activeRegistryPath = Registry.LocalMachine.OpenSubKey(REGISTRY_PATH);
             }
             catch (Exception)
             {
@@ -72,7 +72,7 @@ namespace CustomActions
         {
             try
             {
-                _activeRegistryPath = Registry.LocalMachine.OpenSubKey(RegistryPathWow6432);
+                _activeRegistryPath = Registry.LocalMachine.OpenSubKey(REGISTRY_PATH_WOW6432);
             }
             catch (Exception)
             {

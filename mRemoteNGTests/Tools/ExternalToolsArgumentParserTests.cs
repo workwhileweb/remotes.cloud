@@ -10,13 +10,13 @@ namespace mRemoteNGTests.Tools
     public class ExternalToolsArgumentParserTests
     {
         private ExternalToolArgumentParser _argumentParser;
-        private const string TestString = @"()%!^abc123*<>&|""'\";
-        private const string StringAfterMetacharacterEscaping = @"^(^)^%^!^^abc123*^<^>^&^|^""'\";
-        private const string StringAfterAllEscaping = @"^(^)^%^!^^abc123*^<^>^&^|\^""'\";
-        private const string StringAfterNoEscaping = TestString;
-        private const int Port = 9933;
-        private const string PortAsString = "9933";
-        private const string SampleCommandString = @"/k echo ()%!^abc123*<>&|""'\";
+        private const string TEST_STRING = @"()%!^abc123*<>&|""'\";
+        private const string STRING_AFTER_METACHARACTER_ESCAPING = @"^(^)^%^!^^abc123*^<^>^&^|^""'\";
+        private const string STRING_AFTER_ALL_ESCAPING = @"^(^)^%^!^^abc123*^<^>^&^|\^""'\";
+        private const string STRING_AFTER_NO_ESCAPING = TEST_STRING;
+        private const int PORT = 9933;
+        private const string PORT_AS_STRING = "9933";
+        private const string SAMPLE_COMMAND_STRING = @"/k echo ()%!^abc123*<>&|""'\";
 
 
         [OneTimeSetUp]
@@ -24,15 +24,15 @@ namespace mRemoteNGTests.Tools
         {
             var connectionInfo = new ConnectionInfo
             {
-                Name = TestString,
-                Hostname = TestString,
-                Port = Port,
-                Username = TestString,
-                Password = TestString,
-                Domain = TestString,
-                Description = TestString,
-                MacAddress = TestString,
-                UserField = TestString
+                Name = TEST_STRING,
+                Hostname = TEST_STRING,
+                Port = PORT,
+                Username = TEST_STRING,
+                Password = TEST_STRING,
+                Domain = TEST_STRING,
+                Description = TEST_STRING,
+                MacAddress = TEST_STRING,
+                UserField = TEST_STRING
             };
             _argumentParser = new ExternalToolArgumentParser(connectionInfo);
         }
@@ -65,35 +65,35 @@ namespace mRemoteNGTests.Tools
             {
                 get
                 {
-                    yield return new TestCaseData("%NAME%").Returns(StringAfterAllEscaping);
-                    yield return new TestCaseData("%-NAME%").Returns(StringAfterMetacharacterEscaping);
-                    yield return new TestCaseData("%!NAME%").Returns(StringAfterNoEscaping);
-                    yield return new TestCaseData("%HOSTNAME%").Returns(StringAfterAllEscaping);
-                    yield return new TestCaseData("%-HOSTNAME%").Returns(StringAfterMetacharacterEscaping);
-                    yield return new TestCaseData("%!HOSTNAME%").Returns(StringAfterNoEscaping);
-                    yield return new TestCaseData("%PORT%").Returns(PortAsString);
-                    yield return new TestCaseData("%-PORT%").Returns(PortAsString);
-                    yield return new TestCaseData("%!PORT%").Returns(PortAsString);
-                    yield return new TestCaseData("%USERNAME%").Returns(StringAfterAllEscaping);
-                    yield return new TestCaseData("%-USERNAME%").Returns(StringAfterMetacharacterEscaping);
-                    yield return new TestCaseData("%!USERNAME%").Returns(StringAfterNoEscaping);
-                    yield return new TestCaseData("%PASSWORD%").Returns(StringAfterAllEscaping);
-                    yield return new TestCaseData("%-PASSWORD%").Returns(StringAfterMetacharacterEscaping);
-                    yield return new TestCaseData("%!PASSWORD%").Returns(StringAfterNoEscaping);
-                    yield return new TestCaseData("%DOMAIN%").Returns(StringAfterAllEscaping);
-                    yield return new TestCaseData("%-DOMAIN%").Returns(StringAfterMetacharacterEscaping);
-                    yield return new TestCaseData("%!DOMAIN%").Returns(StringAfterNoEscaping);
-                    yield return new TestCaseData("%DESCRIPTION%").Returns(StringAfterAllEscaping);
-                    yield return new TestCaseData("%-DESCRIPTION%").Returns(StringAfterMetacharacterEscaping);
-                    yield return new TestCaseData("%!DESCRIPTION%").Returns(StringAfterNoEscaping);
-                    yield return new TestCaseData("%MACADDRESS%").Returns(StringAfterAllEscaping);
-                    yield return new TestCaseData("%-MACADDRESS%").Returns(StringAfterMetacharacterEscaping);
-                    yield return new TestCaseData("%!MACADDRESS%").Returns(StringAfterNoEscaping);
-                    yield return new TestCaseData("%USERFIELD%").Returns(StringAfterAllEscaping);
-                    yield return new TestCaseData("%-USERFIELD%").Returns(StringAfterMetacharacterEscaping);
-                    yield return new TestCaseData("%!USERFIELD%").Returns(StringAfterNoEscaping);
+                    yield return new TestCaseData("%NAME%").Returns(STRING_AFTER_ALL_ESCAPING);
+                    yield return new TestCaseData("%-NAME%").Returns(STRING_AFTER_METACHARACTER_ESCAPING);
+                    yield return new TestCaseData("%!NAME%").Returns(STRING_AFTER_NO_ESCAPING);
+                    yield return new TestCaseData("%HOSTNAME%").Returns(STRING_AFTER_ALL_ESCAPING);
+                    yield return new TestCaseData("%-HOSTNAME%").Returns(STRING_AFTER_METACHARACTER_ESCAPING);
+                    yield return new TestCaseData("%!HOSTNAME%").Returns(STRING_AFTER_NO_ESCAPING);
+                    yield return new TestCaseData("%PORT%").Returns(PORT_AS_STRING);
+                    yield return new TestCaseData("%-PORT%").Returns(PORT_AS_STRING);
+                    yield return new TestCaseData("%!PORT%").Returns(PORT_AS_STRING);
+                    yield return new TestCaseData("%USERNAME%").Returns(STRING_AFTER_ALL_ESCAPING);
+                    yield return new TestCaseData("%-USERNAME%").Returns(STRING_AFTER_METACHARACTER_ESCAPING);
+                    yield return new TestCaseData("%!USERNAME%").Returns(STRING_AFTER_NO_ESCAPING);
+                    yield return new TestCaseData("%PASSWORD%").Returns(STRING_AFTER_ALL_ESCAPING);
+                    yield return new TestCaseData("%-PASSWORD%").Returns(STRING_AFTER_METACHARACTER_ESCAPING);
+                    yield return new TestCaseData("%!PASSWORD%").Returns(STRING_AFTER_NO_ESCAPING);
+                    yield return new TestCaseData("%DOMAIN%").Returns(STRING_AFTER_ALL_ESCAPING);
+                    yield return new TestCaseData("%-DOMAIN%").Returns(STRING_AFTER_METACHARACTER_ESCAPING);
+                    yield return new TestCaseData("%!DOMAIN%").Returns(STRING_AFTER_NO_ESCAPING);
+                    yield return new TestCaseData("%DESCRIPTION%").Returns(STRING_AFTER_ALL_ESCAPING);
+                    yield return new TestCaseData("%-DESCRIPTION%").Returns(STRING_AFTER_METACHARACTER_ESCAPING);
+                    yield return new TestCaseData("%!DESCRIPTION%").Returns(STRING_AFTER_NO_ESCAPING);
+                    yield return new TestCaseData("%MACADDRESS%").Returns(STRING_AFTER_ALL_ESCAPING);
+                    yield return new TestCaseData("%-MACADDRESS%").Returns(STRING_AFTER_METACHARACTER_ESCAPING);
+                    yield return new TestCaseData("%!MACADDRESS%").Returns(STRING_AFTER_NO_ESCAPING);
+                    yield return new TestCaseData("%USERFIELD%").Returns(STRING_AFTER_ALL_ESCAPING);
+                    yield return new TestCaseData("%-USERFIELD%").Returns(STRING_AFTER_METACHARACTER_ESCAPING);
+                    yield return new TestCaseData("%!USERFIELD%").Returns(STRING_AFTER_NO_ESCAPING);
                     yield return new TestCaseData("%%") {TestName = "EmptyVariableTagsNotParsed" }.Returns("%%");
-                    yield return new TestCaseData("/k echo %!USERNAME%") { TestName = "ParsingWorksWhenVariableIsNotInFirstPosition" }.Returns(SampleCommandString);
+                    yield return new TestCaseData("/k echo %!USERNAME%") { TestName = "ParsingWorksWhenVariableIsNotInFirstPosition" }.Returns(SAMPLE_COMMAND_STRING);
                     yield return new TestCaseData("%COMSPEC%") { TestName = "EnvironmentVariablesParsed" }.Returns(Environment.GetEnvironmentVariable("comspec"));
                     yield return new TestCaseData("%UNSUPPORTEDPARAMETER%") { TestName = "UnsupportedParametersNotParsed" }.Returns("%UNSUPPORTEDPARAMETER%");
                     yield return new TestCaseData(@"\%COMSPEC\%") { TestName = "BackslashEscapedEnvironmentVariablesParsed" }.Returns(Environment.GetEnvironmentVariable("comspec"));

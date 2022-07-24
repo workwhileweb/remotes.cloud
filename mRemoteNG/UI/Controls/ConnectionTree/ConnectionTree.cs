@@ -68,7 +68,7 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
             InitializeComponent();
             SetupConnectionTreeView();
             UseOverlays = false;
-            _themeManager = ThemeManager.getInstance();
+            _themeManager = ThemeManager.GetInstance();
             _themeManager.ThemeChanged += ThemeManagerOnThemeChanged;
             ApplyTheme();
         }
@@ -85,12 +85,12 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
 
             var themePalette = _themeManager.ActiveTheme.ExtendedPalette;
 
-            BackColor = themePalette.getColor("TreeView_Background");
-            ForeColor = themePalette.getColor("TreeView_Foreground");
-            SelectedBackColor = themePalette.getColor("Treeview_SelectedItem_Active_Background");
-            SelectedForeColor = themePalette.getColor("Treeview_SelectedItem_Active_Foreground");
-            UnfocusedSelectedBackColor = themePalette.getColor("Treeview_SelectedItem_Inactive_Background");
-            UnfocusedSelectedForeColor = themePalette.getColor("Treeview_SelectedItem_Inactive_Foreground");
+            BackColor = themePalette.GetColor("TreeView_Background");
+            ForeColor = themePalette.GetColor("TreeView_Foreground");
+            SelectedBackColor = themePalette.GetColor("Treeview_SelectedItem_Active_Background");
+            SelectedForeColor = themePalette.GetColor("Treeview_SelectedItem_Active_Foreground");
+            UnfocusedSelectedBackColor = themePalette.GetColor("Treeview_SelectedItem_Inactive_Background");
+            UnfocusedSelectedForeColor = themePalette.GetColor("Treeview_SelectedItem_Inactive_Foreground");
         }
 
         protected override void Dispose(bool disposing)

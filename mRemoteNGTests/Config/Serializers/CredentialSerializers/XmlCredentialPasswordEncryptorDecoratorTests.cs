@@ -15,9 +15,9 @@ namespace mRemoteNGTests.Config.Serializers.CredentialSerializers
     public class XmlCredentialPasswordEncryptorDecoratorTests
     {
         private XmlCredentialPasswordEncryptorDecorator _sut;
-        private const BlockCipherEngines CipherEngine = BlockCipherEngines.Twofish;
-        private const BlockCipherModes CipherMode = BlockCipherModes.EAX;
-        private const int KdfIterations = 2000;
+        private const BlockCipherEngines CIPHER_ENGINE = BlockCipherEngines.Twofish;
+        private const BlockCipherModes CIPHER_MODE = BlockCipherModes.EAX;
+        private const int KDF_ITERATIONS = 2000;
         private SecureString _key = "myKey1".ConvertToSecureString();
 
         [SetUp]
@@ -45,9 +45,9 @@ namespace mRemoteNGTests.Config.Serializers.CredentialSerializers
             Assert.That(firstElementPassword, Is.EqualTo("encrypted"));
         }
 
-        [TestCase("EncryptionEngine", CipherEngine)]
-        [TestCase("BlockCipherMode", CipherMode)]
-        [TestCase("KdfIterations", KdfIterations)]
+        [TestCase("EncryptionEngine", CIPHER_ENGINE)]
+        [TestCase("BlockCipherMode", CIPHER_MODE)]
+        [TestCase("KdfIterations", KDF_ITERATIONS)]
         [TestCase("Auth", "encrypted")]
         public void SetsRootNodeEncryptionAttributes(string attributeName, object expectedValue)
         {
@@ -76,9 +76,9 @@ namespace mRemoteNGTests.Config.Serializers.CredentialSerializers
         private ICryptographyProvider SetupCryptoProvider()
         {
             var cryptoProvider = Substitute.For<ICryptographyProvider>();
-            cryptoProvider.CipherEngine.Returns(CipherEngine);
-            cryptoProvider.CipherMode.Returns(CipherMode);
-            cryptoProvider.KeyDerivationIterations.Returns(KdfIterations);
+            cryptoProvider.CipherEngine.Returns(CIPHER_ENGINE);
+            cryptoProvider.CipherMode.Returns(CIPHER_MODE);
+            cryptoProvider.KeyDerivationIterations.Returns(KDF_ITERATIONS);
             cryptoProvider.Encrypt(null, null).ReturnsForAnyArgs("encrypted");
             return cryptoProvider;
         }

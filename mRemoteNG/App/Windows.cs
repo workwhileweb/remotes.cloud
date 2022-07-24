@@ -10,7 +10,7 @@ namespace mRemoteNG.App
         private static ActiveDirectoryImportWindow _adimportForm;
         private static ExternalToolsWindow _externalappsForm;
         private static PortScanWindow _portscanForm;
-        private static UltraVNCWindow _ultravncscForm;
+        private static UltraVncWindow _ultravncscForm;
         private static ConnectionTreeWindow _treeForm;
 
         internal static ConnectionTreeWindow TreeForm
@@ -22,7 +22,7 @@ namespace mRemoteNG.App
         internal static ConfigWindow ConfigForm { get; set; } = new();
         internal static ErrorAndInfoWindow ErrorsForm { get; set; } = new();
         private static UpdateWindow UpdateForm { get; set; } = new();
-        internal static SSHTransferWindow SshtransferForm { get; private set; } = new();
+        internal static SshTransferWindow SshtransferForm { get; private set; } = new();
 
 
         public static void Show(WindowType windowType)
@@ -45,9 +45,9 @@ namespace mRemoteNG.App
                         }
 
                         break;
-                    case WindowType.SSHTransfer:
+                    case WindowType.SshTransfer:
                         if (SshtransferForm == null || SshtransferForm.IsDisposed)
-                            SshtransferForm = new SSHTransferWindow();
+                            SshtransferForm = new SshTransferWindow();
                         SshtransferForm.Show(dockPanel);
                         break;
                     case WindowType.Update:
@@ -64,9 +64,9 @@ namespace mRemoteNG.App
                         _portscanForm = new PortScanWindow();
                         _portscanForm.Show(dockPanel);
                         break;
-                    case WindowType.UltraVNCSC:
+                    case WindowType.UltraVncsc:
                         if (_ultravncscForm == null || _ultravncscForm.IsDisposed)
-                            _ultravncscForm = new UltraVNCWindow();
+                            _ultravncscForm = new UltraVncWindow();
                         _ultravncscForm.Show(dockPanel);
                         break;
                 }

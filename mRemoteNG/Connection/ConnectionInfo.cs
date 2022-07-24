@@ -252,24 +252,24 @@ namespace mRemoteNG.Connection
                 // ReSharper disable once SwitchStatementMissingSomeCases
                 switch (protocol)
                 {
-                    case ProtocolType.RDP:
+                    case ProtocolType.Rdp:
                         return (int)RdpProtocol6.Defaults.Port;
-                    case ProtocolType.VNC:
-                        return (int)ProtocolVNC.Defaults.Port;
-                    case ProtocolType.SSH1:
-                        return (int)ProtocolSSH1.Defaults.Port;
-                    case ProtocolType.SSH2:
-                        return (int)ProtocolSSH2.Defaults.Port;
+                    case ProtocolType.Vnc:
+                        return (int)ProtocolVnc.Defaults.Port;
+                    case ProtocolType.Ssh1:
+                        return (int)ProtocolSsh1.Defaults.Port;
+                    case ProtocolType.Ssh2:
+                        return (int)ProtocolSsh2.Defaults.Port;
                     case ProtocolType.Telnet:
                         return (int)ProtocolTelnet.Defaults.Port;
                     case ProtocolType.Rlogin:
                         return (int)ProtocolRlogin.Defaults.Port;
-                    case ProtocolType.RAW:
+                    case ProtocolType.Raw:
                         return (int)RawProtocol.Defaults.Port;
-                    case ProtocolType.HTTP:
-                        return (int)ProtocolHTTP.Defaults.Port;
-                    case ProtocolType.HTTPS:
-                        return (int)ProtocolHTTPS.Defaults.Port;
+                    case ProtocolType.Http:
+                        return (int)ProtocolHttp.Defaults.Port;
+                    case ProtocolType.Https:
+                        return (int)ProtocolHttps.Defaults.Port;
                     case ProtocolType.PowerShell:
                         return (int)ProtocolPowerShell.Defaults.Port;
                     case ProtocolType.IntApp:
@@ -296,7 +296,7 @@ namespace mRemoteNG.Connection
         private void SetConnectionDefaults()
         {
             Hostname = string.Empty;
-            EC2Region = Settings.Default.ConDefaultEC2Region;
+            Ec2Region = Settings.Default.ConDefaultEC2Region;
         }
 
         private void SetProtocolDefaults()
@@ -306,39 +306,39 @@ namespace mRemoteNG.Connection
             Port = 0;
             PuttySession = Settings.Default.ConDefaultPuttySession;
             UseConsoleSession = Settings.Default.ConDefaultUseConsoleSession;
-            RDPAuthenticationLevel = (AuthenticationLevel)Enum.Parse(typeof(AuthenticationLevel), Settings.Default.ConDefaultRDPAuthenticationLevel);
-            RDPMinutesToIdleTimeout = Settings.Default.ConDefaultRDPMinutesToIdleTimeout;
-            RDPAlertIdleTimeout = Settings.Default.ConDefaultRDPAlertIdleTimeout;
+            RdpAuthenticationLevel = (AuthenticationLevel)Enum.Parse(typeof(AuthenticationLevel), Settings.Default.ConDefaultRDPAuthenticationLevel);
+            RdpMinutesToIdleTimeout = Settings.Default.ConDefaultRDPMinutesToIdleTimeout;
+            RdpAlertIdleTimeout = Settings.Default.ConDefaultRDPAlertIdleTimeout;
             LoadBalanceInfo = Settings.Default.ConDefaultLoadBalanceInfo;
-            RenderingEngine = (HTTPBase.RenderingEngine)Enum.Parse(typeof(HTTPBase.RenderingEngine), Settings.Default.ConDefaultRenderingEngine);
+            RenderingEngine = (HttpBase.RenderingEngine)Enum.Parse(typeof(HttpBase.RenderingEngine), Settings.Default.ConDefaultRenderingEngine);
             UseCredSsp = Settings.Default.ConDefaultUseCredSsp;
             UseRestrictedAdmin = Settings.Default.ConDefaultUseRestrictedAdmin;
-            UseRCG = Settings.Default.ConDefaultUseRCG;
+            UseRcg = Settings.Default.ConDefaultUseRCG;
             UseVmId = Settings.Default.ConDefaultUseVmId;
             UseEnhancedMode = Settings.Default.ConDefaultUseEnhancedMode;
         }
 
         private void SetRemoteDesktopServicesDefaults()
         {
-            RDPStartProgram = string.Empty;
-            RDPStartProgramWorkDir = string.Empty;
+            RdpStartProgram = string.Empty;
+            RdpStartProgramWorkDir = string.Empty;
         }
 
         private void SetRdGatewayDefaults()
         {
-            RDGatewayUsageMethod = (RDGatewayUsageMethod)Enum.Parse(typeof(RDGatewayUsageMethod), Settings.Default.ConDefaultRDGatewayUsageMethod);
-            RDGatewayHostname = Settings.Default.ConDefaultRDGatewayHostname;
-            RDGatewayUseConnectionCredentials = (RDGatewayUseConnectionCredentials)Enum.Parse(typeof(RDGatewayUseConnectionCredentials), Settings.Default.ConDefaultRDGatewayUseConnectionCredentials);
-            RDGatewayUsername = Settings.Default.ConDefaultRDGatewayUsername;
-            RDGatewayPassword = Settings.Default.ConDefaultRDGatewayPassword;
-            RDGatewayDomain = Settings.Default.ConDefaultRDGatewayDomain;
+            RdGatewayUsageMethod = (RdGatewayUsageMethod)Enum.Parse(typeof(RdGatewayUsageMethod), Settings.Default.ConDefaultRDGatewayUsageMethod);
+            RdGatewayHostname = Settings.Default.ConDefaultRDGatewayHostname;
+            RdGatewayUseConnectionCredentials = (RdGatewayUseConnectionCredentials)Enum.Parse(typeof(RdGatewayUseConnectionCredentials), Settings.Default.ConDefaultRDGatewayUseConnectionCredentials);
+            RdGatewayUsername = Settings.Default.ConDefaultRDGatewayUsername;
+            RdGatewayPassword = Settings.Default.ConDefaultRDGatewayPassword;
+            RdGatewayDomain = Settings.Default.ConDefaultRDGatewayDomain;
         }
 
         private void SetAppearanceDefaults()
         {
-            Resolution = (RDPResolutions)Enum.Parse(typeof(RDPResolutions), Settings.Default.ConDefaultResolution);
+            Resolution = (RdpResolutions)Enum.Parse(typeof(RdpResolutions), Settings.Default.ConDefaultResolution);
             AutomaticResize = Settings.Default.ConDefaultAutomaticResize;
-            Colors = (RDPColors)Enum.Parse(typeof(RDPColors), Settings.Default.ConDefaultColors);
+            Colors = (RdpColors)Enum.Parse(typeof(RdpColors), Settings.Default.ConDefaultColors);
             CacheBitmaps = Settings.Default.ConDefaultCacheBitmaps;
             DisplayWallpaper = Settings.Default.ConDefaultDisplayWallpaper;
             DisplayThemes = Settings.Default.ConDefaultDisplayThemes;
@@ -359,8 +359,8 @@ namespace mRemoteNG.Connection
             RedirectPorts = Settings.Default.ConDefaultRedirectPorts;
             RedirectSmartCards = Settings.Default.ConDefaultRedirectSmartCards;
             RedirectAudioCapture = Settings.Default.ConDefaultRedirectAudioCapture;
-            RedirectSound = (RDPSounds)Enum.Parse(typeof(RDPSounds), Settings.Default.ConDefaultRedirectSound);
-            SoundQuality = (RDPSoundQuality)Enum.Parse(typeof(RDPSoundQuality), Settings.Default.ConDefaultSoundQuality);
+            RedirectSound = (RdpSounds)Enum.Parse(typeof(RdpSounds), Settings.Default.ConDefaultRedirectSound);
+            SoundQuality = (RdpSoundQuality)Enum.Parse(typeof(RdpSoundQuality), Settings.Default.ConDefaultSoundQuality);
         }
 
         private void SetMiscDefaults()
@@ -370,24 +370,24 @@ namespace mRemoteNG.Connection
             MacAddress = Settings.Default.ConDefaultMacAddress;
             UserField = Settings.Default.ConDefaultUserField;
             Favorite = Settings.Default.ConDefaultFavorite;
-            RDPStartProgram = Settings.Default.ConDefaultRDPStartProgram;
-            RDPStartProgramWorkDir = Settings.Default.ConDefaultRDPStartProgramWorkDir;
+            RdpStartProgram = Settings.Default.ConDefaultRDPStartProgram;
+            RdpStartProgramWorkDir = Settings.Default.ConDefaultRDPStartProgramWorkDir;
             OpeningCommand = Settings.Default.OpeningCommand;
         }
 
         private void SetVncDefaults()
         {
-            VNCCompression = (ProtocolVNC.Compression)Enum.Parse(typeof(ProtocolVNC.Compression), Settings.Default.ConDefaultVNCCompression);
-            VNCEncoding = (ProtocolVNC.Encoding)Enum.Parse(typeof(ProtocolVNC.Encoding), Settings.Default.ConDefaultVNCEncoding);
-            VNCAuthMode = (ProtocolVNC.AuthMode)Enum.Parse(typeof(ProtocolVNC.AuthMode), Settings.Default.ConDefaultVNCAuthMode);
-            VNCProxyType = (ProtocolVNC.ProxyType)Enum.Parse(typeof(ProtocolVNC.ProxyType), Settings.Default.ConDefaultVNCProxyType);
-            VNCProxyIP = Settings.Default.ConDefaultVNCProxyIP;
-            VNCProxyPort = Settings.Default.ConDefaultVNCProxyPort;
-            VNCProxyUsername = Settings.Default.ConDefaultVNCProxyUsername;
-            VNCProxyPassword = Settings.Default.ConDefaultVNCProxyPassword;
-            VNCColors = (ProtocolVNC.Colors)Enum.Parse(typeof(ProtocolVNC.Colors), Settings.Default.ConDefaultVNCColors);
-            VNCSmartSizeMode = (ProtocolVNC.SmartSizeMode)Enum.Parse(typeof(ProtocolVNC.SmartSizeMode), Settings.Default.ConDefaultVNCSmartSizeMode);
-            VNCViewOnly = Settings.Default.ConDefaultVNCViewOnly;
+            VncCompression = (ProtocolVnc.Compression)Enum.Parse(typeof(ProtocolVnc.Compression), Settings.Default.ConDefaultVNCCompression);
+            VncEncoding = (ProtocolVnc.Encoding)Enum.Parse(typeof(ProtocolVnc.Encoding), Settings.Default.ConDefaultVNCEncoding);
+            VncAuthMode = (ProtocolVnc.AuthMode)Enum.Parse(typeof(ProtocolVnc.AuthMode), Settings.Default.ConDefaultVNCAuthMode);
+            VncProxyType = (ProtocolVnc.ProxyType)Enum.Parse(typeof(ProtocolVnc.ProxyType), Settings.Default.ConDefaultVNCProxyType);
+            VncProxyIp = Settings.Default.ConDefaultVNCProxyIP;
+            VncProxyPort = Settings.Default.ConDefaultVNCProxyPort;
+            VncProxyUsername = Settings.Default.ConDefaultVNCProxyUsername;
+            VncProxyPassword = Settings.Default.ConDefaultVNCProxyPassword;
+            VncColors = (ProtocolVnc.Colors)Enum.Parse(typeof(ProtocolVnc.Colors), Settings.Default.ConDefaultVNCColors);
+            VncSmartSizeMode = (ProtocolVnc.SmartSizeMode)Enum.Parse(typeof(ProtocolVnc.SmartSizeMode), Settings.Default.ConDefaultVNCSmartSizeMode);
+            VncViewOnly = Settings.Default.ConDefaultVNCViewOnly;
         }
 
         private void SetNonBrowsablePropertiesDefaults()

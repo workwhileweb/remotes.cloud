@@ -12,21 +12,21 @@ namespace mRemoteNG.UI.Controls
     internal class MrngNumericUpDown : NumericUpDown
     {
         private readonly ThemeManager _themeManager;
-        private MrngButton Up;
-        private MrngButton Down;
+        private MrngButton _up;
+        private MrngButton _down;
 
         public MrngNumericUpDown()
         {
-            _themeManager = ThemeManager.getInstance();
-            ThemeManager.getInstance().ThemeChanged += OnCreateControl;
+            _themeManager = ThemeManager.GetInstance();
+            ThemeManager.GetInstance().ThemeChanged += OnCreateControl;
         }
 
         protected override void OnCreateControl()
         {
             base.OnCreateControl();
             if (!_themeManager.ActiveAndExtended) return;
-            ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
-            BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
+            ForeColor = _themeManager.ActiveTheme.ExtendedPalette.GetColor("TextBox_Foreground");
+            BackColor = _themeManager.ActiveTheme.ExtendedPalette.GetColor("TextBox_Background");
             SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.UserPaint, true);
 
             if (Controls.Count > 0)
@@ -51,22 +51,22 @@ namespace mRemoteNG.UI.Controls
             }
 
             //Add new themable buttons
-            Up = new MrngButton
+            _up = new MrngButton
             {
                 Text = "\u25B2",
                 Font = new Font(Font.FontFamily, 5f)
             };
-            Up.SetBounds(Controls.Owner.Width - 17, 2, 16, Controls.Owner.Height / 2 - 1);
-            Up.Click += Up_Click;
-            Down = new MrngButton
+            _up.SetBounds(Controls.Owner.Width - 17, 2, 16, Controls.Owner.Height / 2 - 1);
+            _up.Click += Up_Click;
+            _down = new MrngButton
             {
                 Text = "\u25BC",
                 Font = new Font(Font.FontFamily, 5f)
             };
-            Down.SetBounds(Controls.Owner.Width - 17, Controls.Owner.Height / 2 + 1, 16, Controls.Owner.Height / 2 - 1);
-            Down.Click += Down_Click;
-            Controls.Add(Up);
-            Controls.Add(Down);
+            _down.SetBounds(Controls.Owner.Width - 17, Controls.Owner.Height / 2 + 1, 16, Controls.Owner.Height / 2 - 1);
+            _down.Click += Down_Click;
+            Controls.Add(_up);
+            Controls.Add(_down);
             Invalidate();
         }
 
@@ -86,12 +86,12 @@ namespace mRemoteNG.UI.Controls
             {
                 if (Enabled)
                 {
-                    ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
-                    BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
+                    ForeColor = _themeManager.ActiveTheme.ExtendedPalette.GetColor("TextBox_Foreground");
+                    BackColor = _themeManager.ActiveTheme.ExtendedPalette.GetColor("TextBox_Background");
                 }
                 else
                 {
-                    BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Disabled_Background");
+                    BackColor = _themeManager.ActiveTheme.ExtendedPalette.GetColor("TextBox_Disabled_Background");
                 }
             }
 
@@ -108,7 +108,7 @@ namespace mRemoteNG.UI.Controls
             //Fix Border
             if (BorderStyle != BorderStyle.None)
                 e.Graphics.DrawRectangle(
-                                         new Pen(_themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Border"),
+                                         new Pen(_themeManager.ActiveTheme.ExtendedPalette.GetColor("TextBox_Border"),
                                                  1), 0, 0, Width - 1,
                                          Height - 1);
         }

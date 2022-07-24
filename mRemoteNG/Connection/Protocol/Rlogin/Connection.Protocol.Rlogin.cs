@@ -4,7 +4,7 @@
     {
         public ProtocolRlogin()
         {
-            PuttyProtocol = Putty_Protocol.rlogin;
+            PuttyProtocol = PuttyBase.PuttyProtocols.Rlogin;
         }
 
         public enum Defaults

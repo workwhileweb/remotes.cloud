@@ -133,7 +133,7 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
 
         private static ConnectionInfo ConnectionInfoFromXml(XmlNode xmlNode)
         {
-            var connectionInfo = new ConnectionInfo {Protocol = ProtocolType.RDP};
+            var connectionInfo = new ConnectionInfo {Protocol = ProtocolType.Rdp};
 
             var propertiesNode = xmlNode.SelectSingleNode("./properties");
             if (_schemaVersion == 1)
@@ -183,8 +183,8 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
             {
 				if (bool.TryParse(connectionSettingsNode.SelectSingleNode("./connectToConsole")?.InnerText, out var useConsole))
 					connectionInfo.UseConsoleSession = useConsole;
-                connectionInfo.RDPStartProgram = connectionSettingsNode.SelectSingleNode("./startProgram")?.InnerText ?? string.Empty;
-                connectionInfo.RDPStartProgramWorkDir = connectionSettingsNode.SelectSingleNode("./startProgramWorkDir")?.InnerText ?? string.Empty;
+                connectionInfo.RdpStartProgram = connectionSettingsNode.SelectSingleNode("./startProgram")?.InnerText ?? string.Empty;
+                connectionInfo.RdpStartProgramWorkDir = connectionSettingsNode.SelectSingleNode("./startProgramWorkDir")?.InnerText ?? string.Empty;
                 if (int.TryParse(connectionSettingsNode.SelectSingleNode("./port")?.InnerText, out var port))
 					connectionInfo.Port = port;
             }
@@ -197,51 +197,51 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
             var gatewaySettingsNode = xmlNode.SelectSingleNode("./gatewaySettings");
             if (gatewaySettingsNode?.Attributes?["inherit"]?.Value == "None")
             {
-                connectionInfo.RDGatewayUsageMethod =
+                connectionInfo.RdGatewayUsageMethod =
                     gatewaySettingsNode.SelectSingleNode("./enabled")?.InnerText == "True"
-                        ? RDGatewayUsageMethod.Always
-                        : RDGatewayUsageMethod.Never;
-                connectionInfo.RDGatewayHostname = gatewaySettingsNode.SelectSingleNode("./hostName")?.InnerText ?? string.Empty;
-                connectionInfo.RDGatewayUsername = gatewaySettingsNode.SelectSingleNode("./userName")?.InnerText ?? string.Empty;
+                        ? RdGatewayUsageMethod.Always
+                        : RdGatewayUsageMethod.Never;
+                connectionInfo.RdGatewayHostname = gatewaySettingsNode.SelectSingleNode("./hostName")?.InnerText ?? string.Empty;
+                connectionInfo.RdGatewayUsername = gatewaySettingsNode.SelectSingleNode("./userName")?.InnerText ?? string.Empty;
 
                 var passwordNode = gatewaySettingsNode.SelectSingleNode("./password");
-                connectionInfo.RDGatewayPassword = passwordNode?.Attributes?["storeAsClearText"]?.Value == "True"
+                connectionInfo.RdGatewayPassword = passwordNode?.Attributes?["storeAsClearText"]?.Value == "True"
                     ? passwordNode.InnerText
                     : DecryptRdcManPassword(passwordNode?.InnerText);
 
-                connectionInfo.RDGatewayDomain = gatewaySettingsNode.SelectSingleNode("./domain")?.InnerText ?? string.Empty;
+                connectionInfo.RdGatewayDomain = gatewaySettingsNode.SelectSingleNode("./domain")?.InnerText ?? string.Empty;
                 // ./logonMethod
                 // ./localBypass
                 // ./credSharing
             }
             else
             {
-                connectionInfo.Inheritance.RDGatewayUsageMethod = true;
-                connectionInfo.Inheritance.RDGatewayHostname = true;
-                connectionInfo.Inheritance.RDGatewayUsername = true;
-                connectionInfo.Inheritance.RDGatewayPassword = true;
-                connectionInfo.Inheritance.RDGatewayDomain = true;
+                connectionInfo.Inheritance.RdGatewayUsageMethod = true;
+                connectionInfo.Inheritance.RdGatewayHostname = true;
+                connectionInfo.Inheritance.RdGatewayUsername = true;
+                connectionInfo.Inheritance.RdGatewayPassword = true;
+                connectionInfo.Inheritance.RdGatewayDomain = true;
             }
 
             var remoteDesktopNode = xmlNode.SelectSingleNode("./remoteDesktop");
             if (remoteDesktopNode?.Attributes?["inherit"]?.Value == "None")
             {
                 connectionInfo.Resolution = 
-	                Enum.TryParse<RDPResolutions>(remoteDesktopNode.SelectSingleNode("./size")?.InnerText.Replace(" ", ""), true, out var rdpResolution)
+	                Enum.TryParse<RdpResolutions>(remoteDesktopNode.SelectSingleNode("./size")?.InnerText.Replace(" ", ""), true, out var rdpResolution)
 	                ? rdpResolution
-                    : RDPResolutions.FitToWindow;
+                    : RdpResolutions.FitToWindow;
 
                 if (remoteDesktopNode.SelectSingleNode("./sameSizeAsClientArea")?.InnerText == "True")
                 {
-                    connectionInfo.Resolution = RDPResolutions.FitToWindow;
+                    connectionInfo.Resolution = RdpResolutions.FitToWindow;
                 }
 
                 if (remoteDesktopNode.SelectSingleNode("./fullScreen")?.InnerText == "True")
                 {
-                    connectionInfo.Resolution = RDPResolutions.Fullscreen;
+                    connectionInfo.Resolution = RdpResolutions.Fullscreen;
                 }
 
-                if (Enum.TryParse<RDPColors>(remoteDesktopNode.SelectSingleNode("./colorDepth")?.InnerText, true, out var rdpColors))
+                if (Enum.TryParse<RdpColors>(remoteDesktopNode.SelectSingleNode("./colorDepth")?.InnerText, true, out var rdpColors))
 	                connectionInfo.Colors = rdpColors;
             }
             else
@@ -258,15 +258,15 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
                 {
                     case "0": // Bring to this computer
                     case "Client":
-                        connectionInfo.RedirectSound = RDPSounds.BringToThisComputer;
+                        connectionInfo.RedirectSound = RdpSounds.BringToThisComputer;
                         break;
                     case "1": // Leave at remote computer
                     case "Remote":
-                        connectionInfo.RedirectSound = RDPSounds.LeaveAtRemoteComputer;
+                        connectionInfo.RedirectSound = RdpSounds.LeaveAtRemoteComputer;
                         break;
                     case "2": // Do not play
                     case "NoSound":
-                        connectionInfo.RedirectSound = RDPSounds.DoNotPlay;
+                        connectionInfo.RedirectSound = RdpSounds.DoNotPlay;
                         break;
                 }
 
@@ -325,21 +325,21 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
                 {
                     case "0": // No authentication
                     case "None":
-                        connectionInfo.RDPAuthenticationLevel = AuthenticationLevel.NoAuth;
+                        connectionInfo.RdpAuthenticationLevel = AuthenticationLevel.NoAuth;
                         break;
                     case "1": // Do not connect if authentication fails
                     case "Required":
-                        connectionInfo.RDPAuthenticationLevel = AuthenticationLevel.AuthRequired;
+                        connectionInfo.RdpAuthenticationLevel = AuthenticationLevel.AuthRequired;
                         break;
                     case "2": // Warn if authentication fails
                     case "Warn":
-                        connectionInfo.RDPAuthenticationLevel = AuthenticationLevel.WarnOnFailedAuth;
+                        connectionInfo.RdpAuthenticationLevel = AuthenticationLevel.WarnOnFailedAuth;
                         break;
                 }
             }
             else
             {
-                connectionInfo.Inheritance.RDPAuthenticationLevel = true;
+                connectionInfo.Inheritance.RdpAuthenticationLevel = true;
             }
 
             // ./displaySettings/thumbnailScale

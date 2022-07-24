@@ -47,7 +47,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkEncryptCompleteFile
             // 
-            this.chkEncryptCompleteFile._mice = MrngCheckBox.MouseState.OUT;
+            this.chkEncryptCompleteFile.Mice = MrngCheckBox.MouseState.Out;
             this.chkEncryptCompleteFile.AutoSize = true;
             this.chkEncryptCompleteFile.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkEncryptCompleteFile.Location = new System.Drawing.Point(3, 3);
@@ -59,7 +59,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // comboBoxEncryptionEngine
             // 
-            this.comboBoxEncryptionEngine._mice = MrngComboBox.MouseState.HOVER;
+            this.comboBoxEncryptionEngine.Mice = MrngComboBox.MouseState.Hover;
             this.comboBoxEncryptionEngine.Dock = System.Windows.Forms.DockStyle.Fill;
             this.comboBoxEncryptionEngine.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxEncryptionEngine.FormattingEnabled = true;
@@ -93,7 +93,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // comboBoxBlockCipher
             // 
-            this.comboBoxBlockCipher._mice = MrngComboBox.MouseState.HOVER;
+            this.comboBoxBlockCipher.Mice = MrngComboBox.MouseState.Hover;
             this.comboBoxBlockCipher.Dock = System.Windows.Forms.DockStyle.Fill;
             this.comboBoxBlockCipher.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxBlockCipher.FormattingEnabled = true;
@@ -138,7 +138,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // btnTestSettings
             // 
-            this.btnTestSettings._mice = MrngButton.MouseState.OUT;
+            this.btnTestSettings.Mice = MrngButton.MouseState.Out;
             this.btnTestSettings.AutoSize = true;
             this.btnTestSettings.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnTestSettings.Location = new System.Drawing.Point(240, 85);

@@ -17,17 +17,17 @@ namespace mRemoteNG.UI.Controls
         /// </summary>
         public enum MouseState
         {
-            HOVER,
-            DOWN,
-            OUT
+            Hover,
+            Down,
+            Out
         }
 
         public MrngButton()
         {
-            ThemeManager.getInstance().ThemeChanged += OnCreateControl;
+            ThemeManager.GetInstance().ThemeChanged += OnCreateControl;
         }
 
-        public MouseState _mice { get; set; }
+        public MouseState Mice { get; set; }
 
         /// <summary>
         /// Rewrite the function to allow for coloring the component depending on the mouse state
@@ -35,31 +35,31 @@ namespace mRemoteNG.UI.Controls
         protected override void OnCreateControl()
         {
             base.OnCreateControl();
-            _themeManager = ThemeManager.getInstance();
+            _themeManager = ThemeManager.GetInstance();
             if (_themeManager.ThemingActive)
             {
-                _mice = MouseState.OUT;
+                Mice = MouseState.Out;
                 MouseEnter += (sender, args) =>
                 {
-                    _mice = MouseState.HOVER;
+                    Mice = MouseState.Hover;
                     Invalidate();
                 };
                 MouseLeave += (sender, args) =>
                 {
-                    _mice = MouseState.OUT;
+                    Mice = MouseState.Out;
                     Invalidate();
                 };
                 MouseDown += (sender, args) =>
                 {
                     if (args.Button == MouseButtons.Left)
                     {
-                        _mice = MouseState.DOWN;
+                        Mice = MouseState.Down;
                         Invalidate();
                     }
                 };
                 MouseUp += (sender, args) =>
                 {
-                    _mice = MouseState.OUT;
+                    Mice = MouseState.Out;
 
                     Invalidate();
                 };
@@ -85,30 +85,30 @@ namespace mRemoteNG.UI.Controls
             Color border;
             if (Enabled)
             {
-                switch (_mice)
+                switch (Mice)
                 {
-                    case MouseState.HOVER:
-                        back = _themeManager.ActiveTheme.ExtendedPalette.getColor("Button_Hover_Background");
-                        fore = _themeManager.ActiveTheme.ExtendedPalette.getColor("Button_Hover_Foreground");
-                        border = _themeManager.ActiveTheme.ExtendedPalette.getColor("Button_Hover_Border");
+                    case MouseState.Hover:
+                        back = _themeManager.ActiveTheme.ExtendedPalette.GetColor("Button_Hover_Background");
+                        fore = _themeManager.ActiveTheme.ExtendedPalette.GetColor("Button_Hover_Foreground");
+                        border = _themeManager.ActiveTheme.ExtendedPalette.GetColor("Button_Hover_Border");
                         break;
-                    case MouseState.DOWN:
-                        back = _themeManager.ActiveTheme.ExtendedPalette.getColor("Button_Pressed_Background");
-                        fore = _themeManager.ActiveTheme.ExtendedPalette.getColor("Button_Pressed_Foreground");
-                        border = _themeManager.ActiveTheme.ExtendedPalette.getColor("Button_Pressed_Border");
+                    case MouseState.Down:
+                        back = _themeManager.ActiveTheme.ExtendedPalette.GetColor("Button_Pressed_Background");
+                        fore = _themeManager.ActiveTheme.ExtendedPalette.GetColor("Button_Pressed_Foreground");
+                        border = _themeManager.ActiveTheme.ExtendedPalette.GetColor("Button_Pressed_Border");
                         break;
                     default:
-                        back = _themeManager.ActiveTheme.ExtendedPalette.getColor("Button_Background");
-                        fore = _themeManager.ActiveTheme.ExtendedPalette.getColor("Button_Foreground");
-                        border = _themeManager.ActiveTheme.ExtendedPalette.getColor("Button_Border");
+                        back = _themeManager.ActiveTheme.ExtendedPalette.GetColor("Button_Background");
+                        fore = _themeManager.ActiveTheme.ExtendedPalette.GetColor("Button_Foreground");
+                        border = _themeManager.ActiveTheme.ExtendedPalette.GetColor("Button_Border");
                         break;
                 }
             }
             else
             {
-                back = _themeManager.ActiveTheme.ExtendedPalette.getColor("Button_Disabled_Background");
-                fore = _themeManager.ActiveTheme.ExtendedPalette.getColor("Button_Disabled_Foreground");
-                border = _themeManager.ActiveTheme.ExtendedPalette.getColor("Button_Disabled_Border");
+                back = _themeManager.ActiveTheme.ExtendedPalette.GetColor("Button_Disabled_Background");
+                fore = _themeManager.ActiveTheme.ExtendedPalette.GetColor("Button_Disabled_Foreground");
+                border = _themeManager.ActiveTheme.ExtendedPalette.GetColor("Button_Disabled_Border");
             }
 
 

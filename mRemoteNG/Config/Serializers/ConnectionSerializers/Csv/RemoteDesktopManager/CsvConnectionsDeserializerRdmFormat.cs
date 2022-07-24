@@ -24,8 +24,8 @@ public partial class CsvConnectionsDeserializerRdmFormat : IDeserializer<string,
     {
         _connectionTypes = new List<RemoteDesktopManagerConnectionInfo>
         {
-            new(ProtocolType.RDP, "RDP (Microsoft Remote Desktop)", 3389, "Remote Desktop"),
-            new(ProtocolType.SSH2, "SSH Shell", 22, "SSH")
+            new(ProtocolType.Rdp, "RDP (Microsoft Remote Desktop)", 3389, "Remote Desktop"),
+            new(ProtocolType.Ssh2, "SSH Shell", 22, "SSH")
         };
 
         _groups = new HashSet<string>();
@@ -77,7 +77,7 @@ public partial class CsvConnectionsDeserializerRdmFormat : IDeserializer<string,
             }
             else
             {
-                var container = allChildren.FirstOrDefault(x => x.ConstantID == path);
+                var container = allChildren.FirstOrDefault(x => x.ConstantId == path);
                 if (container == default) continue;
 
                 container.AddChild(connection);

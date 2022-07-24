@@ -3,7 +3,7 @@ using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.Connection.Protocol.RDP
 {
-    public enum RDGatewayUseConnectionCredentials
+    public enum RdGatewayUseConnectionCredentials
     {
         [LocalizedAttributes.LocalizedDescription(nameof(Language.UseDifferentUsernameAndPassword))]
         No = 0,

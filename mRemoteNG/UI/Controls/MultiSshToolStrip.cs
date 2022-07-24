@@ -14,12 +14,12 @@ namespace mRemoteNG.UI.Controls
     public partial class MultiSshToolStrip : ToolStrip
     {
         private IContainer components;
-        private ToolStripLabel lblMultiSsh;
-        private ToolStripTextBox txtMultiSsh;
-        private int previousCommandIndex = 0;
-        private readonly ArrayList processHandlers = new();
-        private readonly ArrayList quickConnectConnections = new();
-        private readonly ArrayList previousCommands = new();
+        private ToolStripLabel _lblMultiSsh;
+        private ToolStripTextBox _txtMultiSsh;
+        private int _previousCommandIndex = 0;
+        private readonly ArrayList _processHandlers = new();
+        private readonly ArrayList _quickConnectConnections = new();
+        private readonly ArrayList _previousCommands = new();
         private readonly ThemeManager _themeManager;
 
         private int CommandHistoryLength { get; set; } = 100;
@@ -27,7 +27,7 @@ namespace mRemoteNG.UI.Controls
         public MultiSshToolStrip()
         {
             InitializeComponent();
-            _themeManager = ThemeManager.getInstance();
+            _themeManager = ThemeManager.GetInstance();
             _themeManager.ThemeChanged += ApplyTheme;
             ApplyTheme();
         }
@@ -35,19 +35,19 @@ namespace mRemoteNG.UI.Controls
         private void ApplyTheme()
         {
             if (!_themeManager.ActiveAndExtended) return;
-            txtMultiSsh.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
-            txtMultiSsh.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
+            _txtMultiSsh.BackColor = _themeManager.ActiveTheme.ExtendedPalette.GetColor("TextBox_Background");
+            _txtMultiSsh.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.GetColor("TextBox_Foreground");
         }
 
         private ArrayList ProcessOpenConnections(ConnectionInfo connection)
         {
             var handlers = new ArrayList();
 
-            foreach (ProtocolBase _base in connection.OpenConnections)
+            foreach (ProtocolBase @base in connection.OpenConnections)
             {
-                if (_base.GetType().IsSubclassOf(typeof(PuttyBase)))
+                if (@base.GetType().IsSubclassOf(typeof(PuttyBase)))
                 {
-                    handlers.Add((PuttyBase)_base);
+                    handlers.Add((PuttyBase)@base);
                 }
             }
 
@@ -56,9 +56,9 @@ namespace mRemoteNG.UI.Controls
 
         private void SendAllKeystrokes(int keyType, int keyData)
         {
-            if (processHandlers.Count == 0) return;
+            if (_processHandlers.Count == 0) return;
 
-            foreach (PuttyBase proc in processHandlers)
+            foreach (PuttyBase proc in _processHandlers)
             {
                 NativeMethods.PostMessage(proc.PuttyHandle, keyType, new IntPtr(keyData), new IntPtr(0));
             }
@@ -68,10 +68,10 @@ namespace mRemoteNG.UI.Controls
 
         private void RefreshActiveConnections(object sender, EventArgs e)
         {
-            processHandlers.Clear();
-            foreach (ConnectionInfo connection in quickConnectConnections)
+            _processHandlers.Clear();
+            foreach (ConnectionInfo connection in _quickConnectConnections)
             {
-                processHandlers.AddRange(ProcessOpenConnections(connection));
+                _processHandlers.AddRange(ProcessOpenConnections(connection));
             }
 
             var connectionTreeConnections = Runtime.ConnectionsService.ConnectionTreeModel.GetRecursiveChildList()
@@ -79,7 +79,7 @@ namespace mRemoteNG.UI.Controls
 
             foreach (var connection in connectionTreeConnections)
             {
-                processHandlers.AddRange(ProcessOpenConnections(connection));
+                _processHandlers.AddRange(ProcessOpenConnections(connection));
             }
         }
 
@@ -92,11 +92,11 @@ namespace mRemoteNG.UI.Controls
                 {
                     switch (e.KeyCode)
                     {
-                        case Keys.Up when previousCommandIndex - 1 >= 0:
-                            previousCommandIndex -= 1;
+                        case Keys.Up when _previousCommandIndex - 1 >= 0:
+                            _previousCommandIndex -= 1;
                             break;
-                        case Keys.Down when previousCommandIndex + 1 < previousCommands.Count:
-                            previousCommandIndex += 1;
+                        case Keys.Down when _previousCommandIndex + 1 < _previousCommands.Count:
+                            _previousCommandIndex += 1;
                             break;
                         default:
                             return;
@@ -104,8 +104,8 @@ namespace mRemoteNG.UI.Controls
                 }
                 catch { }
 
-                txtMultiSsh.Text = previousCommands[previousCommandIndex].ToString();
-                txtMultiSsh.SelectAll();
+                _txtMultiSsh.Text = _previousCommands[_previousCommandIndex].ToString();
+                _txtMultiSsh.SelectAll();
             }
 
             if (e.Control && e.KeyCode != Keys.V && e.Alt == false)
@@ -115,7 +115,7 @@ namespace mRemoteNG.UI.Controls
 
             if (e.KeyCode == Keys.Enter)
             {
-                foreach (var chr1 in txtMultiSsh.Text)
+                foreach (var chr1 in _txtMultiSsh.Text)
                 {
                     SendAllKeystrokes(NativeMethods.WM_CHAR, Convert.ToByte(chr1));
                 }
@@ -127,14 +127,14 @@ namespace mRemoteNG.UI.Controls
         private void ProcessKeyRelease(object sender, KeyEventArgs e)
         {
             if (e.KeyCode != Keys.Enter) return;
-            if (string.IsNullOrWhiteSpace(txtMultiSsh.Text)) return;
+            if (string.IsNullOrWhiteSpace(_txtMultiSsh.Text)) return;
 
-            previousCommands.Add(txtMultiSsh.Text.Trim());
+            _previousCommands.Add(_txtMultiSsh.Text.Trim());
 
-            if (previousCommands.Count >= CommandHistoryLength) previousCommands.RemoveAt(0);
+            if (_previousCommands.Count >= CommandHistoryLength) _previousCommands.RemoveAt(0);
 
-            previousCommandIndex = previousCommands.Count - 1;
-            txtMultiSsh.Clear();
+            _previousCommandIndex = _previousCommands.Count - 1;
+            _txtMultiSsh.Clear();
         }
 
         #endregion
@@ -157,29 +157,29 @@ namespace mRemoteNG.UI.Controls
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.lblMultiSsh = new ToolStripLabel();
-            this.txtMultiSsh = new ToolStripTextBox();
+            this._lblMultiSsh = new ToolStripLabel();
+            this._txtMultiSsh = new ToolStripTextBox();
             this.SuspendLayout();
             // 
             // lblMultiSSH
             // 
-            this.lblMultiSsh.Name = "_lblMultiSsh";
-            this.lblMultiSsh.Size = new System.Drawing.Size(77, 22);
-            this.lblMultiSsh.Text = Language.MultiSsh;
+            this._lblMultiSsh.Name = "_lblMultiSsh";
+            this._lblMultiSsh.Size = new System.Drawing.Size(77, 22);
+            this._lblMultiSsh.Text = Language.MultiSsh;
             // 
             // txtMultiSsh
             // 
-            this.txtMultiSsh.Name = "_txtMultiSsh";
-            this.txtMultiSsh.Size = new System.Drawing.Size(new DisplayProperties().ScaleWidth(300), 25);
-            this.txtMultiSsh.ToolTipText = Language.MultiSshToolTip;
-            this.txtMultiSsh.Enter += RefreshActiveConnections;
-            this.txtMultiSsh.KeyDown += ProcessKeyPress;
-            this.txtMultiSsh.KeyUp += ProcessKeyRelease;
+            this._txtMultiSsh.Name = "_txtMultiSsh";
+            this._txtMultiSsh.Size = new System.Drawing.Size(new DisplayProperties().ScaleWidth(300), 25);
+            this._txtMultiSsh.ToolTipText = Language.MultiSshToolTip;
+            this._txtMultiSsh.Enter += RefreshActiveConnections;
+            this._txtMultiSsh.KeyDown += ProcessKeyPress;
+            this._txtMultiSsh.KeyUp += ProcessKeyRelease;
 
             this.Items.AddRange(new ToolStripItem[]
             {
-                lblMultiSsh,
-                txtMultiSsh
+                _lblMultiSsh,
+                _txtMultiSsh
             });
             this.ResumeLayout(false);
         }

@@ -14,14 +14,14 @@ namespace mRemoteNG.Config.Putty
 {
     public class PuttySessionsRegistryProvider : AbstractPuttySessionsProvider
     {
-        private const string PuttySessionsKey = "Software\\SimonTatham\\PuTTY\\Sessions";
+        private const string PUTTY_SESSIONS_KEY = "Software\\SimonTatham\\PuTTY\\Sessions";
         private static ManagementEventWatcher _eventWatcher;
 
         #region Public Methods
 
         public override string[] GetSessionNames(bool raw = false)
         {
-            var sessionsKey = Registry.CurrentUser.OpenSubKey(PuttySessionsKey);
+            var sessionsKey = Registry.CurrentUser.OpenSubKey(PUTTY_SESSIONS_KEY);
             if (sessionsKey == null) return new string[] { };
 
             var sessionNames = new List<string>();
@@ -44,7 +44,7 @@ namespace mRemoteNG.Config.Putty
             if (string.IsNullOrEmpty(sessionName))
                 return null;
 
-            var sessionsKey = Registry.CurrentUser.OpenSubKey(PuttySessionsKey);
+            var sessionsKey = Registry.CurrentUser.OpenSubKey(PUTTY_SESSIONS_KEY);
             var sessionKey = sessionsKey?.OpenSubKey(sessionName);
             if (sessionKey == null) return null;
 
@@ -66,7 +66,7 @@ namespace mRemoteNG.Config.Putty
             switch (protocol.ToLowerInvariant())
             {
                 case "raw":
-                    sessionInfo.Protocol = ProtocolType.RAW;
+                    sessionInfo.Protocol = ProtocolType.Raw;
                     break;
                 case "rlogin":
                     sessionInfo.Protocol = ProtocolType.Rlogin;
@@ -82,7 +82,7 @@ namespace mRemoteNG.Config.Putty
                      *
                      * default to SSH2 if any other value is received
                      */
-                    sessionInfo.Protocol = sshVersion == 1 || sshVersion == 0 ? ProtocolType.SSH1 : ProtocolType.SSH2;
+                    sessionInfo.Protocol = sshVersion == 1 || sshVersion == 0 ? ProtocolType.Ssh1 : ProtocolType.Ssh2;
                     break;
                 case "telnet":
                     sessionInfo.Protocol = ProtocolType.Telnet;
@@ -107,7 +107,7 @@ namespace mRemoteNG.Config.Putty
             try
             {
                 var currentUserSid = WindowsIdentity.GetCurrent().User?.Value;
-                var key = string.Join("\\", currentUserSid, PuttySessionsKey).Replace("\\", "\\\\");
+                var key = string.Join("\\", currentUserSid, PUTTY_SESSIONS_KEY).Replace("\\", "\\\\");
                 var query = new WqlEventQuery(
                                               $"SELECT * FROM RegistryTreeChangeEvent WHERE Hive = \'HKEY_USERS\' AND RootPath = \'{key}\'");
                 _eventWatcher = new ManagementEventWatcher(query);

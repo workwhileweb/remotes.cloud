@@ -41,8 +41,8 @@ namespace mRemoteNG.Tools.Cmdline
                 foreach (var txt in args)
                 {
                     // Look for new parameters (-,/ or --) and a possible enclosed value (=,:)
-                    var Parts = spliter.Split(txt, 3);
-                    switch (Parts.Length)
+                    var parts = spliter.Split(txt, 3);
+                    switch (parts.Length)
                     {
                         case 1:
                             // Found a value (for the last parameter found (space separator))
@@ -50,8 +50,8 @@ namespace mRemoteNG.Tools.Cmdline
                             {
                                 if (!_parameters.ContainsKey(parameter))
                                 {
-                                    Parts[0] = remover.Replace(Parts[0], "$1");
-                                    _parameters.Add(parameter, Parts[0]);
+                                    parts[0] = remover.Replace(parts[0], "$1");
+                                    _parameters.Add(parameter, parts[0]);
                                 }
 
                                 parameter = null;
@@ -70,7 +70,7 @@ namespace mRemoteNG.Tools.Cmdline
                                 }
                             }
 
-                            parameter = Parts[1];
+                            parameter = parts[1];
                             break;
                         case 3:
                             // Parameter with enclosed value
@@ -83,12 +83,12 @@ namespace mRemoteNG.Tools.Cmdline
                                 }
                             }
 
-                            parameter = Parts[1];
+                            parameter = parts[1];
                             // Remove possible enclosing characters (",')
                             if (!_parameters.ContainsKey(parameter))
                             {
-                                Parts[2] = remover.Replace(Parts[2], "$1");
-                                _parameters.Add(parameter, Parts[2]);
+                                parts[2] = remover.Replace(parts[2], "$1");
+                                _parameters.Add(parameter, parts[2]);
                             }
 
                             parameter = null;

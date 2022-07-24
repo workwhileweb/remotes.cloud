@@ -6,16 +6,16 @@ namespace mRemoteNG.Connection.Protocol
     public enum ProtocolType
     {
         [LocalizedAttributes.LocalizedDescription(nameof(Language.Rdp))]
-        RDP = 0,
+        Rdp = 0,
 
         [LocalizedAttributes.LocalizedDescription(nameof(Language.Vnc))]
-        VNC = 1,
+        Vnc = 1,
 
         [LocalizedAttributes.LocalizedDescription(nameof(Language.SshV1))]
-        SSH1 = 2,
+        Ssh1 = 2,
 
         [LocalizedAttributes.LocalizedDescription(nameof(Language.SshV2))]
-        SSH2 = 3,
+        Ssh2 = 3,
 
         [LocalizedAttributes.LocalizedDescription(nameof(Language.Telnet))]
         Telnet = 4,
@@ -24,13 +24,13 @@ namespace mRemoteNG.Connection.Protocol
         Rlogin = 5,
 
         [LocalizedAttributes.LocalizedDescription(nameof(Language.Raw))]
-        RAW = 6,
+        Raw = 6,
 
         [LocalizedAttributes.LocalizedDescription(nameof(Language.Http))]
-        HTTP = 7,
+        Http = 7,
 
         [LocalizedAttributes.LocalizedDescription(nameof(Language.Https))]
-        HTTPS = 8,
+        Https = 8,
 
         [LocalizedAttributes.LocalizedDescription(nameof(Language.PowerShell))]
         PowerShell = 10,

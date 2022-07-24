@@ -19,7 +19,7 @@ namespace mRemoteNG.UI.Window
             // 
             // btnImport
             // 
-            this.btnImport._mice = MrngButton.MouseState.HOVER;
+            this.btnImport.Mice = MrngButton.MouseState.Hover;
             this.btnImport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnImport.Location = new System.Drawing.Point(126, 345);
             this.btnImport.Name = "btnImport";
@@ -51,7 +51,7 @@ namespace mRemoteNG.UI.Window
             // 
             // btnChangeDomain
             // 
-            this.btnChangeDomain._mice = MrngButton.MouseState.HOVER;
+            this.btnChangeDomain.Mice = MrngButton.MouseState.Hover;
             this.btnChangeDomain.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnChangeDomain.Location = new System.Drawing.Point(422, 23);
             this.btnChangeDomain.Name = "btnChangeDomain";
@@ -78,7 +78,7 @@ namespace mRemoteNG.UI.Window
             // 
             // btnClose
             // 
-            this.btnClose._mice = MrngButton.MouseState.HOVER;
+            this.btnClose.Mice = MrngButton.MouseState.Hover;
             this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnClose.Location = new System.Drawing.Point(422, 344);
             this.btnClose.Name = "btnClose";
@@ -90,7 +90,7 @@ namespace mRemoteNG.UI.Window
             // 
             // chkSubOU
             // 
-            this.chkSubOU._mice = MrngCheckBox.MouseState.HOVER;
+            this.chkSubOU.Mice = MrngCheckBox.MouseState.Hover;
             this.chkSubOU.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chkSubOU.AutoSize = true;
             this.chkSubOU.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

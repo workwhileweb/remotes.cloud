@@ -39,8 +39,8 @@ namespace mRemoteNG.App
             //About to pop up a message, let's not block it...
             FrmSplashScreenNew.GetInstance().Close();
 
-            var ShouldIStayOrShouldIGo = CTaskDialog.MessageBox(Application.ProductName, Language.CompatibilityProblemDetected, errorText, "", "", Language.CheckboxDoNotShowThisMessageAgain, ETaskDialogButtons.OkCancel, ESysIcons.Warning, ESysIcons.Warning);
-            if (CTaskDialog.VerificationChecked && ShouldIStayOrShouldIGo == DialogResult.OK)
+            var shouldIStayOrShouldIGo = CTaskDialog.MessageBox(Application.ProductName, Language.CompatibilityProblemDetected, errorText, "", "", Language.CheckboxDoNotShowThisMessageAgain, ETaskDialogButtons.OkCancel, ESysIcons.Warning, ESysIcons.Warning);
+            if (CTaskDialog.VerificationChecked && shouldIStayOrShouldIGo == DialogResult.OK)
             {
                 messageCollector.AddMessage(MessageClass.ErrorMsg, "User requests that FIPS check be overridden", true);
                 Settings.Default.OverrideFIPSCheck = true;
@@ -48,7 +48,7 @@ namespace mRemoteNG.App
                 return;
             }
 
-            if (ShouldIStayOrShouldIGo == DialogResult.Cancel)
+            if (shouldIStayOrShouldIGo == DialogResult.Cancel)
                 Environment.Exit(1);
         }
 

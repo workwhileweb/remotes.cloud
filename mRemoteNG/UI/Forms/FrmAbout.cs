@@ -17,7 +17,7 @@ namespace mRemoteNG.UI.Forms
         {
             InitializeComponent();
             Icon = Resources.ImageConverter.GetImageAsIcon(Properties.Resources.UIAboutBox_16x);
-            ThemeManager.getInstance().ThemeChanged += ApplyTheme;
+            ThemeManager.GetInstance().ThemeChanged += ApplyTheme;
             ApplyLanguage();
             ApplyTheme();
         }
@@ -39,10 +39,10 @@ namespace mRemoteNG.UI.Forms
 
         private void ApplyTheme()
         {
-            if (!ThemeManager.getInstance().ThemingActive) return;
-            if (!ThemeManager.getInstance().ActiveAndExtended) return;
-            pnlBottom.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-            pnlBottom.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            if (!ThemeManager.GetInstance().ThemingActive) return;
+            if (!ThemeManager.GetInstance().ActiveAndExtended) return;
+            pnlBottom.BackColor = ThemeManager.GetInstance().ActiveTheme.ExtendedPalette.GetColor("Dialog_Background");
+            pnlBottom.ForeColor = ThemeManager.GetInstance().ActiveTheme.ExtendedPalette.GetColor("Dialog_Foreground");
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)

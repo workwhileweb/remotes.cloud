@@ -8,45 +8,45 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
     [Apartment(ApartmentState.STA)]
     public class ConfigWindowRdpSpecialTests : ConfigWindowSpecialTestsBase
     {
-        protected override ProtocolType Protocol => ProtocolType.RDP;
+        protected override ProtocolType Protocol => ProtocolType.Rdp;
 
         [Test]
         public void PropertyShownWhenActive_RdpMinutesToIdleTimeout()
         {
-            ConnectionInfo.RDPMinutesToIdleTimeout = 1;
-            ExpectedPropertyList.Add(nameof(mRemoteNG.Connection.ConnectionInfo.RDPAlertIdleTimeout));
+            ConnectionInfo.RdpMinutesToIdleTimeout = 1;
+            ExpectedPropertyList.Add(nameof(mRemoteNG.Connection.ConnectionInfo.RdpAlertIdleTimeout));
 
             RunVerification();
         }
 
-        [TestCase(RDGatewayUsageMethod.Always)]
-        [TestCase(RDGatewayUsageMethod.Detect)]
-        public void RdGatewayPropertiesShown_WhenRdGatewayUsageMethodIsNotNever(RDGatewayUsageMethod gatewayUsageMethod)
+        [TestCase(RdGatewayUsageMethod.Always)]
+        [TestCase(RdGatewayUsageMethod.Detect)]
+        public void RdGatewayPropertiesShown_WhenRdGatewayUsageMethodIsNotNever(RdGatewayUsageMethod gatewayUsageMethod)
         {
-            ConnectionInfo.RDGatewayUsageMethod = gatewayUsageMethod;
-            ConnectionInfo.RDGatewayUseConnectionCredentials = RDGatewayUseConnectionCredentials.Yes;
+            ConnectionInfo.RdGatewayUsageMethod = gatewayUsageMethod;
+            ConnectionInfo.RdGatewayUseConnectionCredentials = RdGatewayUseConnectionCredentials.Yes;
             ExpectedPropertyList.AddRange(new []
             {
-                nameof(mRemoteNG.Connection.ConnectionInfo.RDGatewayHostname),
-                nameof(mRemoteNG.Connection.ConnectionInfo.RDGatewayUseConnectionCredentials)
+                nameof(mRemoteNG.Connection.ConnectionInfo.RdGatewayHostname),
+                nameof(mRemoteNG.Connection.ConnectionInfo.RdGatewayUseConnectionCredentials)
             });
 
             RunVerification();
         }
 
-        [TestCase(RDGatewayUseConnectionCredentials.No)]
-        [TestCase(RDGatewayUseConnectionCredentials.SmartCard)]
-        public void RdGatewayPropertiesShown_WhenRDGatewayUseConnectionCredentialsIsNotYes(RDGatewayUseConnectionCredentials useConnectionCredentials)
+        [TestCase(RdGatewayUseConnectionCredentials.No)]
+        [TestCase(RdGatewayUseConnectionCredentials.SmartCard)]
+        public void RdGatewayPropertiesShown_WhenRDGatewayUseConnectionCredentialsIsNotYes(RdGatewayUseConnectionCredentials useConnectionCredentials)
         {
-            ConnectionInfo.RDGatewayUsageMethod = RDGatewayUsageMethod.Always;
-            ConnectionInfo.RDGatewayUseConnectionCredentials = useConnectionCredentials;
+            ConnectionInfo.RdGatewayUsageMethod = RdGatewayUsageMethod.Always;
+            ConnectionInfo.RdGatewayUseConnectionCredentials = useConnectionCredentials;
             ExpectedPropertyList.AddRange(new []
             {
-                nameof(mRemoteNG.Connection.ConnectionInfo.RDGatewayHostname),
-                nameof(mRemoteNG.Connection.ConnectionInfo.RDGatewayUsername),
-                nameof(mRemoteNG.Connection.ConnectionInfo.RDGatewayPassword),
-                nameof(mRemoteNG.Connection.ConnectionInfo.RDGatewayDomain),
-                nameof(mRemoteNG.Connection.ConnectionInfo.RDGatewayUseConnectionCredentials)
+                nameof(mRemoteNG.Connection.ConnectionInfo.RdGatewayHostname),
+                nameof(mRemoteNG.Connection.ConnectionInfo.RdGatewayUsername),
+                nameof(mRemoteNG.Connection.ConnectionInfo.RdGatewayPassword),
+                nameof(mRemoteNG.Connection.ConnectionInfo.RdGatewayDomain),
+                nameof(mRemoteNG.Connection.ConnectionInfo.RdGatewayUseConnectionCredentials)
             });
 
             RunVerification();
@@ -55,15 +55,15 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
         [Test]
         public void SoundQualityPropertyShown_WhenRdpSoundsSetToBringToThisComputer()
         {
-            ConnectionInfo.RedirectSound = RDPSounds.BringToThisComputer;
+            ConnectionInfo.RedirectSound = RdpSounds.BringToThisComputer;
             ExpectedPropertyList.Add(nameof(mRemoteNG.Connection.ConnectionInfo.SoundQuality));
 
             RunVerification();
         }
 
-        [TestCase(RDPResolutions.FitToWindow)]
-        [TestCase(RDPResolutions.Fullscreen)]
-        public void AutomaticResizePropertyShown_WhenResolutionIsDynamic(RDPResolutions resolution)
+        [TestCase(RdpResolutions.FitToWindow)]
+        [TestCase(RdpResolutions.Fullscreen)]
+        public void AutomaticResizePropertyShown_WhenResolutionIsDynamic(RdpResolutions resolution)
         {
             ConnectionInfo.Resolution = resolution;
             ExpectedPropertyList.Add(nameof(mRemoteNG.Connection.ConnectionInfo.AutomaticResize));

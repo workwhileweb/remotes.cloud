@@ -11,9 +11,9 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
     {
         private PortScanDeserializer _deserializer;
         private ConnectionInfo _importedConnectionInfo;
-        private const string ExpectedHostName = "server1.domain.com";
-        private const string ExpectedDisplayName = "server1";
-        private const ProtocolType ExpectedProtocolType = ProtocolType.SSH2;
+        private const string EXPECTED_HOST_NAME = "server1.domain.com";
+        private const string EXPECTED_DISPLAY_NAME = "server1";
+        private const ProtocolType EXPECTED_PROTOCOL_TYPE = ProtocolType.Ssh2;
 
 
 
@@ -25,7 +25,7 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
                 HostName = "server1.domain.com",
                 Ssh = true
             };
-            _deserializer = new PortScanDeserializer(ProtocolType.SSH2);
+            _deserializer = new PortScanDeserializer(ProtocolType.Ssh2);
             var connectionTreeModel = _deserializer.Deserialize(new[] { host });
             var root = connectionTreeModel.RootNodes.First();
             _importedConnectionInfo = root.Children.First();
@@ -41,19 +41,19 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
         [Test]
         public void DisplayNameImported()
         {
-            Assert.That(_importedConnectionInfo.Name, Is.EqualTo(ExpectedDisplayName));
+            Assert.That(_importedConnectionInfo.Name, Is.EqualTo(EXPECTED_DISPLAY_NAME));
         }
 
         [Test]
         public void HostNameImported()
         {
-            Assert.That(_importedConnectionInfo.Hostname, Is.EqualTo(ExpectedHostName));
+            Assert.That(_importedConnectionInfo.Hostname, Is.EqualTo(EXPECTED_HOST_NAME));
         }
 
         [Test]
         public void ProtocolImported()
         {
-            Assert.That(_importedConnectionInfo.Protocol, Is.EqualTo(ExpectedProtocolType));
+            Assert.That(_importedConnectionInfo.Protocol, Is.EqualTo(EXPECTED_PROTOCOL_TYPE));
         }
     }
 }

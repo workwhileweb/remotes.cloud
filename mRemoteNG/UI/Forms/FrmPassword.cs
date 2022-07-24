@@ -108,13 +108,13 @@ namespace mRemoteNG.UI.Forms
 
         private void ApplyTheme()
         {
-            if (!ThemeManager.getInstance().ActiveAndExtended)
+            if (!ThemeManager.GetInstance().ActiveAndExtended)
                 return;
 
-            var activeTheme = ThemeManager.getInstance().ActiveTheme;
+            var activeTheme = ThemeManager.GetInstance().ActiveTheme;
 
-            BackColor = activeTheme.ExtendedPalette.getColor("Dialog_Background");
-            ForeColor = activeTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            BackColor = activeTheme.ExtendedPalette.GetColor("Dialog_Background");
+            ForeColor = activeTheme.ExtendedPalette.GetColor("Dialog_Foreground");
         }
 
         // ReSharper disable once UnusedMethodReturnValue.Local

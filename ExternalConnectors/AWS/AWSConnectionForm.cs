@@ -1,8 +1,8 @@
 ﻿namespace ExternalConnectors.AWS
 {
-    public partial class AWSConnectionForm : Form
+    public partial class AwsConnectionForm : Form
     {
-        public AWSConnectionForm()
+        public AwsConnectionForm()
         {
             InitializeComponent();
 

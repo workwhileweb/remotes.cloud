@@ -4,7 +4,7 @@ namespace mRemoteNG.Connection.Protocol.RAW
     {
         public RawProtocol()
         {
-            PuttyProtocol = Putty_Protocol.raw;
+            PuttyProtocol = PuttyBase.PuttyProtocols.Raw;
         }
 
         public enum Defaults

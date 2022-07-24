@@ -9,9 +9,9 @@
     /// <summary>
     /// Visual Studio 2015 Light theme.
     /// </summary>
-    public class MremoteNGThemeBase : VS2015ThemeBase
+    public class MremoteNgThemeBase : VS2015ThemeBase
     {
-        public MremoteNGThemeBase(byte[] themeResource)
+        public MremoteNgThemeBase(byte[] themeResource)
             : base(themeResource)
         {
             Measures.SplitterSize = 3;
@@ -25,7 +25,7 @@
     {
         public DockPaneStripBase CreateDockPaneStrip(DockPane pane)
         {
-            return new DockPaneStripNG(pane);
+            return new DockPaneStripNg(pane);
         }
     }
 
@@ -35,12 +35,12 @@
         {
             var activeDocumentBounds = (dockPanel?.ActiveDocument as ConnectionTab)?.Bounds;
 
-            return new FloatWindowNG(dockPanel, pane, activeDocumentBounds ?? bounds);
+            return new FloatWindowNg(dockPanel, pane, activeDocumentBounds ?? bounds);
         }
 
         public FloatWindow CreateFloatWindow(DockPanel dockPanel, DockPane pane)
         {
-            return new FloatWindowNG(dockPanel, pane);
+            return new FloatWindowNg(dockPanel, pane);
         }
     }
 }

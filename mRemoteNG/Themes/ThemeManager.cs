@@ -21,10 +21,10 @@ namespace mRemoteNG.Themes
         #region Private Variables
 
         private ThemeInfo _activeTheme;
-        private Hashtable themes;
+        private Hashtable _themes;
         private bool _themeActive;
-        private static ThemeManager themeInstance;
-        private readonly string themePath = App.Info.SettingsFileInfo.ThemeFolder;
+        private static ThemeManager _themeInstance;
+        private readonly string _themePath = App.Info.SettingsFileInfo.ThemeFolder;
 
         #endregion
 
@@ -39,8 +39,8 @@ namespace mRemoteNG.Themes
 
         private void SetActive()
         {
-            if (themes[OptionsThemePage.Default.ThemeName] != null)
-                ActiveTheme = (ThemeInfo)themes[OptionsThemePage.Default.ThemeName];
+            if (_themes[OptionsThemePage.Default.ThemeName] != null)
+                ActiveTheme = (ThemeInfo)_themes[OptionsThemePage.Default.ThemeName];
             else
             {
                 ActiveTheme = DefaultTheme;
@@ -58,40 +58,40 @@ namespace mRemoteNG.Themes
 
         #region Public Methods
 
-        public static ThemeManager getInstance()
+        public static ThemeManager GetInstance()
         {
-            return themeInstance ?? (themeInstance = new ThemeManager());
+            return _themeInstance ?? (_themeInstance = new ThemeManager());
         }
 
 
-        public ThemeInfo getTheme(string themeName)
+        public ThemeInfo GetTheme(string themeName)
         {
-            if (themes[themeName] != null)
-                return (ThemeInfo)themes[themeName];
+            if (_themes[themeName] != null)
+                return (ThemeInfo)_themes[themeName];
             return null;
         }
 
         private bool ThemeDirExists()
         {
             //Load the files in theme folder first, to include vstheme light as default
-            if (themePath == null) return false;
+            if (_themePath == null) return false;
             try
             {
                 //In install mode first time is necessary to copy the themes folder
-                if (!Directory.Exists(themePath))
+                if (!Directory.Exists(_themePath))
                 {
-                    Directory.CreateDirectory(themePath);
+                    Directory.CreateDirectory(_themePath);
                 }
 
                 var orig = new DirectoryInfo(App.Info.SettingsFileInfo.InstalledThemeFolder);
                 var files = orig.GetFiles();
                 foreach (var file in files)
                 {
-                    if (!File.Exists(Path.Combine(themePath, file.Name)))
-                        file.CopyTo(Path.Combine(themePath, file.Name), true);
+                    if (!File.Exists(Path.Combine(_themePath, file.Name)))
+                        file.CopyTo(Path.Combine(_themePath, file.Name), true);
                 }
 
-                return Directory.Exists(themePath);
+                return Directory.Exists(_themePath);
             }
             catch (Exception ex)
             {
@@ -107,9 +107,9 @@ namespace mRemoteNG.Themes
             {
                 if (ThemeDirExists())
                 {
-                    var defaultThemeURL = $"{themePath}\\vs2015light.vstheme";
+                    var defaultThemeUrl = $"{_themePath}\\vs2015light.vstheme";
 
-                    if (!File.Exists($"{themePath}\\vs2015light.vstheme"))
+                    if (!File.Exists($"{_themePath}\\vs2015light.vstheme"))
                     {
                         Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "Could not find default theme file.",
                                                             true);
@@ -119,7 +119,7 @@ namespace mRemoteNG.Themes
                     //First we load the default base theme, its vs2015lightNG
                     //the true "default" in DockPanelSuite built-in VS2015LightTheme named "vs2015Light"
                     //hence the *NG suffix for this one...
-                    var defaultTheme = ThemeSerializer.LoadFromXmlFile(defaultThemeURL);
+                    var defaultTheme = ThemeSerializer.LoadFromXmlFile(defaultThemeUrl);
                     defaultTheme.Name = $"{defaultTheme.Name}NG";
                     return defaultTheme;
                 }
@@ -135,20 +135,20 @@ namespace mRemoteNG.Themes
         //The manager precharges all the themes at once
         public List<ThemeInfo> LoadThemes()
         {
-            if (themes != null) return themes.Values.OfType<ThemeInfo>().ToList();
-            themes = new Hashtable();
+            if (_themes != null) return _themes.Values.OfType<ThemeInfo>().ToList();
+            _themes = new Hashtable();
 
-            if (themePath == null) return themes.Values.OfType<ThemeInfo>().ToList();
+            if (_themePath == null) return _themes.Values.OfType<ThemeInfo>().ToList();
             try
             {
                 //Check that theme folder exist before trying to load themes
                 if (ThemeDirExists())
                 {
-                    var themeFiles = Directory.GetFiles(themePath, "*.vstheme");
+                    var themeFiles = Directory.GetFiles(_themePath, "*.vstheme");
 
                     //First we load the default base theme, its vs2015lightNG
                     var defaultTheme = LoadDefaultTheme();
-                    themes.Add(defaultTheme.Name, defaultTheme);
+                    _themes.Add(defaultTheme.Name, defaultTheme);
                     //Then the rest
                     foreach (var themeFile in themeFiles)
                     {
@@ -156,40 +156,40 @@ namespace mRemoteNG.Themes
                         if (themeFile.Contains("vs2015light.vstheme")) continue;
                         //filter default one
                         var extTheme = ThemeSerializer.LoadFromXmlFile(themeFile, defaultTheme);
-                        if (extTheme.Theme == null || themes.ContainsKey(extTheme.Name)) continue;
+                        if (extTheme.Theme == null || _themes.ContainsKey(extTheme.Name)) continue;
 
                         if (extTheme.Name.Equals("darcula") || extTheme.Name.Equals("vs2015blue") ||
                             extTheme.Name.Equals("vs2015dark"))
                             extTheme.Name = $"{extTheme.Name}NG";
 
-                        themes.Add(extTheme.Name, extTheme);
+                        _themes.Add(extTheme.Name, extTheme);
                     }
 
                     //Load the embedded themes, extended palettes are taken from the vs2015 themes, trying to match the color theme
 
                     // 2012
-                    var vs2012Light = new ThemeInfo("vs2012Light", new VS2012LightTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2012, ((ThemeInfo)themes["vs2015lightNG"]).ExtendedPalette);
-                    themes.Add(vs2012Light.Name, vs2012Light);
-                    var vs2012Dark = new ThemeInfo("vs2012Dark", new VS2012DarkTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2012, ((ThemeInfo)themes["vs2015darkNG"]).ExtendedPalette);
-                    themes.Add(vs2012Dark.Name, vs2012Dark);
-                    var vs2012Blue = new ThemeInfo("vs2012Blue", new VS2012BlueTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2012, ((ThemeInfo)themes["vs2015blueNG"]).ExtendedPalette);
-                    themes.Add(vs2012Blue.Name, vs2012Blue);
+                    var vs2012Light = new ThemeInfo("vs2012Light", new VS2012LightTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2012, ((ThemeInfo)_themes["vs2015lightNG"]).ExtendedPalette);
+                    _themes.Add(vs2012Light.Name, vs2012Light);
+                    var vs2012Dark = new ThemeInfo("vs2012Dark", new VS2012DarkTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2012, ((ThemeInfo)_themes["vs2015darkNG"]).ExtendedPalette);
+                    _themes.Add(vs2012Dark.Name, vs2012Dark);
+                    var vs2012Blue = new ThemeInfo("vs2012Blue", new VS2012BlueTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2012, ((ThemeInfo)_themes["vs2015blueNG"]).ExtendedPalette);
+                    _themes.Add(vs2012Blue.Name, vs2012Blue);
 
                     // 2013
-                    var vs2013Light = new ThemeInfo("vs2013Light", new VS2013LightTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2013, ((ThemeInfo)themes["vs2015lightNG"]).ExtendedPalette);
-                    themes.Add(vs2013Light.Name, vs2013Light);
-                    var vs2013Dark = new ThemeInfo("vs2013Dark", new VS2013DarkTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2013, ((ThemeInfo)themes["vs2015darkNG"]).ExtendedPalette);
-                    themes.Add(vs2013Dark.Name, vs2013Dark);
-                    var vs2013Blue = new ThemeInfo("vs2013Blue", new VS2013BlueTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2013, ((ThemeInfo)themes["vs2015blueNG"]).ExtendedPalette);
-                    themes.Add(vs2013Blue.Name, vs2013Blue);
+                    var vs2013Light = new ThemeInfo("vs2013Light", new VS2013LightTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2013, ((ThemeInfo)_themes["vs2015lightNG"]).ExtendedPalette);
+                    _themes.Add(vs2013Light.Name, vs2013Light);
+                    var vs2013Dark = new ThemeInfo("vs2013Dark", new VS2013DarkTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2013, ((ThemeInfo)_themes["vs2015darkNG"]).ExtendedPalette);
+                    _themes.Add(vs2013Dark.Name, vs2013Dark);
+                    var vs2013Blue = new ThemeInfo("vs2013Blue", new VS2013BlueTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2013, ((ThemeInfo)_themes["vs2015blueNG"]).ExtendedPalette);
+                    _themes.Add(vs2013Blue.Name, vs2013Blue);
 
                     // 2015
-                    var vs2015Light = new ThemeInfo("vs2015Light", new VS2015LightTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2015, ((ThemeInfo)themes["vs2015lightNG"]).ExtendedPalette);
-                    themes.Add(vs2015Light.Name, vs2015Light);
-                    var vs2015Dark = new ThemeInfo("vs2015Dark", new VS2015DarkTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2015, ((ThemeInfo)themes["vs2015darkNG"]).ExtendedPalette);
-                    themes.Add(vs2015Dark.Name, vs2015Dark);
-                    var vs2015Blue = new ThemeInfo("vs2015Blue", new VS2015BlueTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2015, ((ThemeInfo)themes["vs2015blueNG"]).ExtendedPalette);
-                    themes.Add(vs2015Blue.Name, vs2015Blue);
+                    var vs2015Light = new ThemeInfo("vs2015Light", new VS2015LightTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2015, ((ThemeInfo)_themes["vs2015lightNG"]).ExtendedPalette);
+                    _themes.Add(vs2015Light.Name, vs2015Light);
+                    var vs2015Dark = new ThemeInfo("vs2015Dark", new VS2015DarkTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2015, ((ThemeInfo)_themes["vs2015darkNG"]).ExtendedPalette);
+                    _themes.Add(vs2015Dark.Name, vs2015Dark);
+                    var vs2015Blue = new ThemeInfo("vs2015Blue", new VS2015BlueTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2015, ((ThemeInfo)_themes["vs2015blueNG"]).ExtendedPalette);
+                    _themes.Add(vs2015Blue.Name, vs2015Blue);
                 }
             }
             catch (Exception ex)
@@ -197,7 +197,7 @@ namespace mRemoteNG.Themes
                 Runtime.MessageCollector.AddExceptionStackTrace("Error loading themes", ex);
             }
 
-            return themes.Values.OfType<ThemeInfo>().ToList();
+            return _themes.Values.OfType<ThemeInfo>().ToList();
         }
 
         /// <summary>
@@ -206,44 +206,44 @@ namespace mRemoteNG.Themes
         /// <param name="baseTheme"></param>
         /// <param name="newThemeName"></param>
         /// <returns></returns>
-        public ThemeInfo addTheme(ThemeInfo baseTheme, string newThemeName)
+        public ThemeInfo AddTheme(ThemeInfo baseTheme, string newThemeName)
         {
-            if (themes.Contains(newThemeName)) return null;
+            if (_themes.Contains(newThemeName)) return null;
             var modifiedTheme = (ThemeInfo)baseTheme.Clone();
             modifiedTheme.Name = newThemeName;
             modifiedTheme.IsExtendable = true;
             modifiedTheme.IsThemeBase = false;
             ThemeSerializer.SaveToXmlFile(modifiedTheme, baseTheme);
-            themes.Add(newThemeName, modifiedTheme);
+            _themes.Add(newThemeName, modifiedTheme);
             return modifiedTheme;
         }
 
         //Delete a theme from memory and disk
-        public void deleteTheme(ThemeInfo themeToDelete)
+        public void DeleteTheme(ThemeInfo themeToDelete)
         {
-            if (!themes.Contains(themeToDelete.Name)) return;
+            if (!_themes.Contains(themeToDelete.Name)) return;
             if (ActiveTheme == themeToDelete)
                 ActiveTheme = DefaultTheme;
-            themes.Remove(themeToDelete.Name);
+            _themes.Remove(themeToDelete.Name);
             ThemeSerializer.DeleteFile(themeToDelete);
         }
 
         //Synchronize the theme XML values from memory to disk
-        public void updateTheme(ThemeInfo themeToUpdate)
+        public void UpdateTheme(ThemeInfo themeToUpdate)
         {
-            ThemeSerializer.UpdateThemeXMLValues(themeToUpdate);
+            ThemeSerializer.UpdateThemeXmlValues(themeToUpdate);
         }
 
         //refresh the ui controls to reflect a theme change
-        public void refreshUI()
+        public void RefreshUi()
         {
             NotifyThemeChanged(this, new PropertyChangedEventArgs(""));
         }
 
         //Verify if theme name is repeated or if the name is a valid file  name
-        public bool isThemeNameOk(string name)
+        public bool IsThemeNameOk(string name)
         {
-            if (themes.Contains(name))
+            if (_themes.Contains(name))
                 return false;
             var badChars = Path.GetInvalidFileNameChars();
             return name.IndexOfAny(badChars) == -1;
@@ -255,12 +255,12 @@ namespace mRemoteNG.Themes
 
         public delegate void ThemeChangedEventHandler();
 
-        private ThemeChangedEventHandler ThemeChangedEvent;
+        private ThemeChangedEventHandler _themeChangedEvent;
 
         public event ThemeChangedEventHandler ThemeChanged
         {
-            add => ThemeChangedEvent = (ThemeChangedEventHandler)Delegate.Combine(ThemeChangedEvent, value);
-            remove => ThemeChangedEvent = (ThemeChangedEventHandler)Delegate.Remove(ThemeChangedEvent, value);
+            add => _themeChangedEvent = (ThemeChangedEventHandler)Delegate.Combine(_themeChangedEvent, value);
+            remove => _themeChangedEvent = (ThemeChangedEventHandler)Delegate.Remove(_themeChangedEvent, value);
         }
 
         // ReSharper disable once UnusedParameter.Local
@@ -271,7 +271,7 @@ namespace mRemoteNG.Themes
                 return;
             }
 
-            ThemeChangedEvent?.Invoke();
+            _themeChangedEvent?.Invoke();
         }
 
         #endregion
@@ -283,7 +283,7 @@ namespace mRemoteNG.Themes
             get => _themeActive;
             set
             {
-                if (themes.Count == 0) return;
+                if (_themes.Count == 0) return;
                 _themeActive = value;
                 OptionsThemePage.Default.ThemingActive = value;
                 NotifyThemeChanged(this, new PropertyChangedEventArgs(""));
@@ -291,8 +291,8 @@ namespace mRemoteNG.Themes
         }
 
         public ThemeInfo DefaultTheme =>
-            themes != null && ThemesCount > 0
-                ? (ThemeInfo)themes["vs2015Light"]
+            _themes != null && ThemesCount > 0
+                ? (ThemeInfo)_themes["vs2015Light"]
                 : new ThemeInfo("vs2015Light", new VS2015LightTheme(), "",
                                 VisualStudioToolStripExtender.VsVersion.Vs2015);
 
@@ -326,7 +326,7 @@ namespace mRemoteNG.Themes
 
         public bool ActiveAndExtended => ThemingActive && ActiveTheme.IsExtended;
 
-        public int ThemesCount => themes.Count;
+        public int ThemesCount => _themes.Count;
 
         #endregion
     }

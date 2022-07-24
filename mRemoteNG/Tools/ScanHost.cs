@@ -17,13 +17,13 @@ namespace mRemoteNG.Tools
     {
         #region Properties
 
-        public static int SshPort { get; set; } = (int)ProtocolSSH1.Defaults.Port;
+        public static int SshPort { get; set; } = (int)ProtocolSsh1.Defaults.Port;
         public static int TelnetPort { get; set; } = (int)ProtocolTelnet.Defaults.Port;
-        public static int HttpPort { get; set; } = (int)ProtocolHTTP.Defaults.Port;
-        public static int HttpsPort { get; set; } = (int)ProtocolHTTPS.Defaults.Port;
+        public static int HttpPort { get; set; } = (int)ProtocolHttp.Defaults.Port;
+        public static int HttpsPort { get; set; } = (int)ProtocolHttps.Defaults.Port;
         public static int RloginPort { get; set; } = (int)ProtocolRlogin.Defaults.Port;
         public static int RdpPort { get; set; } = (int)RdpProtocol6.Defaults.Port;
-        public static int VncPort { get; set; } = (int)ProtocolVNC.Defaults.Port;
+        public static int VncPort { get; set; } = (int)ProtocolVnc.Defaults.Port;
         public ArrayList OpenPorts { get; set; }
         public ArrayList ClosedPorts { get; set; }
         public bool Rdp { get; set; }

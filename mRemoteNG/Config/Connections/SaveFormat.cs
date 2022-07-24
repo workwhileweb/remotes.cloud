@@ -3,8 +3,8 @@
     public enum SaveFormat
     {
         None,
-        mRXML,
-        mRCSV,
-        SQL
+        MRxml,
+        MRcsv,
+        Sql
     }
 }

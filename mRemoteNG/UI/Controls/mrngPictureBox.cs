@@ -10,7 +10,7 @@ namespace mRemoteNG.UI.Controls
 
         public MrngPictureBox()
         {
-            ThemeManager.getInstance().ThemeChanged += OnCreateControl;
+            ThemeManager.GetInstance().ThemeChanged += OnCreateControl;
         }
 
         public MrngPictureBox(IContainer container)
@@ -23,10 +23,10 @@ namespace mRemoteNG.UI.Controls
         protected override void OnCreateControl()
         {
             base.OnCreateControl();
-            _themeManager = ThemeManager.getInstance();
+            _themeManager = ThemeManager.GetInstance();
             if (!_themeManager.ActiveAndExtended) return;
-            ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
-            BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
+            ForeColor = _themeManager.ActiveTheme.ExtendedPalette.GetColor("TextBox_Foreground");
+            BackColor = _themeManager.ActiveTheme.ExtendedPalette.GetColor("TextBox_Background");
             Invalidate();
         }
     }

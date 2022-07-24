@@ -62,11 +62,11 @@ namespace mRemoteNG.Connection
 
             try
             {
-                if (!string.IsNullOrEmpty(connectionInfo.EC2InstanceId))
+                if (!string.IsNullOrEmpty(connectionInfo.Ec2InstanceId))
                 {
                     try
                     {
-                        var host = await ExternalConnectors.AWS.EC2FetchDataService.GetEC2InstanceDataAsync("AWSAPI:" + connectionInfo.EC2InstanceId, connectionInfo.EC2Region);
+                        var host = await ExternalConnectors.AWS.Ec2FetchDataService.GetEc2InstanceDataAsync("AWSAPI:" + connectionInfo.Ec2InstanceId, connectionInfo.Ec2Region);
                         if (!string.IsNullOrEmpty(host))
                             connectionInfo.Hostname = host;
                     }
@@ -102,18 +102,18 @@ namespace mRemoteNG.Connection
                 // connectionInfoOriginal points to the original connection info in either case, for where its needed later on.
                 var connectionInfoOriginal = connectionInfo;
                 ConnectionInfo connectionInfoSshTunnel = null; // SSH tunnel connection info will be set if SSH tunnel connection is configured, can be found and connected.
-                if (!string.IsNullOrEmpty(connectionInfoOriginal.SSHTunnelConnectionName))
+                if (!string.IsNullOrEmpty(connectionInfoOriginal.SshTunnelConnectionName))
                 {
                     // Find the connection info specified as SSH tunnel in the connections tree
-                    connectionInfoSshTunnel = GetSshConnectionInfoByName(Runtime.ConnectionsService.ConnectionTreeModel.RootNodes, connectionInfoOriginal.SSHTunnelConnectionName);
+                    connectionInfoSshTunnel = GetSshConnectionInfoByName(Runtime.ConnectionsService.ConnectionTreeModel.RootNodes, connectionInfoOriginal.SshTunnelConnectionName);
                     if (connectionInfoSshTunnel == null)
                     {
                         Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
-                            string.Format(Language.SshTunnelConfigProblem, connectionInfoOriginal.Name, connectionInfoOriginal.SSHTunnelConnectionName));
+                            string.Format(Language.SshTunnelConfigProblem, connectionInfoOriginal.Name, connectionInfoOriginal.SshTunnelConnectionName));
                         return;
                     }
                     Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg,
-                        $"SSH Tunnel connection '{connectionInfoOriginal.SSHTunnelConnectionName}' configured for '{connectionInfoOriginal.Name}' found. Finding free local port for use as local tunnel port ...");
+                        $"SSH Tunnel connection '{connectionInfoOriginal.SshTunnelConnectionName}' configured for '{connectionInfoOriginal.Name}' found. Finding free local port for use as local tunnel port ...");
                     // determine a free local port to use as local tunnel port
                     var l = new System.Net.Sockets.TcpListener(System.Net.IPAddress.Loopback, 0);
                     l.Start();
@@ -124,7 +124,7 @@ namespace mRemoteNG.Connection
 
                     // clone SSH tunnel connection as tunnel options will be added to it, and those changes shall not be saved to the configuration
                     connectionInfoSshTunnel = connectionInfoSshTunnel.Clone();
-                    connectionInfoSshTunnel.SSHOptions += " -L " + localSshTunnelPort + ":" + connectionInfoOriginal.Hostname + ":" + connectionInfoOriginal.Port;
+                    connectionInfoSshTunnel.SshOptions += " -L " + localSshTunnelPort + ":" + connectionInfoOriginal.Hostname + ":" + connectionInfoOriginal.Port;
 
                     // clone target connection info as its hostname will be changed to localhost and port to local tunnel port to establish connection through tunnel, and those changes shall not be saved to the configuration
                     connectionInfo = connectionInfoOriginal.Clone();
@@ -176,7 +176,7 @@ namespace mRemoteNG.Connection
                         // else, if connection attempt fails, window remains open and putty process remains running, and we cannot know that connection is already doomed
                         // in this case the timeout will expire and the log message below will be created
                         // awkward for user as he has already acknowledged the putty popup some seconds again when the below notification comes....
-                        if (!puttyBaseSshTunnel.isRunning())
+                        if (!puttyBaseSshTunnel.IsRunning())
                         {
                             protocolSshTunnel.Close();
                             Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
@@ -222,7 +222,7 @@ namespace mRemoteNG.Connection
                 // and is stored in interface control for further use
                 newProtocol.InterfaceControl.OriginalInfo = connectionInfoOriginal;
                 // SSH tunnel connection is stored in Interface Control to be used in log messages etc
-                newProtocol.InterfaceControl.SSHTunnelInfo = connectionInfoSshTunnel;
+                newProtocol.InterfaceControl.SshTunnelInfo = connectionInfoSshTunnel;
 
                 newProtocol.Force = force;
 
@@ -239,7 +239,7 @@ namespace mRemoteNG.Connection
                 }
 
                 connectionInfoOriginal.OpenConnections.Add(newProtocol);
-                _activeConnections.Add(connectionInfo.ConstantID);
+                _activeConnections.Add(connectionInfo.ConstantId);
                 FrmMain.Default.SelectedConnection = connectionInfo;
             }
             catch (Exception ex)
@@ -260,7 +260,7 @@ namespace mRemoteNG.Connection
                 }
                 else
                 {
-                    if (node.Name == sshTunnelConnectionName && (node.Protocol == ProtocolType.SSH1 || node.Protocol == ProtocolType.SSH2)) result = node;
+                    if (node.Name == sshTunnelConnectionName && (node.Protocol == ProtocolType.Ssh1 || node.Protocol == ProtocolType.Ssh2)) result = node;
                 }
                 if (result != null) break;
             }
@@ -371,7 +371,7 @@ namespace mRemoteNG.Connection
                 var prot = (ProtocolBase)sender;
                 var msgClass = MessageClass.InformationMsg;
 
-                if (prot.InterfaceControl.Info.Protocol == ProtocolType.RDP)
+                if (prot.InterfaceControl.Info.Protocol == ProtocolType.Rdp)
                 {
                     if (reasonCode > 3)
                     {
@@ -380,9 +380,9 @@ namespace mRemoteNG.Connection
                 }
 
                 var strHostname = prot.InterfaceControl.OriginalInfo.Hostname;
-                if (prot.InterfaceControl.SSHTunnelInfo != null)
+                if (prot.InterfaceControl.SshTunnelInfo != null)
                 {
-                    strHostname += " via SSH Tunnel " + prot.InterfaceControl.SSHTunnelInfo.Name;
+                    strHostname += " via SSH Tunnel " + prot.InterfaceControl.SshTunnelInfo.Name;
                 }
                 Runtime.MessageCollector.AddMessage(msgClass,
                                                     string.Format(
@@ -418,8 +418,8 @@ namespace mRemoteNG.Connection
                                                                   prot.InterfaceControl.Info.Protocol,
                                                                   Environment.UserName));
                 prot.InterfaceControl.OriginalInfo.OpenConnections.Remove(prot);
-                if (_activeConnections.Contains(prot.InterfaceControl.Info.ConstantID))
-                    _activeConnections.Remove(prot.InterfaceControl.Info.ConstantID);
+                if (_activeConnections.Contains(prot.InterfaceControl.Info.ConstantId))
+                    _activeConnections.Remove(prot.InterfaceControl.Info.ConstantId);
 
                 if (prot.InterfaceControl.Info.PostExtApp == "") return;
                 var extA = Runtime.ExternalToolsService.GetExtAppByName(prot.InterfaceControl.Info.PostExtApp);

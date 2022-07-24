@@ -25,7 +25,7 @@ namespace mRemoteNG.UI.Window
             Icon = Resources.ImageConverter.GetImageAsIcon(Properties.Resources.Console_16x);
             WindowType = WindowType.ExternalApps;
             DockPnl = new DockContent();
-            _themeManager = ThemeManager.getInstance();
+            _themeManager = ThemeManager.GetInstance();
             _themeManager.ThemeChanged += ApplyTheme;
             _externalAppsSaver = new ExternalAppsSaver();
             _currentlySelectedExternalTools = new FullyObservableCollection<ExternalTool>();

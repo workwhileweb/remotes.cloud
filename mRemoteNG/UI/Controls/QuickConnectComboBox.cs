@@ -194,19 +194,19 @@ namespace mRemoteNG.UI.Controls
 
         public delegate void ConnectRequestedEventHandler(object sender, ConnectRequestedEventArgs e);
 
-        private ConnectRequestedEventHandler ConnectRequestedEvent;
+        private ConnectRequestedEventHandler _connectRequestedEvent;
 
         public event ConnectRequestedEventHandler ConnectRequested
         {
-            add => ConnectRequestedEvent = (ConnectRequestedEventHandler)Delegate.Combine(ConnectRequestedEvent, value);
-            remove => ConnectRequestedEvent = (ConnectRequestedEventHandler)Delegate.Remove(ConnectRequestedEvent, value);
+            add => _connectRequestedEvent = (ConnectRequestedEventHandler)Delegate.Combine(_connectRequestedEvent, value);
+            remove => _connectRequestedEvent = (ConnectRequestedEventHandler)Delegate.Remove(_connectRequestedEvent, value);
         }
 
 
         private void OnConnectRequested(ConnectRequestedEventArgs e)
         {
             // TODO: Any reason to not jsut pass "e"?
-            ConnectRequestedEvent?.Invoke(this, new ConnectRequestedEventArgs(e.ConnectionString));
+            _connectRequestedEvent?.Invoke(this, new ConnectRequestedEventArgs(e.ConnectionString));
         }
 
         public class ProtocolChangedEventArgs : EventArgs
@@ -221,19 +221,19 @@ namespace mRemoteNG.UI.Controls
 
         public delegate void ProtocolChangedEventHandler(object sender, ProtocolChangedEventArgs e);
 
-        private ProtocolChangedEventHandler ProtocolChangedEvent;
+        private ProtocolChangedEventHandler _protocolChangedEvent;
 
         public event ProtocolChangedEventHandler ProtocolChanged
         {
-            add => ProtocolChangedEvent = (ProtocolChangedEventHandler)Delegate.Combine(ProtocolChangedEvent, value);
-            remove => ProtocolChangedEvent = (ProtocolChangedEventHandler)Delegate.Remove(ProtocolChangedEvent, value);
+            add => _protocolChangedEvent = (ProtocolChangedEventHandler)Delegate.Combine(_protocolChangedEvent, value);
+            remove => _protocolChangedEvent = (ProtocolChangedEventHandler)Delegate.Remove(_protocolChangedEvent, value);
         }
 
 
         private void OnProtocolChanged(ProtocolChangedEventArgs e)
         {
             // TODO: Any reason to not jsut pass "e"?
-            ProtocolChangedEvent?.Invoke(this, new ProtocolChangedEventArgs(e.Protocol));
+            _protocolChangedEvent?.Invoke(this, new ProtocolChangedEventArgs(e.Protocol));
         }
 
         #endregion

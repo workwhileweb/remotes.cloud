@@ -9,13 +9,13 @@ namespace mRemoteNG.Config.Serializers.Versioning
 {
     public class SqlDatabaseVersionVerifier
     {
-        protected readonly Version currentSupportedVersion = new(2, 9);
+        protected readonly Version CurrentSupportedVersion = new(2, 9);
 
         private readonly IDatabaseConnector _databaseConnector;
 
-        public SqlDatabaseVersionVerifier(IDatabaseConnector DatabaseConnector)
+        public SqlDatabaseVersionVerifier(IDatabaseConnector databaseConnector)
         {
-            _databaseConnector = DatabaseConnector ?? throw new ArgumentNullException(nameof(DatabaseConnector));
+            _databaseConnector = databaseConnector ?? throw new ArgumentNullException(nameof(databaseConnector));
         }
 
         public bool VerifyDatabaseVersion(Version dbVersion)
@@ -50,7 +50,7 @@ namespace mRemoteNG.Config.Serializers.Versioning
                 }
 
                 // DB is at the highest current supported version
-                if (databaseVersion.CompareTo(currentSupportedVersion) == 0)
+                if (databaseVersion.CompareTo(CurrentSupportedVersion) == 0)
                     isVerified = true;
 
                 if (isVerified == false)

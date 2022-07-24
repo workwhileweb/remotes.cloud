@@ -186,12 +186,12 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                 : new ConnectionInfo();
 
             node.Protocol = protocol;
-            node.Resolution = RDPResolutions.Res800x600;
-            node.RDGatewayUsageMethod = RDGatewayUsageMethod.Never;
-            node.RDGatewayUseConnectionCredentials = RDGatewayUseConnectionCredentials.Yes;
-            node.RedirectSound = RDPSounds.DoNotPlay;
-            node.VNCAuthMode = ProtocolVNC.AuthMode.AuthVNC;
-            node.VNCProxyType = ProtocolVNC.ProxyType.ProxyNone;
+            node.Resolution = RdpResolutions.Res800X600;
+            node.RdGatewayUsageMethod = RdGatewayUsageMethod.Never;
+            node.RdGatewayUseConnectionCredentials = RdGatewayUseConnectionCredentials.Yes;
+            node.RedirectSound = RdpSounds.DoNotPlay;
+            node.VncAuthMode = ProtocolVnc.AuthMode.AuthVnc;
+            node.VncProxyType = ProtocolVnc.ProxyType.ProxyNone;
             node.UseVmId = false;
             node.Inheritance.TurnOffInheritanceCompletely();
 
@@ -212,7 +212,7 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                 nameof(ConnectionInfo.MacAddress),
                 nameof(ConnectionInfo.UserField),
                 nameof(ConnectionInfo.Favorite),
-                nameof(ConnectionInfo.SSHTunnelConnectionName)
+                nameof(ConnectionInfo.SshTunnelConnectionName)
             };
 
             if (!isContainer)
@@ -225,7 +225,7 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
 
             switch (protocol)
             {
-                case ProtocolType.RDP:
+                case ProtocolType.Rdp:
                     expectedProperties.AddRange(new []
                     {
                         nameof(ConnectionInfo.Username),
@@ -234,13 +234,13 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                         nameof(ConnectionInfo.Port),
                         nameof(ConnectionInfo.UseVmId),
                         nameof(ConnectionInfo.UseConsoleSession),
-                        nameof(ConnectionInfo.RDPAuthenticationLevel),
-                        nameof(ConnectionInfo.RDPMinutesToIdleTimeout),
+                        nameof(ConnectionInfo.RdpAuthenticationLevel),
+                        nameof(ConnectionInfo.RdpMinutesToIdleTimeout),
                         nameof(ConnectionInfo.LoadBalanceInfo),
                         nameof(ConnectionInfo.UseCredSsp),
                         nameof(ConnectionInfo.UseRestrictedAdmin),
-                        nameof(ConnectionInfo.UseRCG),
-                        nameof(ConnectionInfo.RDGatewayUsageMethod),
+                        nameof(ConnectionInfo.UseRcg),
+                        nameof(ConnectionInfo.RdGatewayUsageMethod),
                         nameof(ConnectionInfo.Resolution),
                         nameof(ConnectionInfo.Colors),
                         nameof(ConnectionInfo.CacheBitmaps),
@@ -261,62 +261,62 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                         nameof(ConnectionInfo.RedirectSound),
                         nameof(ConnectionInfo.RedirectAudioCapture),
 			nameof(ConnectionInfo.RdpVersion),
-                        nameof(ConnectionInfo.RDPStartProgram),
-                        nameof(ConnectionInfo.RDPStartProgramWorkDir),
-			nameof(ConnectionInfo.UserViaAPI),
-                        nameof(ConnectionInfo.EC2InstanceId),
-                        nameof(ConnectionInfo.EC2Region)
+                        nameof(ConnectionInfo.RdpStartProgram),
+                        nameof(ConnectionInfo.RdpStartProgramWorkDir),
+			nameof(ConnectionInfo.UserViaApi),
+                        nameof(ConnectionInfo.Ec2InstanceId),
+                        nameof(ConnectionInfo.Ec2Region)
                     });
                     break;
-                case ProtocolType.VNC:
+                case ProtocolType.Vnc:
                     expectedProperties.AddRange(new []
                     {
                         nameof(ConnectionInfo.Password),
                         nameof(ConnectionInfo.Port),
-                        nameof(ConnectionInfo.VNCSmartSizeMode),
-                        nameof(ConnectionInfo.VNCViewOnly)
+                        nameof(ConnectionInfo.VncSmartSizeMode),
+                        nameof(ConnectionInfo.VncViewOnly)
                     });
                     break;
-                case ProtocolType.SSH1:
+                case ProtocolType.Ssh1:
                     expectedProperties.AddRange(new[]
                     {
                         nameof(ConnectionInfo.Username),
                         nameof(ConnectionInfo.Password),
                         nameof(ConnectionInfo.Port),
-                        nameof(ConnectionInfo.SSHOptions),
+                        nameof(ConnectionInfo.SshOptions),
                         nameof(ConnectionInfo.PuttySession),
                         nameof(ConnectionInfo.OpeningCommand),
-                        nameof(ConnectionInfo.UserViaAPI),
+                        nameof(ConnectionInfo.UserViaApi),
                     });
                     break;
-                case ProtocolType.SSH2:
+                case ProtocolType.Ssh2:
                     expectedProperties.AddRange(new []
                     {
                         nameof(ConnectionInfo.Username),
                         nameof(ConnectionInfo.Password),
                         nameof(ConnectionInfo.Port),
-                        nameof(ConnectionInfo.SSHOptions),
+                        nameof(ConnectionInfo.SshOptions),
                         nameof(ConnectionInfo.PuttySession),
                         nameof(ConnectionInfo.OpeningCommand),
-                        nameof(ConnectionInfo.EC2InstanceId),
-                        nameof(ConnectionInfo.EC2Region),
-                        nameof(ConnectionInfo.UserViaAPI),
+                        nameof(ConnectionInfo.Ec2InstanceId),
+                        nameof(ConnectionInfo.Ec2Region),
+                        nameof(ConnectionInfo.UserViaApi),
                     });
                     break;
                 case ProtocolType.Telnet:
                 case ProtocolType.Rlogin:
-                case ProtocolType.RAW:
+                case ProtocolType.Raw:
                     expectedProperties.AddRange(new[]
                     {
                         nameof(ConnectionInfo.Port),
                         nameof(ConnectionInfo.PuttySession),
                     });
                     break;
-                case ProtocolType.HTTP:
-                case ProtocolType.HTTPS:
+                case ProtocolType.Http:
+                case ProtocolType.Https:
                     expectedProperties.AddRange(new []
                     {
-                        nameof(ConnectionInfo.UserViaAPI),
+                        nameof(ConnectionInfo.UserViaApi),
                         nameof(ConnectionInfo.Password),
                         nameof(ConnectionInfo.Port),
                         nameof(ConnectionInfo.RenderingEngine),
@@ -325,7 +325,7 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                 case ProtocolType.PowerShell:
                     expectedProperties.AddRange(new[]
                     {
-                        nameof(ConnectionInfo.UserViaAPI),
+                        nameof(ConnectionInfo.UserViaApi),
                         nameof(ConnectionInfo.Password),
                         nameof(ConnectionInfo.Domain),
                         nameof(ConnectionInfo.Port),
@@ -334,7 +334,7 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                 case ProtocolType.IntApp:
                     expectedProperties.AddRange(new[]
                     {
-                        nameof(ConnectionInfo.UserViaAPI),
+                        nameof(ConnectionInfo.UserViaApi),
                         nameof(ConnectionInfo.Password),
                         nameof(ConnectionInfo.Domain),
                         nameof(ConnectionInfo.Port),

@@ -13,7 +13,7 @@ namespace mRemoteNGTests.Config.Serializers.Versioning
         [SetUp]
         public void Setup()
         {
-            var sqlConnector = Substitute.For<MSSqlDatabaseConnector>("", "", "", "");
+            var sqlConnector = Substitute.For<MsSqlDatabaseConnector>("", "", "", "");
             _versionUpgrader = new SqlVersion25To26Upgrader(sqlConnector);
         }
 

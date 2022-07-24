@@ -1,11 +1,11 @@
 namespace mRemoteNG.Connection.Protocol.SSH
 {
-    public class ProtocolSSH1 : PuttyBase
+    public class ProtocolSsh1 : PuttyBase
     {
-        public ProtocolSSH1()
+        public ProtocolSsh1()
         {
-            PuttyProtocol = Putty_Protocol.ssh;
-            PuttySSHVersion = Putty_SSHVersion.ssh1;
+            PuttyProtocol = PuttyBase.PuttyProtocols.Ssh;
+            PuttySshVersion = PuttyBase.PuttySshVersions.Ssh1;
         }
 
         public enum Defaults

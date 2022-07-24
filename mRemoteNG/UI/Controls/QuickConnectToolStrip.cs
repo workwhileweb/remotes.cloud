@@ -25,7 +25,7 @@ namespace mRemoteNG.UI.Controls
         private QuickConnectComboBox _cmbQuickConnect;
         private ContextMenuStrip _mnuConnections;
         private readonly ThemeManager _themeManager;
-        private WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender vsToolStripExtender;
+        private WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender _vsToolStripExtender;
         private readonly DisplayProperties _display;
 
 
@@ -33,7 +33,7 @@ namespace mRemoteNG.UI.Controls
         {
             _display = new DisplayProperties();
             Initialize();
-            _themeManager = ThemeManager.getInstance();
+            _themeManager = ThemeManager.GetInstance();
             _themeManager.ThemeChanged += ApplyTheme;
             PopulateQuickConnectProtocolMenu();
             ApplyTheme();
@@ -58,7 +58,7 @@ namespace mRemoteNG.UI.Controls
             //
             //Theming support
             //
-            vsToolStripExtender = new WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender(components);
+            _vsToolStripExtender = new WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender(components);
             // 
             // lblQuickConnect
             // 
@@ -136,14 +136,14 @@ namespace mRemoteNG.UI.Controls
         private void ApplyTheme()
         {
             if (!_themeManager.ThemingActive) return;
-            vsToolStripExtender.SetStyle(_mnuQuickConnectProtocol, _themeManager.ActiveTheme.Version,
+            _vsToolStripExtender.SetStyle(_mnuQuickConnectProtocol, _themeManager.ActiveTheme.Version,
                                          _themeManager.ActiveTheme.Theme);
-            vsToolStripExtender.SetStyle(_mnuConnections, _themeManager.ActiveTheme.Version,
+            _vsToolStripExtender.SetStyle(_mnuConnections, _themeManager.ActiveTheme.Version,
                                          _themeManager.ActiveTheme.Theme);
 
             if (!_themeManager.ActiveAndExtended) return;
-            _cmbQuickConnect.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
-            _cmbQuickConnect.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
+            _cmbQuickConnect.BackColor = _themeManager.ActiveTheme.ExtendedPalette.GetColor("TextBox_Background");
+            _cmbQuickConnect.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.GetColor("TextBox_Foreground");
         }
 
         #region Quick Connect

@@ -13,7 +13,7 @@ namespace mRemoteNG.Connection
 
             connectionInfo.Name = "";
             connectionInfo.Hostname = url;
-            connectionInfo.Protocol = url.StartsWith("https:") ? ProtocolType.HTTPS : ProtocolType.HTTP;
+            connectionInfo.Protocol = url.StartsWith("https:") ? ProtocolType.Https : ProtocolType.Http;
             connectionInfo.SetDefaultPort();
             if (string.IsNullOrEmpty(connectionInfo.Panel))
                 connectionInfo.Panel = Language.General;

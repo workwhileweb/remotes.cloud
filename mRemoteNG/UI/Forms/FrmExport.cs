@@ -27,7 +27,7 @@ namespace mRemoteNG.UI.Forms
             get
             {
                 var exportFormat = cboFileFormat.SelectedItem as ExportFormat;
-                return exportFormat?.Format ?? SaveFormat.mRXML;
+                return exportFormat?.Format ?? SaveFormat.MRxml;
             }
             set
             {
@@ -147,11 +147,11 @@ namespace mRemoteNG.UI.Forms
         private void ExportForm_Load(object sender, EventArgs e)
         {
             cboFileFormat.Items.Clear();
-            cboFileFormat.Items.Add(new ExportFormat(SaveFormat.mRXML));
-            cboFileFormat.Items.Add(new ExportFormat(SaveFormat.mRCSV));
+            cboFileFormat.Items.Add(new ExportFormat(SaveFormat.MRxml));
+            cboFileFormat.Items.Add(new ExportFormat(SaveFormat.MRcsv));
             cboFileFormat.SelectedIndex = 0;
             ApplyTheme();
-            ThemeManager.getInstance().ThemeChanged += ApplyTheme;
+            ThemeManager.GetInstance().ThemeChanged += ApplyTheme;
             ApplyLanguage();
         }
 
@@ -185,7 +185,7 @@ namespace mRemoteNG.UI.Forms
 
         private void SelectFileTypeBasedOnSaveFormat(FileDialog saveFileDialog)
         {
-            saveFileDialog.FilterIndex = SaveFormat == SaveFormat.mRCSV ? 2 : 1;
+            saveFileDialog.FilterIndex = SaveFormat == SaveFormat.MRcsv ? 2 : 1;
         }
 
         private void btnOK_Click(object sender, EventArgs e)
@@ -221,10 +221,10 @@ namespace mRemoteNG.UI.Forms
 
         private void ApplyTheme()
         {
-            _themeManager = ThemeManager.getInstance();
+            _themeManager = ThemeManager.GetInstance();
             if (!_themeManager.ActiveAndExtended) return;
-            BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-            ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            BackColor = _themeManager.ActiveTheme.ExtendedPalette.GetColor("Dialog_Background");
+            ForeColor = _themeManager.ActiveTheme.ExtendedPalette.GetColor("Dialog_Foreground");
         }
 
 
@@ -293,9 +293,9 @@ namespace mRemoteNG.UI.Forms
             {
                 switch (Format)
                 {
-                    case SaveFormat.mRXML:
+                    case SaveFormat.MRxml:
                         return Language.MremoteNgXml;
-                    case SaveFormat.mRCSV:
+                    case SaveFormat.MRcsv:
                         return Language.MremoteNgCsv;
                     default:
                         return Format.ToString();

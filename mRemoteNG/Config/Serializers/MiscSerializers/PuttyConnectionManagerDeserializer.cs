@@ -117,7 +117,7 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
                     connectionInfo.Protocol = ProtocolType.Telnet;
                     break;
                 case "ssh":
-                    connectionInfo.Protocol = ProtocolType.SSH2;
+                    connectionInfo.Protocol = ProtocolType.Ssh2;
                     break;
                 default:
                     throw new FileFormatException($"Unrecognized protocol ({protocol}).");

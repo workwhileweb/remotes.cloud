@@ -8,12 +8,12 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
     [Apartment(ApartmentState.STA)]
     public class ConfigWindowVncSpecialTests : ConfigWindowSpecialTestsBase
     {
-        protected override ProtocolType Protocol => ProtocolType.VNC;
+        protected override ProtocolType Protocol => ProtocolType.Vnc;
 
         [Test]
         public void UserDomainPropertiesShown_WhenAuthModeIsWindows()
         {
-            ConnectionInfo.VNCAuthMode = ProtocolVNC.AuthMode.AuthWin;
+            ConnectionInfo.VncAuthMode = ProtocolVnc.AuthMode.AuthWin;
             ExpectedPropertyList.AddRange(new []
             {
                 nameof(ConnectionInfo.Username),
@@ -21,18 +21,18 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
             });
         }
 
-        [TestCase(ProtocolVNC.ProxyType.ProxyHTTP)]
-        [TestCase(ProtocolVNC.ProxyType.ProxySocks5)]
-        [TestCase(ProtocolVNC.ProxyType.ProxyUltra)]
-        public void ProxyPropertiesShown_WhenProxyModeIsNotNone(ProtocolVNC.ProxyType proxyType)
+        [TestCase(ProtocolVnc.ProxyType.ProxyHttp)]
+        [TestCase(ProtocolVnc.ProxyType.ProxySocks5)]
+        [TestCase(ProtocolVnc.ProxyType.ProxyUltra)]
+        public void ProxyPropertiesShown_WhenProxyModeIsNotNone(ProtocolVnc.ProxyType proxyType)
         {
-            ConnectionInfo.VNCProxyType = proxyType;
+            ConnectionInfo.VncProxyType = proxyType;
             ExpectedPropertyList.AddRange(new[]
             {
-                nameof(ConnectionInfo.VNCProxyIP),
-                nameof(ConnectionInfo.VNCProxyPort),
-                nameof(ConnectionInfo.VNCProxyUsername),
-                nameof(ConnectionInfo.VNCProxyPassword),
+                nameof(ConnectionInfo.VncProxyIp),
+                nameof(ConnectionInfo.VncProxyPort),
+                nameof(ConnectionInfo.VncProxyUsername),
+                nameof(ConnectionInfo.VncProxyPassword),
             });
         }
     }

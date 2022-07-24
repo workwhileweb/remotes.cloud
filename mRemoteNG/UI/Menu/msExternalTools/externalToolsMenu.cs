@@ -12,14 +12,14 @@ using mRemoteNG.UI.Panels;
 
 namespace mRemoteNG.UI.Menu.msExternalTools
 {
-    public partial class externalToolsMenu : ToolStripMenuItem
+    public partial class ExternalToolsMenu : ToolStripMenuItem
     {
-        public externalToolsMenu()
+        public ExternalToolsMenu()
         {
             Initialize();
         }
 
-        public externalToolsMenu(IContainer container)
+        public ExternalToolsMenu(IContainer container)
         {
             container.Add(this);
 

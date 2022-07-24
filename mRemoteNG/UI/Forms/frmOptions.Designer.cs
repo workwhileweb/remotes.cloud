@@ -57,7 +57,7 @@ namespace mRemoteNG.UI.Forms
             // 
             // btnApply
             // 
-            this.btnApply._mice = MrngButton.MouseState.OUT;
+            this.btnApply.Mice = MrngButton.MouseState.Out;
             this.btnApply.Location = new System.Drawing.Point(677, 5);
             this.btnApply.Name = "btnApply";
             this.btnApply.Size = new System.Drawing.Size(75, 23);
@@ -68,7 +68,7 @@ namespace mRemoteNG.UI.Forms
             // 
             // btnCancel
             // 
-            this.btnCancel._mice = MrngButton.MouseState.OUT;
+            this.btnCancel.Mice = MrngButton.MouseState.Out;
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Location = new System.Drawing.Point(596, 5);
             this.btnCancel.Name = "btnCancel";
@@ -80,7 +80,7 @@ namespace mRemoteNG.UI.Forms
             // 
             // btnOK
             // 
-            this.btnOK._mice = MrngButton.MouseState.OUT;
+            this.btnOK.Mice = MrngButton.MouseState.Out;
             this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnOK.Location = new System.Drawing.Point(515, 5);
             this.btnOK.Name = "btnOK";

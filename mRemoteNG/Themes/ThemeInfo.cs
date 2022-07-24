@@ -16,7 +16,7 @@ namespace mRemoteNG.Themes
 
         private string _name;
         private ThemeBase _theme;
-        private string _URI;
+        private string _uri;
         private VisualStudioToolStripExtender.VsVersion _version;
         private ExtendedColorPalette _extendedPalette;
 
@@ -26,13 +26,13 @@ namespace mRemoteNG.Themes
 
         public ThemeInfo(string themeName,
                          ThemeBase inTheme,
-                         string inURI,
+                         string inUri,
                          VisualStudioToolStripExtender.VsVersion inVersion,
                          ExtendedColorPalette inExtendedPalette)
         {
             _name = themeName;
             _theme = inTheme;
-            _URI = inURI;
+            _uri = inUri;
             _version = inVersion;
             _extendedPalette = inExtendedPalette;
             IsThemeBase = false;
@@ -41,22 +41,22 @@ namespace mRemoteNG.Themes
             if (_extendedPalette != null)
                 IsExtended = true;
 
-            setCustomExtenders();
+            SetCustomExtenders();
         }
 
         public ThemeInfo(string themeName,
                          ThemeBase inTheme,
-                         string inURI,
+                         string inUri,
                          VisualStudioToolStripExtender.VsVersion inVersion)
         {
             _name = themeName;
             _theme = inTheme;
-            _URI = inURI;
+            _uri = inUri;
             _version = inVersion;
             IsThemeBase = false;
             IsExtendable = false;
             IsExtended = false;
-            setCustomExtenders();
+            SetCustomExtenders();
         }
 
         #endregion
@@ -71,7 +71,7 @@ namespace mRemoteNG.Themes
                     _extendedPalette.ExtColorPalette.ToDictionary(entry => entry.Key, entry => entry.Value),
                 DefaultColorPalette = _extendedPalette.DefaultColorPalette
             };
-            var clonedObj = new ThemeInfo(_name, _theme, _URI, _version, extPalette)
+            var clonedObj = new ThemeInfo(_name, _theme, _uri, _version, extPalette)
             {
                 IsExtendable = IsExtendable,
                 IsThemeBase = IsThemeBase
@@ -111,21 +111,21 @@ namespace mRemoteNG.Themes
                 }
 
                 _theme = value;
-                setCustomExtenders();
+                SetCustomExtenders();
             }
         }
 
-        public string URI
+        public string Uri
         {
-            get => _URI;
+            get => _uri;
             set
             {
-                if (value != null && _URI == value)
+                if (value != null && _uri == value)
                 {
                     return;
                 }
 
-                _URI = value;
+                _uri = value;
             }
         }
 
@@ -166,7 +166,7 @@ namespace mRemoteNG.Themes
         #endregion
 
         //Custom extenders for mremote customizations in DPS
-        private void setCustomExtenders()
+        private void SetCustomExtenders()
         {
             _theme.Extender.DockPaneStripFactory = new MremoteDockPaneStripFactory();
             _theme.Extender.FloatWindowFactory = new MremoteFloatWindowFactory();

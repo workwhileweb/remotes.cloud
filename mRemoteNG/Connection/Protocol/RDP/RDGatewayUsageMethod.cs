@@ -3,7 +3,7 @@ using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.Connection.Protocol.RDP
 {
-    public enum RDGatewayUsageMethod
+    public enum RdGatewayUsageMethod
     {
         [LocalizedAttributes.LocalizedDescription(nameof(Language.Never))]
         Never = 0, // TSC_PROXY_MODE_NONE_DIRECT

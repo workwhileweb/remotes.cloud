@@ -12,27 +12,27 @@ namespace mRemoteNG.App
     [Serializable]
     public sealed class SupportedCultures : Dictionary<string, string>
     {
-        private static SupportedCultures _Instance;
+        private static SupportedCultures _instance;
 
         private static SupportedCultures SingletonInstance
         {
-            get { return _Instance ?? (_Instance = new SupportedCultures()); }
+            get { return _instance ?? (_instance = new SupportedCultures()); }
         }
 
 
         private SupportedCultures()
         {
-            foreach (var CultureName in AppUI.Default.SupportedUICultures.Split(','))
+            foreach (var cultureName in AppUI.Default.SupportedUICultures.Split(','))
             {
                 try
                 {
-                    var CultureInfo = new CultureInfo(CultureName.Trim());
-                    Add(CultureInfo.Name, CultureInfo.TextInfo.ToTitleCase(CultureInfo.NativeName));
+                    var cultureInfo = new CultureInfo(cultureName.Trim());
+                    Add(cultureInfo.Name, cultureInfo.TextInfo.ToTitleCase(cultureInfo.NativeName));
                 }
                 catch (Exception ex)
                 {
                     Debug.Print(
-                                $"An exception occurred while adding the culture {CultureName} to the list of supported cultures. {ex.StackTrace}");
+                                $"An exception occurred while adding the culture {cultureName} to the list of supported cultures. {ex.StackTrace}");
                 }
             }
         }
@@ -43,51 +43,51 @@ namespace mRemoteNG.App
             throw new NotImplementedException();
         }
 
-        public static bool IsNameSupported(string CultureName)
+        public static bool IsNameSupported(string cultureName)
         {
-            return SingletonInstance.ContainsKey(CultureName);
+            return SingletonInstance.ContainsKey(cultureName);
         }
 
-        public static bool IsNativeNameSupported(string CultureNativeName)
+        public static bool IsNativeNameSupported(string cultureNativeName)
         {
-            return SingletonInstance.ContainsValue(CultureNativeName);
+            return SingletonInstance.ContainsValue(cultureNativeName);
         }
 
-        public static string get_CultureName(string CultureNativeName)
+        public static string get_CultureName(string cultureNativeName)
         {
-            var Names = new string[SingletonInstance.Count + 1];
-            var NativeNames = new string[SingletonInstance.Count + 1];
+            var names = new string[SingletonInstance.Count + 1];
+            var nativeNames = new string[SingletonInstance.Count + 1];
 
-            SingletonInstance.Keys.CopyTo(Names, 0);
-            SingletonInstance.Values.CopyTo(NativeNames, 0);
+            SingletonInstance.Keys.CopyTo(names, 0);
+            SingletonInstance.Values.CopyTo(nativeNames, 0);
 
-            for (var Index = 0; Index <= SingletonInstance.Count; Index++)
+            for (var index = 0; index <= SingletonInstance.Count; index++)
             {
-                if (NativeNames[Index] == CultureNativeName)
+                if (nativeNames[index] == cultureNativeName)
                 {
-                    return Names[Index];
+                    return names[index];
                 }
             }
 
             throw (new KeyNotFoundException());
         }
 
-        public static string get_CultureNativeName(string CultureName)
+        public static string get_CultureNativeName(string cultureName)
         {
-            return SingletonInstance[CultureName];
+            return SingletonInstance[cultureName];
         }
 
         public static List<string> CultureNativeNames
         {
             get
             {
-                var ValueList = new List<string>();
-                foreach (var Value in SingletonInstance.Values)
+                var valueList = new List<string>();
+                foreach (var value in SingletonInstance.Values)
                 {
-                    ValueList.Add(Value);
+                    valueList.Add(value);
                 }
 
-                return ValueList;
+                return valueList;
             }
         }
     }

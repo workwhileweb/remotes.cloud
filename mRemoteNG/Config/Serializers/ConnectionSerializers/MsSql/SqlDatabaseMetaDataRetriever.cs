@@ -81,7 +81,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
 	        {
 		        cmd = databaseConnector.DbCommand(
                         "INSERT INTO tblRoot (Name, Export, Protected, ConfVersion) VALUES('" +
-				        MiscTools.PrepareValueForDB(rootTreeNode.Name) + "', 0, '" + strProtected + "','" +
+				        MiscTools.PrepareValueForDb(rootTreeNode.Name) + "', 0, '" + strProtected + "','" +
 				        ConnectionsFileInfo.ConnectionFileVersion.ToString() + "')");
 		        cmd.ExecuteNonQuery();
 	        }

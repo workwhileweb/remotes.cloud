@@ -82,7 +82,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // btnUpdateCheckNow
             // 
-            this.btnUpdateCheckNow._mice = MrngButton.MouseState.OUT;
+            this.btnUpdateCheckNow.Mice = MrngButton.MouseState.Out;
             this.btnUpdateCheckNow.Location = new System.Drawing.Point(5, 63);
             this.btnUpdateCheckNow.Name = "btnUpdateCheckNow";
             this.btnUpdateCheckNow.Size = new System.Drawing.Size(122, 25);
@@ -93,7 +93,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkCheckForUpdatesOnStartup
             // 
-            this.chkCheckForUpdatesOnStartup._mice = MrngCheckBox.MouseState.OUT;
+            this.chkCheckForUpdatesOnStartup.Mice = MrngCheckBox.MouseState.Out;
             this.chkCheckForUpdatesOnStartup.AutoSize = true;
             this.chkCheckForUpdatesOnStartup.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkCheckForUpdatesOnStartup.Location = new System.Drawing.Point(6, 11);
@@ -106,7 +106,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // cboUpdateCheckFrequency
             // 
-            this.cboUpdateCheckFrequency._mice = MrngComboBox.MouseState.HOVER;
+            this.cboUpdateCheckFrequency.Mice = MrngComboBox.MouseState.Hover;
             this.cboUpdateCheckFrequency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboUpdateCheckFrequency.FormattingEnabled = true;
             this.cboUpdateCheckFrequency.Location = new System.Drawing.Point(6, 34);
@@ -131,7 +131,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // cboReleaseChannel
             // 
-            this.cboReleaseChannel._mice = MrngComboBox.MouseState.HOVER;
+            this.cboReleaseChannel.Mice = MrngComboBox.MouseState.Hover;
             this.cboReleaseChannel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboReleaseChannel.FormattingEnabled = true;
             this.cboReleaseChannel.Location = new System.Drawing.Point(7, 21);
@@ -285,7 +285,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkUseProxyForAutomaticUpdates
             // 
-            this.chkUseProxyForAutomaticUpdates._mice = MrngCheckBox.MouseState.OUT;
+            this.chkUseProxyForAutomaticUpdates.Mice = MrngCheckBox.MouseState.Out;
             this.chkUseProxyForAutomaticUpdates.AutoSize = true;
             this.chkUseProxyForAutomaticUpdates.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkUseProxyForAutomaticUpdates.Location = new System.Drawing.Point(6, 5);
@@ -298,7 +298,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkUseProxyAuthentication
             // 
-            this.chkUseProxyAuthentication._mice = MrngCheckBox.MouseState.OUT;
+            this.chkUseProxyAuthentication.Mice = MrngCheckBox.MouseState.Out;
             this.chkUseProxyAuthentication.AutoSize = true;
             this.chkUseProxyAuthentication.Enabled = false;
             this.chkUseProxyAuthentication.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -312,7 +312,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // btnTestProxy
             // 
-            this.btnTestProxy._mice = MrngButton.MouseState.OUT;
+            this.btnTestProxy.Mice = MrngButton.MouseState.Out;
             this.btnTestProxy.Location = new System.Drawing.Point(6, 187);
             this.btnTestProxy.Name = "btnTestProxy";
             this.btnTestProxy.Size = new System.Drawing.Size(120, 25);

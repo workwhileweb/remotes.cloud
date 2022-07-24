@@ -6,11 +6,11 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNG.UI.Tabs
 {
-    internal sealed class MremoteNGAutoHideStrip : AutoHideStripBase
+    internal sealed class MremoteNgAutoHideStrip : AutoHideStripBase
     {
-        private class TabNG : Tab
+        private class TabNg : Tab
         {
-            internal TabNG(IDockContent content)
+            internal TabNg(IDockContent content)
                 : base(content)
             {
             }
@@ -20,17 +20,17 @@ namespace mRemoteNG.UI.Tabs
             public int TabWidth { get; set; }
         }
 
-        private const int _ImageHeight = 16;
-        private const int _ImageWidth = 16;
-        private const int _ImageGapTop = 2;
-        private const int _ImageGapLeft = 4;
-        private const int _ImageGapRight = 2;
-        private const int _ImageGapBottom = 2;
-        private const int _TextGapLeft = 0;
-        private const int _TextGapRight = 0;
-        private const int _TabGapTop = 3;
-        private const int _TabGapLeft = 4;
-        private const int _TabGapBetween = 10;
+        private const int IMAGE_HEIGHT = 16;
+        private const int IMAGE_WIDTH = 16;
+        private const int IMAGE_GAP_TOP = 2;
+        private const int IMAGE_GAP_LEFT = 4;
+        private const int IMAGE_GAP_RIGHT = 2;
+        private const int IMAGE_GAP_BOTTOM = 2;
+        private const int TEXT_GAP_LEFT = 0;
+        private const int TEXT_GAP_RIGHT = 0;
+        private const int TAB_GAP_TOP = 3;
+        private const int TAB_GAP_LEFT = 4;
+        private const int TAB_GAP_BETWEEN = 10;
 
         #region Customizable Properties
 
@@ -87,27 +87,27 @@ namespace mRemoteNG.UI.Tabs
             }
         }
 
-        private static int ImageHeight => _ImageHeight;
+        private static int ImageHeight => IMAGE_HEIGHT;
 
-        private static int ImageWidth => _ImageWidth;
+        private static int ImageWidth => IMAGE_WIDTH;
 
-        private static int ImageGapTop => _ImageGapTop;
+        private static int ImageGapTop => IMAGE_GAP_TOP;
 
-        private static int ImageGapLeft => _ImageGapLeft;
+        private static int ImageGapLeft => IMAGE_GAP_LEFT;
 
-        private static int ImageGapRight => _ImageGapRight;
+        private static int ImageGapRight => IMAGE_GAP_RIGHT;
 
-        private static int ImageGapBottom => _ImageGapBottom;
+        private static int ImageGapBottom => IMAGE_GAP_BOTTOM;
 
-        private static int TextGapLeft => _TextGapLeft;
+        private static int TextGapLeft => TEXT_GAP_LEFT;
 
-        private static int TextGapRight => _TextGapRight;
+        private static int TextGapRight => TEXT_GAP_RIGHT;
 
-        private static int TabGapTop => _TabGapTop;
+        private static int TabGapTop => TAB_GAP_TOP;
 
-        private static int TabGapLeft => _TabGapLeft;
+        private static int TabGapLeft => TAB_GAP_LEFT;
 
-        private static int TabGapBetween => _TabGapBetween;
+        private static int TabGapBetween => TAB_GAP_BETWEEN;
 
         private static Pen PenTabBorder => SystemPens.GrayText;
 
@@ -147,7 +147,7 @@ namespace mRemoteNG.UI.Tabs
             }
         }
 
-        public MremoteNGAutoHideStrip(DockPanel panel)
+        public MremoteNgAutoHideStrip(DockPanel panel)
             : base(panel)
         {
             SetStyle(ControlStyles.ResizeRedraw |
@@ -205,7 +205,7 @@ namespace mRemoteNG.UI.Tabs
 
             foreach (var pane in GetPanes(dockState))
             {
-                foreach (TabNG tab in pane.AutoHideTabs)
+                foreach (TabNg tab in pane.AutoHideTabs)
                     DrawTab(g, tab);
             }
 
@@ -232,7 +232,7 @@ namespace mRemoteNG.UI.Tabs
             var x = TabGapLeft + rectTabStrip.X;
             foreach (var pane in GetPanes(dockState))
             {
-                foreach (TabNG tab in pane.AutoHideTabs)
+                foreach (TabNg tab in pane.AutoHideTabs)
                 {
                     var width = imageWidth + ImageGapLeft + ImageGapRight +
                                 TextRenderer.MeasureText(tab.Content.DockHandler.TabText, TextFont).Width +
@@ -257,7 +257,7 @@ namespace mRemoteNG.UI.Tabs
             return rectTransformed;
         }
 
-        private GraphicsPath GetTabOutline(TabNG tab, bool transformed, bool rtlTransform)
+        private GraphicsPath GetTabOutline(TabNg tab, bool transformed, bool rtlTransform)
         {
             var dockState = tab.Content.DockHandler.DockState;
             var rectTab = GetTabRectangle(tab, transformed);
@@ -269,7 +269,7 @@ namespace mRemoteNG.UI.Tabs
             return GraphicsPath;
         }
 
-        private void DrawTab(Graphics g, TabNG tab)
+        private void DrawTab(Graphics g, TabNg tab)
         {
             var rectTabOrigin = GetTabRectangle(tab);
             if (rectTabOrigin.IsEmpty)
@@ -402,12 +402,12 @@ namespace mRemoteNG.UI.Tabs
             return transformed ? GetTransformedRectangle(dockState, rect) : rect;
         }
 
-        private Rectangle GetTabRectangle(TabNG tab)
+        private Rectangle GetTabRectangle(TabNg tab)
         {
             return GetTabRectangle(tab, false);
         }
 
-        private Rectangle GetTabRectangle(TabNG tab, bool transformed)
+        private Rectangle GetTabRectangle(TabNg tab, bool transformed)
         {
             var dockState = tab.Content.DockHandler.DockState;
             var rectTabStrip = GetLogicalTabStripRectangle(dockState);
@@ -461,7 +461,7 @@ namespace mRemoteNG.UI.Tabs
 
                 foreach (var pane in GetPanes(state))
                 {
-                    foreach (TabNG tab in pane.AutoHideTabs)
+                    foreach (TabNg tab in pane.AutoHideTabs)
                     {
                         var path = GetTabOutline(tab, true, true);
                         if (path.IsVisible(point))
@@ -475,7 +475,7 @@ namespace mRemoteNG.UI.Tabs
 
         protected override Rectangle GetTabBounds(Tab tab)
         {
-            var path = GetTabOutline((TabNG)tab, true, true);
+            var path = GetTabOutline((TabNg)tab, true, true);
             var bounds = path.GetBounds();
             return new Rectangle((int)bounds.Left, (int)bounds.Top, (int)bounds.Width, (int)bounds.Height);
         }
@@ -495,7 +495,7 @@ namespace mRemoteNG.UI.Tabs
 
         protected override Tab CreateTab(IDockContent content)
         {
-            return new TabNG(content);
+            return new TabNg(content);
         }
     }
 }

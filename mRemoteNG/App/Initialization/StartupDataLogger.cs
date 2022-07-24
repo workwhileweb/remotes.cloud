@@ -46,7 +46,7 @@ namespace mRemoteNG.App.Initialization
                 {
                     var managementObject = (ManagementObject)o;
                     osVersion = Convert.ToString(managementObject.GetPropertyValue("Caption")).Trim();
-                    servicePack = GetOSServicePack(servicePack, managementObject);
+                    servicePack = GetOsServicePack(servicePack, managementObject);
                 }
             }
             catch (Exception ex)
@@ -58,7 +58,7 @@ namespace mRemoteNG.App.Initialization
             return osData;
         }
 
-        private string GetOSServicePack(string servicePack, ManagementObject managementObject)
+        private string GetOsServicePack(string servicePack, ManagementObject managementObject)
         {
             var servicePackNumber = Convert.ToInt32(managementObject.GetPropertyValue("ServicePackMajorVersion"));
             if (servicePackNumber != 0)

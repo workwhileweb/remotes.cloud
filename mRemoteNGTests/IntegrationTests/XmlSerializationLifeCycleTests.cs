@@ -96,11 +96,11 @@ namespace mRemoteNGTests.IntegrationTests
             var serializedContent = _serializer.Serialize(originalConnectionInfo);
 
             // remove GUID from connection xml
-            serializedContent = serializedContent.Replace(originalConnectionInfo.ConstantID, "");
+            serializedContent = serializedContent.Replace(originalConnectionInfo.ConstantId, "");
 
             var deserializedModel = _deserializer.Deserialize(serializedContent);
             var deserializedConnectionInfo = deserializedModel.GetRecursiveChildList().First(node => node.Name == originalConnectionInfo.Name);
-            Assert.That(Guid.TryParse(deserializedConnectionInfo.ConstantID, out var guid));
+            Assert.That(Guid.TryParse(deserializedConnectionInfo.ConstantId, out var guid));
         }
 
         [Test]

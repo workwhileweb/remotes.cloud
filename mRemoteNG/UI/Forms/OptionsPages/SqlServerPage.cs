@@ -91,24 +91,24 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         private void chkUseSQLServer_CheckedChanged(object sender, EventArgs e)
         {
-            toggleSQLPageControls(chkUseSQLServer.Checked);
+            ToggleSqlPageControls(chkUseSQLServer.Checked);
         }
 
-        private void toggleSQLPageControls(bool useSQLServer)
+        private void ToggleSqlPageControls(bool useSqlServer)
         {
-            lblSQLType.Enabled = useSQLServer;
-            lblSQLServer.Enabled = useSQLServer;
-            lblSQLDatabaseName.Enabled = useSQLServer;
-            lblSQLUsername.Enabled = useSQLServer;
-            lblSQLPassword.Enabled = useSQLServer;
-            lblSQLReadOnly.Enabled = useSQLServer;
-            txtSQLType.Enabled = useSQLServer;
-            txtSQLServer.Enabled = useSQLServer;
-            txtSQLDatabaseName.Enabled = useSQLServer;
-            txtSQLUsername.Enabled = useSQLServer;
-            txtSQLPassword.Enabled = useSQLServer;
-            chkSQLReadOnly.Enabled = useSQLServer;
-            btnTestConnection.Enabled = useSQLServer;
+            lblSQLType.Enabled = useSqlServer;
+            lblSQLServer.Enabled = useSqlServer;
+            lblSQLDatabaseName.Enabled = useSqlServer;
+            lblSQLUsername.Enabled = useSqlServer;
+            lblSQLPassword.Enabled = useSqlServer;
+            lblSQLReadOnly.Enabled = useSqlServer;
+            txtSQLType.Enabled = useSqlServer;
+            txtSQLServer.Enabled = useSqlServer;
+            txtSQLDatabaseName.Enabled = useSqlServer;
+            txtSQLUsername.Enabled = useSqlServer;
+            txtSQLPassword.Enabled = useSqlServer;
+            chkSQLReadOnly.Enabled = useSqlServer;
+            btnTestConnection.Enabled = useSqlServer;
         }
 
         private async void btnTestConnection_Click(object sender, EventArgs e)

@@ -9,11 +9,11 @@ namespace mRemoteNG.Tools
 {
     public class PropertyGridCommandSite : IMenuCommandService, ISite
     {
-        private readonly object TheObject;
+        private readonly object _theObject;
 
         public PropertyGridCommandSite(object @object)
         {
-            TheObject = @object;
+            _theObject = @object;
         }
 
         public DesignerVerbCollection Verbs
@@ -22,7 +22,7 @@ namespace mRemoteNG.Tools
             {
                 var objectVerbs = new DesignerVerbCollection();
                 // ReSharper disable VBPossibleMistakenCallToGetType.2
-                var methods = TheObject.GetType().GetMethods(BindingFlags.Public | BindingFlags.Instance);
+                var methods = _theObject.GetType().GetMethods(BindingFlags.Public | BindingFlags.Instance);
                 // ReSharper restore VBPossibleMistakenCallToGetType.2
                 foreach (var method in methods)
                 {
@@ -64,7 +64,7 @@ namespace mRemoteNG.Tools
             }
 
             // ReSharper disable VBPossibleMistakenCallToGetType.2
-            var methods = TheObject.GetType().GetMethods(BindingFlags.Public | BindingFlags.Instance);
+            var methods = _theObject.GetType().GetMethods(BindingFlags.Public | BindingFlags.Instance);
             // ReSharper restore VBPossibleMistakenCallToGetType.2
             foreach (var method in methods)
             {
@@ -92,7 +92,7 @@ namespace mRemoteNG.Tools
                 }
 
                 if (verb.Text != displayName) continue;
-                method.Invoke(TheObject, null);
+                method.Invoke(_theObject, null);
                 return;
             }
         }

@@ -47,7 +47,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
             element.Add(new XAttribute("Descr", connectionInfo.Description));
             element.Add(new XAttribute("Icon", connectionInfo.Icon));
             element.Add(new XAttribute("Panel", connectionInfo.Panel));
-            element.Add(new XAttribute("Id", connectionInfo.ConstantID));
+            element.Add(new XAttribute("Id", connectionInfo.ConstantId));
 
             if (!Runtime.UseCredentialManager)
             {
@@ -68,17 +68,17 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
             element.Add(new XAttribute("Hostname", connectionInfo.Hostname));
             element.Add(new XAttribute("Protocol", connectionInfo.Protocol));
             element.Add(new XAttribute("RdpVersion", connectionInfo.RdpVersion.ToString().ToLowerInvariant()));
-            element.Add(new XAttribute("SSHTunnelConnectionName", connectionInfo.SSHTunnelConnectionName));
+            element.Add(new XAttribute("SSHTunnelConnectionName", connectionInfo.SshTunnelConnectionName));
             element.Add(new XAttribute("OpeningCommand", connectionInfo.OpeningCommand));
-            element.Add(new XAttribute("SSHOptions", connectionInfo.SSHOptions));
+            element.Add(new XAttribute("SSHOptions", connectionInfo.SshOptions));
             element.Add(new XAttribute("PuttySession", connectionInfo.PuttySession));
             element.Add(new XAttribute("Port", connectionInfo.Port));
             element.Add(new XAttribute("ConnectToConsole", connectionInfo.UseConsoleSession.ToString().ToLowerInvariant()));
             element.Add(new XAttribute("UseCredSsp", connectionInfo.UseCredSsp.ToString().ToLowerInvariant()));
             element.Add(new XAttribute("RenderingEngine", connectionInfo.RenderingEngine));
-            element.Add(new XAttribute("RDPAuthenticationLevel", connectionInfo.RDPAuthenticationLevel));
-            element.Add(new XAttribute("RDPMinutesToIdleTimeout", connectionInfo.RDPMinutesToIdleTimeout));
-            element.Add(new XAttribute("RDPAlertIdleTimeout", connectionInfo.RDPAlertIdleTimeout.ToString().ToLowerInvariant()));
+            element.Add(new XAttribute("RDPAuthenticationLevel", connectionInfo.RdpAuthenticationLevel));
+            element.Add(new XAttribute("RDPMinutesToIdleTimeout", connectionInfo.RdpMinutesToIdleTimeout));
+            element.Add(new XAttribute("RDPAlertIdleTimeout", connectionInfo.RdpAlertIdleTimeout.ToString().ToLowerInvariant()));
             element.Add(new XAttribute("LoadBalanceInfo", connectionInfo.LoadBalanceInfo));
             element.Add(new XAttribute("Colors", connectionInfo.Colors));
             element.Add(new XAttribute("Resolution", connectionInfo.Resolution));
@@ -108,48 +108,48 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
             element.Add(new XAttribute("UserField", connectionInfo.UserField));
             element.Add(new XAttribute("Favorite", connectionInfo.Favorite));
             element.Add(new XAttribute("ExtApp", connectionInfo.ExtApp));
-            element.Add(new XAttribute("StartProgram", connectionInfo.RDPStartProgram));
-            element.Add(new XAttribute("StartProgramWorkDir", connectionInfo.RDPStartProgramWorkDir));
-            element.Add(new XAttribute("VNCCompression", connectionInfo.VNCCompression));
-            element.Add(new XAttribute("VNCEncoding", connectionInfo.VNCEncoding));
-            element.Add(new XAttribute("VNCAuthMode", connectionInfo.VNCAuthMode));
-            element.Add(new XAttribute("VNCProxyType", connectionInfo.VNCProxyType));
-            element.Add(new XAttribute("VNCProxyIP", connectionInfo.VNCProxyIP));
-            element.Add(new XAttribute("VNCProxyPort", connectionInfo.VNCProxyPort));
+            element.Add(new XAttribute("StartProgram", connectionInfo.RdpStartProgram));
+            element.Add(new XAttribute("StartProgramWorkDir", connectionInfo.RdpStartProgramWorkDir));
+            element.Add(new XAttribute("VNCCompression", connectionInfo.VncCompression));
+            element.Add(new XAttribute("VNCEncoding", connectionInfo.VncEncoding));
+            element.Add(new XAttribute("VNCAuthMode", connectionInfo.VncAuthMode));
+            element.Add(new XAttribute("VNCProxyType", connectionInfo.VncProxyType));
+            element.Add(new XAttribute("VNCProxyIP", connectionInfo.VncProxyIp));
+            element.Add(new XAttribute("VNCProxyPort", connectionInfo.VncProxyPort));
 
             element.Add(_saveFilter.SaveUsername
-                ? new XAttribute("VNCProxyUsername", connectionInfo.VNCProxyUsername)
+                ? new XAttribute("VNCProxyUsername", connectionInfo.VncProxyUsername)
                 : new XAttribute("VNCProxyUsername", ""));
 
             element.Add(_saveFilter.SavePassword
-                ? new XAttribute("VNCProxyPassword", _cryptographyProvider.Encrypt(connectionInfo.VNCProxyPassword, _encryptionKey))
+                ? new XAttribute("VNCProxyPassword", _cryptographyProvider.Encrypt(connectionInfo.VncProxyPassword, _encryptionKey))
                 : new XAttribute("VNCProxyPassword", ""));
 
-            element.Add(new XAttribute("VNCColors", connectionInfo.VNCColors));
-            element.Add(new XAttribute("VNCSmartSizeMode", connectionInfo.VNCSmartSizeMode));
-            element.Add(new XAttribute("VNCViewOnly", connectionInfo.VNCViewOnly.ToString().ToLowerInvariant()));
-            element.Add(new XAttribute("RDGatewayUsageMethod", connectionInfo.RDGatewayUsageMethod));
-            element.Add(new XAttribute("RDGatewayHostname", connectionInfo.RDGatewayHostname));
-            element.Add(new XAttribute("RDGatewayUseConnectionCredentials", connectionInfo.RDGatewayUseConnectionCredentials));
+            element.Add(new XAttribute("VNCColors", connectionInfo.VncColors));
+            element.Add(new XAttribute("VNCSmartSizeMode", connectionInfo.VncSmartSizeMode));
+            element.Add(new XAttribute("VNCViewOnly", connectionInfo.VncViewOnly.ToString().ToLowerInvariant()));
+            element.Add(new XAttribute("RDGatewayUsageMethod", connectionInfo.RdGatewayUsageMethod));
+            element.Add(new XAttribute("RDGatewayHostname", connectionInfo.RdGatewayHostname));
+            element.Add(new XAttribute("RDGatewayUseConnectionCredentials", connectionInfo.RdGatewayUseConnectionCredentials));
 
             element.Add(_saveFilter.SaveUsername
-                ? new XAttribute("RDGatewayUsername", connectionInfo.RDGatewayUsername)
+                ? new XAttribute("RDGatewayUsername", connectionInfo.RdGatewayUsername)
                 : new XAttribute("RDGatewayUsername", ""));
 
             element.Add(_saveFilter.SavePassword
-                ? new XAttribute("RDGatewayPassword", _cryptographyProvider.Encrypt(connectionInfo.RDGatewayPassword, _encryptionKey))
+                ? new XAttribute("RDGatewayPassword", _cryptographyProvider.Encrypt(connectionInfo.RdGatewayPassword, _encryptionKey))
                 : new XAttribute("RDGatewayPassword", ""));
 
             element.Add(_saveFilter.SaveDomain
-                ? new XAttribute("RDGatewayDomain", connectionInfo.RDGatewayDomain)
+                ? new XAttribute("RDGatewayDomain", connectionInfo.RdGatewayDomain)
                 : new XAttribute("RDGatewayDomain", ""));
 
-            element.Add(new XAttribute("UseRCG", connectionInfo.UseRCG));
+            element.Add(new XAttribute("UseRCG", connectionInfo.UseRcg));
             element.Add(new XAttribute("UseRestrictedAdmin", connectionInfo.UseRestrictedAdmin));
 
-            element.Add(new XAttribute("UserViaAPI", connectionInfo.UserViaAPI));
-            element.Add(new XAttribute("EC2InstanceId", connectionInfo.EC2InstanceId));
-            element.Add(new XAttribute("EC2Region", connectionInfo.EC2Region));
+            element.Add(new XAttribute("UserViaAPI", connectionInfo.UserViaApi));
+            element.Add(new XAttribute("EC2InstanceId", connectionInfo.Ec2InstanceId));
+            element.Add(new XAttribute("EC2Region", connectionInfo.Ec2Region));
         }
 
         private void SetInheritanceAttributes(XContainer element, IInheritable connectionInfo)
@@ -194,12 +194,12 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
                     element.Add(new XAttribute("InheritProtocol", inheritance.Protocol.ToString().ToLowerInvariant()));
                 if (inheritance.RdpVersion)
                     element.Add(new XAttribute("InheritRdpVersion", inheritance.RdpVersion.ToString().ToLowerInvariant()));
-                if (inheritance.SSHTunnelConnectionName)
-                    element.Add(new XAttribute("InheritSSHTunnelConnectionName", inheritance.SSHTunnelConnectionName.ToString().ToLowerInvariant()));
+                if (inheritance.SshTunnelConnectionName)
+                    element.Add(new XAttribute("InheritSSHTunnelConnectionName", inheritance.SshTunnelConnectionName.ToString().ToLowerInvariant()));
                 if (inheritance.OpeningCommand)
                     element.Add(new XAttribute("InheritOpeningCommand", inheritance.OpeningCommand.ToString().ToLowerInvariant()));
-                if (inheritance.SSHOptions)
-                    element.Add(new XAttribute("InheritSSHOptions", inheritance.SSHOptions.ToString().ToLowerInvariant()));
+                if (inheritance.SshOptions)
+                    element.Add(new XAttribute("InheritSSHOptions", inheritance.SshOptions.ToString().ToLowerInvariant()));
                 if (inheritance.PuttySession)
                     element.Add(new XAttribute("InheritPuttySession", inheritance.PuttySession.ToString().ToLowerInvariant()));
                 if (inheritance.RedirectDiskDrives)
@@ -232,12 +232,12 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
                     element.Add(new XAttribute("InheritRenderingEngine", inheritance.RenderingEngine.ToString().ToLowerInvariant()));
                 if (inheritance.Username)
                     element.Add(new XAttribute("InheritUsername", inheritance.Username.ToString().ToLowerInvariant()));
-                if (inheritance.RDPAuthenticationLevel)
-                    element.Add(new XAttribute("InheritRDPAuthenticationLevel", inheritance.RDPAuthenticationLevel.ToString().ToLowerInvariant()));
-                if (inheritance.RDPMinutesToIdleTimeout)
-                    element.Add(new XAttribute("InheritRDPMinutesToIdleTimeout", inheritance.RDPMinutesToIdleTimeout.ToString().ToLowerInvariant()));
-                if (inheritance.RDPAlertIdleTimeout)
-                    element.Add(new XAttribute("InheritRDPAlertIdleTimeout", inheritance.RDPAlertIdleTimeout.ToString().ToLowerInvariant()));
+                if (inheritance.RdpAuthenticationLevel)
+                    element.Add(new XAttribute("InheritRDPAuthenticationLevel", inheritance.RdpAuthenticationLevel.ToString().ToLowerInvariant()));
+                if (inheritance.RdpMinutesToIdleTimeout)
+                    element.Add(new XAttribute("InheritRDPMinutesToIdleTimeout", inheritance.RdpMinutesToIdleTimeout.ToString().ToLowerInvariant()));
+                if (inheritance.RdpAlertIdleTimeout)
+                    element.Add(new XAttribute("InheritRDPAlertIdleTimeout", inheritance.RdpAlertIdleTimeout.ToString().ToLowerInvariant()));
                 if (inheritance.LoadBalanceInfo)
                     element.Add(new XAttribute("InheritLoadBalanceInfo", inheritance.LoadBalanceInfo.ToString().ToLowerInvariant()));
                 if (inheritance.PreExtApp)
@@ -252,50 +252,50 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
                     element.Add(new XAttribute("InheritFavorite", inheritance.Favorite.ToString().ToLowerInvariant()));
                 if (inheritance.ExtApp)
                     element.Add(new XAttribute("InheritExtApp", inheritance.ExtApp.ToString().ToLowerInvariant()));
-                if (inheritance.VNCCompression)
-                    element.Add(new XAttribute("InheritVNCCompression", inheritance.VNCCompression.ToString().ToLowerInvariant()));
-                if (inheritance.VNCEncoding)
-                    element.Add(new XAttribute("InheritVNCEncoding", inheritance.VNCEncoding.ToString().ToLowerInvariant()));
-                if (inheritance.VNCAuthMode)
-                    element.Add(new XAttribute("InheritVNCAuthMode", inheritance.VNCAuthMode.ToString().ToLowerInvariant()));
-                if (inheritance.VNCProxyType)
-                    element.Add(new XAttribute("InheritVNCProxyType", inheritance.VNCProxyType.ToString().ToLowerInvariant()));
-                if (inheritance.VNCProxyIP)
-                    element.Add(new XAttribute("InheritVNCProxyIP", inheritance.VNCProxyIP.ToString().ToLowerInvariant()));
-                if (inheritance.VNCProxyPort)
-                    element.Add(new XAttribute("InheritVNCProxyPort", inheritance.VNCProxyPort.ToString().ToLowerInvariant()));
-                if (inheritance.VNCProxyUsername)
-                    element.Add(new XAttribute("InheritVNCProxyUsername", inheritance.VNCProxyUsername.ToString().ToLowerInvariant()));
-                if (inheritance.VNCProxyPassword)
-                    element.Add(new XAttribute("InheritVNCProxyPassword", inheritance.VNCProxyPassword.ToString().ToLowerInvariant()));
-                if (inheritance.VNCColors)
-                    element.Add(new XAttribute("InheritVNCColors", inheritance.VNCColors.ToString().ToLowerInvariant()));
-                if (inheritance.VNCSmartSizeMode)
-                    element.Add(new XAttribute("InheritVNCSmartSizeMode", inheritance.VNCSmartSizeMode.ToString().ToLowerInvariant()));
-                if (inheritance.VNCViewOnly)
-                    element.Add(new XAttribute("InheritVNCViewOnly", inheritance.VNCViewOnly.ToString().ToLowerInvariant()));
-                if (inheritance.RDGatewayUsageMethod)
-                    element.Add(new XAttribute("InheritRDGatewayUsageMethod", inheritance.RDGatewayUsageMethod.ToString().ToLowerInvariant()));
-                if (inheritance.RDGatewayHostname)
-                    element.Add(new XAttribute("InheritRDGatewayHostname", inheritance.RDGatewayHostname.ToString().ToLowerInvariant()));
-                if (inheritance.RDGatewayUseConnectionCredentials)
-                    element.Add(new XAttribute("InheritRDGatewayUseConnectionCredentials", inheritance.RDGatewayUseConnectionCredentials.ToString().ToLowerInvariant()));
-                if (inheritance.RDGatewayUsername)
-                    element.Add(new XAttribute("InheritRDGatewayUsername", inheritance.RDGatewayUsername.ToString().ToLowerInvariant()));
-                if (inheritance.RDGatewayPassword)
-                    element.Add(new XAttribute("InheritRDGatewayPassword", inheritance.RDGatewayPassword.ToString().ToLowerInvariant()));
-                if (inheritance.RDGatewayDomain)
-                    element.Add(new XAttribute("InheritRDGatewayDomain", inheritance.RDGatewayDomain.ToString().ToLowerInvariant()));
+                if (inheritance.VncCompression)
+                    element.Add(new XAttribute("InheritVNCCompression", inheritance.VncCompression.ToString().ToLowerInvariant()));
+                if (inheritance.VncEncoding)
+                    element.Add(new XAttribute("InheritVNCEncoding", inheritance.VncEncoding.ToString().ToLowerInvariant()));
+                if (inheritance.VncAuthMode)
+                    element.Add(new XAttribute("InheritVNCAuthMode", inheritance.VncAuthMode.ToString().ToLowerInvariant()));
+                if (inheritance.VncProxyType)
+                    element.Add(new XAttribute("InheritVNCProxyType", inheritance.VncProxyType.ToString().ToLowerInvariant()));
+                if (inheritance.VncProxyIp)
+                    element.Add(new XAttribute("InheritVNCProxyIP", inheritance.VncProxyIp.ToString().ToLowerInvariant()));
+                if (inheritance.VncProxyPort)
+                    element.Add(new XAttribute("InheritVNCProxyPort", inheritance.VncProxyPort.ToString().ToLowerInvariant()));
+                if (inheritance.VncProxyUsername)
+                    element.Add(new XAttribute("InheritVNCProxyUsername", inheritance.VncProxyUsername.ToString().ToLowerInvariant()));
+                if (inheritance.VncProxyPassword)
+                    element.Add(new XAttribute("InheritVNCProxyPassword", inheritance.VncProxyPassword.ToString().ToLowerInvariant()));
+                if (inheritance.VncColors)
+                    element.Add(new XAttribute("InheritVNCColors", inheritance.VncColors.ToString().ToLowerInvariant()));
+                if (inheritance.VncSmartSizeMode)
+                    element.Add(new XAttribute("InheritVNCSmartSizeMode", inheritance.VncSmartSizeMode.ToString().ToLowerInvariant()));
+                if (inheritance.VncViewOnly)
+                    element.Add(new XAttribute("InheritVNCViewOnly", inheritance.VncViewOnly.ToString().ToLowerInvariant()));
+                if (inheritance.RdGatewayUsageMethod)
+                    element.Add(new XAttribute("InheritRDGatewayUsageMethod", inheritance.RdGatewayUsageMethod.ToString().ToLowerInvariant()));
+                if (inheritance.RdGatewayHostname)
+                    element.Add(new XAttribute("InheritRDGatewayHostname", inheritance.RdGatewayHostname.ToString().ToLowerInvariant()));
+                if (inheritance.RdGatewayUseConnectionCredentials)
+                    element.Add(new XAttribute("InheritRDGatewayUseConnectionCredentials", inheritance.RdGatewayUseConnectionCredentials.ToString().ToLowerInvariant()));
+                if (inheritance.RdGatewayUsername)
+                    element.Add(new XAttribute("InheritRDGatewayUsername", inheritance.RdGatewayUsername.ToString().ToLowerInvariant()));
+                if (inheritance.RdGatewayPassword)
+                    element.Add(new XAttribute("InheritRDGatewayPassword", inheritance.RdGatewayPassword.ToString().ToLowerInvariant()));
+                if (inheritance.RdGatewayDomain)
+                    element.Add(new XAttribute("InheritRDGatewayDomain", inheritance.RdGatewayDomain.ToString().ToLowerInvariant()));
                 if (inheritance.VmId)
                     element.Add(new XAttribute("InheritVmId", inheritance.VmId.ToString().ToLowerInvariant()));
                 if (inheritance.UseVmId)
                     element.Add(new XAttribute("InheritUseVmId", inheritance.UseVmId.ToString().ToLowerInvariant()));
                 if (inheritance.UseEnhancedMode)
                     element.Add(new XAttribute("InheritUseEnhancedMode", inheritance.UseEnhancedMode.ToString().ToLowerInvariant()));
-                if (inheritance.UserViaAPI)
-                    element.Add(new XAttribute("InheritUserViaAPI", inheritance.UserViaAPI.ToString().ToLowerInvariant()));
-                if (inheritance.UseRCG)
-                    element.Add(new XAttribute("InheritUseRCG", inheritance.UseRCG.ToString().ToLowerInvariant()));
+                if (inheritance.UserViaApi)
+                    element.Add(new XAttribute("InheritUserViaAPI", inheritance.UserViaApi.ToString().ToLowerInvariant()));
+                if (inheritance.UseRcg)
+                    element.Add(new XAttribute("InheritUseRCG", inheritance.UseRcg.ToString().ToLowerInvariant()));
                 if (inheritance.UseRestrictedAdmin)
                     element.Add(new XAttribute("InheritUseRestrictedAdmin", inheritance.UseRestrictedAdmin.ToString().ToLowerInvariant()));
             }

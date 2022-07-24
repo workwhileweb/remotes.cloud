@@ -36,33 +36,33 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
 
             switch (_targetProtocolType)
             {
-                case ProtocolType.SSH2:
+                case ProtocolType.Ssh2:
                     if (host.Ssh)
-                        finalProtocol = ProtocolType.SSH2;
+                        finalProtocol = ProtocolType.Ssh2;
                     break;
                 case ProtocolType.Telnet:
                     if (host.Telnet)
                         finalProtocol = ProtocolType.Telnet;
                     break;
-                case ProtocolType.HTTP:
+                case ProtocolType.Http:
                     if (host.Http)
-                        finalProtocol = ProtocolType.HTTP;
+                        finalProtocol = ProtocolType.Http;
                     break;
-                case ProtocolType.HTTPS:
+                case ProtocolType.Https:
                     if (host.Https)
-                        finalProtocol = ProtocolType.HTTPS;
+                        finalProtocol = ProtocolType.Https;
                     break;
                 case ProtocolType.Rlogin:
                     if (host.Rlogin)
                         finalProtocol = ProtocolType.Rlogin;
                     break;
-                case ProtocolType.RDP:
+                case ProtocolType.Rdp:
                     if (host.Rdp)
-                        finalProtocol = ProtocolType.RDP;
+                        finalProtocol = ProtocolType.Rdp;
                     break;
-                case ProtocolType.VNC:
+                case ProtocolType.Vnc:
                     if (host.Vnc)
-                        finalProtocol = ProtocolType.VNC;
+                        finalProtocol = ProtocolType.Vnc;
                     break;
                 default:
                     protocolValid = false;

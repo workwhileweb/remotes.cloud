@@ -12,7 +12,7 @@ using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.Connection.Protocol.VNC
 {
-    public class ProtocolVNC : ProtocolBase
+    public class ProtocolVnc : ProtocolBase
     {
         #region Private Declarations
 
@@ -26,7 +26,7 @@ namespace mRemoteNG.Connection.Protocol.VNC
 
         #region Public Methods
 
-        public ProtocolVNC()
+        public ProtocolVnc()
         {
             Control = new VncSharpCore.RemoteDesktop();
         }
@@ -58,7 +58,7 @@ namespace mRemoteNG.Connection.Protocol.VNC
             try
             {
                 if (TestConnect(_info.Hostname, _info.Port, 500))
-                    _vnc.Connect(_info.Hostname, _info.VNCViewOnly, _info.VNCSmartSizeMode != SmartSizeMode.SmartSNo);
+                    _vnc.Connect(_info.Hostname, _info.VncViewOnly, _info.VncSmartSizeMode != SmartSizeMode.SmartSNo);
             }
             catch (Exception ex)
             {
@@ -85,12 +85,12 @@ namespace mRemoteNG.Connection.Protocol.VNC
             }
         }
 
-        public void SendSpecialKeys(SpecialKeys Keys)
+        public void SendSpecialKeys(SpecialKeys keys)
         {
             try
             {
                 // ReSharper disable once SwitchStatementMissingSomeCases
-                switch (Keys)
+                switch (keys)
                 {
                     case SpecialKeys.CtrlAltDel:
                         _vnc.SendSpecialKeys(VncSharpCore.SpecialKeys.CtrlAltDel);
@@ -206,7 +206,7 @@ namespace mRemoteNG.Connection.Protocol.VNC
         private void VNCEvent_Connected(object sender, EventArgs e)
         {
             Event_Connected(this);
-            _vnc.AutoScroll = _info.VNCSmartSizeMode == SmartSizeMode.SmartSNo;
+            _vnc.AutoScroll = _info.VncSmartSizeMode == SmartSizeMode.SmartSNo;
         }
 
         private void VNCEvent_Disconnected(object sender, EventArgs e)
@@ -260,19 +260,19 @@ namespace mRemoteNG.Connection.Protocol.VNC
         public enum Encoding
         {
             [Description("Raw")] EncRaw,
-            [Description("RRE")] EncRRE,
+            [Description("RRE")] EncRre,
             [Description("CoRRE")] EncCorre,
             [Description("Hextile")] EncHextile,
             [Description("Zlib")] EncZlib,
             [Description("Tight")] EncTight,
             [Description("ZlibHex")] EncZLibHex,
-            [Description("ZRLE")] EncZRLE
+            [Description("ZRLE")] EncZrle
         }
 
         public enum AuthMode
         {
             [LocalizedAttributes.LocalizedDescription(nameof(Language.Vnc))]
-            AuthVNC,
+            AuthVnc,
 
             [LocalizedAttributes.LocalizedDescription(nameof(Language.Windows))]
             AuthWin
@@ -284,7 +284,7 @@ namespace mRemoteNG.Connection.Protocol.VNC
             ProxyNone,
 
             [LocalizedAttributes.LocalizedDescription(nameof(Language.Http))]
-            ProxyHTTP,
+            ProxyHttp,
 
             [LocalizedAttributes.LocalizedDescription(nameof(Language.Socks5))]
             ProxySocks5,

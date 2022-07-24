@@ -53,7 +53,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // cboLanguage
             // 
-            this.cboLanguage._mice = MrngComboBox.MouseState.HOVER;
+            this.cboLanguage.Mice = MrngComboBox.MouseState.Hover;
             this.cboLanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboLanguage.FormattingEnabled = true;
             this.cboLanguage.Location = new System.Drawing.Point(3, 24);
@@ -73,7 +73,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkShowFullConnectionsFilePathInTitle
             // 
-            this.chkShowFullConnectionsFilePathInTitle._mice = MrngCheckBox.MouseState.OUT;
+            this.chkShowFullConnectionsFilePathInTitle.Mice = MrngCheckBox.MouseState.Out;
             this.chkShowFullConnectionsFilePathInTitle.AutoSize = true;
             this.chkShowFullConnectionsFilePathInTitle.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkShowFullConnectionsFilePathInTitle.Location = new System.Drawing.Point(3, 127);
@@ -85,7 +85,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkShowDescriptionTooltipsInTree
             // 
-            this.chkShowDescriptionTooltipsInTree._mice = MrngCheckBox.MouseState.OUT;
+            this.chkShowDescriptionTooltipsInTree.Mice = MrngCheckBox.MouseState.Out;
             this.chkShowDescriptionTooltipsInTree.AutoSize = true;
             this.chkShowDescriptionTooltipsInTree.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkShowDescriptionTooltipsInTree.Location = new System.Drawing.Point(3, 104);
@@ -97,7 +97,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkShowSystemTrayIcon
             // 
-            this.chkShowSystemTrayIcon._mice = MrngCheckBox.MouseState.OUT;
+            this.chkShowSystemTrayIcon.Mice = MrngCheckBox.MouseState.Out;
             this.chkShowSystemTrayIcon.AutoSize = true;
             this.chkShowSystemTrayIcon.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkShowSystemTrayIcon.Location = new System.Drawing.Point(3, 173);
@@ -109,7 +109,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkMinimizeToSystemTray
             // 
-            this.chkMinimizeToSystemTray._mice = MrngCheckBox.MouseState.OUT;
+            this.chkMinimizeToSystemTray.Mice = MrngCheckBox.MouseState.Out;
             this.chkMinimizeToSystemTray.AutoSize = true;
             this.chkMinimizeToSystemTray.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkMinimizeToSystemTray.Location = new System.Drawing.Point(3, 196);
@@ -121,7 +121,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkCloseToSystemTray
             // 
-            this.chkCloseToSystemTray._mice = MrngCheckBox.MouseState.OUT;
+            this.chkCloseToSystemTray.Mice = MrngCheckBox.MouseState.Out;
             this.chkCloseToSystemTray.AutoSize = true;
             this.chkCloseToSystemTray.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkCloseToSystemTray.Location = new System.Drawing.Point(3, 219);

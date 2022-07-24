@@ -261,7 +261,7 @@ namespace mRemoteNGTests.Container
         public void ClonedContainerHasNewConstantId()
         {
             var clone = _containerInfo.Clone();
-            Assert.That(clone.ConstantID, Is.Not.EqualTo(_containerInfo.ConstantID));
+            Assert.That(clone.ConstantId, Is.Not.EqualTo(_containerInfo.ConstantId));
         }
 
         [Test]
@@ -368,9 +368,9 @@ namespace mRemoteNGTests.Container
             _containerInfo.AddChild(_con2);
             _containerInfo.AddChild(_con1);
             _containerInfo.AddChild(_con3);
-            _containerInfo.SortOn(node=> node.ConstantID);
+            _containerInfo.SortOn(node=> node.ConstantId);
             var orderAfterSort = _containerInfo.Children.ToArray();
-            Assert.That(orderAfterSort, Is.Ordered.Ascending.By(nameof(ConnectionInfo.ConstantID)));
+            Assert.That(orderAfterSort, Is.Ordered.Ascending.By(nameof(ConnectionInfo.ConstantId)));
         }
 
         [Test]
@@ -379,9 +379,9 @@ namespace mRemoteNGTests.Container
             _containerInfo.AddChild(_con2);
             _containerInfo.AddChild(_con1);
             _containerInfo.AddChild(_con3);
-            _containerInfo.SortOn(node => node.ConstantID, ListSortDirection.Descending);
+            _containerInfo.SortOn(node => node.ConstantId, ListSortDirection.Descending);
             var orderAfterSort = _containerInfo.Children.ToArray();
-            Assert.That(orderAfterSort, Is.Ordered.Descending.By(nameof(ConnectionInfo.ConstantID)));
+            Assert.That(orderAfterSort, Is.Ordered.Descending.By(nameof(ConnectionInfo.ConstantId)));
         }
 
         [Test]
@@ -418,9 +418,9 @@ namespace mRemoteNGTests.Container
             childContainer.AddChild(_con1);
             childContainer.AddChild(_con3);
             _containerInfo.AddChild(childContainer);
-            _containerInfo.SortOnRecursive(node => node.ConstantID);
+            _containerInfo.SortOnRecursive(node => node.ConstantId);
             var grandchildOrderAfterSort = _containerInfo.Children.ToArray();
-            Assert.That(grandchildOrderAfterSort, Is.Ordered.Ascending.By(nameof(ConnectionInfo.ConstantID)));
+            Assert.That(grandchildOrderAfterSort, Is.Ordered.Ascending.By(nameof(ConnectionInfo.ConstantId)));
         }
 
         [Test]
@@ -431,9 +431,9 @@ namespace mRemoteNGTests.Container
             childContainer.AddChild(_con1);
             childContainer.AddChild(_con3);
             _containerInfo.AddChild(childContainer);
-            _containerInfo.SortOnRecursive(node => node.ConstantID, ListSortDirection.Descending);
+            _containerInfo.SortOnRecursive(node => node.ConstantId, ListSortDirection.Descending);
             var grandchildOrderAfterSort = _containerInfo.Children.ToArray();
-            Assert.That(grandchildOrderAfterSort, Is.Ordered.Descending.By(nameof(ConnectionInfo.ConstantID)));
+            Assert.That(grandchildOrderAfterSort, Is.Ordered.Descending.By(nameof(ConnectionInfo.ConstantId)));
         }
 
         [Test]

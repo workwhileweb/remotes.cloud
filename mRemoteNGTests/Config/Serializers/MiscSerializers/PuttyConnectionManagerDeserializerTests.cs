@@ -12,15 +12,15 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
     {
         private PuttyConnectionManagerDeserializer _deserializer;
         private ContainerInfo _rootImportedFolder;
-        private const string ExpectedRootFolderName = "test_puttyConnectionManager_database";
-        private const string ExpectedConnectionDisplayName = "my ssh connection";
-        private const string ExpectedConnectionHostname = "server1.mydomain.com";
-        private const string ExpectedConnectionDescription = "My Description Here";
-        private const int ExpectedConnectionPort = 22;
-        private const ProtocolType ExpectedProtocolType = ProtocolType.SSH2;
-        private const string ExpectedPuttySession = "MyCustomPuttySession";
-        private const string ExpectedConnectionUsername = "mysshusername";
-        private const string ExpectedConnectionPassword = "password123";
+        private const string EXPECTED_ROOT_FOLDER_NAME = "test_puttyConnectionManager_database";
+        private const string EXPECTED_CONNECTION_DISPLAY_NAME = "my ssh connection";
+        private const string EXPECTED_CONNECTION_HOSTNAME = "server1.mydomain.com";
+        private const string EXPECTED_CONNECTION_DESCRIPTION = "My Description Here";
+        private const int EXPECTED_CONNECTION_PORT = 22;
+        private const ProtocolType EXPECTED_PROTOCOL_TYPE = ProtocolType.Ssh2;
+        private const string EXPECTED_PUTTY_SESSION = "MyCustomPuttySession";
+        private const string EXPECTED_CONNECTION_USERNAME = "mysshusername";
+        private const string EXPECTED_CONNECTION_PASSWORD = "password123";
 
 
         [OneTimeSetUp]
@@ -43,63 +43,63 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
         [Test]
         public void RootFolderImportedWithCorrectName()
         {
-            Assert.That(_rootImportedFolder.Name, Is.EqualTo(ExpectedRootFolderName));
+            Assert.That(_rootImportedFolder.Name, Is.EqualTo(EXPECTED_ROOT_FOLDER_NAME));
         }
 
         [Test]
         public void ConnectionDisplayNameImported()
         {
             var connection = GetSshConnection();
-            Assert.That(connection.Name, Is.EqualTo(ExpectedConnectionDisplayName));
+            Assert.That(connection.Name, Is.EqualTo(EXPECTED_CONNECTION_DISPLAY_NAME));
         }
 
         [Test]
         public void ConnectionHostNameImported()
         {
             var connection = GetSshConnection();
-            Assert.That(connection.Hostname, Is.EqualTo(ExpectedConnectionHostname));
+            Assert.That(connection.Hostname, Is.EqualTo(EXPECTED_CONNECTION_HOSTNAME));
         }
 
         [Test]
         public void ConnectionDescriptionImported()
         {
             var connection = GetSshConnection();
-            Assert.That(connection.Description, Is.EqualTo(ExpectedConnectionDescription));
+            Assert.That(connection.Description, Is.EqualTo(EXPECTED_CONNECTION_DESCRIPTION));
         }
 
         [Test]
         public void ConnectionPortImported()
         {
             var connection = GetSshConnection();
-            Assert.That(connection.Port, Is.EqualTo(ExpectedConnectionPort));
+            Assert.That(connection.Port, Is.EqualTo(EXPECTED_CONNECTION_PORT));
         }
 
         [Test]
         public void ConnectionProtocolTypeImported()
         {
             var connection = GetSshConnection();
-            Assert.That(connection.Protocol, Is.EqualTo(ExpectedProtocolType));
+            Assert.That(connection.Protocol, Is.EqualTo(EXPECTED_PROTOCOL_TYPE));
         }
 
         [Test]
         public void ConnectionPuttySessionImported()
         {
             var connection = GetSshConnection();
-            Assert.That(connection.PuttySession, Is.EqualTo(ExpectedPuttySession));
+            Assert.That(connection.PuttySession, Is.EqualTo(EXPECTED_PUTTY_SESSION));
         }
 
         [Test]
         public void ConnectionUsernameImported()
         {
             var connection = GetSshConnection();
-            Assert.That(connection.Username, Is.EqualTo(ExpectedConnectionUsername));
+            Assert.That(connection.Username, Is.EqualTo(EXPECTED_CONNECTION_USERNAME));
         }
 
         [Test]
         public void ConnectionPasswordImported()
         {
             var connection = GetSshConnection();
-            Assert.That(connection.Password, Is.EqualTo(ExpectedConnectionPassword));
+            Assert.That(connection.Password, Is.EqualTo(EXPECTED_CONNECTION_PASSWORD));
         }
 
         private ConnectionInfo GetSshConnection()

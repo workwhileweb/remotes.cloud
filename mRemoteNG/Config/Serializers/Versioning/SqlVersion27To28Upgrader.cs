@@ -42,7 +42,7 @@ ALTER TABLE tblCons ADD CONSTRAINT PK_tblCons PRIMARY KEY (ConstantID);
 UPDATE tblRoot SET ConfVersion='2.8';";
             DbCommand dbCommand;
 
-            if (_databaseConnector.GetType() == typeof(MSSqlDatabaseConnector))
+            if (_databaseConnector.GetType() == typeof(MsSqlDatabaseConnector))
             {
                 dbCommand = _databaseConnector.DbCommand(msSqlText1);
                 dbCommand.ExecuteNonQuery();

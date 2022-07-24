@@ -21,7 +21,7 @@ namespace mRemoteNG.App.Update
 {
     public class AppUpdater
     {
-        private const int _bufferLength = 8192;
+        private const int BUFFER_LENGTH = 8192;
         private WebProxy _webProxy;
         private HttpClient _httpClient;
         private CancellationTokenSource _changeLogCancelToken;
@@ -131,19 +131,19 @@ namespace mRemoteNG.App.Update
             {
                 _getUpdateInfoCancelToken = new CancellationTokenSource();
                 using var response = await _httpClient.GetAsync(CurrentUpdateInfo.DownloadAddress, HttpCompletionOption.ResponseHeadersRead, _getUpdateInfoCancelToken.Token);
-                var buffer = new byte[_bufferLength];
+                var buffer = new byte[BUFFER_LENGTH];
                 var totalBytes = response.Content.Headers.ContentLength ?? 0;
                 var readBytes = 0L;
 
                 await using (var httpStream = await response.Content.ReadAsStreamAsync(_getUpdateInfoCancelToken.Token))
                 {
                     await using var fileStream = new FileStream(CurrentUpdateInfo.UpdateFilePath, FileMode.Create,
-                        FileAccess.Write, FileShare.None, _bufferLength, true);
+                        FileAccess.Write, FileShare.None, BUFFER_LENGTH, true);
 
                     while (readBytes <= totalBytes || !_getUpdateInfoCancelToken.IsCancellationRequested)
                     {
                         var bytesRead =
-                            await httpStream.ReadAsync(buffer, 0, _bufferLength, _getUpdateInfoCancelToken.Token);
+                            await httpStream.ReadAsync(buffer, 0, BUFFER_LENGTH, _getUpdateInfoCancelToken.Token);
                         if (bytesRead == 0)
                         {
                             progress.Report(100);

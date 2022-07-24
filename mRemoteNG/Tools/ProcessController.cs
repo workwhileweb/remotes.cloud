@@ -14,12 +14,12 @@ namespace mRemoteNG.Tools
 
         public bool Start(string fileName, CommandLineArguments arguments = null)
         {
-            Process.StartInfo.UseShellExecute = false;
-            Process.StartInfo.FileName = fileName;
+            _process.StartInfo.UseShellExecute = false;
+            _process.StartInfo.FileName = fileName;
             if (arguments != null)
-                Process.StartInfo.Arguments = arguments.ToString();
+                _process.StartInfo.Arguments = arguments.ToString();
 
-            if (!Process.Start())
+            if (!_process.Start())
                 return false;
             GetMainWindowHandle();
 
@@ -28,9 +28,9 @@ namespace mRemoteNG.Tools
 
         public bool SetControlVisible(string className, string text, bool visible = true)
         {
-            if (Process == null || Process.HasExited)
+            if (_process == null || _process.HasExited)
                 return false;
-            if (Handle == IntPtr.Zero)
+            if (_handle == IntPtr.Zero)
                 return false;
 
             var controlHandle = GetControlHandle(className, text);
@@ -44,7 +44,7 @@ namespace mRemoteNG.Tools
 
         public bool SetControlText(string className, string oldText, string newText)
         {
-            if (Process == null || Process.HasExited || Handle == IntPtr.Zero)
+            if (_process == null || _process.HasExited || _handle == IntPtr.Zero)
                 return false;
 
             var controlHandle = GetControlHandle(className, oldText);
@@ -58,7 +58,7 @@ namespace mRemoteNG.Tools
 
         public bool SelectListBoxItem(string itemText)
         {
-            if (Process == null || Process.HasExited || Handle == IntPtr.Zero)
+            if (_process == null || _process.HasExited || _handle == IntPtr.Zero)
                 return false;
 
             var listBoxHandle = GetControlHandle("ListBox");
@@ -72,7 +72,7 @@ namespace mRemoteNG.Tools
 
         public bool ClickButton(string text)
         {
-            if (Process == null || Process.HasExited || Handle == IntPtr.Zero)
+            if (_process == null || _process.HasExited || _handle == IntPtr.Zero)
                 return false;
 
             var buttonHandle = GetControlHandle("Button", text);
@@ -80,25 +80,25 @@ namespace mRemoteNG.Tools
                 return false;
 
             var buttonControlId = NativeMethods.GetDlgCtrlID(buttonHandle);
-            NativeMethods.SendMessage(Handle, NativeMethods.WM_COMMAND, (IntPtr)buttonControlId, buttonHandle);
+            NativeMethods.SendMessage(_handle, NativeMethods.WM_COMMAND, (IntPtr)buttonControlId, buttonHandle);
 
             return true;
         }
 
         public void WaitForExit()
         {
-            if (Process == null || Process.HasExited)
+            if (_process == null || _process.HasExited)
                 return;
-            Process.WaitForExit();
+            _process.WaitForExit();
         }
 
         #endregion
 
         #region Protected Fields
 
-        private readonly Process Process = new();
-        private IntPtr Handle = IntPtr.Zero;
-        private List<IntPtr> Controls = new();
+        private readonly Process _process = new();
+        private IntPtr _handle = IntPtr.Zero;
+        private List<IntPtr> _controls = new();
 
         #endregion
 
@@ -107,41 +107,41 @@ namespace mRemoteNG.Tools
         // ReSharper disable once UnusedMethodReturnValue.Local
         private IntPtr GetMainWindowHandle()
         {
-            if (Process == null || Process.HasExited)
+            if (_process == null || _process.HasExited)
                 return IntPtr.Zero;
 
-            Process.WaitForInputIdle(OptionsAdvancedPage.Default.MaxPuttyWaitTime * 1000);
+            _process.WaitForInputIdle(OptionsAdvancedPage.Default.MaxPuttyWaitTime * 1000);
 
-            Handle = IntPtr.Zero;
+            _handle = IntPtr.Zero;
             var startTicks = Environment.TickCount;
-            while (Handle == IntPtr.Zero &&
+            while (_handle == IntPtr.Zero &&
                    Environment.TickCount < startTicks + (OptionsAdvancedPage.Default.MaxPuttyWaitTime * 1000))
             {
-                Process.Refresh();
-                Handle = Process.MainWindowHandle;
-                if (Handle == IntPtr.Zero)
+                _process.Refresh();
+                _handle = _process.MainWindowHandle;
+                if (_handle == IntPtr.Zero)
                 {
                     System.Threading.Thread.Sleep(0);
                 }
             }
 
-            return Handle;
+            return _handle;
         }
 
         private IntPtr GetControlHandle(string className, string text = "")
         {
-            if (Process == null || Process.HasExited || Handle == IntPtr.Zero)
+            if (_process == null || _process.HasExited || _handle == IntPtr.Zero)
                 return IntPtr.Zero;
 
-            if (Controls.Count == 0)
+            if (_controls.Count == 0)
             {
                 var windowEnumerator = new EnumWindows();
-                Controls = windowEnumerator.EnumChildWindows(Handle);
+                _controls = windowEnumerator.EnumChildWindows(_handle);
             }
 
             var stringBuilder = new StringBuilder();
             var controlHandle = IntPtr.Zero;
-            foreach (var control in Controls)
+            foreach (var control in _controls)
             {
                 NativeMethods.GetClassName(control, stringBuilder, stringBuilder.Capacity);
                 if (stringBuilder.ToString() != className) continue;
@@ -168,10 +168,10 @@ namespace mRemoteNG.Tools
         {
             if (!disposing) return;
 
-            if(Process != null)
-                Process.Dispose();
+            if(_process != null)
+                _process.Dispose();
 
-            Handle = IntPtr.Zero;
+            _handle = IntPtr.Zero;
         }
 
         public void Dispose()

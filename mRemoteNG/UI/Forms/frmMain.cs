@@ -75,7 +75,7 @@ namespace mRemoteNG.UI.Forms
             Fullscreen = new FullscreenHandler(this);
 
             //Theming support
-            _themeManager = ThemeManager.getInstance();
+            _themeManager = ThemeManager.GetInstance();
             vsToolStripExtender.DefaultRenderer = _toolStripProfessionalRenderer;
             ApplyTheme();
 
@@ -321,9 +321,9 @@ namespace mRemoteNG.UI.Forms
                 vsToolStripExtender.SetStyle(_multiSshToolStrip, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
 
                 if (!_themeManager.ActiveAndExtended) return;
-                tsContainer.TopToolStripPanel.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("CommandBarMenuDefault_Background");
-                BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-                ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+                tsContainer.TopToolStripPanel.BackColor = _themeManager.ActiveTheme.ExtendedPalette.GetColor("CommandBarMenuDefault_Background");
+                BackColor = _themeManager.ActiveTheme.ExtendedPalette.GetColor("Dialog_Background");
+                ForeColor = _themeManager.ActiveTheme.ExtendedPalette.GetColor("Dialog_Foreground");
             }
             catch (Exception ex)
             {
@@ -601,12 +601,12 @@ namespace mRemoteNG.UI.Forms
         private void SimulateClick(Control control)
         {
             var clientMousePosition = control.PointToClient(MousePosition);
-            var temp_wLow = clientMousePosition.X;
-            var temp_wHigh = clientMousePosition.Y;
+            var tempWLow = clientMousePosition.X;
+            var tempWHigh = clientMousePosition.Y;
             NativeMethods.SendMessage(control.Handle, NativeMethods.WM_LBUTTONDOWN, (IntPtr)NativeMethods.MK_LBUTTON,
-                                      (IntPtr)NativeMethods.MAKELPARAM(ref temp_wLow, ref temp_wHigh));
-            clientMousePosition.X = temp_wLow;
-            clientMousePosition.Y = temp_wHigh;
+                                      (IntPtr)NativeMethods.MAKELPARAM(ref tempWLow, ref tempWHigh));
+            clientMousePosition.X = tempWLow;
+            clientMousePosition.Y = tempWHigh;
         }
 
         private void ActivateConnection()
@@ -725,7 +725,7 @@ namespace mRemoteNG.UI.Forms
             Windows.TreeForm.Show(pnlDock, DockState.DockLeft);
             Windows.ConfigForm.Show(pnlDock, DockState.DockLeft);
             Windows.ErrorsForm.Show(pnlDock, DockState.DockBottomAutoHide);
-            viewMenu._mMenViewErrorsAndInfos.Checked = true;
+            viewMenu.MMenViewErrorsAndInfos.Checked = true;
 
             pnlDock.Visible = true;
         }
@@ -737,54 +737,54 @@ namespace mRemoteNG.UI.Forms
             if (Properties.Settings.Default.ViewMenuMessages == true)
             {
                 Windows.ErrorsForm.Show(pnlDock, DockState.DockBottomAutoHide);
-                viewMenu._mMenViewErrorsAndInfos.Checked = true;
+                viewMenu.MMenViewErrorsAndInfos.Checked = true;
             }
             else
-                viewMenu._mMenViewErrorsAndInfos.Checked = false;
+                viewMenu.MMenViewErrorsAndInfos.Checked = false;
 
 
             if (Properties.Settings.Default.ViewMenuExternalTools == true)
             {
                 viewMenu.TsExternalTools.Visible = true;
-                viewMenu._mMenViewExtAppsToolbar.Checked = true;
+                viewMenu.MMenViewExtAppsToolbar.Checked = true;
             }
             else
             {
                 viewMenu.TsExternalTools.Visible = false;
-                viewMenu._mMenViewExtAppsToolbar.Checked = false;
+                viewMenu.MMenViewExtAppsToolbar.Checked = false;
             }
 
             if (Properties.Settings.Default.ViewMenuMultiSSH == true)
             {
                 viewMenu.TsMultiSsh.Visible = true;
-                viewMenu._mMenViewMultiSshToolbar.Checked = true;
+                viewMenu.MMenViewMultiSshToolbar.Checked = true;
             }
             else
             {
                 viewMenu.TsMultiSsh.Visible = false;
-                viewMenu._mMenViewMultiSshToolbar.Checked = false;
+                viewMenu.MMenViewMultiSshToolbar.Checked = false;
             }
 
             if (Properties.Settings.Default.ViewMenuQuickConnect == true)
             {
                 viewMenu.TsQuickConnect.Visible = true;
-                viewMenu._mMenViewQuickConnectToolbar.Checked = true;
+                viewMenu.MMenViewQuickConnectToolbar.Checked = true;
             }
             else
             {
                 viewMenu.TsQuickConnect.Visible = false;
-                viewMenu._mMenViewQuickConnectToolbar.Checked = false;
+                viewMenu.MMenViewQuickConnectToolbar.Checked = false;
             }
 
             if (Properties.Settings.Default.LockToolbars == true)
             {
                 Properties.Settings.Default.LockToolbars = true;
-                viewMenu._mMenViewLockToolbars.Checked = true;                
+                viewMenu.MMenViewLockToolbars.Checked = true;                
             }
             else
             {
                 Properties.Settings.Default.LockToolbars = false;
-                viewMenu._mMenViewLockToolbars.Checked = false;
+                viewMenu.MMenViewLockToolbars.Checked = false;
             }
 
             pnlDock.Visible = true;

@@ -9,20 +9,20 @@ using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.Connection.Protocol.Http
 {
-    public class HTTPBase : ProtocolBase
+    public class HttpBase : ProtocolBase
     {
         #region Private Properties
 
         private Control _wBrowser;
         private string _tabTitle;
-        protected string httpOrS;
-        protected int defaultPort;
+        protected string HttpOrS;
+        protected int DefaultPort;
 
         #endregion
 
         #region Public Methods
 
-        protected HTTPBase(RenderingEngine renderingEngine)
+        protected HttpBase(RenderingEngine renderingEngine)
         {
             try
             {
@@ -121,20 +121,20 @@ namespace mRemoteNG.Connection.Protocol.Http
             {
                 var strHost = InterfaceControl.Info.Hostname;
 
-                if (InterfaceControl.Info.Port != defaultPort)
+                if (InterfaceControl.Info.Port != DefaultPort)
                 {
                     if (strHost.EndsWith("/"))
                         strHost = strHost.Substring(0, strHost.Length - 1);
 
-                    if (strHost.Contains(httpOrS + "://") == false)
-                        strHost = httpOrS + "://" + strHost;
+                    if (strHost.Contains(HttpOrS + "://") == false)
+                        strHost = HttpOrS + "://" + strHost;
 
                     strHost = strHost + ":" + InterfaceControl.Info.Port;
                 }
                 else
                 {
-                    if (strHost.Contains(httpOrS + "://") == false)
-                        strHost = httpOrS + "://" + strHost;
+                    if (strHost.Contains(HttpOrS + "://") == false)
+                        strHost = HttpOrS + "://" + strHost;
                 }
 
                 return strHost;
@@ -205,7 +205,7 @@ namespace mRemoteNG.Connection.Protocol.Http
         public enum RenderingEngine
         {
             [LocalizedAttributes.LocalizedDescription(nameof(Language.HttpInternetExplorer))]
-            IE = 1,
+            Ie = 1,
 
             [LocalizedAttributes.LocalizedDescription(nameof(Language.HttpCEF))]
             EdgeChromium = 2

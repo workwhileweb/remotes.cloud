@@ -64,7 +64,7 @@ namespace mRemoteNG.Tools
             // 
             // btnClose
             // 
-            this.btnClose._mice = MrngButton.MouseState.HOVER;
+            this.btnClose.Mice = MrngButton.MouseState.Hover;
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClose.Location = new System.Drawing.Point(6, 67);
             this.btnClose.Name = "btnClose";
@@ -85,7 +85,7 @@ namespace mRemoteNG.Tools
             // 
             // chkReconnectWhenReady
             // 
-            this.chkReconnectWhenReady._mice = MrngCheckBox.MouseState.HOVER;
+            this.chkReconnectWhenReady.Mice = MrngCheckBox.MouseState.Hover;
             this.chkReconnectWhenReady.AutoSize = true;
             this.chkReconnectWhenReady.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkReconnectWhenReady.Location = new System.Drawing.Point(18, 44);

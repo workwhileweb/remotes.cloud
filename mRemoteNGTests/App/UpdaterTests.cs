@@ -13,72 +13,72 @@ namespace mRemoteNGTests.App
         public void UpdateStableChannel()
         {
             GeneralAppInfo.ApplicationVersion = "1.0.0.0";
-            var CurrentUpdateInfo = UpdateInfo.FromString(Resources.update);
-            Assert.That(CurrentUpdateInfo.CheckIfValid(), Is.True);
+            var currentUpdateInfo = UpdateInfo.FromString(Resources.update);
+            Assert.That(currentUpdateInfo.CheckIfValid(), Is.True);
             Version v;
             Version.TryParse(GeneralAppInfo.ApplicationVersion, out v);
-            var IsNewer = CurrentUpdateInfo.Version > v;
-            Assert.That(IsNewer, Is.True);
+            var isNewer = currentUpdateInfo.Version > v;
+            Assert.That(isNewer, Is.True);
         }
 
         [Test]
         public void UpdateBetaChannel()
         {
             GeneralAppInfo.ApplicationVersion = "1.0.0.0";
-            var CurrentUpdateInfo = UpdateInfo.FromString(Resources.beta_update);
-            Assert.That(CurrentUpdateInfo.CheckIfValid(), Is.True);
+            var currentUpdateInfo = UpdateInfo.FromString(Resources.beta_update);
+            Assert.That(currentUpdateInfo.CheckIfValid(), Is.True);
             Version v;
             Version.TryParse(GeneralAppInfo.ApplicationVersion, out v);
-            var IsNewer = CurrentUpdateInfo.Version > v;
-            Assert.That(IsNewer, Is.True);
+            var isNewer = currentUpdateInfo.Version > v;
+            Assert.That(isNewer, Is.True);
         }
 
         [Test]
         public void UpdateDevChannel()
         {
             GeneralAppInfo.ApplicationVersion = "1.0.0.0";
-            var CurrentUpdateInfo = UpdateInfo.FromString(Resources.dev_update);
-            Assert.That(CurrentUpdateInfo.CheckIfValid(), Is.True);
+            var currentUpdateInfo = UpdateInfo.FromString(Resources.dev_update);
+            Assert.That(currentUpdateInfo.CheckIfValid(), Is.True);
             Version v;
             Version.TryParse(GeneralAppInfo.ApplicationVersion, out v);
-            var IsNewer = CurrentUpdateInfo.Version > v;
-            Assert.That(IsNewer, Is.True);
+            var isNewer = currentUpdateInfo.Version > v;
+            Assert.That(isNewer, Is.True);
         }
 
         [Test]
         public void UpdateStablePortableChannel()
         {
             GeneralAppInfo.ApplicationVersion = "1.0.0.0";
-            var CurrentUpdateInfo = UpdateInfo.FromString(Resources.update_portable);
-            Assert.That(CurrentUpdateInfo.CheckIfValid(), Is.True);
+            var currentUpdateInfo = UpdateInfo.FromString(Resources.update_portable);
+            Assert.That(currentUpdateInfo.CheckIfValid(), Is.True);
             Version v;
             Version.TryParse(GeneralAppInfo.ApplicationVersion, out v);
-            var IsNewer = CurrentUpdateInfo.Version > v;
-            Assert.That(IsNewer, Is.True);
+            var isNewer = currentUpdateInfo.Version > v;
+            Assert.That(isNewer, Is.True);
         }
 
         [Test]
         public void UpdateBetaPortableChannel()
         {
             GeneralAppInfo.ApplicationVersion = "1.0.0.0";
-            var CurrentUpdateInfo = UpdateInfo.FromString(Resources.beta_update_portable);
-            Assert.That(CurrentUpdateInfo.CheckIfValid(), Is.True);
+            var currentUpdateInfo = UpdateInfo.FromString(Resources.beta_update_portable);
+            Assert.That(currentUpdateInfo.CheckIfValid(), Is.True);
             Version v;
             Version.TryParse(GeneralAppInfo.ApplicationVersion, out v);
-            var IsNewer = CurrentUpdateInfo.Version > v;
-            Assert.That(IsNewer, Is.True);
+            var isNewer = currentUpdateInfo.Version > v;
+            Assert.That(isNewer, Is.True);
         }
 
         [Test]
         public void UpdateDevPortableChannel()
         {
             GeneralAppInfo.ApplicationVersion = "1.0.0.0";
-            var CurrentUpdateInfo = UpdateInfo.FromString(Resources.dev_update_portable);
-            Assert.That(CurrentUpdateInfo.CheckIfValid(), Is.True);
+            var currentUpdateInfo = UpdateInfo.FromString(Resources.dev_update_portable);
+            Assert.That(currentUpdateInfo.CheckIfValid(), Is.True);
             Version v;
             Version.TryParse(GeneralAppInfo.ApplicationVersion, out v);
-            var IsNewer = CurrentUpdateInfo.Version > v;
-            Assert.That(IsNewer, Is.True);
+            var isNewer = currentUpdateInfo.Version > v;
+            Assert.That(isNewer, Is.True);
         }
     }
 }

@@ -154,7 +154,7 @@ namespace mRemoteNG.UI.Window
         {
             var protocol =
                 (ProtocolType)Enum.Parse(typeof(ProtocolType), Convert.ToString(cbProtocol.SelectedItem), true);
-            importSelectedHosts(protocol);
+            ImportSelectedHosts(protocol);
         }
 
         #endregion
@@ -275,7 +275,7 @@ namespace mRemoteNG.UI.Window
 
         #endregion
 
-        private void importSelectedHosts(ProtocolType protocol)
+        private void ImportSelectedHosts(ProtocolType protocol)
         {
             var hosts = new List<ScanHost>();
             foreach (ScanHost host in olvHosts.SelectedObjects)
@@ -317,37 +317,37 @@ namespace mRemoteNG.UI.Window
 
         private void importVNCToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            importSelectedHosts(ProtocolType.VNC);
+            ImportSelectedHosts(ProtocolType.Vnc);
         }
 
         private void importTelnetToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            importSelectedHosts(ProtocolType.Telnet);
+            ImportSelectedHosts(ProtocolType.Telnet);
         }
 
         private void importSSH2ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            importSelectedHosts(ProtocolType.SSH2);
+            ImportSelectedHosts(ProtocolType.Ssh2);
         }
 
         private void importRloginToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            importSelectedHosts(ProtocolType.Rlogin);
+            ImportSelectedHosts(ProtocolType.Rlogin);
         }
 
         private void importRDPToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            importSelectedHosts(ProtocolType.RDP);
+            ImportSelectedHosts(ProtocolType.Rdp);
         }
 
         private void importHTTPSToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            importSelectedHosts(ProtocolType.HTTPS);
+            ImportSelectedHosts(ProtocolType.Https);
         }
 
         private void importHTTPToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            importSelectedHosts(ProtocolType.HTTP);
+            ImportSelectedHosts(ProtocolType.Http);
         }
 
         private void NgCheckFirstPort_CheckedChanged(object sender, EventArgs e)

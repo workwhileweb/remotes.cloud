@@ -17,7 +17,7 @@ namespace mRemoteNG.Connection
         // and the original Info is saved in the following variable
         public ConnectionInfo OriginalInfo { get; set; }
         // in case the connection is through a SSH tunnel the Info of the SSHTunnelConnection is also saved for reference in log messages etc.
-        public ConnectionInfo SSHTunnelInfo { get; set; }
+        public ConnectionInfo SshTunnelInfo { get; set; }
 
 
         public InterfaceControl(Control parent, ProtocolBase protocol, ConnectionInfo info)
@@ -40,10 +40,10 @@ namespace mRemoteNG.Connection
             }
         }
 
-        public static InterfaceControl FindInterfaceControl(DockPanel DockPnl)
+        public static InterfaceControl FindInterfaceControl(DockPanel dockPnl)
         {
             // instead of repeating the code, call the routine using ConnectionTab if called by DockPanel
-            if (DockPnl.ActiveDocument is ConnectionTab ct)
+            if (dockPnl.ActiveDocument is ConnectionTab ct)
                 return FindInterfaceControl(ct);
             return null;
         }

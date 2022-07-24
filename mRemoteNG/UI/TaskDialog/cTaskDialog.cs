@@ -68,7 +68,7 @@ namespace mRemoteNG.UI.TaskDialog
             DialogResult result;
             OnTaskDialogShown?.Invoke(null, EventArgs.Empty);
 
-            using (var td = new frmTaskDialog())
+            using (var td = new FrmTaskDialog())
             {
                 var display = new DisplayProperties();
                 td.Title = title;

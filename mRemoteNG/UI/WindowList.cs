@@ -8,15 +8,15 @@ namespace mRemoteNG.UI
     {
         #region Public Properties
 
-        public BaseWindow this[object Index]
+        public BaseWindow this[object index]
         {
             get
             {
                 CleanUp();
-                return Index switch
+                return index switch
                 {
-                    BaseWindow => IndexByObject(Index),
-                    int => IndexByNumber(Convert.ToInt32(Index)),
+                    BaseWindow => IndexByObject(index),
+                    int => IndexByNumber(Convert.ToInt32(index)),
                     _ => null
                 };
             }
@@ -88,11 +88,11 @@ namespace mRemoteNG.UI
             }
         }
 
-        private BaseWindow IndexByObject(object Index)
+        private BaseWindow IndexByObject(object index)
         {
             try
             {
-                var objectIndex = List.IndexOf(Index);
+                var objectIndex = List.IndexOf(index);
                 return IndexByNumber(objectIndex);
             }
             catch (ArgumentOutOfRangeException e)
@@ -101,11 +101,11 @@ namespace mRemoteNG.UI
             }
         }
 
-        private BaseWindow IndexByNumber(int Index)
+        private BaseWindow IndexByNumber(int index)
         {
             try
             {
-                return List[Index] as BaseWindow;
+                return List[index] as BaseWindow;
             }
             catch (ArgumentOutOfRangeException e)
             {

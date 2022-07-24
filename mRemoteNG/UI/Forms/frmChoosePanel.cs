@@ -40,13 +40,13 @@ namespace mRemoteNG.UI.Forms
 
         private void ApplyTheme()
         {
-            if (!ThemeManager.getInstance().ActiveAndExtended) return;
-            BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-            ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            if (!ThemeManager.GetInstance().ActiveAndExtended) return;
+            BackColor = ThemeManager.GetInstance().ActiveTheme.ExtendedPalette.GetColor("Dialog_Background");
+            ForeColor = ThemeManager.GetInstance().ActiveTheme.ExtendedPalette.GetColor("Dialog_Foreground");
             lblDescription.BackColor =
-                ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+                ThemeManager.GetInstance().ActiveTheme.ExtendedPalette.GetColor("Dialog_Background");
             lblDescription.ForeColor =
-                ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+                ThemeManager.GetInstance().ActiveTheme.ExtendedPalette.GetColor("Dialog_Foreground");
         }
 
         private void AddAvailablePanels()
@@ -77,10 +77,10 @@ namespace mRemoteNG.UI.Forms
                 new FrmInputBox(Language.NewPanel, Language.PanelName + ":", Language.NewPanel))
             {
                 var dr = frmInputBox.ShowDialog();
-                if (dr != DialogResult.OK || string.IsNullOrEmpty(frmInputBox.returnValue)) return;
-                _panelAdder.AddPanel(frmInputBox.returnValue);
+                if (dr != DialogResult.OK || string.IsNullOrEmpty(frmInputBox.ReturnValue)) return;
+                _panelAdder.AddPanel(frmInputBox.ReturnValue);
                 AddAvailablePanels();
-                cbPanels.SelectedItem = frmInputBox.returnValue;
+                cbPanels.SelectedItem = frmInputBox.ReturnValue;
                 cbPanels.Focus();
             }
         }

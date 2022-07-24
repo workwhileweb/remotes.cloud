@@ -60,19 +60,19 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
                     switch (value)
                     {
                         case "8":
-                            connectionInfo.Colors = RDPColors.Colors256;
+                            connectionInfo.Colors = RdpColors.Colors256;
                             break;
                         case "15":
-                            connectionInfo.Colors = RDPColors.Colors15Bit;
+                            connectionInfo.Colors = RdpColors.Colors15Bit;
                             break;
                         case "16":
-                            connectionInfo.Colors = RDPColors.Colors16Bit;
+                            connectionInfo.Colors = RdpColors.Colors16Bit;
                             break;
                         case "24":
-                            connectionInfo.Colors = RDPColors.Colors24Bit;
+                            connectionInfo.Colors = RdpColors.Colors24Bit;
                             break;
                         case "32":
-                            connectionInfo.Colors = RDPColors.Colors32Bit;
+                            connectionInfo.Colors = RdpColors.Colors32Bit;
                             break;
                     }
                     break;
@@ -81,8 +81,8 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
                     break;
                 case "screen mode id":
                     connectionInfo.Resolution = value == "2"
-                        ? RDPResolutions.Fullscreen
-                        : RDPResolutions.FitToWindow;
+                        ? RdpResolutions.Fullscreen
+                        : RdpResolutions.FitToWindow;
                     break;
                 case "connect to console":
                     connectionInfo.UseConsoleSession = value == "1";
@@ -118,13 +118,13 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
                     switch (value)
                     {
                         case "0":
-                            connectionInfo.RedirectSound = RDPSounds.BringToThisComputer;
+                            connectionInfo.RedirectSound = RdpSounds.BringToThisComputer;
                             break;
                         case "1":
-                            connectionInfo.RedirectSound = RDPSounds.LeaveAtRemoteComputer;
+                            connectionInfo.RedirectSound = RdpSounds.LeaveAtRemoteComputer;
                             break;
                         case "2":
-                            connectionInfo.RedirectSound = RDPSounds.DoNotPlay;
+                            connectionInfo.RedirectSound = RdpSounds.DoNotPlay;
                             break;
                     }
                     break;
@@ -138,21 +138,21 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
                     switch (value)
                     {
                         case "0":
-                            connectionInfo.RDGatewayUsageMethod = RDGatewayUsageMethod.Never;
+                            connectionInfo.RdGatewayUsageMethod = RdGatewayUsageMethod.Never;
                             break;
                         case "1":
-                            connectionInfo.RDGatewayUsageMethod = RDGatewayUsageMethod.Always;
+                            connectionInfo.RdGatewayUsageMethod = RdGatewayUsageMethod.Always;
                             break;
                         case "2":
-                            connectionInfo.RDGatewayUsageMethod = RDGatewayUsageMethod.Detect;
+                            connectionInfo.RdGatewayUsageMethod = RdGatewayUsageMethod.Detect;
                             break;
                     }
                     break;
                 case "gatewayhostname":
-                    connectionInfo.RDGatewayHostname = value;
+                    connectionInfo.RdGatewayHostname = value;
                     break;
                 case "alternate shell":
-                    connectionInfo.RDPStartProgram = value;
+                    connectionInfo.RdpStartProgram = value;
                     break;
             }
         }

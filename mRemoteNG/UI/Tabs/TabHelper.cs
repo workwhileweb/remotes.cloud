@@ -6,31 +6,31 @@ namespace mRemoteNG.UI.Tabs
 {
     class TabHelper
     {
-        private static readonly Lazy<TabHelper> lazyHelper = new(() => new TabHelper());
+        private static readonly Lazy<TabHelper> LazyHelper = new(() => new TabHelper());
 
-        public static TabHelper Instance => lazyHelper.Value;
+        public static TabHelper Instance => LazyHelper.Value;
 
         private TabHelper()
         {
         }
 
-        private ConnectionTab currentTab;
+        private ConnectionTab _currentTab;
 
         public ConnectionTab CurrentTab
         {
-            get => currentTab;
+            get => _currentTab;
             set
             {
-                currentTab = value;
-                findCurrentPanel();
+                _currentTab = value;
+                FindCurrentPanel();
                 Runtime.MessageCollector.AddMessage(Messages.MessageClass.DebugMsg,
-                                                    "Tab got focused: " + currentTab.TabText);
+                                                    "Tab got focused: " + _currentTab.TabText);
             }
         }
 
-        private void findCurrentPanel()
+        private void FindCurrentPanel()
         {
-            var currentForm = currentTab.Parent;
+            var currentForm = _currentTab.Parent;
             while (currentForm != null && !(currentForm is ConnectionWindow))
             {
                 currentForm = currentForm.Parent;
@@ -40,16 +40,16 @@ namespace mRemoteNG.UI.Tabs
                 CurrentPanel = (ConnectionWindow)currentForm;
         }
 
-        private ConnectionWindow currentPanel;
+        private ConnectionWindow _currentPanel;
 
         public ConnectionWindow CurrentPanel
         {
-            get => currentPanel;
+            get => _currentPanel;
             set
             {
-                currentPanel = value;
+                _currentPanel = value;
                 Runtime.MessageCollector.AddMessage(Messages.MessageClass.DebugMsg,
-                                                    "Panel got focused: " + currentPanel.TabText);
+                                                    "Panel got focused: " + _currentPanel.TabText);
             }
         }
     }

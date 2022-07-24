@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace mRemoteNG.UI.Menu.msQuickConnect
 {
-    public partial class quickConnect : ToolStripMenuItem
+    public partial class QuickConnect : ToolStripMenuItem
     {
-        public quickConnect()
+        public QuickConnect()
         {
             Initialize();
         }

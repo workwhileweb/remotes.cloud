@@ -42,7 +42,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkReconnectOnStart
             // 
-            this.chkReconnectOnStart._mice = mRemoteNG.UI.Controls.MrngCheckBox.MouseState.OUT;
+            this.chkReconnectOnStart.Mice = mRemoteNG.UI.Controls.MrngCheckBox.MouseState.Out;
             this.chkReconnectOnStart.AutoSize = true;
             this.chkReconnectOnStart.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkReconnectOnStart.Location = new System.Drawing.Point(3, 26);
@@ -54,7 +54,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkSaveConsOnExit
             // 
-            this.chkSaveConsOnExit._mice = mRemoteNG.UI.Controls.MrngCheckBox.MouseState.OUT;
+            this.chkSaveConsOnExit.Mice = mRemoteNG.UI.Controls.MrngCheckBox.MouseState.Out;
             this.chkSaveConsOnExit.AutoSize = true;
             this.chkSaveConsOnExit.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkSaveConsOnExit.Location = new System.Drawing.Point(3, 2);
@@ -66,7 +66,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkSingleInstance
             // 
-            this.chkSingleInstance._mice = mRemoteNG.UI.Controls.MrngCheckBox.MouseState.OUT;
+            this.chkSingleInstance.Mice = mRemoteNG.UI.Controls.MrngCheckBox.MouseState.Out;
             this.chkSingleInstance.AutoSize = true;
             this.chkSingleInstance.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkSingleInstance.Location = new System.Drawing.Point(3, 50);
@@ -78,7 +78,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkStartMinimized
             // 
-            this.chkStartMinimized._mice = mRemoteNG.UI.Controls.MrngCheckBox.MouseState.OUT;
+            this.chkStartMinimized.Mice = mRemoteNG.UI.Controls.MrngCheckBox.MouseState.Out;
             this.chkStartMinimized.AutoSize = true;
             this.chkStartMinimized.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkStartMinimized.Location = new System.Drawing.Point(3, 73);
@@ -91,7 +91,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkStartFullScreen
             // 
-            this.chkStartFullScreen._mice = mRemoteNG.UI.Controls.MrngCheckBox.MouseState.OUT;
+            this.chkStartFullScreen.Mice = mRemoteNG.UI.Controls.MrngCheckBox.MouseState.Out;
             this.chkStartFullScreen.AutoSize = true;
             this.chkStartFullScreen.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkStartFullScreen.Location = new System.Drawing.Point(3, 96);

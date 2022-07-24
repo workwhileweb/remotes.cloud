@@ -59,13 +59,13 @@ namespace mRemoteNG.UI
             return $"Connection_{icon}_{status}";
         }
 
-        private const string DefaultConnectionIcon = "";
+        private const string DEFAULT_CONNECTION_ICON = "";
 
         private string GetConnectionIcon(ConnectionInfo connection)
         {
             if (string.IsNullOrEmpty(connection.Icon))
             {
-                return DefaultConnectionIcon;
+                return DEFAULT_CONNECTION_ICON;
             }
 
             var connected = connection.OpenConnections.Count > 0;
@@ -74,7 +74,7 @@ namespace mRemoteNG.UI
             var image = ConnectionIcon.FromString(connection.Icon);
             if (image == null)
             {
-                return DefaultConnectionIcon;
+                return DEFAULT_CONNECTION_ICON;
             }
 
             ImageList.Images.Add(BuildConnectionIconName(connection.Icon, false), image);

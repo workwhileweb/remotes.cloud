@@ -110,7 +110,7 @@ namespace mRemoteNGTests.Connection
         {
             var wasCalled = false;
             _testAbstractConnectionInfoData.PropertyChanged += (sender, args) => wasCalled = true;
-            _testAbstractConnectionInfoData.Protocol = ProtocolType.HTTP;
+            _testAbstractConnectionInfoData.Protocol = ProtocolType.Http;
             Assert.That(wasCalled, Is.True);
         }
 
@@ -155,7 +155,7 @@ namespace mRemoteNGTests.Connection
         {
             var wasCalled = false;
             _testAbstractConnectionInfoData.PropertyChanged += (sender, args) => wasCalled = true;
-            _testAbstractConnectionInfoData.RDPAuthenticationLevel = AuthenticationLevel.AuthRequired;
+            _testAbstractConnectionInfoData.RdpAuthenticationLevel = AuthenticationLevel.AuthRequired;
             Assert.That(wasCalled, Is.True);
         }
 
@@ -173,7 +173,7 @@ namespace mRemoteNGTests.Connection
         {
             var wasCalled = false;
             _testAbstractConnectionInfoData.PropertyChanged += (sender, args) => wasCalled = true;
-            _testAbstractConnectionInfoData.RenderingEngine = HTTPBase.RenderingEngine.EdgeChromium;
+            _testAbstractConnectionInfoData.RenderingEngine = HttpBase.RenderingEngine.EdgeChromium;
             Assert.That(wasCalled, Is.True);
         }
 
@@ -200,7 +200,7 @@ namespace mRemoteNGTests.Connection
         {
             var wasCalled = false;
             _testAbstractConnectionInfoData.PropertyChanged += (sender, args) => wasCalled = true;
-            _testAbstractConnectionInfoData.UseRCG = true;
+            _testAbstractConnectionInfoData.UseRcg = true;
             Assert.That(wasCalled, Is.True);
         }
 
@@ -209,7 +209,7 @@ namespace mRemoteNGTests.Connection
         {
             var wasCalled = false;
             _testAbstractConnectionInfoData.PropertyChanged += (sender, args) => wasCalled = true;
-            _testAbstractConnectionInfoData.RDGatewayUsageMethod = RDGatewayUsageMethod.Always;
+            _testAbstractConnectionInfoData.RdGatewayUsageMethod = RdGatewayUsageMethod.Always;
             Assert.That(wasCalled, Is.True);
         }
 
@@ -218,7 +218,7 @@ namespace mRemoteNGTests.Connection
         {
             var wasCalled = false;
             _testAbstractConnectionInfoData.PropertyChanged += (sender, args) => wasCalled = true;
-            _testAbstractConnectionInfoData.RDGatewayHostname = "a";
+            _testAbstractConnectionInfoData.RdGatewayHostname = "a";
             Assert.That(wasCalled, Is.True);
         }
 
@@ -227,7 +227,7 @@ namespace mRemoteNGTests.Connection
         {
             var wasCalled = false;
             _testAbstractConnectionInfoData.PropertyChanged += (sender, args) => wasCalled = true;
-            _testAbstractConnectionInfoData.RDGatewayUseConnectionCredentials = RDGatewayUseConnectionCredentials.SmartCard;
+            _testAbstractConnectionInfoData.RdGatewayUseConnectionCredentials = RdGatewayUseConnectionCredentials.SmartCard;
             Assert.That(wasCalled, Is.True);
         }
 
@@ -236,7 +236,7 @@ namespace mRemoteNGTests.Connection
         {
             var wasCalled = false;
             _testAbstractConnectionInfoData.PropertyChanged += (sender, args) => wasCalled = true;
-            _testAbstractConnectionInfoData.RDGatewayUsername = "a";
+            _testAbstractConnectionInfoData.RdGatewayUsername = "a";
             Assert.That(wasCalled, Is.True);
         }
 
@@ -245,7 +245,7 @@ namespace mRemoteNGTests.Connection
         {
             var wasCalled = false;
             _testAbstractConnectionInfoData.PropertyChanged += (sender, args) => wasCalled = true;
-            _testAbstractConnectionInfoData.RDGatewayPassword = "a";
+            _testAbstractConnectionInfoData.RdGatewayPassword = "a";
             Assert.That(wasCalled, Is.True);
         }
 
@@ -254,7 +254,7 @@ namespace mRemoteNGTests.Connection
         {
             var wasCalled = false;
             _testAbstractConnectionInfoData.PropertyChanged += (sender, args) => wasCalled = true;
-            _testAbstractConnectionInfoData.RDGatewayDomain = "a";
+            _testAbstractConnectionInfoData.RdGatewayDomain = "a";
             Assert.That(wasCalled, Is.True);
         }
 
@@ -263,7 +263,7 @@ namespace mRemoteNGTests.Connection
         {
             var wasCalled = false;
             _testAbstractConnectionInfoData.PropertyChanged += (sender, args) => wasCalled = true;
-            _testAbstractConnectionInfoData.Resolution = RDPResolutions.Res1366x768;
+            _testAbstractConnectionInfoData.Resolution = RdpResolutions.Res1366X768;
             Assert.That(wasCalled, Is.True);
         }
 
@@ -281,7 +281,7 @@ namespace mRemoteNGTests.Connection
         {
             var wasCalled = false;
             _testAbstractConnectionInfoData.PropertyChanged += (sender, args) => wasCalled = true;
-            _testAbstractConnectionInfoData.Colors = RDPColors.Colors16Bit;
+            _testAbstractConnectionInfoData.Colors = RdpColors.Colors16Bit;
             Assert.That(wasCalled, Is.True);
         }
 
@@ -380,7 +380,7 @@ namespace mRemoteNGTests.Connection
         {
             var wasCalled = false;
             _testAbstractConnectionInfoData.PropertyChanged += (sender, args) => wasCalled = true;
-            _testAbstractConnectionInfoData.RedirectSound = RDPSounds.DoNotPlay;
+            _testAbstractConnectionInfoData.RedirectSound = RdpSounds.DoNotPlay;
             Assert.That(wasCalled, Is.True);
         }
 
@@ -443,7 +443,7 @@ namespace mRemoteNGTests.Connection
         {
             var wasCalled = false;
             _testAbstractConnectionInfoData.PropertyChanged += (sender, args) => wasCalled = true;
-            _testAbstractConnectionInfoData.VNCCompression = ProtocolVNC.Compression.Comp5;
+            _testAbstractConnectionInfoData.VncCompression = ProtocolVnc.Compression.Comp5;
             Assert.That(wasCalled, Is.True);
         }
 
@@ -452,7 +452,7 @@ namespace mRemoteNGTests.Connection
         {
             var wasCalled = false;
             _testAbstractConnectionInfoData.PropertyChanged += (sender, args) => wasCalled = true;
-            _testAbstractConnectionInfoData.VNCEncoding = ProtocolVNC.Encoding.EncTight;
+            _testAbstractConnectionInfoData.VncEncoding = ProtocolVnc.Encoding.EncTight;
             Assert.That(wasCalled, Is.True);
         }
 
@@ -461,7 +461,7 @@ namespace mRemoteNGTests.Connection
         {
             var wasCalled = false;
             _testAbstractConnectionInfoData.PropertyChanged += (sender, args) => wasCalled = true;
-            _testAbstractConnectionInfoData.VNCAuthMode = ProtocolVNC.AuthMode.AuthWin;
+            _testAbstractConnectionInfoData.VncAuthMode = ProtocolVnc.AuthMode.AuthWin;
             Assert.That(wasCalled, Is.True);
         }
 
@@ -470,7 +470,7 @@ namespace mRemoteNGTests.Connection
         {
             var wasCalled = false;
             _testAbstractConnectionInfoData.PropertyChanged += (sender, args) => wasCalled = true;
-            _testAbstractConnectionInfoData.VNCProxyType = ProtocolVNC.ProxyType.ProxyUltra;
+            _testAbstractConnectionInfoData.VncProxyType = ProtocolVnc.ProxyType.ProxyUltra;
             Assert.That(wasCalled, Is.True);
         }
 
@@ -479,7 +479,7 @@ namespace mRemoteNGTests.Connection
         {
             var wasCalled = false;
             _testAbstractConnectionInfoData.PropertyChanged += (sender, args) => wasCalled = true;
-            _testAbstractConnectionInfoData.VNCProxyIP = "a";
+            _testAbstractConnectionInfoData.VncProxyIp = "a";
             Assert.That(wasCalled, Is.True);
         }
 
@@ -488,7 +488,7 @@ namespace mRemoteNGTests.Connection
         {
             var wasCalled = false;
             _testAbstractConnectionInfoData.PropertyChanged += (sender, args) => wasCalled = true;
-            _testAbstractConnectionInfoData.VNCProxyPort = 9999;
+            _testAbstractConnectionInfoData.VncProxyPort = 9999;
             Assert.That(wasCalled, Is.True);
         }
 
@@ -497,7 +497,7 @@ namespace mRemoteNGTests.Connection
         {
             var wasCalled = false;
             _testAbstractConnectionInfoData.PropertyChanged += (sender, args) => wasCalled = true;
-            _testAbstractConnectionInfoData.VNCProxyUsername = "a";
+            _testAbstractConnectionInfoData.VncProxyUsername = "a";
             Assert.That(wasCalled, Is.True);
         }
 
@@ -506,7 +506,7 @@ namespace mRemoteNGTests.Connection
         {
             var wasCalled = false;
             _testAbstractConnectionInfoData.PropertyChanged += (sender, args) => wasCalled = true;
-            _testAbstractConnectionInfoData.VNCProxyPassword = "a";
+            _testAbstractConnectionInfoData.VncProxyPassword = "a";
             Assert.That(wasCalled, Is.True);
         }
 
@@ -515,7 +515,7 @@ namespace mRemoteNGTests.Connection
         {
             var wasCalled = false;
             _testAbstractConnectionInfoData.PropertyChanged += (sender, args) => wasCalled = true;
-            _testAbstractConnectionInfoData.VNCColors = ProtocolVNC.Colors.Col8Bit;
+            _testAbstractConnectionInfoData.VncColors = ProtocolVnc.Colors.Col8Bit;
             Assert.That(wasCalled, Is.True);
         }
 
@@ -524,7 +524,7 @@ namespace mRemoteNGTests.Connection
         {
             var wasCalled = false;
             _testAbstractConnectionInfoData.PropertyChanged += (sender, args) => wasCalled = true;
-            _testAbstractConnectionInfoData.VNCSmartSizeMode = ProtocolVNC.SmartSizeMode.SmartSFree;
+            _testAbstractConnectionInfoData.VncSmartSizeMode = ProtocolVnc.SmartSizeMode.SmartSFree;
             Assert.That(wasCalled, Is.True);
         }
 
@@ -533,7 +533,7 @@ namespace mRemoteNGTests.Connection
         {
             var wasCalled = false;
             _testAbstractConnectionInfoData.PropertyChanged += (sender, args) => wasCalled = true;
-            _testAbstractConnectionInfoData.VNCViewOnly = true;
+            _testAbstractConnectionInfoData.VncViewOnly = true;
             Assert.That(wasCalled, Is.True);
         }
     }

@@ -10,10 +10,10 @@ namespace mRemoteNGTests.Config.Serializers.CredentialSerializers
     {
         private XmlCredentialRecordDeserializer _deserializer;
         private readonly Guid _id = Guid.NewGuid();
-        private const string Title = "sometitle";
-        private const string Username = "myusername";
-        private const string Domain = "mydomain";
-        private const string PlaintextPassword = "mypassword";
+        private const string TITLE = "sometitle";
+        private const string USERNAME = "myusername";
+        private const string DOMAIN = "mydomain";
+        private const string PLAINTEXT_PASSWORD = "mypassword";
 
 
         [SetUp]
@@ -35,7 +35,7 @@ namespace mRemoteNGTests.Config.Serializers.CredentialSerializers
         {
             var xml = GenerateXml();
             var creds = _deserializer.Deserialize(xml);
-            Assert.That(creds.First().Title, Is.EqualTo(Title));
+            Assert.That(creds.First().Title, Is.EqualTo(TITLE));
         }
 
         [Test]
@@ -43,7 +43,7 @@ namespace mRemoteNGTests.Config.Serializers.CredentialSerializers
         {
             var xml = GenerateXml();
             var creds = _deserializer.Deserialize(xml);
-            Assert.That(creds.First().Username, Is.EqualTo(Username));
+            Assert.That(creds.First().Username, Is.EqualTo(USERNAME));
         }
 
         [Test]
@@ -51,7 +51,7 @@ namespace mRemoteNGTests.Config.Serializers.CredentialSerializers
         {
             var xml = GenerateXml();
             var creds = _deserializer.Deserialize(xml);
-            Assert.That(creds.First().Domain, Is.EqualTo(Domain));
+            Assert.That(creds.First().Domain, Is.EqualTo(DOMAIN));
         }
 
         [Test]
@@ -59,7 +59,7 @@ namespace mRemoteNGTests.Config.Serializers.CredentialSerializers
         {
             var xml = GenerateXml();
             var creds = _deserializer.Deserialize(xml);
-            Assert.That(creds.First().Password.ConvertToUnsecureString(), Is.EqualTo(PlaintextPassword));
+            Assert.That(creds.First().Password.ConvertToUnsecureString(), Is.EqualTo(PLAINTEXT_PASSWORD));
         }
 
         [Test]
@@ -75,15 +75,15 @@ namespace mRemoteNGTests.Config.Serializers.CredentialSerializers
         {
             var xml = GenerateXml(BlockCipherEngines.Serpent, BlockCipherModes.EAX, 3000);
             var creds = _deserializer.Deserialize(xml);
-            Assert.That(creds.First().Password.ConvertToUnsecureString(), Is.EqualTo(PlaintextPassword));
+            Assert.That(creds.First().Password.ConvertToUnsecureString(), Is.EqualTo(PLAINTEXT_PASSWORD));
         }
 
 
         private string GenerateXml(BlockCipherEngines engine = BlockCipherEngines.AES, BlockCipherModes mode = BlockCipherModes.GCM, int interations = 1000)
         {
             return $"<Credentials EncryptionEngine=\"{engine}\" BlockCipherMode=\"{mode}\" KdfIterations=\"{interations}\" SchemaVersion=\"1.0\">" +
-                        $"<Credential Id=\"{_id}\" Title=\"{Title}\" Username=\"{Username}\" Domain=\"{Domain}\" Password=\"{PlaintextPassword}\" />" +
-                        $"<Credential Id=\"{Guid.NewGuid()}\" Title=\"{Title}\" Username=\"{Username}\" Domain=\"{Domain}\" Password=\"{PlaintextPassword}\" />" +
+                        $"<Credential Id=\"{_id}\" Title=\"{TITLE}\" Username=\"{USERNAME}\" Domain=\"{DOMAIN}\" Password=\"{PLAINTEXT_PASSWORD}\" />" +
+                        $"<Credential Id=\"{Guid.NewGuid()}\" Title=\"{TITLE}\" Username=\"{USERNAME}\" Domain=\"{DOMAIN}\" Password=\"{PLAINTEXT_PASSWORD}\" />" +
                     "</Credentials>";
         }
     }

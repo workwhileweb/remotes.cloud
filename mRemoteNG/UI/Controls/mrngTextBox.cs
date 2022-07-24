@@ -14,16 +14,16 @@ namespace mRemoteNG.UI.Controls
         public MrngTextBox()
         {
             InitializeComponent();
-            ThemeManager.getInstance().ThemeChanged += OnCreateControl;
+            ThemeManager.GetInstance().ThemeChanged += OnCreateControl;
         }
 
         protected override void OnCreateControl()
         {
             base.OnCreateControl();
-            _themeManager = ThemeManager.getInstance();
+            _themeManager = ThemeManager.GetInstance();
             if (!_themeManager.ActiveAndExtended) return;
-            ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
-            BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor(ReadOnly
+            ForeColor = _themeManager.ActiveTheme.ExtendedPalette.GetColor("TextBox_Foreground");
+            BackColor = _themeManager.ActiveTheme.ExtendedPalette.GetColor(ReadOnly
                                                                                ? "TextBox_Disabled_Background"
                                                                                : "TextBox_Background");
             Invalidate();
@@ -31,18 +31,18 @@ namespace mRemoteNG.UI.Controls
 
         protected override void OnEnabledChanged(EventArgs e)
         {
-            _themeManager = ThemeManager.getInstance();
-            _themeManager = ThemeManager.getInstance();
+            _themeManager = ThemeManager.GetInstance();
+            _themeManager = ThemeManager.GetInstance();
             if (_themeManager.ActiveAndExtended)
             {
                 if (Enabled)
                 {
-                    ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
-                    BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
+                    ForeColor = _themeManager.ActiveTheme.ExtendedPalette.GetColor("TextBox_Foreground");
+                    BackColor = _themeManager.ActiveTheme.ExtendedPalette.GetColor("TextBox_Background");
                 }
                 else
                 {
-                    BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Disabled_Background");
+                    BackColor = _themeManager.ActiveTheme.ExtendedPalette.GetColor("TextBox_Disabled_Background");
                 }
             }
 

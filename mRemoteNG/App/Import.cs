@@ -150,7 +150,7 @@ namespace mRemoteNG.App
                 case ".xml":
                     return new MRemoteNGXmlImporter();
                 case ".csv":
-                    return new MRemoteNGCsvImporter();
+                    return new MRemoteNgCsvImporter();
                 case ".rdp":
                     return new RemoteDesktopConnectionImporter();
                 case ".rdg":

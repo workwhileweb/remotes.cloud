@@ -15,22 +15,22 @@
 		public TType Protocol { get; set; }
 		public TType ExtApp { get; set; }
 		public TType PuttySession { get; set; }
-		public TType ICAEncryptionStrength { get; set; }
+		public TType IcaEncryptionStrength { get; set; }
 		public TType UseConsoleSession { get; set; }
-		public TType RDPAuthenticationLevel { get; set; }
-		public TType RDPMinutesToIdleTimeout { get; set; }
-		public TType RDPAlertIdleTimeout { get; set; }
+		public TType RdpAuthenticationLevel { get; set; }
+		public TType RdpMinutesToIdleTimeout { get; set; }
+		public TType RdpAlertIdleTimeout { get; set; }
 		public TType LoadBalanceInfo { get; set; }
 		public TType RenderingEngine { get; set; }
 		public TType UseCredSsp { get; set; }
 		public TType UseRestrictedAdmin { get; set; }
-		public TType UseRCG { get; set; }
-		public TType RDGatewayUsageMethod { get; set; }
-		public TType RDGatewayHostname { get; set; }
-		public TType RDGatewayUseConnectionCredentials { get; set; }
-		public TType RDGatewayUsername { get; set; }
-		public TType RDGatewayPassword { get; set; }
-		public TType RDGatewayDomain { get; set; }
+		public TType UseRcg { get; set; }
+		public TType RdGatewayUsageMethod { get; set; }
+		public TType RdGatewayHostname { get; set; }
+		public TType RdGatewayUseConnectionCredentials { get; set; }
+		public TType RdGatewayUsername { get; set; }
+		public TType RdGatewayPassword { get; set; }
+		public TType RdGatewayDomain { get; set; }
 		public TType Resolution { get; set; }
 		public TType AutomaticResize { get; set; }
 		public TType Colors { get; set; }
@@ -59,26 +59,26 @@
         public TType Favorite { get; set; }
         public TType VmId { get; set; }
         public TType UseVmId { get; set; }
-        public TType VNCCompression { get; set; }
-		public TType VNCEncoding { get; set; }
-		public TType VNCAuthMode { get; set; }
-		public TType VNCProxyType { get; set; }
-		public TType VNCProxyIP { get; set; }
-		public TType VNCProxyPort { get; set; }
-		public TType VNCProxyUsername { get; set; }
-		public TType VNCProxyPassword { get; set; }
-		public TType VNCColors { get; set; }
-		public TType VNCSmartSizeMode { get; set; }
-		public TType VNCViewOnly { get; set; }
+        public TType VncCompression { get; set; }
+		public TType VncEncoding { get; set; }
+		public TType VncAuthMode { get; set; }
+		public TType VncProxyType { get; set; }
+		public TType VncProxyIp { get; set; }
+		public TType VncProxyPort { get; set; }
+		public TType VncProxyUsername { get; set; }
+		public TType VncProxyPassword { get; set; }
+		public TType VncColors { get; set; }
+		public TType VncSmartSizeMode { get; set; }
+		public TType VncViewOnly { get; set; }
         public TType RdpVersion { get; set; }
         public TType UseEnhancedMode { get; set; }
-        public TType SSHOptions { get; set; }
-        public TType SSHTunnelConnectionName { get; set; }
-        public TType RDPStartProgram { get; set; }
-        public TType RDPStartProgramWorkDir { get; set; }
+        public TType SshOptions { get; set; }
+        public TType SshTunnelConnectionName { get; set; }
+        public TType RdpStartProgram { get; set; }
+        public TType RdpStartProgramWorkDir { get; set; }
 		public TType OpeningCommand { get; set; }
-		public TType UserViaAPI { get; set; }
-		public TType EC2InstanceId { get; set; }
-		public TType EC2Region { get; set; }
+		public TType UserViaApi { get; set; }
+		public TType Ec2InstanceId { get; set; }
+		public TType Ec2Region { get; set; }
 	}
 }

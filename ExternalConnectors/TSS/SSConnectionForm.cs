@@ -1,8 +1,8 @@
 ﻿namespace ExternalConnectors.TSS
 {
-    public partial class SSConnectionForm : Form
+    public partial class SsConnectionForm : Form
     {
-        public SSConnectionForm()
+        public SsConnectionForm()
         {
             InitializeComponent();
         }

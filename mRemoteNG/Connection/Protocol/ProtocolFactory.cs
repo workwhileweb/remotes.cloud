@@ -21,26 +21,26 @@ namespace mRemoteNG.Connection.Protocol
             // ReSharper disable once SwitchStatementMissingSomeCases
             switch (connectionInfo.Protocol)
             {
-                case ProtocolType.RDP:
+                case ProtocolType.Rdp:
                     var rdp = _rdpProtocolFactory.Build(connectionInfo.RdpVersion);
                     rdp.LoadBalanceInfoUseUtf8 = OptionsAdvancedPage.Default.RdpLoadBalanceInfoUseUtf8;
                     return rdp;
-                case ProtocolType.VNC:
-                    return new ProtocolVNC();
-                case ProtocolType.SSH1:
-                    return new ProtocolSSH1();
-                case ProtocolType.SSH2:
-                    return new ProtocolSSH2();
+                case ProtocolType.Vnc:
+                    return new ProtocolVnc();
+                case ProtocolType.Ssh1:
+                    return new ProtocolSsh1();
+                case ProtocolType.Ssh2:
+                    return new ProtocolSsh2();
                 case ProtocolType.Telnet:
                     return new ProtocolTelnet();
                 case ProtocolType.Rlogin:
                     return new ProtocolRlogin();
-                case ProtocolType.RAW:
+                case ProtocolType.Raw:
                     return new RawProtocol();
-                case ProtocolType.HTTP:
-                    return new ProtocolHTTP(connectionInfo.RenderingEngine);
-                case ProtocolType.HTTPS:
-                    return new ProtocolHTTPS(connectionInfo.RenderingEngine);
+                case ProtocolType.Http:
+                    return new ProtocolHttp(connectionInfo.RenderingEngine);
+                case ProtocolType.Https:
+                    return new ProtocolHttps(connectionInfo.RenderingEngine);
                 case ProtocolType.PowerShell:
                     return new ProtocolPowerShell(connectionInfo);
                 case ProtocolType.IntApp:

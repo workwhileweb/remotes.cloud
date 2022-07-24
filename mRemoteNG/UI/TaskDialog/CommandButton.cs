@@ -14,21 +14,21 @@ namespace mRemoteNG.UI.TaskDialog
         #region PRIVATE MEMBERS
 
         //--------------------------------------------------------------------------------
-        private Image imgArrow1;
-        private Image imgArrow2;
+        private Image _imgArrow1;
+        private Image _imgArrow2;
         private readonly ThemeManager _themeManager;
         private const int LEFT_MARGIN = 10;
         private const int TOP_MARGIN = 10;
         private const int ARROW_WIDTH = 19;
 
-        enum eButtonState
+        enum EButtonState
         {
             Normal,
             MouseOver,
             Down
         }
 
-        eButtonState m_State = eButtonState.Normal;
+        EButtonState _mState = EButtonState.Normal;
 
         #endregion
 
@@ -44,7 +44,7 @@ namespace mRemoteNG.UI.TaskDialog
             set
             {
                 base.Text = value;
-                if (m_autoHeight)
+                if (_mAutoHeight)
                     Height = GetBestHeight();
                 Invalidate();
             }
@@ -54,18 +54,18 @@ namespace mRemoteNG.UI.TaskDialog
         private Font SmallFont { get; set; }
 
         // AutoHeight determines whether the button automatically resizes itself to fit the Text
-        bool m_autoHeight = true;
+        bool _mAutoHeight = true;
 
         [Browsable(true)]
         [Category("Behavior")]
         [DefaultValue(true)]
         public bool AutoHeight
         {
-            get => m_autoHeight;
+            get => _mAutoHeight;
             set
             {
-                m_autoHeight = value;
-                if (m_autoHeight) Invalidate();
+                _mAutoHeight = value;
+                if (_mAutoHeight) Invalidate();
             }
         }
 
@@ -81,7 +81,7 @@ namespace mRemoteNG.UI.TaskDialog
             InitializeComponent();
             Font = new Font("Segoe UI", 11.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             SmallFont = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            _themeManager = ThemeManager.getInstance();
+            _themeManager = ThemeManager.GetInstance();
         }
 
         #endregion
@@ -152,8 +152,8 @@ namespace mRemoteNG.UI.TaskDialog
         protected override void OnCreateControl()
         {
             base.OnCreateControl();
-            imgArrow1 = Properties.Resources.GlyphRight_16x;
-            imgArrow2 = Properties.Resources.GlyphRight_16x;
+            _imgArrow1 = Properties.Resources.GlyphRight_16x;
+            _imgArrow2 = Properties.Resources.GlyphRight_16x;
         }
 
         //--------------------------------------------------------------------------------
@@ -173,7 +173,7 @@ namespace mRemoteNG.UI.TaskDialog
             var newRect = new Rectangle(ClientRectangle.X, ClientRectangle.Y, ClientRectangle.Width - 1,
                                         ClientRectangle.Height - 1);
 
-            var img = imgArrow1;
+            var img = _imgArrow1;
 
 
             Color back;
@@ -181,30 +181,30 @@ namespace mRemoteNG.UI.TaskDialog
             Color border;
             if (Enabled)
             {
-                switch (m_State)
+                switch (_mState)
                 {
-                    case eButtonState.MouseOver:
-                        back = _themeManager.ActiveTheme.ExtendedPalette.getColor("Button_Hover_Background");
-                        fore = _themeManager.ActiveTheme.ExtendedPalette.getColor("Button_Hover_Foreground");
-                        border = _themeManager.ActiveTheme.ExtendedPalette.getColor("Button_Hover_Border");
+                    case EButtonState.MouseOver:
+                        back = _themeManager.ActiveTheme.ExtendedPalette.GetColor("Button_Hover_Background");
+                        fore = _themeManager.ActiveTheme.ExtendedPalette.GetColor("Button_Hover_Foreground");
+                        border = _themeManager.ActiveTheme.ExtendedPalette.GetColor("Button_Hover_Border");
                         break;
-                    case eButtonState.Down:
-                        back = _themeManager.ActiveTheme.ExtendedPalette.getColor("Button_Pressed_Background");
-                        fore = _themeManager.ActiveTheme.ExtendedPalette.getColor("Button_Pressed_Foreground");
-                        border = _themeManager.ActiveTheme.ExtendedPalette.getColor("Button_Pressed_Border");
+                    case EButtonState.Down:
+                        back = _themeManager.ActiveTheme.ExtendedPalette.GetColor("Button_Pressed_Background");
+                        fore = _themeManager.ActiveTheme.ExtendedPalette.GetColor("Button_Pressed_Foreground");
+                        border = _themeManager.ActiveTheme.ExtendedPalette.GetColor("Button_Pressed_Border");
                         break;
                     default:
-                        back = _themeManager.ActiveTheme.ExtendedPalette.getColor("Button_Background");
-                        fore = _themeManager.ActiveTheme.ExtendedPalette.getColor("Button_Foreground");
-                        border = _themeManager.ActiveTheme.ExtendedPalette.getColor("Button_Border");
+                        back = _themeManager.ActiveTheme.ExtendedPalette.GetColor("Button_Background");
+                        fore = _themeManager.ActiveTheme.ExtendedPalette.GetColor("Button_Foreground");
+                        border = _themeManager.ActiveTheme.ExtendedPalette.GetColor("Button_Border");
                         break;
                 }
             }
             else
             {
-                back = _themeManager.ActiveTheme.ExtendedPalette.getColor("Button_Disabled_Background");
-                fore = _themeManager.ActiveTheme.ExtendedPalette.getColor("Button_Disabled_Foreground");
-                border = _themeManager.ActiveTheme.ExtendedPalette.getColor("Button_Disabled_Border");
+                back = _themeManager.ActiveTheme.ExtendedPalette.GetColor("Button_Disabled_Background");
+                fore = _themeManager.ActiveTheme.ExtendedPalette.GetColor("Button_Disabled_Foreground");
+                border = _themeManager.ActiveTheme.ExtendedPalette.GetColor("Button_Disabled_Border");
             }
 
             if (Enabled)
@@ -225,7 +225,7 @@ namespace mRemoteNG.UI.TaskDialog
             var szL = GetLargeTextSizeF();
             //e.Graphics.DrawString(largetext, base.Font, new SolidBrush(text_color), new RectangleF(new PointF(LEFT_MARGIN + imgArrow1.Width + 5, TOP_MARGIN), szL));
             TextRenderer.DrawText(e.Graphics, largetext, Font,
-                                  new Rectangle(LEFT_MARGIN + imgArrow1.Width + 5, TOP_MARGIN, (int)szL.Width,
+                                  new Rectangle(LEFT_MARGIN + _imgArrow1.Width + 5, TOP_MARGIN, (int)szL.Width,
                                                 (int)szL.Height), fore,
                                   TextFormatFlags.Default);
 
@@ -234,7 +234,7 @@ namespace mRemoteNG.UI.TaskDialog
                 var szS = GetSmallTextSizeF();
                 e.Graphics.DrawString(smalltext, SmallFont, new SolidBrush(fore),
                                       new
-                                          RectangleF(new PointF(LEFT_MARGIN + imgArrow1.Width + 8, TOP_MARGIN + (int)szL.Height),
+                                          RectangleF(new PointF(LEFT_MARGIN + _imgArrow1.Width + 8, TOP_MARGIN + (int)szL.Height),
                                                      szS));
             }
 
@@ -244,7 +244,7 @@ namespace mRemoteNG.UI.TaskDialog
         //--------------------------------------------------------------------------------
         protected override void OnMouseLeave(EventArgs e)
         {
-            m_State = eButtonState.Normal;
+            _mState = EButtonState.Normal;
             Invalidate();
             base.OnMouseLeave(e);
         }
@@ -252,7 +252,7 @@ namespace mRemoteNG.UI.TaskDialog
         //--------------------------------------------------------------------------------
         protected override void OnMouseEnter(EventArgs e)
         {
-            m_State = eButtonState.MouseOver;
+            _mState = EButtonState.MouseOver;
             Invalidate();
             base.OnMouseEnter(e);
         }
@@ -260,7 +260,7 @@ namespace mRemoteNG.UI.TaskDialog
         //--------------------------------------------------------------------------------
         protected override void OnMouseUp(MouseEventArgs e)
         {
-            m_State = eButtonState.MouseOver;
+            _mState = EButtonState.MouseOver;
             Invalidate();
             base.OnMouseUp(e);
         }
@@ -268,7 +268,7 @@ namespace mRemoteNG.UI.TaskDialog
         //--------------------------------------------------------------------------------
         protected override void OnMouseDown(MouseEventArgs e)
         {
-            m_State = eButtonState.Down;
+            _mState = EButtonState.Down;
             Invalidate();
             base.OnMouseDown(e);
         }
@@ -276,7 +276,7 @@ namespace mRemoteNG.UI.TaskDialog
         //--------------------------------------------------------------------------------
         protected override void OnSizeChanged(EventArgs e)
         {
-            if (m_autoHeight)
+            if (_mAutoHeight)
             {
                 var h = GetBestHeight();
                 if (Height != h)

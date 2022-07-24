@@ -205,7 +205,7 @@ namespace mRemoteNG.UI.Window
             // 
             // btnImport
             // 
-            this.btnImport._mice = MrngButton.MouseState.OUT;
+            this.btnImport.Mice = MrngButton.MouseState.Out;
             this.btnImport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnImport.Location = new System.Drawing.Point(765, 27);
             this.btnImport.Name = "btnImport";
@@ -217,7 +217,7 @@ namespace mRemoteNG.UI.Window
             // 
             // cbProtocol
             // 
-            this.cbProtocol._mice = MrngComboBox.MouseState.HOVER;
+            this.cbProtocol.Mice = MrngComboBox.MouseState.Hover;
             this.cbProtocol.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cbProtocol.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbProtocol.FormattingEnabled = true;
@@ -410,7 +410,7 @@ namespace mRemoteNG.UI.Window
             // 
             // btnScan
             // 
-            this.btnScan._mice = MrngButton.MouseState.OUT;
+            this.btnScan.Mice = MrngButton.MouseState.Out;
             this.btnScan.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnScan.Image = global::mRemoteNG.Properties.Resources.Search_16x;
             this.btnScan.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -425,7 +425,7 @@ namespace mRemoteNG.UI.Window
             // 
             // ngCheckFirstPort
             // 
-            this.ngCheckFirstPort._mice = MrngCheckBox.MouseState.OUT;
+            this.ngCheckFirstPort.Mice = MrngCheckBox.MouseState.Out;
             this.ngCheckFirstPort.AutoSize = true;
             this.ngCheckFirstPort.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ngCheckFirstPort.Location = new System.Drawing.Point(3, 51);
@@ -438,7 +438,7 @@ namespace mRemoteNG.UI.Window
             // 
             // ngCheckLastPort
             // 
-            this.ngCheckLastPort._mice = MrngCheckBox.MouseState.OUT;
+            this.ngCheckLastPort.Mice = MrngCheckBox.MouseState.Out;
             this.ngCheckLastPort.AutoSize = true;
             this.ngCheckLastPort.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ngCheckLastPort.Location = new System.Drawing.Point(3, 75);

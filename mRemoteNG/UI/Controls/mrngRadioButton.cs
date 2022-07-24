@@ -24,48 +24,48 @@ namespace mRemoteNG.UI.Controls
             _circle = new Rectangle(display.ScaleWidth(1), display.ScaleHeight(1), display.ScaleWidth(12),
                                     display.ScaleHeight(12));
             _textXCoord = display.ScaleWidth(16);
-            ThemeManager.getInstance().ThemeChanged += OnCreateControl;
+            ThemeManager.GetInstance().ThemeChanged += OnCreateControl;
         }
 
 
         private enum MouseState
         {
-            HOVER,
-            DOWN,
-            OUT
+            Hover,
+            Down,
+            Out
         }
 
-        private MouseState _mice { get; set; }
+        private MouseState Mice { get; set; }
 
 
         protected override void OnCreateControl()
         {
             base.OnCreateControl();
-            _themeManager = ThemeManager.getInstance();
+            _themeManager = ThemeManager.GetInstance();
             if (!_themeManager.ThemingActive) return;
             // Allows for Overlaying
             SetStyle(ControlStyles.SupportsTransparentBackColor, true);
             BackColor = Color.Transparent;
-            _mice = MouseState.OUT;
+            Mice = MouseState.Out;
             MouseEnter += (sender, args) =>
             {
-                _mice = MouseState.HOVER;
+                Mice = MouseState.Hover;
                 Invalidate();
             };
             MouseLeave += (sender, args) =>
             {
-                _mice = MouseState.OUT;
+                Mice = MouseState.Out;
                 Invalidate();
             };
             MouseDown += (sender, args) =>
             {
                 if (args.Button != MouseButtons.Left) return;
-                _mice = MouseState.DOWN;
+                Mice = MouseState.Down;
                 Invalidate();
             };
             MouseUp += (sender, args) =>
             {
-                _mice = MouseState.OUT;
+                Mice = MouseState.Out;
 
                 Invalidate();
             };
@@ -86,9 +86,9 @@ namespace mRemoteNG.UI.Controls
             var g = e.Graphics;
             g.SmoothingMode = SmoothingMode.AntiAlias;
 
-            var fore = _themeManager.ActiveTheme.ExtendedPalette.getColor("CheckBox_Text");
-            var outline = _themeManager.ActiveTheme.ExtendedPalette.getColor("CheckBox_Border");
-            var centerBack = _themeManager.ActiveTheme.ExtendedPalette.getColor("CheckBox_Background");
+            var fore = _themeManager.ActiveTheme.ExtendedPalette.GetColor("CheckBox_Text");
+            var outline = _themeManager.ActiveTheme.ExtendedPalette.GetColor("CheckBox_Border");
+            var centerBack = _themeManager.ActiveTheme.ExtendedPalette.GetColor("CheckBox_Background");
             Color center;
 
             // Overlay Graphic
@@ -97,21 +97,21 @@ namespace mRemoteNG.UI.Controls
             {
                 if (Checked)
                 {
-                    center = _themeManager.ActiveTheme.ExtendedPalette.getColor("CheckBox_Glyph");
+                    center = _themeManager.ActiveTheme.ExtendedPalette.GetColor("CheckBox_Glyph");
                 }
                 else
                 {
                     center = Color.Transparent;
-                    if (_mice == MouseState.HOVER)
+                    if (Mice == MouseState.Hover)
                     {
-                        outline = _themeManager.ActiveTheme.ExtendedPalette.getColor("CheckBox_Border_Hover");
+                        outline = _themeManager.ActiveTheme.ExtendedPalette.GetColor("CheckBox_Border_Hover");
                     }
                 }
             }
             else
             {
                 center = Color.Transparent;
-                fore = _themeManager.ActiveTheme.ExtendedPalette.getColor("CheckBox_Text_Disabled");
+                fore = _themeManager.ActiveTheme.ExtendedPalette.GetColor("CheckBox_Text_Disabled");
             }
 
             var textRect = new Rectangle(_textXCoord, Padding.Top, Width - 16, Height);

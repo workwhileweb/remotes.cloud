@@ -94,7 +94,7 @@ namespace mRemoteNG.Config.Connections
         {
             var a = rootNode.GetRecursiveChildList().Select(info => new LocalConnectionPropertiesModel
             {
-                ConnectionId = info.ConstantID,
+                ConnectionId = info.ConstantId,
                 Connected = info.OpenConnections.Count > 0,
                 Expanded = info is ContainerInfo c && c.IsExpanded,
                 Favorite = info.Favorite,
@@ -134,7 +134,7 @@ namespace mRemoteNG.Config.Connections
                 dbQuery =
                     databaseConnector.DbCommand(
                         "INSERT INTO tblRoot (Name, Export, Protected, ConfVersion) VALUES('" +
-                        MiscTools.PrepareValueForDB(rootTreeNode.Name) + "', 0, '" + strProtected + "','" +
+                        MiscTools.PrepareValueForDb(rootTreeNode.Name) + "', 0, '" + strProtected + "','" +
                         ConnectionsFileInfo.ConnectionFileVersion.ToString() + "')");
                 dbQuery.ExecuteNonQuery();
             }
@@ -165,7 +165,7 @@ namespace mRemoteNG.Config.Connections
         {
             var dbQuery = databaseConnector.DbCommand("DELETE FROM tblUpdate");
             dbQuery.ExecuteNonQuery();
-            dbQuery = databaseConnector.DbCommand("INSERT INTO tblUpdate (LastUpdate) VALUES('" + MiscTools.DBDate(DateTime.Now) + "')");
+            dbQuery = databaseConnector.DbCommand("INSERT INTO tblUpdate (LastUpdate) VALUES('" + MiscTools.DbDate(DateTime.Now) + "')");
             dbQuery.ExecuteNonQuery();
         }
 

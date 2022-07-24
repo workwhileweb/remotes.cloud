@@ -18,7 +18,7 @@ namespace mRemoteNG.Connection
             }
             catch (Exception)
             {
-                return ProtocolType.RDP;
+                return ProtocolType.Rdp;
             }
         }
     }

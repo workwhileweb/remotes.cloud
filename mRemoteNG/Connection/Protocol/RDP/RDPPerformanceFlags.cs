@@ -2,7 +2,7 @@
 
 namespace mRemoteNG.Connection.Protocol.RDP
 {
-    public enum RDPPerformanceFlags
+    public enum RdpPerformanceFlags
     {
         [Description("strRDPDisableWallpaper")]
         DisableWallpaper = 0x1,

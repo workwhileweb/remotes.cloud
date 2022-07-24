@@ -4,7 +4,7 @@
     {
         public ProtocolSerial()
         {
-            PuttyProtocol = Putty_Protocol.serial;
+            PuttyProtocol = PuttyBase.PuttyProtocols.Serial;
         }
 
         public enum Defaults

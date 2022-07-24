@@ -96,7 +96,7 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
                 Name = displayName,
                 Hostname = hostName,
                 Description = description,
-                Protocol = ProtocolType.RDP
+                Protocol = ProtocolType.Rdp
             };
             newConnectionInfo.Inheritance.TurnOnInheritanceCompletely();
             newConnectionInfo.Inheritance.Description = false;

@@ -95,12 +95,12 @@ namespace mRemoteNG.UI
             };
         }
 
-        public static CommonOpenFileDialog SelectFolder(string DialogWindowTitle)
+        public static CommonOpenFileDialog SelectFolder(string dialogWindowTitle)
         {
             return new CommonOpenFileDialog
             {
                 IsFolderPicker = true,
-                Title = DialogWindowTitle,
+                Title = dialogWindowTitle,
                 EnsurePathExists = true,
                 InitialDirectory = Properties.OptionsBackupPage.Default.BackupLocation != "" ? Properties.OptionsBackupPage.Default.BackupLocation : Directory.GetCurrentDirectory()
             };

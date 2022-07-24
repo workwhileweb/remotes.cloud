@@ -78,7 +78,7 @@ namespace mRemoteNG.App
                 ISerializer<ConnectionInfo, string> serializer;
                 switch (saveFormat)
                 {
-                    case SaveFormat.mRXML:
+                    case SaveFormat.MRxml:
                         var cryptographyProvider = new CryptoProviderFactoryFromSettings().Build();
                         var rootNode = exportTarget.GetRootParent() as RootNodeInfo;
                         var connectionNodeSerializer = new XmlConnectionNodeSerializer27(
@@ -92,7 +92,7 @@ namespace mRemoteNG.App
                                                                                          saveFilter);
                         serializer = new XmlConnectionsSerializer(cryptographyProvider, connectionNodeSerializer);
                         break;
-                    case SaveFormat.mRCSV:
+                    case SaveFormat.MRcsv:
                         serializer =
                             new CsvConnectionsSerializerMremotengFormat(saveFilter, Runtime.CredentialProviderCatalog);
                         break;

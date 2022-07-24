@@ -258,7 +258,7 @@ namespace mRemoteNG.Config.Settings
 
         private void LoadExternalAppsFromXml()
         {
-            _externalAppsLoader.LoadExternalAppsFromXML();
+            _externalAppsLoader.LoadExternalAppsFromXml();
         }
 
         #endregion

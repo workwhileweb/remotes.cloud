@@ -92,7 +92,7 @@ static class DPI_Per_Monitor
     private static extern IntPtr MonitorFromPoint([In]Point pt, [In]uint dwFlags);
 
     static List<Tuple<Control, Form, float>> ManResCtrl = new();
-    internal static void TryEnableDPIAware(Form form, VoidOfFloatFloatDelegate CallBackWithScale)
+    internal static void TryEnableDPIAware(Form form, VoidOfFloatFloatDelegate callBackWithScale)
     {
         var handledLev = 0;
         if (0==handledLev)
@@ -115,7 +115,7 @@ static class DPI_Per_Monitor
             uint dpiY;
             GetDpiForMonitor(mon, DpiType.Effective, out dpiX, out dpiY);
             if (dpiX!=96 || dpiY!=96) {
-                CallBackWithScale(dpiX/96f, dpiY/96f);
+                callBackWithScale(dpiX/96f, dpiY/96f);
             }
         } catch { /* Windows older than WinX */ }
     }

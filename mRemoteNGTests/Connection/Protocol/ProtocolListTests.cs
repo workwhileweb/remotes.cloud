@@ -22,8 +22,8 @@ namespace mRemoteNGTests.Connection.Protocol
         {
             _protocolList = new ProtocolList();
             _protocol1 = new ProtocolTelnet();
-            _protocol2 = new ProtocolSSH2();
-            _protocol3 = new ProtocolVNC();
+            _protocol2 = new ProtocolSsh2();
+            _protocol3 = new ProtocolVnc();
         }
 
         [TearDown]

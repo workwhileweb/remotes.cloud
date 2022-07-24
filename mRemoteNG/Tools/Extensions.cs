@@ -11,15 +11,15 @@ namespace mRemoteNG.Tools
             return new Optional<T>(value);
         }
 
-        public static Optional<U> MaybeParse<T, U>(this T value, Func<T, U> parseFunc)
+        public static Optional<TU> MaybeParse<T, TU>(this T value, Func<T, TU> parseFunc)
         {
             try
             {
-                return new Optional<U>(parseFunc(value));
+                return new Optional<TU>(parseFunc(value));
             }
             catch
             {
-                return new Optional<U>();
+                return new Optional<TU>();
             }
         }
 

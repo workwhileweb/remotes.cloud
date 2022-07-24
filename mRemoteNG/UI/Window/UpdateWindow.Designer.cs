@@ -37,7 +37,7 @@ namespace mRemoteNG.UI.Window
             // 
             // btnCheckForUpdate
             // 
-            this.btnCheckForUpdate._mice = MrngButton.MouseState.HOVER;
+            this.btnCheckForUpdate.Mice = MrngButton.MouseState.Hover;
             this.btnCheckForUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCheckForUpdate.Location = new System.Drawing.Point(3, 94);
             this.btnCheckForUpdate.Name = "btnCheckForUpdate";
@@ -184,7 +184,7 @@ namespace mRemoteNG.UI.Window
             // 
             // btnDownload
             // 
-            this.btnDownload._mice = MrngButton.MouseState.HOVER;
+            this.btnDownload.Mice = MrngButton.MouseState.Hover;
             this.tableLayoutPanel1.SetColumnSpan(this.btnDownload, 2);
             this.btnDownload.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnDownload.FlatStyle = System.Windows.Forms.FlatStyle.Flat;

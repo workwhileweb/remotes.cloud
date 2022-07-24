@@ -38,7 +38,7 @@ namespace mRemoteNG.UI.Forms
             // 
             // btnCancel
             // 
-            this.btnCancel._mice = MrngButton.MouseState.HOVER;
+            this.btnCancel.Mice = MrngButton.MouseState.Hover;
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Location = new System.Drawing.Point(447, 473);
             this.btnCancel.Name = "btnCancel";
@@ -50,7 +50,7 @@ namespace mRemoteNG.UI.Forms
             // 
             // btnOK
             // 
-            this.btnOK._mice = MrngButton.MouseState.HOVER;
+            this.btnOK.Mice = MrngButton.MouseState.Hover;
             this.btnOK.Location = new System.Drawing.Point(366, 473);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
@@ -70,7 +70,7 @@ namespace mRemoteNG.UI.Forms
             // 
             // chkUsername
             // 
-            this.chkUsername._mice = MrngCheckBox.MouseState.HOVER;
+            this.chkUsername.Mice = MrngCheckBox.MouseState.Hover;
             this.chkUsername.AutoSize = true;
             this.chkUsername.Checked = true;
             this.chkUsername.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -83,7 +83,7 @@ namespace mRemoteNG.UI.Forms
             // 
             // chkPassword
             // 
-            this.chkPassword._mice = MrngCheckBox.MouseState.HOVER;
+            this.chkPassword.Mice = MrngCheckBox.MouseState.Hover;
             this.chkPassword.AutoSize = true;
             this.chkPassword.Checked = true;
             this.chkPassword.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -96,7 +96,7 @@ namespace mRemoteNG.UI.Forms
             // 
             // chkDomain
             // 
-            this.chkDomain._mice = MrngCheckBox.MouseState.HOVER;
+            this.chkDomain.Mice = MrngCheckBox.MouseState.Hover;
             this.chkDomain.AutoSize = true;
             this.chkDomain.Checked = true;
             this.chkDomain.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -109,7 +109,7 @@ namespace mRemoteNG.UI.Forms
             // 
             // chkInheritance
             // 
-            this.chkInheritance._mice = MrngCheckBox.MouseState.HOVER;
+            this.chkInheritance.Mice = MrngCheckBox.MouseState.Hover;
             this.chkInheritance.AutoSize = true;
             this.chkInheritance.Checked = true;
             this.chkInheritance.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -131,7 +131,7 @@ namespace mRemoteNG.UI.Forms
             // 
             // btnBrowse
             // 
-            this.btnBrowse._mice = MrngButton.MouseState.HOVER;
+            this.btnBrowse.Mice = MrngButton.MouseState.Hover;
             this.btnBrowse.Location = new System.Drawing.Point(417, 46);
             this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.Size = new System.Drawing.Size(75, 23);
@@ -157,7 +157,7 @@ namespace mRemoteNG.UI.Forms
             // 
             // chkAssignedCredential
             // 
-            this.chkAssignedCredential._mice = MrngCheckBox.MouseState.HOVER;
+            this.chkAssignedCredential.Mice = MrngCheckBox.MouseState.Hover;
             this.chkAssignedCredential.AutoSize = true;
             this.chkAssignedCredential.Checked = true;
             this.chkAssignedCredential.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -203,7 +203,7 @@ namespace mRemoteNG.UI.Forms
             // 
             // cboFileFormat
             // 
-            this.cboFileFormat._mice = MrngComboBox.MouseState.HOVER;
+            this.cboFileFormat.Mice = MrngComboBox.MouseState.Hover;
             this.cboFileFormat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboFileFormat.FormattingEnabled = true;
             this.cboFileFormat.Location = new System.Drawing.Point(15, 100);

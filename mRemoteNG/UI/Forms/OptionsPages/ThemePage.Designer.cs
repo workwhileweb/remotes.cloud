@@ -51,7 +51,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // btnThemeDelete
             // 
-            this.btnThemeDelete._mice = MrngButton.MouseState.OUT;
+            this.btnThemeDelete.Mice = MrngButton.MouseState.Out;
             this.btnThemeDelete.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnThemeDelete.Location = new System.Drawing.Point(507, 3);
             this.btnThemeDelete.Name = "btnThemeDelete";
@@ -63,7 +63,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // btnThemeNew
             // 
-            this.btnThemeNew._mice = MrngButton.MouseState.OUT;
+            this.btnThemeNew.Mice = MrngButton.MouseState.Out;
             this.btnThemeNew.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnThemeNew.Location = new System.Drawing.Point(407, 3);
             this.btnThemeNew.Name = "btnThemeNew";
@@ -75,7 +75,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // cboTheme
             // 
-            this.cboTheme._mice = MrngComboBox.MouseState.HOVER;
+            this.cboTheme.Mice = MrngComboBox.MouseState.Hover;
             this.cboTheme.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cboTheme.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboTheme.FormattingEnabled = true;

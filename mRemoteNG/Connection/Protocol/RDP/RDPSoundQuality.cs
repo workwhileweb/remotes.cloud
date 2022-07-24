@@ -3,7 +3,7 @@ using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.Connection.Protocol.RDP
 {
-    public enum RDPSoundQuality
+    public enum RdpSoundQuality
     {
         [LocalizedAttributes.LocalizedDescription(nameof(Language.Dynamic))]
         Dynamic = 0,

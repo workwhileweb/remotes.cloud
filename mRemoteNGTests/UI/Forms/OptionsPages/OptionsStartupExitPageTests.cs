@@ -12,23 +12,23 @@ namespace mRemoteNGTests.UI.Forms.OptionsPages
         [Test]
         public void StartupExitPageLinkExistsInListView()
         {
-            var listViewTester = new ListViewTester("lstOptionPages", _optionsForm);
+            var listViewTester = new ListViewTester("lstOptionPages", OptionsForm);
             Assert.That(listViewTester.Items[0].Text, Does.Match("Startup/Exit"));
         }
 
         [Test]
         public void IconShownInListView()
         {
-            var listViewTester = new ListViewTester("lstOptionPages", _optionsForm);
+            var listViewTester = new ListViewTester("lstOptionPages", OptionsForm);
             Assert.That(listViewTester.Items[0].ImageList, Is.Not.Null);
         }
 
         [Test]
         public void SelectingStartupExitPageLoadsSettings()
         {
-            var listViewTester = new ListViewTester("lstOptionPages", _optionsForm);
+            var listViewTester = new ListViewTester("lstOptionPages", OptionsForm);
             listViewTester.Select("Startup/Exit");
-            var checkboxTester = _optionsForm.FindControl<CheckBox>("chkSaveConsOnExit");
+            var checkboxTester = OptionsForm.FindControl<CheckBox>("chkSaveConsOnExit");
             Assert.That(checkboxTester.Text, Does.Match("Save connections"));
         }
     }

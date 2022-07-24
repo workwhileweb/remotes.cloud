@@ -13,7 +13,7 @@ namespace mRemoteNGTests.Connection
 	public class ConnectionInfoTests
     {
         private ConnectionInfo _connectionInfo;
-        private const string TestDomain = "somedomain";
+        private const string TEST_DOMAIN = "somedomain";
 
         [SetUp]
         public void Setup()
@@ -30,7 +30,7 @@ namespace mRemoteNGTests.Connection
         [Test]
         public void CopyCreatesMemberwiseCopy()
         {
-            _connectionInfo.Domain = TestDomain;
+            _connectionInfo.Domain = TEST_DOMAIN;
             var secondConnection = _connectionInfo.Clone();
             Assert.That(secondConnection.Domain, Is.EqualTo(_connectionInfo.Domain));
         }
@@ -61,7 +61,7 @@ namespace mRemoteNGTests.Connection
         [Test]
         public void CopyFromCopiesProperties()
         {
-            var secondConnection = new ConnectionInfo {Domain = TestDomain};
+            var secondConnection = new ConnectionInfo {Domain = TEST_DOMAIN};
             _connectionInfo.CopyFrom(secondConnection);
             Assert.That(_connectionInfo.Domain, Is.EqualTo(secondConnection.Domain));
         }
@@ -80,7 +80,7 @@ namespace mRemoteNGTests.Connection
         {
             var eventWasCalled = false;
             _connectionInfo.PropertyChanged += (sender, args) => eventWasCalled = true;
-            _connectionInfo.OpenConnections.Add(new ProtocolSSH2());
+            _connectionInfo.OpenConnections.Add(new ProtocolSsh2());
             Assert.That(eventWasCalled);
         }
 
@@ -89,7 +89,7 @@ namespace mRemoteNGTests.Connection
         {
             var nameOfModifiedProperty = "";
             _connectionInfo.PropertyChanged += (sender, args) => nameOfModifiedProperty = args.PropertyName;
-            _connectionInfo.OpenConnections.Add(new ProtocolSSH2());
+            _connectionInfo.OpenConnections.Add(new ProtocolSsh2());
             Assert.That(nameOfModifiedProperty, Is.EqualTo("OpenConnections"));
         }
 
@@ -105,16 +105,16 @@ namespace mRemoteNGTests.Connection
 		    Assert.That(propertyValue, Is.True);
 	    }
 
-		[TestCase(ProtocolType.HTTP, ExpectedResult = 80)]
-        [TestCase(ProtocolType.HTTPS, ExpectedResult = 443)]
+		[TestCase(ProtocolType.Http, ExpectedResult = 80)]
+        [TestCase(ProtocolType.Https, ExpectedResult = 443)]
         [TestCase(ProtocolType.IntApp, ExpectedResult = 0)]
-        [TestCase(ProtocolType.RAW, ExpectedResult = 23)]
-        [TestCase(ProtocolType.RDP, ExpectedResult = 3389)]
+        [TestCase(ProtocolType.Raw, ExpectedResult = 23)]
+        [TestCase(ProtocolType.Rdp, ExpectedResult = 3389)]
         [TestCase(ProtocolType.Rlogin, ExpectedResult = 513)]
-        [TestCase(ProtocolType.SSH1, ExpectedResult = 22)]
-        [TestCase(ProtocolType.SSH2, ExpectedResult = 22)]
+        [TestCase(ProtocolType.Ssh1, ExpectedResult = 22)]
+        [TestCase(ProtocolType.Ssh2, ExpectedResult = 22)]
         [TestCase(ProtocolType.Telnet, ExpectedResult = 23)]
-        [TestCase(ProtocolType.VNC, ExpectedResult = 5900)]
+        [TestCase(ProtocolType.Vnc, ExpectedResult = 5900)]
         public int GetDefaultPortReturnsCorrectPortForProtocol(ProtocolType protocolType)
         {
             _connectionInfo.Protocol = protocolType;

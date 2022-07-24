@@ -8,14 +8,14 @@ using mRemoteNG.Themes;
 namespace mRemoteNG.Themes
 {
     //Class to extract the rest of the required theme colors for MremoteNG from the vstheme file
-    public class MremoteNGPaletteManipulator
+    public class MremoteNgPaletteManipulator
     {
         private XmlDocument _xml;
         private ExtendedColorPalette _defaultPalette;
 
 
         //warning, defaultpalette should always contain all the values, because when is loaded there is no default palette (parameter is null
-        public MremoteNGPaletteManipulator(byte[] file, ExtendedColorPalette defaultPalette = null)
+        public MremoteNgPaletteManipulator(byte[] file, ExtendedColorPalette defaultPalette = null)
         {
             _xml = new XmlDocument();
             _xml.LoadXml(new StreamReader(new MemoryStream(file)).ReadToEnd());
@@ -24,10 +24,10 @@ namespace mRemoteNG.Themes
 
 
         //Load the colors for the mRemoteNG own components as Dockpanel only have a menus and docks palette
-        public ExtendedColorPalette getColors()
+        public ExtendedColorPalette GetColors()
         {
             var newPalette = new ExtendedColorPalette();
-            newPalette.setDefault(_defaultPalette);
+            newPalette.SetDefault(_defaultPalette);
             var resourceSet = ColorMapTheme.ResourceManager.GetResourceSet(CultureInfo.CurrentUICulture, true, true);
             //
             foreach (DictionaryEntry entry in resourceSet)
@@ -39,7 +39,7 @@ namespace mRemoteNG.Themes
                 var color = colorNodeList != null && colorNodeList.Count > 0 ? colorNodeList[0].Value : null;
                 if (color != null)
                 {
-                    newPalette.addColor(colorName, ColorTranslator.FromHtml($"#{color}"));
+                    newPalette.AddColor(colorName, ColorTranslator.FromHtml($"#{color}"));
                 }
             }
 
@@ -52,7 +52,7 @@ namespace mRemoteNG.Themes
         /// </summary>
         /// <param name="colorPalette"></param>
         /// <returns></returns>
-        public byte[] mergePalette(ExtendedColorPalette colorPalette)
+        public byte[] MergePalette(ExtendedColorPalette colorPalette)
         {
             var resourceSet = ColorMapTheme.ResourceManager.GetResourceSet(CultureInfo.CurrentUICulture, true, true);
 
@@ -62,7 +62,7 @@ namespace mRemoteNG.Themes
                 var xmlQueryPath = entry.Value.ToString();
                 var colorNodeList = _xml.DocumentElement?.FirstChild.SelectNodes(xmlQueryPath);
                 if (colorNodeList == null || colorNodeList.Count <= 0) continue;
-                var paletteColor = colorPalette.getColor(colorName);
+                var paletteColor = colorPalette.GetColor(colorName);
                 colorNodeList[0].Value = $"FF{paletteColor.R:X2}{paletteColor.G:X2}{paletteColor.B:X2}";
             }
 

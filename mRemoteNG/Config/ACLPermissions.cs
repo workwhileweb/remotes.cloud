@@ -1,6 +1,6 @@
 ﻿namespace mRemoteNG.Config.ACL
 {
-    public enum ACLPermissions
+    public enum AclPermissions
     {
         Hidden = 0,
         ReadOnly = 1,

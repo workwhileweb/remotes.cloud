@@ -21,7 +21,7 @@ namespace mRemoteNG.UI.Controls
         public MrngCheckBox()
         {
             InitializeComponent();
-            ThemeManager.getInstance().ThemeChanged += OnCreateControl;
+            ThemeManager.GetInstance().ThemeChanged += OnCreateControl;
             var display = new DisplayProperties();
             _checkboxSize = new Size(display.ScaleWidth(11), display.ScaleHeight(11));
             _checkboxYCoord = (display.ScaleHeight(Height) - _checkboxSize.Height) / 2 - display.ScaleHeight(5);
@@ -30,39 +30,39 @@ namespace mRemoteNG.UI.Controls
 
         public enum MouseState
         {
-            HOVER,
-            DOWN,
-            OUT
+            Hover,
+            Down,
+            Out
         }
 
-        public MouseState _mice { get; set; }
+        public MouseState Mice { get; set; }
 
 
         protected override void OnCreateControl()
         {
             base.OnCreateControl();
-            _themeManager = ThemeManager.getInstance();
+            _themeManager = ThemeManager.GetInstance();
             if (!_themeManager.ThemingActive) return;
-            _mice = MouseState.OUT;
+            Mice = MouseState.Out;
             MouseEnter += (sender, args) =>
             {
-                _mice = MouseState.HOVER;
+                Mice = MouseState.Hover;
                 Invalidate();
             };
             MouseLeave += (sender, args) =>
             {
-                _mice = MouseState.OUT;
+                Mice = MouseState.Out;
                 Invalidate();
             };
             MouseDown += (sender, args) =>
             {
                 if (args.Button != MouseButtons.Left) return;
-                _mice = MouseState.DOWN;
+                Mice = MouseState.Down;
                 Invalidate();
             };
             MouseUp += (sender, args) =>
             {
-                _mice = MouseState.OUT;
+                Mice = MouseState.Out;
 
                 Invalidate();
             };
@@ -84,30 +84,30 @@ namespace mRemoteNG.UI.Controls
             Color glyph;
             Color checkBorder;
 
-            var back = _themeManager.ActiveTheme.ExtendedPalette.getColor("CheckBox_Background");
+            var back = _themeManager.ActiveTheme.ExtendedPalette.GetColor("CheckBox_Background");
             if (Enabled)
             {
-                glyph = _themeManager.ActiveTheme.ExtendedPalette.getColor("CheckBox_Glyph");
-                fore = _themeManager.ActiveTheme.ExtendedPalette.getColor("CheckBox_Text");
+                glyph = _themeManager.ActiveTheme.ExtendedPalette.GetColor("CheckBox_Glyph");
+                fore = _themeManager.ActiveTheme.ExtendedPalette.GetColor("CheckBox_Text");
                 // ReSharper disable once SwitchStatementMissingSomeCases
-                switch (_mice)
+                switch (Mice)
                 {
-                    case MouseState.HOVER:
-                        checkBorder = _themeManager.ActiveTheme.ExtendedPalette.getColor("CheckBox_Border_Hover");
+                    case MouseState.Hover:
+                        checkBorder = _themeManager.ActiveTheme.ExtendedPalette.GetColor("CheckBox_Border_Hover");
                         break;
-                    case MouseState.DOWN:
-                        checkBorder = _themeManager.ActiveTheme.ExtendedPalette.getColor("CheckBox_Border_Pressed");
+                    case MouseState.Down:
+                        checkBorder = _themeManager.ActiveTheme.ExtendedPalette.GetColor("CheckBox_Border_Pressed");
                         break;
                     default:
-                        checkBorder = _themeManager.ActiveTheme.ExtendedPalette.getColor("CheckBox_Border");
+                        checkBorder = _themeManager.ActiveTheme.ExtendedPalette.GetColor("CheckBox_Border");
                         break;
                 }
             }
             else
             {
-                fore = _themeManager.ActiveTheme.ExtendedPalette.getColor("CheckBox_Text_Disabled");
-                glyph = _themeManager.ActiveTheme.ExtendedPalette.getColor("CheckBox_Glyph_Disabled");
-                checkBorder = _themeManager.ActiveTheme.ExtendedPalette.getColor("CheckBox_Border_Disabled");
+                fore = _themeManager.ActiveTheme.ExtendedPalette.GetColor("CheckBox_Text_Disabled");
+                glyph = _themeManager.ActiveTheme.ExtendedPalette.GetColor("CheckBox_Glyph_Disabled");
+                checkBorder = _themeManager.ActiveTheme.ExtendedPalette.GetColor("CheckBox_Border_Disabled");
             }
 
             e.Graphics.Clear(Parent.BackColor);

@@ -19,17 +19,17 @@ namespace mRemoteNG.Tools
 {
     public static class MiscTools
     {
-        public static Icon GetIconFromFile(string FileName)
+        public static Icon GetIconFromFile(string fileName)
         {
             try
             {
-                return File.Exists(FileName) == false ? null : Icon.ExtractAssociatedIcon(FileName);
+                return File.Exists(fileName) == false ? null : Icon.ExtractAssociatedIcon(fileName);
             }
-            catch (ArgumentException AEx)
+            catch (ArgumentException aEx)
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
                                                     "GetIconFromFile failed (Tools.Misc) - using default icon" +
-                                                    Environment.NewLine + AEx.Message,
+                                                    Environment.NewLine + aEx.Message,
                                                     true);
                 return Properties.Resources.mRemoteNG_Icon;
             }
@@ -53,30 +53,30 @@ namespace mRemoteNG.Tools
             return passwordForm.GetKey();
         }
 
-        public static string LeadingZero(string Number)
+        public static string LeadingZero(string number)
         {
-            if (Convert.ToInt32(Number) < 10)
+            if (Convert.ToInt32(number) < 10)
             {
-                return "0" + Number;
+                return "0" + number;
             }
 
-            return Number;
+            return number;
         }
 
 
-        public static string DBDate(DateTime Dt)
+        public static string DbDate(DateTime dt)
 		{
 			switch (OptionsDBsPage.Default.SQLServerType)
 			{
 				case "mysql":
-					return Dt.ToString("yyyy/MM/dd HH:mm:ss");
+					return dt.ToString("yyyy/MM/dd HH:mm:ss");
 				case "mssql":
 				default:
-					return Dt.ToString("yyyyMMdd HH:mm:ss");
+					return dt.ToString("yyyyMMdd HH:mm:ss");
 			}
 		}
 
-		public static Type DBTimeStampType()
+		public static Type DbTimeStampType()
 		{
 			switch (OptionsDBsPage.Default.SQLServerType)
 			{
@@ -88,7 +88,7 @@ namespace mRemoteNG.Tools
 			}
 		}
 
-		public static object DBTimeStampNow()
+		public static object DbTimeStampNow()
 		{
 			switch (OptionsDBsPage.Default.SQLServerType)
 			{
@@ -100,9 +100,9 @@ namespace mRemoteNG.Tools
 			}
 		}
 
-        public static string PrepareValueForDB(string Text)
+        public static string PrepareValueForDb(string text)
         {
-            return Text.Replace("\'", "\'\'");
+            return text.Replace("\'", "\'\'");
         }
 
         public static string GetExceptionMessageRecursive(Exception ex)

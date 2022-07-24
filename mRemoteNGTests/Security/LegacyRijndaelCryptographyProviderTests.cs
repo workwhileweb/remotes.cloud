@@ -12,7 +12,7 @@ namespace mRemoteNGTests.Security
         private ICryptographyProvider _rijndaelCryptographyProvider;
         private SecureString _encryptionKey;
         private string _plainText;
-        private const string CipherText = "RmV7zw/a7ZRRzZdcTkrLDgBfyEmeh8OFMgg2OKFJnwg=";
+        private const string CIPHER_TEXT = "RmV7zw/a7ZRRzZdcTkrLDgBfyEmeh8OFMgg2OKFJnwg=";
 
 
         [SetUp]
@@ -61,14 +61,14 @@ namespace mRemoteNGTests.Security
         [Test]
         public void DecryptingFromPreviousApplicationExecutionWorks()
         {
-            var decryptedCipherText = _rijndaelCryptographyProvider.Decrypt(CipherText, _encryptionKey);
+            var decryptedCipherText = _rijndaelCryptographyProvider.Decrypt(CIPHER_TEXT, _encryptionKey);
             Assert.That(decryptedCipherText, Is.EqualTo(_plainText));
         }
 
         [Test]
         public void DecryptionFailureThrowsException()
         {
-            ActualValueDelegate<string> decryptMethod = () => _rijndaelCryptographyProvider.Decrypt(CipherText, "wrongKey".ConvertToSecureString());
+            ActualValueDelegate<string> decryptMethod = () => _rijndaelCryptographyProvider.Decrypt(CIPHER_TEXT, "wrongKey".ConvertToSecureString());
             Assert.That(decryptMethod, Throws.TypeOf<EncryptionException>());
         }
 

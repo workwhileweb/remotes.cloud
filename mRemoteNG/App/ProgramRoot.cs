@@ -54,8 +54,8 @@ namespace mRemoteNG.App
 
         private static void StartApplicationAsSingleInstance()
         {
-            const string mutexID = "mRemoteNG_SingleInstanceMutex";
-            _mutex = new Mutex(false, mutexID, out var newInstanceCreated);
+            const string mutexId = "mRemoteNG_SingleInstanceMutex";
+            _mutex = new Mutex(false, mutexId, out var newInstanceCreated);
             if (!newInstanceCreated)
             {
                 SwitchToCurrentInstance();

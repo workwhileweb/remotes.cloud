@@ -12,23 +12,23 @@ namespace mRemoteNGTests.UI.Forms.OptionsPages
         [Test]
         public void ThemePageLinkExistsInListView()
         {
-            var listViewTester = new ListViewTester("lstOptionPages", _optionsForm);
+            var listViewTester = new ListViewTester("lstOptionPages", OptionsForm);
             Assert.That(listViewTester.Items[8].Text, Does.Match("Theme"));
         }
 
         [Test]
         public void ThemeIconShownInListView()
         {
-            var listViewTester = new ListViewTester("lstOptionPages", _optionsForm);
+            var listViewTester = new ListViewTester("lstOptionPages", OptionsForm);
             Assert.That(listViewTester.Items[8].ImageList, Is.Not.Null);
         }
 
         [Test]
         public void SelectingThemePageLoadsSettings()
         {
-            var listViewTester = new ListViewTester("lstOptionPages", _optionsForm);
+            var listViewTester = new ListViewTester("lstOptionPages", OptionsForm);
             listViewTester.Select("Theme");
-            var buttonTester = _optionsForm.FindControl<Button>("btnThemeNew");
+            var buttonTester = OptionsForm.FindControl<Button>("btnThemeNew");
             Assert.That(buttonTester.Text, Does.Match("New"));
         }
     }

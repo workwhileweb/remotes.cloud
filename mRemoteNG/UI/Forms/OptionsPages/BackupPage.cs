@@ -19,7 +19,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         public BackupPage()
         {
             InitializeComponent();
-            Check4ACL();
+            Check4Acl();
             ApplyTheme();
             PageIcon = Resources.ImageConverter.GetImageAsIcon(Properties.Resources.DocumentsFolder_16x);
         }
@@ -30,7 +30,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             set { }
         }
 
-        public void Check4ACL()
+        public void Check4Acl()
         {
             if (Properties.rbac.Default.ActiveRole == "AdminRole")
             {
@@ -130,9 +130,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             _permissionsListing = new List<DropdownList>
             {
-                {new((int) ACLPermissions.Hidden, Language.ACLPermissionsHidden)},
-                {new((int) ACLPermissions.ReadOnly, Language.ACLPermissionsReadOnly)},
-                {new((int) ACLPermissions.WriteAllow, Language.ACLPermissionsWriteAllow)},
+                {new((int) AclPermissions.Hidden, Language.ACLPermissionsHidden)},
+                {new((int) AclPermissions.ReadOnly, Language.ACLPermissionsReadOnly)},
+                {new((int) AclPermissions.WriteAllow, Language.ACLPermissionsWriteAllow)},
             };
 
             btnBrowsePath.Text = Language.strBrowse;

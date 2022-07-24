@@ -8,7 +8,7 @@ namespace mRemoteNG.UI.Forms
     /// </summary>
     public partial class FrmSplashScreenNew
     {
-        static FrmSplashScreenNew instance = null;
+        static FrmSplashScreenNew _instance = null;
         public FrmSplashScreenNew()
         {
             InitializeComponent();
@@ -17,9 +17,9 @@ namespace mRemoteNG.UI.Forms
         }
         public static FrmSplashScreenNew GetInstance()
         {
-            if (instance == null)
-                instance = new FrmSplashScreenNew();
-            return instance;
+            if (_instance == null)
+                _instance = new FrmSplashScreenNew();
+            return _instance;
         }
         void LoadFont()
         {

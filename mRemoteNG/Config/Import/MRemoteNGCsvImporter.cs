@@ -8,7 +8,7 @@ using mRemoteNG.Messages;
 
 namespace mRemoteNG.Config.Import
 {
-    public class MRemoteNGCsvImporter : IConnectionImporter<string>
+    public class MRemoteNgCsvImporter : IConnectionImporter<string>
     {
         public void Import(string filePath, ContainerInfo destinationContainer)
         {

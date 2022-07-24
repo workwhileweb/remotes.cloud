@@ -14,13 +14,13 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
 {
     public class DataTableSerializer : ISerializer<ConnectionInfo, DataTable>
     {
-        public readonly int DELETE = 0;
+        public readonly int Delete = 0;
         private readonly ICryptographyProvider _cryptographyProvider;
         private readonly SecureString _encryptionKey;
         private DataTable _dataTable;
         private DataTable _sourceDataTable;
-        private Dictionary<string, int> sourcePrimaryKeyDict = new();
-        private const string TableName = "tblCons";
+        private Dictionary<string, int> _sourcePrimaryKeyDict = new();
+        private const string TABLE_NAME = "tblCons";
         private readonly SaveFilter _saveFilter;
         private int _currentNodeIndex;
 
@@ -62,7 +62,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
             _currentNodeIndex = 0;
             // Register add or update row
             SerializeNodesRecursive(serializationTarget);
-            var entryToDelete = sourcePrimaryKeyDict.Keys.ToList();
+            var entryToDelete = _sourcePrimaryKeyDict.Keys.ToList();
             foreach( var entry in entryToDelete)
             {
                 _dataTable.Rows.Find(entry).Delete();
@@ -78,14 +78,14 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
                 dataTable = _sourceDataTable;
             }else
             {
-                dataTable = new DataTable(TableName);
+                dataTable = new DataTable(TABLE_NAME);
 
             }
             if (dataTable.Columns.Count == 0) CreateSchema(dataTable);
             if (dataTable.PrimaryKey.Length == 0 ) SetPrimaryKey(dataTable);
             foreach(DataRow row in dataTable.Rows)
             {
-                sourcePrimaryKeyDict.Add((string)row["ConstantID"], DELETE);
+                _sourcePrimaryKeyDict.Add((string)row["ConstantID"], Delete);
             }
             return dataTable;
         }
@@ -98,7 +98,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
             dataTable.Columns.Add("ConstantID", typeof(string));
             dataTable.Columns.Add("PositionID", typeof(int));
             dataTable.Columns.Add("ParentID", typeof(string));
-            dataTable.Columns.Add("LastChange", MiscTools.DBTimeStampType());
+            dataTable.Columns.Add("LastChange", MiscTools.DbTimeStampType());
             dataTable.Columns.Add("Name", typeof(string));
             dataTable.Columns.Add("Type", typeof(string));
             dataTable.Columns.Add("Expanded", typeof(bool));
@@ -264,11 +264,11 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
                 SerializeNodesRecursive(child);
         }
 
-        public bool isRowUpdated(ConnectionInfo connectionInfo, DataRow dataRow)
+        public bool IsRowUpdated(ConnectionInfo connectionInfo, DataRow dataRow)
         {
             var isFieldNotChange = dataRow["Name"].Equals(connectionInfo.Name) &&
             dataRow["Type"].Equals(connectionInfo.GetTreeNodeType().ToString()) &&
-            dataRow["ParentID"].Equals(connectionInfo.Parent?.ConstantID ?? "") &&
+            dataRow["ParentID"].Equals(connectionInfo.Parent?.ConstantId ?? "") &&
             dataRow["PositionID"].Equals(_currentNodeIndex) &&
             dataRow["Expanded"].Equals(false) &&
             dataRow["Description"].Equals(connectionInfo.Description) &&
@@ -290,7 +290,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
             isFieldNotChange = isFieldNotChange &&
             dataRow["UseRestrictedAdmin"].Equals(connectionInfo.UseRestrictedAdmin);
             isFieldNotChange = isFieldNotChange &&
-            dataRow["UseRCG"].Equals(connectionInfo.UseRCG);
+            dataRow["UseRCG"].Equals(connectionInfo.UseRcg);
             isFieldNotChange = isFieldNotChange &&
             dataRow["UseVmId"].Equals(connectionInfo.UseVmId);
             isFieldNotChange = isFieldNotChange &&
@@ -298,11 +298,11 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
             isFieldNotChange = isFieldNotChange &&
             dataRow["RenderingEngine"].Equals(connectionInfo.RenderingEngine.ToString());
             isFieldNotChange = isFieldNotChange &&
-            dataRow["RDPAuthenticationLevel"].Equals(connectionInfo.RDPAuthenticationLevel.ToString());
+            dataRow["RDPAuthenticationLevel"].Equals(connectionInfo.RdpAuthenticationLevel.ToString());
             isFieldNotChange = isFieldNotChange &&
-            dataRow["RDPMinutesToIdleTimeout"].Equals(connectionInfo.RDPMinutesToIdleTimeout);
+            dataRow["RDPMinutesToIdleTimeout"].Equals(connectionInfo.RdpMinutesToIdleTimeout);
             isFieldNotChange = isFieldNotChange &&
-            dataRow["RDPAlertIdleTimeout"].Equals(connectionInfo.RDPAlertIdleTimeout);
+            dataRow["RDPAlertIdleTimeout"].Equals(connectionInfo.RdpAlertIdleTimeout);
             isFieldNotChange = isFieldNotChange &&
             dataRow["LoadBalanceInfo"].Equals(connectionInfo.LoadBalanceInfo);
             isFieldNotChange = isFieldNotChange &&
@@ -330,8 +330,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
              dataRow["SoundQuality"].Equals(connectionInfo.SoundQuality.ToString()) &&
              dataRow["RedirectAudioCapture"].Equals(connectionInfo.RedirectAudioCapture) &&
              dataRow["RedirectKeys"].Equals(connectionInfo.RedirectKeys) &&
-             dataRow["StartProgram"].Equals(connectionInfo.RDPStartProgram) &&
-             dataRow["StartProgramWorkDir"].Equals(connectionInfo.RDPStartProgramWorkDir);
+             dataRow["StartProgram"].Equals(connectionInfo.RdpStartProgram) &&
+             dataRow["StartProgramWorkDir"].Equals(connectionInfo.RdpStartProgramWorkDir);
 
             isFieldNotChange = isFieldNotChange &&
              dataRow["Connected"].Equals(false) && // TODO: this column can eventually be removed. we now save this property locally
@@ -341,21 +341,21 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
              dataRow["MacAddress"].Equals(connectionInfo.MacAddress) &&
              dataRow["UserField"].Equals(connectionInfo.UserField) &&
              dataRow["ExtApp"].Equals(connectionInfo.ExtApp) &&
-             dataRow["VNCCompression"].Equals(connectionInfo.VNCCompression.ToString()) &&
-             dataRow["VNCEncoding"].Equals(connectionInfo.VNCEncoding.ToString()) &&
-             dataRow["VNCAuthMode"].Equals(connectionInfo.VNCAuthMode.ToString()) &&
-             dataRow["VNCProxyType"].Equals(connectionInfo.VNCProxyType.ToString()) &&
-             dataRow["VNCProxyIP"].Equals(connectionInfo.VNCProxyIP) &&
-             dataRow["VNCProxyPort"].Equals(connectionInfo.VNCProxyPort) &&
-             dataRow["VNCProxyUsername"].Equals(connectionInfo.VNCProxyUsername) &&
-             dataRow["VNCColors"].Equals(connectionInfo.VNCColors.ToString()) &&
-             dataRow["VNCSmartSizeMode"].Equals(connectionInfo.VNCSmartSizeMode.ToString()) &&
-             dataRow["VNCViewOnly"].Equals(connectionInfo.VNCViewOnly) &&
-             dataRow["RDGatewayUsageMethod"].Equals(connectionInfo.RDGatewayUsageMethod.ToString()) &&
-             dataRow["RDGatewayHostname"].Equals(connectionInfo.RDGatewayHostname) &&
-             dataRow["RDGatewayUseConnectionCredentials"].Equals(connectionInfo.RDGatewayUseConnectionCredentials.ToString()) &&
-             dataRow["RDGatewayUsername"].Equals(connectionInfo.RDGatewayUsername) &&
-             dataRow["RDGatewayDomain"].Equals(connectionInfo.RDGatewayDomain) &&
+             dataRow["VNCCompression"].Equals(connectionInfo.VncCompression.ToString()) &&
+             dataRow["VNCEncoding"].Equals(connectionInfo.VncEncoding.ToString()) &&
+             dataRow["VNCAuthMode"].Equals(connectionInfo.VncAuthMode.ToString()) &&
+             dataRow["VNCProxyType"].Equals(connectionInfo.VncProxyType.ToString()) &&
+             dataRow["VNCProxyIP"].Equals(connectionInfo.VncProxyIp) &&
+             dataRow["VNCProxyPort"].Equals(connectionInfo.VncProxyPort) &&
+             dataRow["VNCProxyUsername"].Equals(connectionInfo.VncProxyUsername) &&
+             dataRow["VNCColors"].Equals(connectionInfo.VncColors.ToString()) &&
+             dataRow["VNCSmartSizeMode"].Equals(connectionInfo.VncSmartSizeMode.ToString()) &&
+             dataRow["VNCViewOnly"].Equals(connectionInfo.VncViewOnly) &&
+             dataRow["RDGatewayUsageMethod"].Equals(connectionInfo.RdGatewayUsageMethod.ToString()) &&
+             dataRow["RDGatewayHostname"].Equals(connectionInfo.RdGatewayHostname) &&
+             dataRow["RDGatewayUseConnectionCredentials"].Equals(connectionInfo.RdGatewayUseConnectionCredentials.ToString()) &&
+             dataRow["RDGatewayUsername"].Equals(connectionInfo.RdGatewayUsername) &&
+             dataRow["RDGatewayDomain"].Equals(connectionInfo.RdGatewayDomain) &&
              dataRow["RdpVersion"].Equals(connectionInfo.RdpVersion.ToString());
 
             var isInheritanceFieldNotChange = false;
@@ -393,15 +393,15 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
                 dataRow["InheritUseConsoleSession"].Equals(connectionInfo.Inheritance.UseConsoleSession) &&
                 dataRow["InheritUseCredSsp"].Equals(connectionInfo.Inheritance.UseCredSsp) &&
                 dataRow["InheritUseRestrictedAdmin"].Equals(connectionInfo.Inheritance.UseRestrictedAdmin) &&
-                dataRow["InheritUseRCG"].Equals(connectionInfo.Inheritance.UseRCG) &&
+                dataRow["InheritUseRCG"].Equals(connectionInfo.Inheritance.UseRcg) &&
                 dataRow["InheritRenderingEngine"].Equals(connectionInfo.Inheritance.RenderingEngine) &&
                 dataRow["InheritUsername"].Equals(connectionInfo.Inheritance.Username) &&
                 dataRow["InheritVmId"].Equals(connectionInfo.Inheritance.VmId) &&
                 dataRow["InheritUseVmId"].Equals(connectionInfo.Inheritance.UseVmId) &&
                 dataRow["InheritUseEnhancedMode"].Equals(connectionInfo.Inheritance.UseEnhancedMode) &&
-                dataRow["InheritRDPAuthenticationLevel"].Equals(connectionInfo.Inheritance.RDPAuthenticationLevel) &&
-                dataRow["InheritRDPMinutesToIdleTimeout"].Equals(connectionInfo.Inheritance.RDPMinutesToIdleTimeout) &&
-                dataRow["InheritRDPAlertIdleTimeout"].Equals(connectionInfo.Inheritance.RDPAlertIdleTimeout) &&
+                dataRow["InheritRDPAuthenticationLevel"].Equals(connectionInfo.Inheritance.RdpAuthenticationLevel) &&
+                dataRow["InheritRDPMinutesToIdleTimeout"].Equals(connectionInfo.Inheritance.RdpMinutesToIdleTimeout) &&
+                dataRow["InheritRDPAlertIdleTimeout"].Equals(connectionInfo.Inheritance.RdpAlertIdleTimeout) &&
                 dataRow["InheritLoadBalanceInfo"].Equals(connectionInfo.Inheritance.LoadBalanceInfo) &&
                 dataRow["InheritOpeningCommand"].Equals(connectionInfo.Inheritance.OpeningCommand) &&
                 dataRow["InheritPreExtApp"].Equals(connectionInfo.Inheritance.PreExtApp) &&
@@ -409,23 +409,23 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
                 dataRow["InheritMacAddress"].Equals(connectionInfo.Inheritance.MacAddress) &&
                 dataRow["InheritUserField"].Equals(connectionInfo.Inheritance.UserField) &&
                 dataRow["InheritExtApp"].Equals(connectionInfo.Inheritance.ExtApp) &&
-                dataRow["InheritVNCCompression"].Equals(connectionInfo.Inheritance.VNCCompression) &&
-                dataRow["InheritVNCEncoding"].Equals(connectionInfo.Inheritance.VNCEncoding) &&
-                dataRow["InheritVNCAuthMode"].Equals(connectionInfo.Inheritance.VNCAuthMode) &&
-                dataRow["InheritVNCProxyType"].Equals(connectionInfo.Inheritance.VNCProxyType) &&
-                dataRow["InheritVNCProxyIP"].Equals(connectionInfo.Inheritance.VNCProxyIP) &&
-                dataRow["InheritVNCProxyPort"].Equals(connectionInfo.Inheritance.VNCProxyPort) &&
-                dataRow["InheritVNCProxyUsername"].Equals(connectionInfo.Inheritance.VNCProxyUsername) &&
-                dataRow["InheritVNCProxyPassword"].Equals(connectionInfo.Inheritance.VNCProxyPassword) &&
-                dataRow["InheritVNCColors"].Equals(connectionInfo.Inheritance.VNCColors) &&
-                dataRow["InheritVNCSmartSizeMode"].Equals(connectionInfo.Inheritance.VNCSmartSizeMode) &&
-                dataRow["InheritVNCViewOnly"].Equals(connectionInfo.Inheritance.VNCViewOnly) &&
-                dataRow["InheritRDGatewayUsageMethod"].Equals(connectionInfo.Inheritance.RDGatewayUsageMethod) &&
-                dataRow["InheritRDGatewayHostname"].Equals(connectionInfo.Inheritance.RDGatewayHostname) &&
-                dataRow["InheritRDGatewayUseConnectionCredentials"].Equals(connectionInfo.Inheritance.RDGatewayUseConnectionCredentials) &&
-                dataRow["InheritRDGatewayUsername"].Equals(connectionInfo.Inheritance.RDGatewayUsername) &&
-                dataRow["InheritRDGatewayPassword"].Equals(connectionInfo.Inheritance.RDGatewayPassword) &&
-                dataRow["InheritRDGatewayDomain"].Equals(connectionInfo.Inheritance.RDGatewayDomain) &&
+                dataRow["InheritVNCCompression"].Equals(connectionInfo.Inheritance.VncCompression) &&
+                dataRow["InheritVNCEncoding"].Equals(connectionInfo.Inheritance.VncEncoding) &&
+                dataRow["InheritVNCAuthMode"].Equals(connectionInfo.Inheritance.VncAuthMode) &&
+                dataRow["InheritVNCProxyType"].Equals(connectionInfo.Inheritance.VncProxyType) &&
+                dataRow["InheritVNCProxyIP"].Equals(connectionInfo.Inheritance.VncProxyIp) &&
+                dataRow["InheritVNCProxyPort"].Equals(connectionInfo.Inheritance.VncProxyPort) &&
+                dataRow["InheritVNCProxyUsername"].Equals(connectionInfo.Inheritance.VncProxyUsername) &&
+                dataRow["InheritVNCProxyPassword"].Equals(connectionInfo.Inheritance.VncProxyPassword) &&
+                dataRow["InheritVNCColors"].Equals(connectionInfo.Inheritance.VncColors) &&
+                dataRow["InheritVNCSmartSizeMode"].Equals(connectionInfo.Inheritance.VncSmartSizeMode) &&
+                dataRow["InheritVNCViewOnly"].Equals(connectionInfo.Inheritance.VncViewOnly) &&
+                dataRow["InheritRDGatewayUsageMethod"].Equals(connectionInfo.Inheritance.RdGatewayUsageMethod) &&
+                dataRow["InheritRDGatewayHostname"].Equals(connectionInfo.Inheritance.RdGatewayHostname) &&
+                dataRow["InheritRDGatewayUseConnectionCredentials"].Equals(connectionInfo.Inheritance.RdGatewayUseConnectionCredentials) &&
+                dataRow["InheritRDGatewayUsername"].Equals(connectionInfo.Inheritance.RdGatewayUsername) &&
+                dataRow["InheritRDGatewayPassword"].Equals(connectionInfo.Inheritance.RdGatewayPassword) &&
+                dataRow["InheritRDGatewayDomain"].Equals(connectionInfo.Inheritance.RdGatewayDomain) &&
                 dataRow["InheritRdpVersion"].Equals(connectionInfo.Inheritance.RdpVersion));
             }
             else
@@ -496,8 +496,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
             }
 
             var pwd = dataRow["Password"].Equals(_saveFilter.SavePassword ? _cryptographyProvider.Encrypt(connectionInfo.Password, _encryptionKey) : "") &&
-                      dataRow["VNCProxyPassword"].Equals(_cryptographyProvider.Encrypt(connectionInfo.VNCProxyPassword, _encryptionKey)) &&
-                      dataRow["RDGatewayPassword"].Equals(_cryptographyProvider.Encrypt(connectionInfo.RDGatewayPassword, _encryptionKey));
+                      dataRow["VNCProxyPassword"].Equals(_cryptographyProvider.Encrypt(connectionInfo.VncProxyPassword, _encryptionKey)) &&
+                      dataRow["RDGatewayPassword"].Equals(_cryptographyProvider.Encrypt(connectionInfo.RdGatewayPassword, _encryptionKey));
             return !(pwd && isFieldNotChange && isInheritanceFieldNotChange);
         }
 
@@ -505,26 +505,26 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
         {
             _currentNodeIndex++;
             var isNewRow = false;
-            var dataRow = _dataTable.Rows.Find(connectionInfo.ConstantID);
+            var dataRow = _dataTable.Rows.Find(connectionInfo.ConstantId);
             if (dataRow == null)
             {
                 dataRow = _dataTable.NewRow();
-                dataRow["ConstantID"] = connectionInfo.ConstantID;
+                dataRow["ConstantID"] = connectionInfo.ConstantId;
                 isNewRow = true;
             }
             else
             {
-                sourcePrimaryKeyDict.Remove(connectionInfo.ConstantID);
+                _sourcePrimaryKeyDict.Remove(connectionInfo.ConstantId);
             }
-            var tmp = isRowUpdated(connectionInfo, dataRow);
+            var tmp = IsRowUpdated(connectionInfo, dataRow);
             if (!tmp){
                 return;
             } 
             dataRow["Name"] = connectionInfo.Name;
             dataRow["Type"] = connectionInfo.GetTreeNodeType().ToString();
-            dataRow["ParentID"] = connectionInfo.Parent?.ConstantID ?? "";
+            dataRow["ParentID"] = connectionInfo.Parent?.ConstantId ?? "";
             dataRow["PositionID"] = _currentNodeIndex;
-            dataRow["LastChange"] = MiscTools.DBTimeStampNow();
+            dataRow["LastChange"] = MiscTools.DbTimeStampNow();
             dataRow["Expanded"] =
                 false; // TODO: this column can eventually be removed. we now save this property locally
             dataRow["Description"] = connectionInfo.Description;
@@ -538,21 +538,21 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
             dataRow["Hostname"] = connectionInfo.Hostname;
             dataRow["VmId"] = connectionInfo.VmId;
             dataRow["Protocol"] = connectionInfo.Protocol;
-            dataRow["SSHTunnelConnectionName"] = connectionInfo.SSHTunnelConnectionName;
+            dataRow["SSHTunnelConnectionName"] = connectionInfo.SshTunnelConnectionName;
             dataRow["OpeningCommand"] = connectionInfo.OpeningCommand;
-            dataRow["SSHOptions"] = connectionInfo.SSHOptions;
+            dataRow["SSHOptions"] = connectionInfo.SshOptions;
             dataRow["PuttySession"] = connectionInfo.PuttySession;
             dataRow["Port"] = connectionInfo.Port;
             dataRow["ConnectToConsole"] = connectionInfo.UseConsoleSession;
             dataRow["UseCredSsp"] = connectionInfo.UseCredSsp;
             dataRow["UseRestrictedAdmin"] = connectionInfo.UseRestrictedAdmin;
-            dataRow["UseRCG"] = connectionInfo.UseRCG;
+            dataRow["UseRCG"] = connectionInfo.UseRcg;
             dataRow["UseVmId"] = connectionInfo.UseVmId;
             dataRow["UseEnhancedMode"] = connectionInfo.UseEnhancedMode;
             dataRow["RenderingEngine"] = connectionInfo.RenderingEngine;
-            dataRow["RDPAuthenticationLevel"] = connectionInfo.RDPAuthenticationLevel;
-            dataRow["RDPMinutesToIdleTimeout"] = connectionInfo.RDPMinutesToIdleTimeout;
-            dataRow["RDPAlertIdleTimeout"] = connectionInfo.RDPAlertIdleTimeout;
+            dataRow["RDPAuthenticationLevel"] = connectionInfo.RdpAuthenticationLevel;
+            dataRow["RDPMinutesToIdleTimeout"] = connectionInfo.RdpMinutesToIdleTimeout;
+            dataRow["RDPAlertIdleTimeout"] = connectionInfo.RdpAlertIdleTimeout;
             dataRow["LoadBalanceInfo"] = connectionInfo.LoadBalanceInfo;
             dataRow["Colors"] = connectionInfo.Colors;
             dataRow["Resolution"] = connectionInfo.Resolution;
@@ -582,29 +582,29 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
             dataRow["MacAddress"] = connectionInfo.MacAddress;
             dataRow["UserField"] = connectionInfo.UserField;
             dataRow["ExtApp"] = connectionInfo.ExtApp;
-            dataRow["VNCCompression"] = connectionInfo.VNCCompression;
-            dataRow["VNCEncoding"] = connectionInfo.VNCEncoding;
-            dataRow["VNCAuthMode"] = connectionInfo.VNCAuthMode;
-            dataRow["VNCProxyType"] = connectionInfo.VNCProxyType;
-            dataRow["VNCProxyIP"] = connectionInfo.VNCProxyIP;
-            dataRow["VNCProxyPort"] = connectionInfo.VNCProxyPort;
-            dataRow["VNCProxyUsername"] = connectionInfo.VNCProxyUsername;
+            dataRow["VNCCompression"] = connectionInfo.VncCompression;
+            dataRow["VNCEncoding"] = connectionInfo.VncEncoding;
+            dataRow["VNCAuthMode"] = connectionInfo.VncAuthMode;
+            dataRow["VNCProxyType"] = connectionInfo.VncProxyType;
+            dataRow["VNCProxyIP"] = connectionInfo.VncProxyIp;
+            dataRow["VNCProxyPort"] = connectionInfo.VncProxyPort;
+            dataRow["VNCProxyUsername"] = connectionInfo.VncProxyUsername;
             dataRow["VNCProxyPassword"] =
-                _cryptographyProvider.Encrypt(connectionInfo.VNCProxyPassword, _encryptionKey);
-            dataRow["VNCColors"] = connectionInfo.VNCColors;
-            dataRow["VNCSmartSizeMode"] = connectionInfo.VNCSmartSizeMode;
-            dataRow["VNCViewOnly"] = connectionInfo.VNCViewOnly;
-            dataRow["RDGatewayUsageMethod"] = connectionInfo.RDGatewayUsageMethod;
-            dataRow["RDGatewayHostname"] = connectionInfo.RDGatewayHostname;
-            dataRow["RDGatewayUseConnectionCredentials"] = connectionInfo.RDGatewayUseConnectionCredentials;
-            dataRow["RDGatewayUsername"] = connectionInfo.RDGatewayUsername;
-            dataRow["RDGatewayPassword"] = _cryptographyProvider.Encrypt(connectionInfo.RDGatewayPassword, _encryptionKey);
-            dataRow["RDGatewayDomain"] = connectionInfo.RDGatewayDomain;
+                _cryptographyProvider.Encrypt(connectionInfo.VncProxyPassword, _encryptionKey);
+            dataRow["VNCColors"] = connectionInfo.VncColors;
+            dataRow["VNCSmartSizeMode"] = connectionInfo.VncSmartSizeMode;
+            dataRow["VNCViewOnly"] = connectionInfo.VncViewOnly;
+            dataRow["RDGatewayUsageMethod"] = connectionInfo.RdGatewayUsageMethod;
+            dataRow["RDGatewayHostname"] = connectionInfo.RdGatewayHostname;
+            dataRow["RDGatewayUseConnectionCredentials"] = connectionInfo.RdGatewayUseConnectionCredentials;
+            dataRow["RDGatewayUsername"] = connectionInfo.RdGatewayUsername;
+            dataRow["RDGatewayPassword"] = _cryptographyProvider.Encrypt(connectionInfo.RdGatewayPassword, _encryptionKey);
+            dataRow["RDGatewayDomain"] = connectionInfo.RdGatewayDomain;
             dataRow["RdpVersion"] = connectionInfo.RdpVersion;
             dataRow["Favorite"] = connectionInfo.Favorite;
             dataRow["ICAEncryptionStrength"] = string.Empty;
-            dataRow["StartProgram"] = connectionInfo.RDPStartProgram;
-            dataRow["StartProgramWorkDir"] = connectionInfo.RDPStartProgramWorkDir;
+            dataRow["StartProgram"] = connectionInfo.RdpStartProgram;
+            dataRow["StartProgramWorkDir"] = connectionInfo.RdpStartProgramWorkDir;
 
             if (_saveFilter.SaveInheritance)
             {
@@ -625,9 +625,9 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
                 dataRow["InheritPassword"] = connectionInfo.Inheritance.Password;
                 dataRow["InheritPort"] = connectionInfo.Inheritance.Port;
                 dataRow["InheritProtocol"] = connectionInfo.Inheritance.Protocol;
-                dataRow["InheritSSHTunnelConnectionName"] = connectionInfo.Inheritance.SSHTunnelConnectionName;
+                dataRow["InheritSSHTunnelConnectionName"] = connectionInfo.Inheritance.SshTunnelConnectionName;
                 dataRow["InheritOpeningCommand"] = connectionInfo.Inheritance.OpeningCommand;
-                dataRow["InheritSSHOptions"] = connectionInfo.Inheritance.SSHOptions;
+                dataRow["InheritSSHOptions"] = connectionInfo.Inheritance.SshOptions;
                 dataRow["InheritPuttySession"] = connectionInfo.Inheritance.PuttySession;
                 dataRow["InheritRedirectDiskDrives"] = connectionInfo.Inheritance.RedirectDiskDrives;
                 dataRow["InheritRedirectKeys"] = connectionInfo.Inheritance.RedirectKeys;
@@ -643,15 +643,15 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
                 dataRow["InheritUseConsoleSession"] = connectionInfo.Inheritance.UseConsoleSession;
                 dataRow["InheritUseCredSsp"] = connectionInfo.Inheritance.UseCredSsp;
                 dataRow["InheritUseRestrictedAdmin"] = connectionInfo.Inheritance.UseRestrictedAdmin;
-                dataRow["InheritUseRCG"] = connectionInfo.Inheritance.UseRCG;
+                dataRow["InheritUseRCG"] = connectionInfo.Inheritance.UseRcg;
                 dataRow["InheritRenderingEngine"] = connectionInfo.Inheritance.RenderingEngine;
                 dataRow["InheritUsername"] = connectionInfo.Inheritance.Username;
                 dataRow["InheritVmId"] = connectionInfo.Inheritance.VmId;
                 dataRow["InheritUseVmId"] = connectionInfo.Inheritance.UseVmId;
                 dataRow["InheritUseEnhancedMode"] = connectionInfo.Inheritance.UseEnhancedMode;
-                dataRow["InheritRDPAuthenticationLevel"] = connectionInfo.Inheritance.RDPAuthenticationLevel;
-                dataRow["InheritRDPMinutesToIdleTimeout"] = connectionInfo.Inheritance.RDPMinutesToIdleTimeout;
-                dataRow["InheritRDPAlertIdleTimeout"] = connectionInfo.Inheritance.RDPAlertIdleTimeout;
+                dataRow["InheritRDPAuthenticationLevel"] = connectionInfo.Inheritance.RdpAuthenticationLevel;
+                dataRow["InheritRDPMinutesToIdleTimeout"] = connectionInfo.Inheritance.RdpMinutesToIdleTimeout;
+                dataRow["InheritRDPAlertIdleTimeout"] = connectionInfo.Inheritance.RdpAlertIdleTimeout;
                 dataRow["InheritLoadBalanceInfo"] = connectionInfo.Inheritance.LoadBalanceInfo;
                 dataRow["InheritOpeningCommand"] = connectionInfo.Inheritance.OpeningCommand;
                 dataRow["InheritPreExtApp"] = connectionInfo.Inheritance.PreExtApp;
@@ -659,23 +659,23 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
                 dataRow["InheritMacAddress"] = connectionInfo.Inheritance.MacAddress;
                 dataRow["InheritUserField"] = connectionInfo.Inheritance.UserField;
                 dataRow["InheritExtApp"] = connectionInfo.Inheritance.ExtApp;
-                dataRow["InheritVNCCompression"] = connectionInfo.Inheritance.VNCCompression;
-                dataRow["InheritVNCEncoding"] = connectionInfo.Inheritance.VNCEncoding;
-                dataRow["InheritVNCAuthMode"] = connectionInfo.Inheritance.VNCAuthMode;
-                dataRow["InheritVNCProxyType"] = connectionInfo.Inheritance.VNCProxyType;
-                dataRow["InheritVNCProxyIP"] = connectionInfo.Inheritance.VNCProxyIP;
-                dataRow["InheritVNCProxyPort"] = connectionInfo.Inheritance.VNCProxyPort;
-                dataRow["InheritVNCProxyUsername"] = connectionInfo.Inheritance.VNCProxyUsername;
-                dataRow["InheritVNCProxyPassword"] = connectionInfo.Inheritance.VNCProxyPassword;
-                dataRow["InheritVNCColors"] = connectionInfo.Inheritance.VNCColors;
-                dataRow["InheritVNCSmartSizeMode"] = connectionInfo.Inheritance.VNCSmartSizeMode;
-                dataRow["InheritVNCViewOnly"] = connectionInfo.Inheritance.VNCViewOnly;
-                dataRow["InheritRDGatewayUsageMethod"] = connectionInfo.Inheritance.RDGatewayUsageMethod;
-                dataRow["InheritRDGatewayHostname"] = connectionInfo.Inheritance.RDGatewayHostname;
-                dataRow["InheritRDGatewayUseConnectionCredentials"] = connectionInfo.Inheritance.RDGatewayUseConnectionCredentials;
-                dataRow["InheritRDGatewayUsername"] = connectionInfo.Inheritance.RDGatewayUsername;
-                dataRow["InheritRDGatewayPassword"] = connectionInfo.Inheritance.RDGatewayPassword;
-                dataRow["InheritRDGatewayDomain"] = connectionInfo.Inheritance.RDGatewayDomain;
+                dataRow["InheritVNCCompression"] = connectionInfo.Inheritance.VncCompression;
+                dataRow["InheritVNCEncoding"] = connectionInfo.Inheritance.VncEncoding;
+                dataRow["InheritVNCAuthMode"] = connectionInfo.Inheritance.VncAuthMode;
+                dataRow["InheritVNCProxyType"] = connectionInfo.Inheritance.VncProxyType;
+                dataRow["InheritVNCProxyIP"] = connectionInfo.Inheritance.VncProxyIp;
+                dataRow["InheritVNCProxyPort"] = connectionInfo.Inheritance.VncProxyPort;
+                dataRow["InheritVNCProxyUsername"] = connectionInfo.Inheritance.VncProxyUsername;
+                dataRow["InheritVNCProxyPassword"] = connectionInfo.Inheritance.VncProxyPassword;
+                dataRow["InheritVNCColors"] = connectionInfo.Inheritance.VncColors;
+                dataRow["InheritVNCSmartSizeMode"] = connectionInfo.Inheritance.VncSmartSizeMode;
+                dataRow["InheritVNCViewOnly"] = connectionInfo.Inheritance.VncViewOnly;
+                dataRow["InheritRDGatewayUsageMethod"] = connectionInfo.Inheritance.RdGatewayUsageMethod;
+                dataRow["InheritRDGatewayHostname"] = connectionInfo.Inheritance.RdGatewayHostname;
+                dataRow["InheritRDGatewayUseConnectionCredentials"] = connectionInfo.Inheritance.RdGatewayUseConnectionCredentials;
+                dataRow["InheritRDGatewayUsername"] = connectionInfo.Inheritance.RdGatewayUsername;
+                dataRow["InheritRDGatewayPassword"] = connectionInfo.Inheritance.RdGatewayPassword;
+                dataRow["InheritRDGatewayDomain"] = connectionInfo.Inheritance.RdGatewayDomain;
                 dataRow["InheritRdpVersion"] = connectionInfo.Inheritance.RdpVersion;
                 dataRow["InheritFavorite"] = connectionInfo.Inheritance.Favorite;
                 dataRow["InheritICAEncryptionStrength"] = false;

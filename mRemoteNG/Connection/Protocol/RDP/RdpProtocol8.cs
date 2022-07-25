@@ -74,7 +74,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
 
         private void DoResizeClient()
         {
-            if (!loginComplete)
+            if (!LoginComplete)
                 return;
 
             if (!InterfaceControl.Info.AutomaticResize)
@@ -88,7 +88,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 return;
 
             Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg,
-                $"Resizing RDP connection to host '{connectionInfo.Hostname}'");
+                $"Resizing RDP connection to host '{ConnectionInfo.Hostname}'");
 
             try
             {
@@ -101,7 +101,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
             {
                 Runtime.MessageCollector.AddExceptionMessage(
                     string.Format(Language.ChangeConnectionResolutionError,
-                        connectionInfo.Hostname),
+                        ConnectionInfo.Hostname),
                     ex, MessageClass.WarningMsg, false);
             }
         }

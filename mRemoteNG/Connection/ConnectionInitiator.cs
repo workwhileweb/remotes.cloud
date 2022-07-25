@@ -39,8 +39,7 @@ namespace mRemoteNG.Connection
             ConnectionInfo.Force force = ConnectionInfo.Force.None,
             ConnectionWindow conForm = null)
         {
-            if (containerInfo == null || containerInfo.Children.Count == 0)
-                return;
+            if (containerInfo == null || containerInfo.Children.Count == 0) return;
 
             foreach (var child in containerInfo.Children)
             {

@@ -19,18 +19,18 @@ namespace mRemoteNG.Connection.Protocol.RDP
             try
             {
                 var rdpClient7 = (MsRdpClient7NotSafeForScripting)((AxHost) Control).GetOcx();
-                rdpClient7.AdvancedSettings8.AudioQualityMode = (uint)connectionInfo.SoundQuality;
-                rdpClient7.AdvancedSettings8.AudioCaptureRedirectionMode = connectionInfo.RedirectAudioCapture;
+                rdpClient7.AdvancedSettings8.AudioQualityMode = (uint)ConnectionInfo.SoundQuality;
+                rdpClient7.AdvancedSettings8.AudioCaptureRedirectionMode = ConnectionInfo.RedirectAudioCapture;
                 rdpClient7.AdvancedSettings8.NetworkConnectionType = (int)RdpNetworkConnectionType.Modem;
 
-                if (connectionInfo.UseVmId)
+                if (ConnectionInfo.UseVmId)
                 {
                     SetExtendedProperty("DisableCredentialsDelegation", true);
                     rdpClient7.AdvancedSettings7.AuthenticationServiceClass = "Microsoft Virtual Console Service";
                     rdpClient7.AdvancedSettings8.EnableCredSspSupport = true;
                     rdpClient7.AdvancedSettings8.NegotiateSecurityLayer = false;
-                    rdpClient7.AdvancedSettings7.PCB = $"{connectionInfo.VmId}";
-                    if (connectionInfo.UseEnhancedMode)
+                    rdpClient7.AdvancedSettings7.PCB = $"{ConnectionInfo.VmId}";
+                    if (ConnectionInfo.UseEnhancedMode)
                         rdpClient7.AdvancedSettings7.PCB += ";EnhancedMode=1";
                 }
             }
